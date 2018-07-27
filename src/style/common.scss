@@ -1,0 +1,396 @@
+body,
+div,
+span,
+header,
+footer,
+nav,
+section,
+aside,
+article,
+ul,
+dl,
+dt,
+dd,
+li,
+a,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+i,
+b,
+textarea,
+button,
+input,
+select,
+figure,
+figcaption,
+  {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-style: normal;
+  text-decoration: none;
+  border: none; // color: #333;
+  font-weight: normal;
+  font-family: "Microsoft Yahei";
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  &:hover {
+    outline: none;
+  }
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  background-color: #F5F5F5;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="search"],
+input[type="reset"] {
+  -webkit-appearance: none;
+}
+
+textarea {
+  -webkit-appearance: none;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%; // background-color: #F5F5F5;
+  background-color: rgb(251, 249, 254);
+}
+
+.fff {
+  background-color: #fff;
+}
+
+.clear:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.clear {
+  zoom: 1;
+}
+
+.back_img {
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.margin {
+  margin: 0 auto;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.paddingTop {
+  padding-top: 1.95rem;
+}
+
+@keyframes backOpacity {
+  0% {
+    opacity: 1
+  }
+  25% {
+    opacity: .5
+  }
+  50% {
+    opacity: 1
+  }
+  75% {
+    opacity: .5
+  }
+  100% {
+    opacity: 1
+  }
+}
+
+.animation_opactiy {
+  animation: backOpacity 2s ease-in-out infinite;
+}
+
+// rem 换算 1rem = 23.4px
+$fullWidth: 100%;
+$padding: 0.387597rem; // 10px
+$margin: 0.387597rem; // 10px
+$mdsize: 0.598291rem; // 14px
+$minsize: 0.512821rem; // 12px
+$lgsize: 0.683761rem;
+$img: 2.564103rem; // 60px
+// scroll
+.xparent {
+  height: 100%;
+  display: flex;
+  flex-direction: column; // 把tabbar顶上去
+  padding-bottom: 2.07rem;
+  .xchild {
+    // flex: 1;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/*
+<div class="zw-list-container-img">
+  <div class="zw-list-title">
+    <p>这里是文章标题部分....</p>
+  </div>
+  <div class="zw-list-item">
+    <div class="zw-list-item-content">
+      <div class="zw-image">
+        <img src="http://placeholder.qiniudn.com/60x60/3cc51f/ffffff">
+      </div>
+      <div class="zw-detail">
+        <div class="zw-detail-item zw-detail-1">xxx</div>
+        <div class="zw-detail-item zw-detail-2">地区</div>
+        <div class="zw-detail-item zw-detail-3">
+          <div>
+            <span>描述xxx</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ */
+
+.zw-list-container-img {
+  font-size: $minsize;
+  box-shadow: 2px 2px 7px #c9c9c9;
+}
+
+.zw-list-container-img .zw-list-title {
+  background-color: #fff;
+  padding: 1.5*$padding;
+}
+
+.zw-list-container-img .zw-list-item {
+  background-color: #fff;
+  padding: 1.5*$padding; // box-shadow: 2px 2px 7px #c9c9c9;
+  position: relative;
+}
+
+.zw-list-container-img .zw-list-item:before {
+  content: " ";
+  position: absolute;
+  right: 0;
+  top: 0;
+  border-bottom: 1px solid #e5e5e5;
+  color: #e5e5e5;
+  left: 0.641026rem;
+}
+
+.zw-list-container-img .zw-list-item-content {
+  display: flex; // line-height: 100%;
+}
+
+.zw-list-container-img .zw-operation {
+  border-top: 1px solid #c9c9c9;
+  margin-top: $margin;
+  text-align: right;
+}
+
+.zw-list-container-img .zw-operation-content {
+  padding-top: $margin;
+}
+
+.zw-list-container-img .zw-image {
+  width: $img;
+  height: $img;
+  background-color: pink;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zw-list-container-img .zw-image img {
+  width: 100%;
+  height: 100%;
+  background-color: red;
+}
+
+.zw-list-container-img .zw-detail {
+  flex: 1;
+  padding-left: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.zw-list-container-img .zw-detail-item {
+  justify-content: space-between;
+  margin-bottom: $margin;
+}
+
+.zw-list-container-img .zw-detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.zw-list-container-img .zw-detail-1 {
+  font-size: $mdsize;
+}
+
+.zw-list-container-img .zw-detail-2 {}
+
+.zw-list-container-img .zw-detail-3 {
+  display: flex;
+}
+
+.zw-list-container-img .zw-detail-3 div {
+  // margin-right: $margin;
+}
+
+.zw-list-container-img .zw-detail-3 div:nth-child(2) {
+  width: 3.5rem;
+}
+
+// 
+.card-demo-flex {
+  display: flex;
+}
+
+.card-demo-content01 {
+  padding: 10px 0;
+}
+
+.card-padding {
+  padding: 15px;
+}
+
+.card-demo-flex>div {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+}
+
+.card-demo-flex span {
+  color: #f74c31;
+}
+
+.vux-1px-r {
+  border-right: 1px solid #ccc;
+}
+
+/*
+  <div class="x-data-preview">
+      <div class="x-data-preview-header">
+        <label>付款金额</label>
+        <span>$2018</span>
+      </div>
+      <div class="x-data-preview-body">
+        <div class="x-data-preview-bd-item">
+          <label>商搜索品</label>
+          <span>扭蛋</span>
+        </div>
+        <div class="x-data-preview-bd-item">
+          <label>单价</label>
+          <span>$99</span>
+        </div>
+        <div class="x-data-preview-bd-item">
+          <label>数量</label>
+          <span>x8</span>
+        </div>
+      </div>
+    </div>
+ */
+
+// 数据展示
+// .x-data-preview {
+//   margin-top: 0.42735rem; // 10px
+//   // margin-bottom: 0.42735rem; // 10px
+//   background-color: #fff;
+//   .x-data-preview-header {
+//     position: relative;
+//     font-size: 0.683761rem; // 16px
+//     padding: 0.641026rem; // 15px
+//     line-height: 100%;
+//     label {
+//       float: left;
+//       color: #999;
+//     }
+//     span {
+//       font-size: 0.854701rem; // 20px
+//       display: block;
+//       overflow: hidden;
+//       text-align: right;
+//     }
+//   }
+//   .x-data-preview-header:after {
+//     content: ' ';
+//     position: absolute; // height: 1px;
+//     bottom: 0;
+//     right: 0;
+//     left: 0.641026rem; // 15px
+//     border-bottom: 1px solid #f5f5f5;
+//   }
+//   .x-data-preview-body {
+//     position: relative;
+//     text-align: right;
+//     color: #999;
+//     padding: 0.641026rem; // 15px
+//     .x-data-preview-bd-item {
+//       label {
+//         float: left;
+//         margin-right: 0.641026rem; // 15px
+//         min-width: 1.709402rem; // 40px
+//         text-align: justify;
+//         text-align-last: justify;
+//       }
+//       span {
+//         display: block;
+//         overflow: hidden;
+//         word-break: normal;
+//         word-wrap: break-word
+//       }
+//     }
+//   }
+// }

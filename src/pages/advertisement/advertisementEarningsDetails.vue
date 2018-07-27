@@ -108,7 +108,8 @@ export default {
 @import "~style/variable"
 .advertisementEarningsDetails
   @include allcover(101)
-
+  display: flex
+  flex-direction: column
   th
     font-weight: 700
     font-size: $px_12

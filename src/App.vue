@@ -11,8 +11,10 @@
 </template>
 
 <script>
-import { Loading } from 'vux'
+import { Loading, querystring } from 'vux'
 import { mapGetters } from 'vuex'
+
+import VConsole from "vconsole/dist/vconsole.min.js"
 
 export default {
   name: 'App',
@@ -26,12 +28,24 @@ export default {
   },
   computed: {
     ...mapGetters(['isLoading'])
+  },
+  created () {
+    this._debug()
+  },
+  methods: {
+    _debug () {
+      let urlParams = location.href.split('?')[1]
+
+      let isDebug = querystring.parse(urlParams).debug
+
+      isDebug && new VConsole()
+    }
   }
 }
 </script>
 
 <style lang="scss">
-@import '~style/mixin';
+@import "~style/mixin";
 #app {
   height: 100%;
 

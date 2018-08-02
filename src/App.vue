@@ -6,18 +6,24 @@
     <keep-alive>
       <router-view name="tabbar"></router-view>
     </keep-alive>
-    <loading :show="isLoading.status"></loading>
+    <div v-transfer-dom>
+      <loading :show="isLoading.status"></loading>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { Loading, querystring } from 'vux'
+import { Loading, querystring, TransferDomDirective as TransferDom } from 'vux'
 import { mapGetters } from 'vuex'
 
 import VConsole from "vconsole/dist/vconsole.min.js"
 
 export default {
   name: 'App',
+  directives: {
+    TransferDom
+  },
   data () {
     return {
       show: true

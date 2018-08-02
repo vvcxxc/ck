@@ -67,18 +67,21 @@ instance.interceptors.response.use(
       let message = data.message
       switch (status) {
         case 400:
-          Vue.$vux.toast.text(message || "error")
-          break
+          return Vue.$vux.toast.text(message || "error")
 
         case 401:
           Vue.$vux.toast.text(message || "error")
-          timeout(1000).then(() => {
+          return timeout(1000).then(() => {
             router.push("/login")
           })
-          break
 
         case 500:
           Vue.$vux.toast.text("sever error")
+          if (message == "The token has been blacklisted") {
+            return timeout(1000).then(() => {
+              router.push("/login")
+            })
+          }
           // 刷新了
           break
       }

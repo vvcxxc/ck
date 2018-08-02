@@ -41,14 +41,6 @@ export default {
   [types.GET_PROFIT_INFO](state, params) {
     state.profitInfo = params
   },
-  [types.LOGOUT](state) {
-    state.token = ""
-    Vue.$vux.toast.text("登出成功")
-
-    timeout(1000).then(() => {
-      router.push("/login")
-    })
-  },
   [types.AUTH_USER](state, params) {
     state.authUser = params
   },

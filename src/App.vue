@@ -6,16 +6,24 @@
     <keep-alive>
       <router-view name="tabbar"></router-view>
     </keep-alive>
-    <loading :show="isLoading.status"></loading>
+    <div v-transfer-dom>
+      <loading :show="isLoading.status"></loading>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { Loading } from 'vux'
+import { Loading, querystring, TransferDomDirective as TransferDom } from 'vux'
 import { mapGetters } from 'vuex'
+
+import VConsole from "vconsole/dist/vconsole.min.js"
 
 export default {
   name: 'App',
+  directives: {
+    TransferDom
+  },
   data () {
     return {
       show: true
@@ -26,12 +34,24 @@ export default {
   },
   computed: {
     ...mapGetters(['isLoading'])
+  },
+  created () {
+    this._debug()
+  },
+  methods: {
+    _debug () {
+      let urlParams = location.href.split('?')[1]
+
+      let isDebug = querystring.parse(urlParams).debug
+
+      isDebug && new VConsole()
+    }
   }
 }
 </script>
 
 <style lang="scss">
-@import '~style/mixin';
+@import "~style/mixin";
 #app {
   height: 100%;
 

@@ -15,7 +15,7 @@
     <flexbox style="padding: 0 0.5rem;">
       <x-button type="warn"
                 style="margin-top: 1rem;"
-                @click.native="logout">退出登录</x-button>
+                @click.native="_logout">退出登录</x-button>
     </flexbox>
     <router-view></router-view>
   </div>
@@ -26,12 +26,8 @@ import { Flexbox } from 'vux'
 
 import { mapState } from 'vuex'
 import { logout } from '~api/self'
+import { timeout } from '~utils/common'
 export default {
-  data () {
-    return {
-
-    }
-  },
   components: {
     Flexbox
   },
@@ -39,11 +35,19 @@ export default {
     ...mapState(['userInfo'])
   },
   methods: {
-    logout () {
-      logout()
-    },
-    goto (name) {
+    _logout () {
+      logout().then(({ code, message, data }) => {
+        this.$vux.toast.text(message)
+        if (code == 200) {
+          this.$store.state.token = ""
 
+          timeout(1000).then(() => {
+            this.$router.push({
+              path: '/login'
+            })
+          })
+        }
+      })
     }
   }
 }

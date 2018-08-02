@@ -5,12 +5,8 @@ import Vue from "vue"
 import {
   login,
   memberDetails,
-  chuangkeDetails,
   shopDetails,
-  articleDetails,
-  videoDetails,
   profitDetails,
-  profitShareHistory,
   authUser,
   supplierDetails
 } from "~api/self"
@@ -45,37 +41,19 @@ export default {
       !code && commit(types.GET_MEMBER_INFO, ...data)
     })
   },
-  // getChuangkeDetails({ commit, state }, params) {
-  //   chuangkeDetails(params)
-  //     .then(([res]) => {
-
-  //       commit(types.GET_CHUANGKE_INFO, res)
-  //     })
-  // },
   getShopDetails({ commit, state }, params) {
     shopDetails(params).then(({ code, data, message }) => {
       !code && commit(types.GET_SHOP_INFO, ...data)
     })
   },
-  // getArticleDetails({ commit, state }, params) {
-  //   articleDetails(params)
-  //     .then(([res]) => {
-
-  //       commit(types.GET_ARTICLE_INFO, res)
-  //     })
-  // },
-  // getVideoDetails() {},
   getProfitDetails({ commit, state }, params) {
     profitDetails(params).then(({ data, code, message }) => {
-      // console.log(res)
-      // if(code == 200)
       !code && commit(types.GET_PROFIT_INFO, data)
     })
   },
   getSupplierDetails({ commit, state }, params) {
     supplierDetails(params).then(res => {
       console.log(res)
-      // !code && commit(types.GET_SUPPLIER_INFO, ...data)
     })
   }
 }

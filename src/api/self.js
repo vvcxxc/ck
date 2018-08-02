@@ -134,9 +134,11 @@ export const authUser = () =>
  * 登出
  */
 
-export const logout = () => {
-  store.commit("LOGOUT")
-}
+export const logout = () =>
+  http({
+    url: "api/entrepreneur/logout",
+    method: "post"
+  })
 
 /**
  * 排行榜

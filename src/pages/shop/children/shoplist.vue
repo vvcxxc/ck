@@ -105,10 +105,8 @@ export default {
     },
     onCancel () {
       // this.getShopList()
-      console.log('cancel')
     },
     onBlur () {
-      // console.log(this.supplier_name)
       !this.supplier_name && this._getShopList()
     },
     _getShopList (supplier_name = '') {

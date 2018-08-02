@@ -1,18 +1,6 @@
 <template>
   <div class="advertisement">
     <x-header title="费率返点"></x-header>
-    <!-- <div class="timeRank">
-      <input type="text"
-             :value="beginTime"
-             @click="handleBeginTime">
-      <input type="text"
-             :value="endTime"
-             @click="handleEndTime">
-      <button @click="search">搜索</button>
-    </div> -->
-    <!-- <load-more tip="请选择日期"
-               :show-loading="false"
-               background-color="#fbf9fe"></load-more> -->
 
     <x-scroll :http="http"
               :lastPage="lastPage"

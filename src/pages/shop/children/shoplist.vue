@@ -39,7 +39,6 @@
         </div>
       </div>
     </div>
-    <loading :show="this.shopData.length == 0"></loading>
     <load-more v-if="!shopData.toString()"
                :show-loading="false"
                :tip="'暂无数据'"
@@ -60,7 +59,6 @@ export default {
       shopData: [],
       page: 2,
       supplier_name: '',
-      loading: false,
       results: []
     }
   },
@@ -69,14 +67,7 @@ export default {
   },
   methods: {
     switchShopItem (item) {
-      // if(this.currentswitch == item) return false;
 
-      // this.$store.commit('LOADING', {text: '加载中...', status: true})
-
-      // setTimeout(() => {
-      //   this.$store.commit('LOADING', {status: false})
-      //   this.currentswitch = item;
-      // }, 1000)
     },
     onChange ([region]) {
       shopList({ region })
@@ -84,9 +75,6 @@ export default {
           this.shopData = res
         })
     },
-    // async getDetails (params) {
-    //   await this.$store.dispatch('getShopDetails', params)
-    // },
     loadMoreData () {
       this.loading = true
 
@@ -145,7 +133,7 @@ export default {
 
 </script>
 <style lang="scss">
-@import '~style/mixin';
+@import "~style/mixin";
 
 .shoplistbox {
   font-size: $mdsize;

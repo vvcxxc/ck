@@ -18,7 +18,6 @@ export default {
     })
   },
   [types.LOADING](state, params) {
-    // console.log(params)
     state.isLoading = params
   },
   [types.GET_MEMBER_INFO](state, params) {

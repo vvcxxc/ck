@@ -3,7 +3,6 @@ export default {
   role_type: "",
   authUser: {},
   memberInfo: {},
-  chuangkeInfo: {},
   shopInfo: {},
   profitInfo: {},
   supplierInfo: {},

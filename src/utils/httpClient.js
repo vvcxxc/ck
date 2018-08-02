@@ -67,10 +67,6 @@ instance.interceptors.response.use(
       let message = data.message
       switch (status) {
         case 400:
-          // store.commit('TIPS', {
-          //   status: true,
-          //   txt: message
-          // })
           Vue.$vux.toast.text(message || "error")
           break
 
@@ -82,7 +78,7 @@ instance.interceptors.response.use(
           break
 
         case 500:
-          Vue.$vux.toast.text("系统异常")
+          Vue.$vux.toast.text("sever error")
           // 刷新了
           break
       }

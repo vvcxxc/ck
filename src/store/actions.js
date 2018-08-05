@@ -1,6 +1,6 @@
-import * as types from "./mutation-type"
+import * as types from './mutation-type'
 
-import Vue from "vue"
+import Vue from 'vue'
 
 import {
   login,
@@ -9,18 +9,13 @@ import {
   profitDetails,
   authUser,
   supplierDetails
-} from "~api/self"
+} from '~api/self'
 
 export default {
   login({ commit, state }, params) {
     login(params).then(({ code, data, message }) => {
-      // 成功没有状态码 和 信息, 失败才有
-
-      // code && commit('TIPS', { status: true, txt: message })
-      code && Vue.$vux.toast.text("登录成功")
-
+      code && Vue.$vux.toast.text('登录成功')
       !code && commit(types.GET_TOKEN, data)
-      // commit(type.ROLE_TYPE, )
     })
   },
   authUser({ commit, state }, params) {
@@ -28,11 +23,6 @@ export default {
       // .then(({ code, data, message }) => {
       .then(res => {
         console.log(res)
-
-        // !code && commit(types.AUTH_USER, ...data)
-        // if(!code){
-        //   commit(types.AUTH_USER, ...data)
-        // }
       })
   },
   getMemberDetails({ commit, state }, params) {
@@ -48,6 +38,7 @@ export default {
   },
   getProfitDetails({ commit, state }, params) {
     profitDetails(params).then(({ data, code, message }) => {
+      console.log(data)
       !code && commit(types.GET_PROFIT_INFO, data)
     })
   },

@@ -11,26 +11,26 @@
           <div class="vux-1px-r">
             {{$t('balanceTxt.card.item1')}}
             <br/>
-            <span>2819</span>
+            <span>{{profitInfo.yesterday_fee}}</span>
 
           </div>
           <div class="vux-1px-r">
             {{$t('balanceTxt.card.item2')}}
             <br/>
-            <span>{{((+today).toFixed(0))}}</span>
+            <span>{{profitInfo.today_fee}}</span>
 
           </div>
           <div>
             {{$t('balanceTxt.card.item3')}}
             <br/>
-            <span>{{(+total).toFixed(0)}}</span>
+            <span>{{profitInfo.amount}}</span>
           </div>
         </div>
       </card>
 
       <card style="margin-top: 1rem"
             v-if="role_type == 'entrepreneur'"
-            :header="{title: '收益排行榜'}">
+            :header="{title: '我的收益'}">
         <div slot="content"
              class="card-demo-flex card-demo-content01">
           <div class="vux-1px-r">
@@ -78,7 +78,7 @@
         </x-table>
       </div>
 
-      <div class="rank-table"
+      <!-- <div class="rank-table"
            v-if="role_type == 'president'">
         <load-more tip="收益统计"
                    :show-loading="false"
@@ -122,7 +122,7 @@
             </tr>
           </tbody>
         </x-table>
-      </div>
+      </div> -->
     </div>
     <router-view></router-view>
   </div>
@@ -160,6 +160,7 @@ export default {
     },
     _initRank () {
       rank().then(({ code, data, message }) => {
+        console.log(data)
         code == 200 && (this.datalist = data)
         code !== 200 && this.$vux.toast.text(message)
       })
@@ -201,7 +202,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~style/mixin";
+@import '~style/mixin';
 .homebox {
   font-size: $mdsize;
   .vux-loadmore {

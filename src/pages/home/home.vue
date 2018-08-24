@@ -11,21 +11,22 @@
           <div class="vux-1px-r">
             {{$t('balanceTxt.card.item1')}}
             <br/>
-            <!-- <span>{{profitInfo.yesterday_fee}}</span> -->
-            <span>3064</span>
+            <span>{{profitInfo.yesterday_fee}}</span>
+            <!-- <span>3064</span> -->
 
           </div>
           <div class="vux-1px-r">
             {{$t('balanceTxt.card.item2')}}
             <br/>
-            <!-- <span>{{profitInfo.today_fee}}</span> -->
-            <span>{{(+today).toFixed(2)}}</span>
+            <span>{{profitInfo.today_fee}}</span>
+            <!-- <span>{{(+today).toFixed(2)}}</span> -->
 
           </div>
           <div>
             {{$t('balanceTxt.card.item3')}}
             <br/>
-            <span>{{(+total).toFixed(2)}}</span>
+            <span>{{profitInfo.amount}}</span>
+            <!-- <span>{{(+total).toFixed(2)}}</span> -->
           </div>
         </div>
       </card>
@@ -80,7 +81,7 @@
         </x-table>
       </div>
 
-      <div class="rank-table"
+      <!-- <div class="rank-table"
            v-if="role_type == 'president'">
         <load-more tip="收益统计"
                    :show-loading="false"
@@ -128,7 +129,7 @@
             </tr>
           </tbody>
         </x-table>
-      </div>
+      </div> -->
     </div>
     <router-view></router-view>
   </div>

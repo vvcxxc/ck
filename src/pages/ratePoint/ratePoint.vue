@@ -90,7 +90,6 @@ export default {
 
       ratePoint(params).then(({ data, meta }) => {
         this.rates = data
-        console.log(data)
       }).catch(err => {
         console.log(err)
       })

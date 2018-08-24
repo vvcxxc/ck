@@ -12,18 +12,21 @@
             {{$t('balanceTxt.card.item1')}}
             <br/>
             <span>{{profitInfo.yesterday_fee}}</span>
+            <!-- <span>3064</span> -->
 
           </div>
           <div class="vux-1px-r">
             {{$t('balanceTxt.card.item2')}}
             <br/>
             <span>{{profitInfo.today_fee}}</span>
+            <!-- <span>{{(+today).toFixed(2)}}</span> -->
 
           </div>
           <div>
             {{$t('balanceTxt.card.item3')}}
             <br/>
             <span>{{profitInfo.amount}}</span>
+            <!-- <span>{{(+total).toFixed(2)}}</span> -->
           </div>
         </div>
       </card>
@@ -93,8 +96,12 @@
           </thead>
           <tbody>
             <tr>
-              <td>2018-07</td>
+              <td>2018-08</td>
               <td>￥{{(+sevenAmount).toFixed(0)}}</td>
+            </tr>
+            <tr>
+              <td>2018-07</td>
+              <td>￥{{infoEarnings.seven}}</td>
             </tr>
             <tr>
               <td>2018-06</td>
@@ -137,7 +144,7 @@ export default {
     return {
       datalist: [],
       sevenAmount: 52236,
-      dieTime: 1532096932,
+      dieTime: 1534496342,
       currentTime: +String.prototype.slice.call(new Date().getTime(), 0, -3),
       weeHours: +String.prototype.slice.call(new Date(new Date().setHours(0, 0, 0, 0)).getTime(), 0, -3),
       infoEarnings: {
@@ -146,7 +153,8 @@ export default {
         three: 22835,
         four: 38842,
         five: 53085,
-        six: 67246
+        six: 67246,
+        seven: 80754
       }
     }
   },
@@ -160,7 +168,7 @@ export default {
     },
     _initRank () {
       rank().then(({ code, data, message }) => {
-        console.log(data)
+        // console.log(data)
         code == 200 && (this.datalist = data)
         code !== 200 && this.$vux.toast.text(message)
       })
@@ -202,7 +210,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~style/mixin';
+@import "~style/mixin";
 .homebox {
   font-size: $mdsize;
   .vux-loadmore {

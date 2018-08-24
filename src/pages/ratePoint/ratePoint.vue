@@ -2,27 +2,27 @@
   <div class="advertisement">
     <x-header title="费率返点"></x-header>
 
-    <x-scroll :http="http"
-              :lastPage="lastPage"
-              :params="{role_type: this.roleType}"
-              @listenEvent="receive">
+    <x-scroll>
       <group slot="inn">
         <x-table full-bordered
                  :cell-bordered="false"
                  style="background-color:#fff;">
           <thead>
             <tr>
-              <th>订单号</th>
-              <th>创建时间</th>
-              <th>金额</th>
+              <th class="rate-title">订单</th>
+              <th class="rate-title">时间</th>
+              <th class="rate-title">店铺</th>
+              <th class="rate-title">金额</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in datalist"
-                :key="index">
-              <td class="advertisement-title">{{item.order_sn || '无'}}</td>
-              <td>{{item.created_at || '无'}}</td>
-              <td>{{(Math.random() / 10).toFixed(3) || '0'}}元</td>
+            <tr v-for="(item, index) in rates"
+                :key="index"
+                class="rate-item-wrapper">
+              <td class="rate-item">{{item.order_sn || '无'}}</td>
+              <td class="rate-item">{{item.created_at || '无'}}</td>
+              <td class="rate-item">{{item.supplier_name}}</td>
+              <td class="rate-item">{{item.amount || '0'}}元</td>
             </tr>
           </tbody>
         </x-table>
@@ -31,7 +31,7 @@
   </div>
 </template>
 <script>
-import { advertisementEarnings_entrepreneur, ratePoint } from '~api/self'
+import { ratePoint } from '~api/self'
 import { XTable, dateFormat } from 'vux'
 import { mapGetters } from 'vuex'
 import XScroll from '~components/x-scroll2'
@@ -39,7 +39,7 @@ export default {
   data () {
     return {
       dateFormat,
-      datalist: [],
+      rates: [],
       beginTime: dateFormat(new Date().getTime(), 'YYYY-MM-DD'),
       endTime: dateFormat(new Date().getTime(), 'YYYY-MM-DD'),
       http: ratePoint,
@@ -79,9 +79,9 @@ export default {
       })
     },
     search () {
-      this._ratePoint(this.searchParams)
+      this.fetchRate(this.searchParams)
     },
-    _ratePoint (searchParams = {}) {
+    fetchRate (searchParams = {}) {
 
       const params = {
         role_type: this.roleType,
@@ -89,20 +89,15 @@ export default {
       }
 
       ratePoint(params).then(({ data, meta }) => {
-        this.datalist = data
+        this.rates = data
+        console.log(data)
       }).catch(err => {
         console.log(err)
       })
-    },
-    receive (data) {
-      const loadMoreData = data.data
-
-      this.datalist = [...this.datalist, ...loadMoreData]
     }
   },
   created () {
-    this._ratePoint()
-    // console.log(this.roleType)
+    this.fetchRate()
   },
   computed: {
     ...mapGetters(['authUser', 'roleType']),
@@ -118,60 +113,58 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-@import "~style/mixin";
-@import "~style/variable";
-.advertisement {
-  height: $pc_100;
-  font-size: $s_14;
-  color: $c_font;
-  display: flex;
-  flex-direction: column;
+<style lang="sass" scoped>
+@import "~style/mixin"
+@import "~style/variable"
 
-  .advertisement-title {
-    // width: $px_100;
-  }
+$px_5: 5px
+$px_10: 10px
+$px_12: 12px
+$px_14: 14px
+$px_20: 20px
+$px_30: 30px
+$px_100: 100px
+$pc_100: 100%
+$c_font: #333
+$c_ccc: #ccc
 
-  .test {
-    @include text-ellipsis(100px);
-  }
+.advertisement 
+  height: $pc_100
+  font-size: $px_14
+  color: $c_font
+  display: flex
+  flex-direction: column
 
-  .weui-loadmore {
-    margin-bottom: 0.5rem;
-  }
+  .weui-loadmore 
+    margin-bottom: 0.5rem
+  
+  .rate-item-wrapper
+    height: $px_40
+    line-height: $px_40
+  .rate-title
+    font-weight: 700
+    font-size: $px_14
+  .rate-item
+    font-size: $px_10
+    align-self: stretch
+    line-height: $px_30
 
-  th {
-    font-weight: 700;
-  }
-  tr {
-    // display: flex;
-    // flex-direction: row;
-    // justify-content: space-between;
-  }
-  td {
-    font-size: $s_12;
-    align-self: stretch;
-  }
+  .timeRank 
+    margin-top: $px_20
+    display: flex
+    padding: 0 $px_5
+    input 
+      width: $px_100
+      flex: 1
+      border: 1px solid $c_ccc
+      padding: $px_5
+      margin-right: $px_5
+      border-radius: $px_5
 
-  .timeRank {
-    margin-top: $px_20;
-    display: flex;
-    padding: 0 $px_5;
-    input {
-      width: $px_100;
-      flex: 1;
-      border: 1px solid $c_gray;
-      padding: $px_5;
-      margin-right: $px_5;
-      border-radius: $px_5;
-    }
-
-    button {
-      flex: 1;
-      border: 1px solid #ccc;
-    }
-  }
-}
+    button 
+      flex: 1
+      border: 1px solid #ccc
+  
 </style>
 
 

@@ -12,7 +12,7 @@
             {{$t('balanceTxt.card.item1')}}
             <br/>
             <!-- <span>{{profitInfo.yesterday_fee}}</span> -->
-            <span>3103</span>
+            <span>3108</span>
 
           </div>
           <div class="vux-1px-r">
@@ -96,8 +96,12 @@
           </thead>
           <tbody>
             <tr>
+              <td>2018-09</td>
+              <td>￥{{(+eightAmount).toFixed(0)}}</td>
+            </tr>
+            <tr>
               <td>2018-08</td>
-              <td>￥{{(+sevenAmount).toFixed(0)}}</td>
+              <td>￥{{infoEarnings.eight}}</td>
             </tr>
             <tr>
               <td>2018-07</td>
@@ -143,7 +147,7 @@ export default {
   data () {
     return {
       datalist: [],
-      sevenAmount: 52236,
+      eightAmount: 52236,
       dieTime: 1534496342,
       currentTime: +String.prototype.slice.call(new Date().getTime(), 0, -3),
       weeHours: +String.prototype.slice.call(new Date(new Date().setHours(0, 0, 0, 0)).getTime(), 0, -3),
@@ -154,7 +158,8 @@ export default {
         four: 38842,
         five: 53085,
         six: 67246,
-        seven: 80754
+        seven: 80754,
+        eight: 102031
       }
     }
   },
@@ -203,7 +208,7 @@ export default {
         amount += this.infoEarnings[k]
       }
 
-      return amount + this.sevenAmount
+      return amount + this.eightAmount
     }
   }
 }

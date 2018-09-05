@@ -3,14 +3,14 @@
     <x-header :title="$t('balanceTxt.header')"
               :left-options="{showBack: false}"
               @on-click-back="routeTo"></x-header>
-    <tab :line-width="1"
+    <!-- <tab :line-width="1"
          v-model="index"
          prevent-default
          custom-bar-width="4rem"
          @on-before-index-change="switchItem">
-      <tab-item v-for="(item, index) in $t('balanceTxt.switch')"
+      <tab-item v-for="(item, index) in tabOptions"
                 :key="index">{{item}}</tab-item>
-    </tab>
+    </tab> -->
 
     <div class="xchild">
       <router-view></router-view>
@@ -24,6 +24,7 @@ export default {
   name: 'balance',
   data () {
     return {
+      tabOptions: ["提现记录"],
       index: 0,
       xrouter: ['profitShareHistory', 'withdrawHistory']
     }

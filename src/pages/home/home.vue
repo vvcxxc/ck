@@ -25,8 +25,8 @@
           <div>
             {{$t('balanceTxt.card.item3')}}
             <br/>
-            <!-- <span>{{profitInfo.amount}}</span> -->
-            <span>{{(+total).toFixed(2)}}</span>
+            <span>{{profitInfo.amount}}</span>
+            <!-- <span>{{(+total).toFixed(2)}}</span> -->
           </div>
         </div>
       </card>
@@ -97,7 +97,7 @@
           <tbody>
             <tr>
               <td>2018-09</td>
-              <td>￥{{(+total).toFixed(0)}}</td>
+              <td>￥{{(+profitInfo.amount).toFixed(0)}}</td>
             </tr>
             <tr>
               <td>2018-08</td>
@@ -173,19 +173,18 @@ export default {
     },
     _initRank () {
       rank().then(({ code, data, message }) => {
-        // console.log(data)
         code == 200 && (this.datalist = data)
         code !== 200 && this.$vux.toast.text(message)
       })
     },
-    calculateEarnings () {
-      this.sevenAmount = +this.sevenAmount + +this.everySceond * +this.timestamp
-    },
+    // calculateEarnings () {
+    //   this.sevenAmount = +this.sevenAmount + +this.everySceond * +this.timestamp
+    // },
   },
   created () {
     this.$store.dispatch('getProfitDetails')
     this._initRank()
-    this.calculateEarnings()
+    // this.calculateEarnings()
   },
   computed: {
     ...mapState(['profitInfo', 'role_type']),
@@ -201,15 +200,15 @@ export default {
     today () { // 今日收入
       return +this.everySceond * +this.todayTimestamp
     },
-    total () {
+    // total () {
 
-      let amount = 0
-      for (let k in this.infoEarnings) {
-        amount += this.infoEarnings[k]
-      }
+    //   let amount = 0
+    //   for (let k in this.infoEarnings) {
+    //     amount += this.infoEarnings[k]
+    //   }
 
-      return amount + this.eightAmount
-    }
+    //   return amount + this.eightAmount
+    // }
   }
 }
 </script>

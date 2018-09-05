@@ -77,11 +77,11 @@ instance.interceptors.response.use(
 
         case 500:
           Vue.$vux.toast.text("sever error")
-          if (message == "The token has been blacklisted") {
-            return timeout(1000).then(() => {
-              router.push("/login")
-            })
-          }
+          // if (message == "The token has been blacklisted") {
+          //   return timeout(1000).then(() => {
+          //     router.push("/login")
+          //   })
+          // }
           // 刷新了
           break
       }

@@ -55,5 +55,8 @@ export default {
   },
   [types.AREAS_META_INFO](state, params) {
     state.areasMetaInfo = params
+  },
+  [types.LOGOUT](state, { token }) {
+    state.token = token
   }
 }

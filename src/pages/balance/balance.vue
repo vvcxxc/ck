@@ -24,9 +24,9 @@ export default {
   name: 'balance',
   data () {
     return {
-      tabOptions: ["提现记录"],
+      tabOptions: ["提现记录"/*"分润记录"*/],
       index: 0,
-      xrouter: ['profitShareHistory', 'withdrawHistory']
+      xrouter: ['withdrawHistory', 'profitShareHistory']
     }
   },
   components: {

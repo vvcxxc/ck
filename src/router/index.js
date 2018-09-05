@@ -76,7 +76,7 @@ export default new Router({
         default: getComponent("balance/balance"),
         tabbar
       },
-      redirect: "balance/profitShareHistory",
+      redirect: "balance/withdrawHistory",
       children: [
         {
           path: "profitShareHistory",

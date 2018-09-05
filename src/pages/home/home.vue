@@ -97,7 +97,7 @@
           <tbody>
             <tr>
               <td>2018-09</td>
-              <td>￥{{(+eightAmount).toFixed(0)}}</td>
+              <td>￥{{(+total).toFixed(0)}}</td>
             </tr>
             <tr>
               <td>2018-08</td>

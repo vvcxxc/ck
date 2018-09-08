@@ -63,6 +63,13 @@ export default {
     Toast,
   },
   methods: {
+    Formvalidate () {
+      let { account_name, account_passwd } = this.account_info
+    },
+    handleLogin () {
+
+    },
+    valitator () { },
     login () {
       let { account_name, account_passwd } = this.account_info;
 

@@ -40,11 +40,9 @@ export default {
   },
   methods: {
     _debug () {
-      let urlParams = location.href.split('?')[1]
-
-      let isDebug = querystring.parse(urlParams).debug
-
-      isDebug && new VConsole()
+      let urlStr = location.href.split('?')[1]
+      let urlParams = querystring.parse(urlStr)
+      urlParams.debug && new VConsole()
     }
   }
 }

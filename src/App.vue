@@ -36,7 +36,7 @@ export default {
     ...mapGetters(['isLoading'])
   },
   created () {
-    this._debug()
+    // this._debug()
   },
   methods: {
     _debug () {

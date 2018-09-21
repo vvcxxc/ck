@@ -17,7 +17,6 @@
       <router-view></router-view>
     </div> -->
   </div>
-
 </template>
 <script type="text/javascript">
 
@@ -52,7 +51,6 @@ export default {
     }
   }
 }
-
 </script>
 <style lang="scss" scoped>
 @import "@/style/mixin.scss";

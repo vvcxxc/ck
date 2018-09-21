@@ -1,0 +1,17 @@
+$px_5: 5px
+$px_10: 10px
+$px_46: 46px
+$pc_50: 50%
+$pc_100: 100%
+
+@mixin scroll-wrapper($top: 46px, $bottom: 53px)
+  position: absolute
+  top: $top
+  width: $pc_100
+  bottom: $bottom
+  overflow: hidden
+.supplier
+  height: $pc_100
+  .supplier-wrapper
+    @include scroll-wrapper
+    margin-top: $px_5

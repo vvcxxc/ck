@@ -71,6 +71,8 @@ instance.interceptors.response.use(
 
         case 401:
           Vue.$vux.toast.text(message || "error")
+
+          return console.log('here')
           return timeout(1000).then(() => {
             router.push("/login")
           })

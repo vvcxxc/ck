@@ -3,22 +3,25 @@
     <x-header :title="$t('balanceTxt.header')"
               :left-options="{showBack: false}"
               @on-click-back="routeTo"></x-header>
-    <tab :line-width="1"
+    <p-withdraw-record></p-withdraw-record>
+    <!-- <tab :line-width="1"
          v-model="index"
          prevent-default
          custom-bar-width="4rem"
          @on-before-index-change="switchItem">
       <tab-item v-for="(item, index) in $t('balanceTxt.switch')"
                 :key="index">{{item}}</tab-item>
-    </tab>
+    </tab> -->
 
-    <div class="xchild">
+    <!-- <div class="xchild">
       <router-view></router-view>
-    </div>
+    </div> -->
   </div>
 
 </template>
 <script type="text/javascript">
+
+import PWithdrawRecord from "./withdrawRecord/withdrawRecord"
 
 export default {
   name: 'balance',
@@ -29,6 +32,7 @@ export default {
     }
   },
   components: {
+    PWithdrawRecord
   },
   methods: {
     switchItem (index) {

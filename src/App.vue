@@ -18,6 +18,7 @@ import { Loading, querystring, TransferDomDirective as TransferDom } from 'vux'
 import { mapGetters } from 'vuex'
 
 import VConsole from "vconsole/dist/vconsole.min.js"
+const PRODUCTION = 'production'
 
 export default {
   name: 'App',
@@ -36,15 +37,16 @@ export default {
     ...mapGetters(['isLoading'])
   },
   created () {
-    this._debug()
+    if (process.env.NODE_ENV != PRODUCTION) {
+      new VConsole()
+    }
+    // this._debug()
   },
   methods: {
     _debug () {
-      let urlParams = location.href.split('?')[1]
-
-      let isDebug = querystring.parse(urlParams).debug
-
-      isDebug && new VConsole()
+      let urlStr = location.href.split('?')[1]
+      let urlParams = querystring.parse(urlStr)
+      urlParams.debug && new VConsole()
     }
   }
 }

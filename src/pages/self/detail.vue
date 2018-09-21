@@ -39,7 +39,8 @@ export default {
       logout().then(({ code, message, data }) => {
         this.$vux.toast.text(message)
         if (code == 200) {
-          this.$store.state.token = ""
+          // this.$store.state.token = ""
+          this.$store.commit('LOGOUT', { token: "" })
 
           timeout(1000).then(() => {
             this.$router.push({

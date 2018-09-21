@@ -1,6 +1,6 @@
-import * as types from './mutation-type'
+import * as types from "./mutation-type"
 
-import Vue from 'vue'
+import Vue from "vue"
 
 import {
   login,
@@ -9,12 +9,12 @@ import {
   profitDetails,
   authUser,
   supplierDetails
-} from '~api/self'
+} from "~api/self"
 
 export default {
   login({ commit, state }, params) {
     login(params).then(({ code, data, message }) => {
-      code && Vue.$vux.toast.text('登录成功')
+      code && Vue.$vux.toast.text("登录成功")
       !code && commit(types.GET_TOKEN, data)
     })
   },
@@ -38,7 +38,7 @@ export default {
   },
   getProfitDetails({ commit, state }, params) {
     profitDetails(params).then(({ data, code, message }) => {
-      console.log(data)
+      // console.log(data)
       !code && commit(types.GET_PROFIT_INFO, data)
     })
   },

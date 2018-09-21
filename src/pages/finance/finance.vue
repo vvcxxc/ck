@@ -9,7 +9,7 @@
          prevent-default
          custom-bar-width="4rem"
          @on-before-index-change="switchItem">
-      <tab-item v-for="(item, index) in $t('balanceTxt.switch')"
+      <tab-item v-for="(item, index) in tabOptions"
                 :key="index">{{item}}</tab-item>
     </tab> -->
 
@@ -27,8 +27,9 @@ export default {
   name: 'balance',
   data () {
     return {
+      tabOptions: ["提现记录"/*"分润记录"*/],
       index: 0,
-      xrouter: ['profitShareHistory', 'withdrawHistory']
+      xrouter: ['withdrawHistory', 'profitShareHistory']
     }
   },
   components: {

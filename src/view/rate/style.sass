@@ -1,0 +1,61 @@
+$px_5: 5px
+$px_10: 10px
+$px_12: 12px
+$px_14: 14px
+$px_20: 20px
+$px_30: 30px
+$px_40: 40px
+$px_46: 46px
+$px_100: 100px
+$pc_100: 100%
+$c_font: #333
+$c_ccc: #ccc
+
+@mixin scroll-wrapper($top: 46px, $bottom: 53px)
+  position: absolute
+  top: $top
+  width: $pc_100
+  bottom: $bottom
+  overflow: hidden
+.rate
+  height: $pc_100
+  .rate-wrapper
+    @include scroll-wrapper($px_46, 0)
+    margin-top: $px_5
+
+.rate 
+  height: $pc_100
+  font-size: $px_14
+  color: $c_font
+  display: flex
+  flex-direction: column
+
+  .weui-loadmore 
+    margin-bottom: 0.5rem
+  
+  .rate-item-wrapper
+    height: $px_40
+    line-height: $px_40
+  .rate-title
+    font-weight: 700
+    font-size: $px_14
+  .rate-item
+    font-size: $px_10
+    align-self: stretch
+    line-height: $px_30
+
+  .timeRank 
+    margin-top: $px_20
+    display: flex
+    padding: 0 $px_5
+    input 
+      width: $px_100
+      flex: 1
+      border: 1px solid $c_ccc
+      padding: $px_5
+      margin-right: $px_5
+      border-radius: $px_5
+
+    button 
+      flex: 1
+      border: 1px solid $c_ccc

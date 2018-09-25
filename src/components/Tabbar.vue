@@ -22,11 +22,10 @@
     </tabbar-item>
 
     <tabbar-item @on-item-click="change"
-                 link="/supplier"
-                 v-if="role_type == 'president'">
+                 link="/supplier">
       <i slot="icon"
          class="iconfont icon-mendianguanli"></i>
-      <span slot="label">{{$t('tabbarTxt.store')}}</span>
+      <span slot="label">店铺</span>
     </tabbar-item>
 
     <tabbar-item @on-item-click="change"

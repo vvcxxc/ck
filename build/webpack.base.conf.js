@@ -27,7 +27,7 @@ let webpackConfig = {
   },
   resolve: {
     // 拓展名
-    extensions: ['.js', '.vue', '.json', '.scss'],
+    extensions: ['.js', '.vue', '.json', '.scss', ".sass"],
 
     // 别名
     alias: {
@@ -40,7 +40,12 @@ let webpackConfig = {
       "~pages": resolve('src/pages'),
       "~utils": resolve('src/utils'),
       "~components": resolve('src/components'),
-      "~static": resolve('static')
+      "~static": resolve('static'),
+      // this is reconfiguration 
+      "@api": resolve('src/api'),
+      "@utils": resolve('src/utils'),
+      "@components": resolve('src/components'),
+      "@style": resolve('src/style')
     }
   },
   module: {

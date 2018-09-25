@@ -1,7 +1,7 @@
 import * as types from "./mutation-type"
 import router from "@/router/index"
 import store from "@/store/index"
-import Vue from "vue"
+import vue from "vue"
 
 import { timeout, ls } from "~utils/common"
 // 跳转路由应该放在这里 ?
@@ -11,7 +11,7 @@ export default {
     state.token = data.token
     state.role_type = data.role_type
 
-    Vue.$vux.toast.text("登录成功")
+    vue.$vux.toast.text("登录成功")
 
     timeout(1000).then(res => {
       router.push("/")
@@ -55,5 +55,9 @@ export default {
   },
   [types.AREAS_META_INFO](state, params) {
     state.areasMetaInfo = params
-  }
+  },
+  // this is reconfiguration ..
+  [types.TOAST](state, { text }) {
+    vue.$vux.toast.text(text)
+  },
 }

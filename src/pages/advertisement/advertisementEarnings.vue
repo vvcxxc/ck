@@ -13,7 +13,6 @@
     <!-- <load-more tip="请选择日期"
                :show-loading="false"
                background-color="#fbf9fe"></load-more> -->
-
     <x-scroll :http="http"
               :lastPage="lastPage"
               @listenEvent="receive">

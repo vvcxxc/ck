@@ -230,3 +230,4 @@ export const advertisementEarningsDetails = data =>
     method: "post",
     data
   })
+

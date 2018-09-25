@@ -6,5 +6,9 @@ export default {
   shopInfo: state => state.shopInfo,
   withdrawInfo: state => state.withdrawInfo,
   authUser: state => state.authUser,
-  roleType: state => state.role_type
+  // roleType: state => state.role_type
+  // this is reconfiguration ...
+  role_type: state => {
+    return state.role_type ? state.role_type : localStorage.role_type ? localStorage.role_type : ''
+  }
 }

@@ -9,6 +9,9 @@ import "~static/icon-font/iconfont.css"
 import store from "./store"
 import { i18n } from "./i18n"
 
+// this is new reconfiguration
+import "@style/base-style"
+
 import { InfiniteScroll } from "mint-ui"
 
 import {

@@ -12,8 +12,6 @@ const store = new Vuex.Store({
   actions,
   mutations,
   state: {
-    // role_type: "",
-    // authUser: {},
     isLoading: {
       status: false
     },

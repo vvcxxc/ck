@@ -7,6 +7,8 @@
 </template>
 <script type="text/javascript">
 
+import { XHeader } from "vux"
+
 import PWithdrawRecord from "./withdrawRecord/withdrawRecord"
 
 export default {
@@ -17,6 +19,7 @@ export default {
     }
   },
   components: {
+    XHeader,
     PWithdrawRecord
   },
   methods: {

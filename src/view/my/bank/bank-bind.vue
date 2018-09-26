@@ -27,6 +27,7 @@
 
 <script>
 
+  import { XHeader, Group, XButton, XInput } from 'vux'
   import { bankBind, bankBindVerify } from '@api/api'
   import { Validator } from '@utils/common'
 
@@ -42,6 +43,12 @@
           verify: ''
         }
       }
+    },
+    components: {
+      XHeader,
+      Group,
+      XInput,
+      XButton,
     },
     methods: {
       handleHide(){

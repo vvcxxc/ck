@@ -20,6 +20,7 @@
 </template>
 
 <script>
+  import { XHeader, LoadMore } from "vux"
   import { couponProfit } from "@api/api"
   import { routerTo } from '@utils/common'
   import XList from '@components/x-list'
@@ -33,6 +34,8 @@
       }
     },
     components: {
+      XHeader,
+      LoadMore,
       XList
     },
     methods: {

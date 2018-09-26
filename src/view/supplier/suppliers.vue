@@ -9,6 +9,7 @@
   </div>
 </template>
 <script type="text/javascript">
+  import { XHeader } from "vux"
   import { suppliers } from "@api/api"
   import { mapGetters } from 'vuex'
   import CScroll from "@components/c-scroll/scroll"
@@ -27,6 +28,7 @@
       ...mapGetters(['role_type'])
     },
     components: {
+      XHeader,
       CScroll,
       CList
     },

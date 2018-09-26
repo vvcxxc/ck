@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in adProfits" :key="index" @click="getDetails(item.id, item.name)">
+          <tr v-for="(item, index) in adProfits" :key="index" @click="viewDetail(item.id)">
             <td class="advertisement-title">{{item.name}}</td>
             <td>{{dateFormat(item.create_time*1000, 'YYYY-M-D') || '无'}}</td>
             <td>{{item.display || '0'}}次</td>
@@ -24,31 +24,45 @@
       </x-table>
     </group>
     <load-more v-if="!adProfits.toString()" slot="inn" :show-loading="false" :tip="'暂无数据'" background-color="#fff"></load-more>
-    <!-- </x-scroll> -->
-    <router-view></router-view>
+
+    <div class="sub-view-wrapper">
+      <v-ad-profit-defail :id="adId" v-if="flagAdProfitDetail" @on-hide="handleHideView('adProfitDetail')"></v-ad-profit-defail>
+    </div>
   </div>
 </template>
 <script>
-
+  import { XHeader, Group, LoadMore } from 'vux'
   import { adProfit } from "@api/api"
   import { XTable, dateFormat } from 'vux'
   import { mapGetters } from 'vuex'
 
+  import VAdProfitDefail from "./adProfitDetail"
+
   const REQUEST_OK = 200
+  const AD_PROFIT_DETAIL = 'adProfitDetail'
 
   export default {
     data() {
       return {
+        adId: '',
         dateFormat,
         adProfits: [],
-        lastPage: '',
-        total: ''
+        flagAdProfitDetail: false
       }
     },
     components: {
-      XTable
+      XTable,
+      XHeader,
+      Group,
+      LoadMore,
+      VAdProfitDefail
     },
     methods: {
+      handleHideView(view){
+        switch(view){
+          case AD_PROFIT_DETAIL: return this.flagAdProfitDetail = false
+        }
+      },
       handleHide(){
         this.$emit('on-hide')
       },
@@ -59,14 +73,11 @@
           }
         }).catch(err => console.log(err))
       },
-      getDetails(id, name) {
-        this.$router.push({
-          path: '/adProfit/adProfitDetail',
-          query: {
-            id,
-            name
-          }
-        })
+      viewDetail(id) {
+
+        this.adId = id
+
+        this.flagAdProfitDetail = true
       }
     },
     created() {

@@ -33,20 +33,21 @@ let webpackConfig = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      "~self": resolve('src/pages/self/children'),
-      "~api": resolve('src/api'),
-      "~style": resolve('src/style'),
-      "~config": resolve('src/config'),
-      "~pages": resolve('src/pages'),
-      "~utils": resolve('src/utils'),
-      "~components": resolve('src/components'),
-      "~static": resolve('static'),
+      // "~self": resolve('src/pages/self/children'),
+      // "~api": resolve('src/api'),
+      // "~style": resolve('src/style'),
+      // "~config": resolve('src/config'),
+      // "~pages": resolve('src/pages'),
+      // "~utils": resolve('src/utils'),
+      // "~components": resolve('src/components'),
+      // "~static": resolve('static'),
       // this is reconfiguration 
       "@api": resolve('src/api'),
       "@utils": resolve('src/utils'),
       "@components": resolve('src/components'),
       "@style": resolve('src/style'),
-      "@view": resolve('src/view')
+      "@view": resolve('src/view'),
+      "@static": resolve('static')
     }
   },
   module: {

@@ -30,7 +30,7 @@
 </template>
 <script>
   import { rates } from "@api/api"
-  import { XTable, dateFormat } from 'vux'
+  import { XTable, dateFormat, XHeader, LoadMore, Group } from 'vux'
   import { mapGetters } from 'vuex'
   import CScroll from "@components/c-scroll/scroll"
   export default {
@@ -41,6 +41,9 @@
       }
     },
     components: {
+      XHeader,
+      LoadMore,
+      Group,
       XTable,
       CScroll
     },

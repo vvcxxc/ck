@@ -12,7 +12,7 @@
 
 </template>
 <script>
-  import { XTable, Panel, LoadMore } from 'vux'
+  import { XTable, Panel, LoadMore, XHeader } from 'vux'
   import { mapGetters } from "vuex"
   import { profits, ranking } from "@api/api"
 
@@ -37,14 +37,12 @@
       ...mapGetters(['role_type'])
     },
     components: {
+      XHeader,
       XTable,
       Panel,
       PPresident,
       PEntrepreneur,
       CScroll
-    },
-    created(){
-      console.log(this.role_type)
     }
   }
 </script>

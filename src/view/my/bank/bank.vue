@@ -35,6 +35,9 @@
 </template>
 
 <script>
+
+  import { XHeader, Group, Cell } from 'vux'
+
   import XDatapreview from '@components/x-datapreview'
 
   import { bank } from "@api/api"
@@ -52,6 +55,9 @@
       }
     },
     components: {
+      XHeader,
+      Cell,
+      Group,
       XDatapreview,
       VBankBind
     },

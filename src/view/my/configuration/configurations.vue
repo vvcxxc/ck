@@ -23,7 +23,7 @@
 </template>
 <script type="text/javascript">
 
-import { Flexbox } from 'vux'
+import { Flexbox, XHeader, Group, Cell, XButton } from 'vux'
 import { logout } from '@api/api'
 import { timeout } from '@utils/common'
 
@@ -39,6 +39,10 @@ export default {
   },
   components: {
     Flexbox,
+    XHeader,
+    Group,
+    Cell,
+    XButton,
     VModifyPassword
   },
   methods: {

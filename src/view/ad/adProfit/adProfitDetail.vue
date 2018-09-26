@@ -1,10 +1,8 @@
 <template>
   <div class="advertisementEarningsDetails">
-    <x-header title="广告收益详情"></x-header>
-    <!-- <x-scroll :http="http" :lastPage="lastPage" :params="{[roleTypeParams]: authUser.party_id}" @listenEvent="receive"> -->
+    <x-header title="广告收益详情" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
 
-      <!-- <load-more :tip="currentAdvertisement" :show-loading="false" background-color="#fbf9fe"></load-more> -->
-      <group :title="' 一共有 '+total+' 条记录'" slot="inn" v-if="!!dataAdvertisementEarningsLog.length">
+      <group :title="' 一共有 '+dataAdvertisementEarningsLog.length+' 条记录'" v-if="!!dataAdvertisementEarningsLog.length">
         <x-table full-bordered :cell-bordered="false" style="background-color:#fff;">
           <thead>
             <tr>
@@ -28,54 +26,30 @@
           </tbody>
         </x-table>
       </group>
-      <load-more v-if="!dataAdvertisementEarningsLog.toString()" slot="inn" :show-loading="false" :tip="'暂无数据'" background-color="#fff"></load-more>
-    <!-- </x-scroll> -->
+      <load-more v-if="!dataAdvertisementEarningsLog.toString()" :show-loading="false" :tip="'暂无数据'" background-color="#fff"></load-more>
+
   </div>
 </template>
 
 <script>
-  // import { advertisementEarningsDetails } from '~api/self'
+  import { XHeader, Group, XTable, dateFormat, LoadMore } from 'vux'
   import { adProfitDetail } from "@api/api"
-  // import { mapGetters } from 'vuex'
-  import { XTable, dateFormat } from 'vux'
   import { fieldReplace } from '@utils/common'
-  // import XScroll from '@components/x-scroll2'
+
+  const REQUEST_OK = 200
+
   export default {
+    props: {
+      id: {
+        type: [Number, String]
+      }
+    },
     data() {
       return {
-        // http: advertisementEarningsDetails,
         dataAdvertisementEarningsLog: [],
-        lastPage: 1,
-        total: 0,
         dateFormat,
-        currentAdvertisement: '',
         fieldReplace
       }
-    },
-    methods: {
-      fetchAdProfitDetail(id) {
-
-        const params = {
-          id
-        }
-
-        adProfitDetail(params).then(({ code, data, message }) => {
-
-          if (code == 200) {
-            this.dataAdvertisementEarningsLog = data.data
-            this.lastPage = data.last_page
-            this.total = data.total
-          }
-        })
-      },
-      receive(data) {
-        this.dataAdvertisementEarningsLog = [...this.dataAdvertisementEarningsLog, ...data]
-      }
-    },
-    created() {
-      let { id, name } = this.$route.query
-      this.currentAdvertisement = name
-      this.fetchAdProfitDetail(id)
     },
     computed: {
       // ...mapGetters(['authUser', 'roleType']),
@@ -84,9 +58,30 @@
       // }
     },
     components: {
-      // XScroll,
-      XTable
-    }
+      XHeader,
+      Group,
+      XTable,
+      LoadMore
+    },
+    methods: {
+      handleHide(){
+        this.$emit('on-hide')
+      },
+      fetchAdProfitDetail(id) {
+
+        const params = {
+          id
+        }
+        adProfitDetail(params).then(({ code, data, message }) => {
+          if (code == REQUEST_OK) {
+            this.dataAdvertisementEarningsLog = data.data
+          }
+        })
+      }
+    },
+    created() {
+      this.fetchAdProfitDetail(this.id)
+    },
   }
 </script>
 

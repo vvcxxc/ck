@@ -23,6 +23,7 @@
 </template>
 <script type="text/javascript">
 
+  import { LoadMore } from "vux"
   import { withdrawRecord } from "@api/api"
 
   const REQUEST_OK = 200
@@ -37,7 +38,7 @@
 
     },
     components: {
-
+      LoadMore
     },
     methods: {
       fetchWithdrawRecord() {

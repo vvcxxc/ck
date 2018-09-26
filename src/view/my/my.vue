@@ -51,7 +51,7 @@
 </template>
 <script>
   import { mapState } from 'vuex'
-  import { Alert } from 'vux'
+  import { Alert, XHeader, Group, Cell, Card, XInput, XButton } from 'vux'
 
   import { authUser, withdrawApply } from "@api/api"
 
@@ -85,6 +85,12 @@
       }
     },
     components: {
+      XButton,
+      XHeader,
+      XInput,
+      Card,
+      Cell,
+      Group,
       Alert,
       CScroll,
       VBank,

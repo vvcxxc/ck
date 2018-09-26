@@ -13,6 +13,8 @@
   </div>
 </template>
 <script type="text/javascript">
+
+  import { XHeader, Group, XButton, XInput } from 'vux'
   import { modifyPassword } from '@api/api'
   import { Validator } from '@utils/common'
 
@@ -28,7 +30,12 @@
         confirmPassword: ''
       }
     },
-    components: {},
+    components: {
+      XHeader,
+      Group,
+      XInput,
+      XButton
+    },
     methods: {
       handleHide(){
         this.$emit('on-hide')

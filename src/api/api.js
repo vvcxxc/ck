@@ -11,6 +11,27 @@ export const login = data => http({
 })
 
 /**
+ * 登出
+ */
+
+export const logout = () =>
+  http({
+    url: "api/entrepreneur/logout",
+    method: "post"
+  })
+
+/**
+ * 修改密码
+ */
+
+export const modifyPassword = data =>
+  http({
+    url: "api/entrepreneur/user/modifyPwd",
+    method: "post",
+    data
+  })
+
+/**
  * 获取创客会长店铺列表
  */
 

@@ -1,5 +1,5 @@
 <template>
-  <tabbar class="tabbarbox">
+  <tabbar class="tabbarbox" v-show="isHideTabbar">
     <tabbar-item v-for="(item, index) in tabMenus" :key="index" :selected="currentRouter == index" v-if="Object.keys(item).length" :link="item.link">
       <i slot="icon" :class="['iconfont', item.icon]"></i>
       <span slot="label">{{item.text}}</span>
@@ -37,7 +37,7 @@
 </template>
 <script>
   import { Tabbar, TabbarItem } from 'vux'
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapState } from 'vuex'
 
   const ROLE_PRESIDENT = 'president'
   const ROLE_ENTREPRENEUR = 'entrepreneur'
@@ -58,12 +58,13 @@
       }
     },
     computed: {
+      ...mapState(['isHideTabbar']),
       ...mapGetters(['role_type']),
       tabMenus() {
         return [{
             text: '首页',
             icon: 'icon-home',
-            link: '/home'
+            link: '/index'
           }, {
             text: '财务',
             icon: 'icon-icon-',

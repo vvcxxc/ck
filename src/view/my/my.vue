@@ -5,7 +5,7 @@
     <c-scroll class="scroll-wrapper">
       <div class="container">
         <group>
-          <cell is-link link="/configuration">
+          <cell is-link @click.native="handleShowView('configuration')">
             <div class="self-baseInfo" slot="after-title">
               <div class="user-info">
                 <p style="margin-bottom: 10px">{{account_name || '请登录'}}</p>
@@ -23,21 +23,30 @@
           </div>
         </card>
         <group title="点击查看">
-          <cell is-link title="我的银行卡" link="/bank"></cell>
-          <cell is-link title="广告收益" link="/adProfit"></cell>
-          <cell is-link title="现金券收益" link="/couponProfit"></cell>
+          <cell is-link title="我的银行卡" @click.native="handleShowView('bank')"></cell>
 
-          <cell is-link title="费率返点" link="/rates"></cell>
+          <cell is-link title="广告收益" @click.native="handleShowView('adProfit')"></cell>
+          <cell is-link title="现金券收益" @click.native="handleShowView('couponProfit')"></cell>
+
+          <cell is-link title="费率返点" @click.native="handleShowView('rate')"></cell>
         </group>
 
         <group title="提现">
-
           <x-input title="￥" v-model="withdrawMoney" placeholder="请输入提现金额" ref="withdraw"></x-input>
         </group>
         <x-button type="primary" style="margin-top: 1rem;" @click.native="requestWithdrawApply">提现</x-button>
         <alert v-model="show" title="提示" @on-hide="onHide">您的提现申请已经发出</alert>
+
       </div>
     </c-scroll>
+
+    <div class="sub-view-wrapper">
+      <v-configuration v-if="flagConfiguration" @on-hide="handleHideView('configuration')"></v-configuration>
+      <v-bank v-if="flagBank" @on-hide="handleHideView('bank')"></v-bank>
+      <v-ad-profit v-if="flagAdProfit" @on-hide="handleHideView('adProfit')"></v-ad-profit>
+      <v-coupon-profit v-if="flagCouponProfit" @on-hide="handleHideView('couponProfit')"></v-coupon-profit>
+      <v-rate v-if="flagRate" @on-hide="handleHideView('rate')"></v-rate>
+    </div>
   </div>
 </template>
 <script>
@@ -46,8 +55,19 @@
 
   import { authUser, withdrawApply } from "@api/api"
 
+  import VBank from "./bank/bank"
+  import VConfiguration from './configuration/configurations'
+  import VAdProfit from "@/view/ad/adProfit/adProfit"
+  import VCouponProfit from "@/view/coupon/coupon-profit/coupon-profit"
+  import VRate from "@/view/rate/rates"
+
   import CScroll from "@components/c-scroll/scroll"
 
+  const V_BANK = 'bank'
+  const V_AD_PROFIT = 'adProfit'
+  const V_COUPON_PROFIT = 'couponProfit'
+  const V_CONFIGURATION = 'configuration'
+  const V_RATE = 'rate'
 
   export default {
     data() {
@@ -56,20 +76,59 @@
         withdrawMoney: '',
         account_name: '',
         account_balance: '',
-        account_phone: ''
+        account_phone: '',
+        flagBank: false,
+        flagAdProfit: false,
+        flagCouponProfit: false,
+        flagConfiguration: false,
+        flagRate: false
       }
     },
     components: {
       Alert,
-      CScroll
+      CScroll,
+      VBank,
+      VConfiguration,
+      VAdProfit,
+      VCouponProfit,
+      VRate
     },
     created() {
       this.fetchAuthUser()
     },
     methods: {
+      handleShowView(view) {
+        this.$store.commit('HIDE_TABBAR', { path: '' })
+        switch (view) {
+          case V_BANK:
+            return this.flagBank = true
+          case V_AD_PROFIT:
+            return this.flagAdProfit = true
+          case V_COUPON_PROFIT:
+            return this.flagCouponProfit = true
+          case V_CONFIGURATION:
+            return this.flagConfiguration = true
+          case V_RATE:
+            return this.flagRate = true
+        }
+      },
+      handleHideView(view) {
+        this.$store.commit('HIDE_TABBAR', { path: '/my' })
+        switch (view) {
+          case V_BANK:
+            return this.flagBank = false
+          case V_AD_PROFIT:
+            return this.flagAdProfit = false
+          case V_COUPON_PROFIT:
+            return this.flagCouponProfit = false
+          case V_CONFIGURATION:
+            return this.flagConfiguration = false
+          case V_RATE:
+            return this.flagRate = false
+        }
+      },
       fetchAuthUser() {
         authUser().then(({ data: { account_name, account_phone, money, party_id } }) => {
-          // console.log(res)
           if (account_name) {
             this.account_name = account_name
             this.account_phone = account_phone
@@ -86,7 +145,7 @@
 
           this.$vux.toast.text(message)
 
-          if(!code){
+          if (!code) {
             this.show = true
             this.withdrawMoney = ''
           }

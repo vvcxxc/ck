@@ -68,7 +68,7 @@
         </x-table>
       </div>
 
-      <div class="rank-table"
+      <!-- <div class="rank-table"
            v-if="role_type == 'president'">
         <load-more tip="收益统计"
                    :show-loading="false"
@@ -120,7 +120,7 @@
             </tr>
           </tbody>
         </x-table>
-      </div>
+      </div> -->
     </div>
     <!-- <router-view></router-view> -->
   </div>

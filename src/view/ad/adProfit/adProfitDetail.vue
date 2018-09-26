@@ -95,7 +95,7 @@
 $px_12: 12px
 $px_10: 10px
 .advertisementEarningsDetails 
-  @include allcover(101) 
+  @include xallcover(101)
   display: flex 
   flex-direction: column 
   th 

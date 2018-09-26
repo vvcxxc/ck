@@ -45,7 +45,8 @@ let webpackConfig = {
       "@api": resolve('src/api'),
       "@utils": resolve('src/utils'),
       "@components": resolve('src/components'),
-      "@style": resolve('src/style')
+      "@style": resolve('src/style'),
+      "@view": resolve('src/view')
     }
   },
   module: {

@@ -1,3 +1,4 @@
+@import "@style/mixin"
 $px_5: 5px
 $px_10: 10px
 $px_12: 12px
@@ -18,6 +19,7 @@ $c_ccc: #ccc
   bottom: $bottom
   overflow: hidden
 .rate
+  @include xallcover
   height: $pc_100
   .rate-wrapper
     @include scroll-wrapper($px_46, 0)

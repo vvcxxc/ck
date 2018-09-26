@@ -1,7 +1,7 @@
 <template>
   <div class="bankBind">
 
-    <x-header title="更改银行卡"></x-header>
+    <x-header title="更改银行卡" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
 
     <group title="请输入以下信息" class="bankBindInfo">
       <form>
@@ -21,13 +21,14 @@
       </form>
     </group>
     <x-button style="margin-top: 1rem" type="primary" @click.native="applyBankBind">确认更新</x-button>
+    
   </div>
 </template>
 
 <script>
 
   import { bankBind, bankBindVerify } from '@api/api'
-  import { Validator_a } from '@utils/common'
+  import { Validator } from '@utils/common'
 
   const REQUEST_OK = 200
 
@@ -43,6 +44,9 @@
       }
     },
     methods: {
+      handleHide(){
+        this.$emit('on-hide')
+      },
       requestBankBindVerify() {
         bankBindVerify().then(({ code, message }) => {
           if (code == REQUEST_OK) {
@@ -68,7 +72,7 @@
         })
       },
       _validator() {
-        let validator = new Validator_a
+        let validator = new Validator()
 
         validator.add(this.bankInfo.bank_account_user_name, [{
           validateRule: 'isEmpty',
@@ -93,29 +97,31 @@
         let errmsg = validator.start()
 
         if (errmsg) return errmsg
-
-        return false
       }
     }
   }
 </script>
 <style lang="scss" scoped>
-  @import '~style/mixin';
+  @import '@style/mixin';
+
+  $px_5: 5px;
+  $px_12: 12px;
+  $px_20: 20px;
 
   .bankBind {
     @include xallcover(101);
-    font-size: $mdsize;
+    font-size: $px_12;
 
     .iconfont {
-      font-size: 20px;
-      padding-right: 5px;
+      font-size: $px_20;
+      padding-right: $px_5;
       color: #000;
     }
   }
 
   .bankBindInfo {
     .weui-btn {
-      font-size: $mdsize;
+      font-size: $px_12;
     }
   }
 </style>

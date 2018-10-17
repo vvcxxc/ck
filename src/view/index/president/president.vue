@@ -25,7 +25,7 @@
           </div>
         </card>
       </div>
-      <!-- <div class="rank-table">
+      <div class="rank-table">
         <load-more tip="收益统计"
                    :show-loading="false"
                    background-color="#fbf9fe"></load-more>
@@ -41,7 +41,6 @@
             <tr>
               <td>2018-09</td>
               <td>￥8888</td>
-              <td>$88</td>
             </tr>
             <tr>
               <td>2018-08</td>
@@ -77,7 +76,7 @@
             </tr>
           </tbody>
         </x-table>
-      </div> -->
+      </div>
     </div>
 
   </div>

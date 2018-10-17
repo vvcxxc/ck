@@ -15,7 +15,8 @@ const store = new Vuex.Store({
     isLoading: {
       status: false
     },
-    isHideTabbar: true
+    isHideTabbar: true,
+    role_type: ""
   }
 })
 

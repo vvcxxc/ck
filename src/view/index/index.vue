@@ -36,6 +36,10 @@
     computed: {
       ...mapGetters(['role_type'])
     },
+    created () {
+      console.log('----role_type----')
+      console.log(this.role_type)
+    },
     components: {
       XHeader,
       XTable,

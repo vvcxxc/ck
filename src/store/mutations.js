@@ -19,5 +19,8 @@ export default {
     } else {
       state.isHideTabbar = false
     }
+  },
+  [types.ROLE_TYPE] (state, { type }) {
+    state.role_type = type
   }
 }

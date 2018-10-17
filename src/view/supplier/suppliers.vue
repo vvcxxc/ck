@@ -5,6 +5,7 @@
       <div class="container">
         <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"></c-list>
       </div>
+      <load-more :tip="tipDesc" :show-loading="flagLoading" v-if="!suppliers.length"></load-more>
     </c-scroll>
   </div>
 </template>
@@ -12,6 +13,7 @@
   import { XHeader } from "vux"
   import { suppliers } from "@api/api"
   import { mapGetters } from 'vuex'
+  import { LoadMore } from 'vux'
   import CScroll from "@components/c-scroll/scroll"
   import CList from "@components/c-list/list"
 
@@ -21,16 +23,19 @@
   export default {
     data() {
       return {
-        suppliers: []
+        suppliers: [],
+        tipDesc: '正在加载',
+        flagLoading: true
       }
     },
     computed: {
-      ...mapGetters(['role_type'])
+      ...mapGetters(['role_type']),
     },
     components: {
       XHeader,
       CScroll,
-      CList
+      CList,
+      LoadMore
     },
     created() {
       this.fetchSuppliers()
@@ -46,6 +51,12 @@
             name: '店铺',
             mobile: '手机',
             money: '今日营业额'
+          }
+          
+          this.flagLoading = false
+
+          if (!data.length) {
+            this.tipDesc = '暂无数据'
           }
 
           const turnover_fields = ['sale_money', 'supplierMoney', 'wd_money']

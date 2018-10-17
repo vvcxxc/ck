@@ -7,20 +7,20 @@
             <div class="vux-1px-r">
               昨日收入
               <br />
-              <span>{{yesterday_fee}}</span>
-              <!-- <span>3064</span> -->
+              <!-- <span>{{yesterday_fee}}</span> -->
+              <span>3064</span>
             </div>
             <div class="vux-1px-r">
               今日收入
               <br />
-              <span>{{today_fee}}</span>
-              <!-- <span>{{(+today).toFixed(2)}}</span> -->
+              <!-- <span>{{today_fee}}</span> -->
+              <span>{{(+today).toFixed(2)}}</span>
             </div>
             <div>
               余额
               <br />
-              <span>{{amount}}</span>
-              <!-- <span>{{(+total).toFixed(2)}}</span> -->
+              <!-- <span>{{amount}}</span> -->
+              <span>{{(+infoEarnings.nine).toFixed(2)}}</span>
             </div>
           </div>
         </card>
@@ -40,7 +40,7 @@
           <tbody>
             <tr>
               <td>2018-09</td>
-              <td>￥8888</td>
+              <td>￥{{infoEarnings.nine}}</td>
             </tr>
             <tr>
               <td>2018-08</td>
@@ -106,7 +106,8 @@
           five: 53085,
           six: 67246,
           seven: 80754,
-          eight: 10198
+          eight: 101980,
+          nine: 135441
         }
       }
     },

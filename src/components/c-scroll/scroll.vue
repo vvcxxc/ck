@@ -6,8 +6,8 @@
 </template>
 <script>
 import BScroll from 'better-scroll'
-const DIRECTION_H = 'horizontal'
-const DIRECTION_V = 'vertical'
+const DIRECTION_H = 'horizontal',
+  DIRECTION_V = 'vertical'
 
 export default {
   props: {
@@ -48,14 +48,12 @@ export default {
     },
     refresh () {
       this.scroll && this.scroll.refresh()
-    },
-    handleLoadMore () {
-
-    },
-    handleRefresh () {}
+    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
+
 </style>
+

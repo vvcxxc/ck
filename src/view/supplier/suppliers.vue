@@ -1,7 +1,7 @@
 <template>
   <div class="supplier">
     <x-header title="店铺" :left-options="{showBack: false}"></x-header>
-    <c-scroll class="supplier-wrapper ofh">
+    <c-scroll class="supplier-wrapper ofh" :pullUpLoad="true">
       <div class="container">
         <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"></c-list>
       </div>

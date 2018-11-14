@@ -90,3 +90,10 @@
     }
   }
 </script>
+
+<style lang="sass" scoped>
+// $px_53: 53px
+// .tabbarbox
+//   flex: 0 0 $px_53
+//   height: $px_53
+</style>

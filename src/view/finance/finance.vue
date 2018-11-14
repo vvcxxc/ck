@@ -68,16 +68,6 @@ export default {
 <style lang="sass" scoped>
 @import "@/style/mixin.scss"
 
-
-// $px_12: 12px;
-// .balancebox {
-//   @include xallcover(101);
-//   font-size: $px_12;
-//   .zw-detail {
-//     padding-left: 0;
-//   }
-// }
-
 $px_5: 5px
 $px_10: 10px
 $px_12: 12px

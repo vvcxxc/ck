@@ -60,6 +60,7 @@ $pc_100: 100%;
 
 #app {
   height: $pc_100;
+  position: relative;
 
   .weui-loading_toast .weui-toast {
     width: 4.5rem;

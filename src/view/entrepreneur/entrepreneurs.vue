@@ -1,11 +1,14 @@
 <template>
   <div class="entrepreneur">
     <x-header title="创客" :left-options="{showBack: false}"></x-header>
-    <c-scroll class="entrepreneur-wrapper ofh">
+    <c-scroll-new class="entrepreneur-wrapper" 
+      :data="entrepreneurs"
+      @pullingUp="hanleLoadMore"
+    >
       <div class="container">
-      <c-list v-for="(item, index) in entrepreneurs" :key="index" :showOptions="{image: true}" :data="item"></c-list>
-    </div>
-    </c-scroll>
+        <c-list v-for="(item, index) in entrepreneurs" :key="index" :showOptions="{image: true}" :data="item"></c-list>
+      </div>
+    </c-scroll-new>
   </div>
 </template>
 
@@ -14,6 +17,7 @@
   import { mapGetters } from "vuex"
   import CScroll from "@components/c-scroll/scroll"
   import CList from "@components/c-list/list"
+  import CScrollNew from "@components/c-n-scroll/scroll"
 
   import { entrepreneurs } from "@api/api"
 
@@ -37,24 +41,31 @@
     components: {
       XHeader,
       CScroll,
-      CList
+      CList,
+      CScrollNew
     },
     methods: {
-      fetchEntrepreneurs() {
+      hanleLoadMore () {
+        window.setTimeout(() => {
+          this.fetchEntrepreneurs()
+        }, 1000)
+      },
+      async fetchEntrepreneurs() {
         const params = {
-          type: this.role_type
+          type: this.role_type,
+          page: 2
         }
-        entrepreneurs(params).then(({ code, data, message }) => {
+        let { code, data, message } = await entrepreneurs(params)
+        const CH_MAP = {
+          account_name: '用户',
+          account_phone: '手机',
+          account_regist_time: '注册时间'
+        }
 
-          const CH_MAP = {
-            account_name: '用户',
-            account_phone: '手机',
-            account_regist_time: '注册时间'
-          }
-
-          if(code == REQUEST_ONE){
-            
-            this.entrepreneurs = data.map(item => {
+        if(code == REQUEST_ONE){
+          this.entrepreneurs = [
+            ...this.entrepreneurs,
+            ...data.map(item => {
               let output = {}
               for(let [key, value] of Object.entries(item)){
                 CH_MAP[key] && (output[CH_MAP[key]] = value)
@@ -64,8 +75,10 @@
                 desc: output
               }
             })
-          }
-        }).catch(err => console.log(err))
+          ]
+        } else {
+
+        }
       }
     },
     created() {

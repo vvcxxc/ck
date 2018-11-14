@@ -1,26 +1,13 @@
-// $blue: #3190e8;
-// $bc: #e4e4e4;
-// $fc:#fff;
-// $size: 0.683761rem; // 16px
-// $mdsize: 0.598291rem; // 14px
-// $minsize: 0.512821rem; // 12px
-// $padding: 0.387597rem; // 10px
-// $margin: 0.387597rem; // 10px
-// $gray: #999999;
-// 背景图片地址和大小
-// @mixin bis($url) {
-//   background-image: url($url);
-//   background-repeat: no-repeat;
-//   background-size: 100% 100%;
-// }
+// 子页采用absolute, flex
+@mixin direct-sub-layout ($bottom: 53px, $with: 100%) {
+  position: absolute;
+  top: 0;
+  bottom: $bottom;
+  width: $with;
+  display: flex;
+  flex-direction: column;
+}
 
-// @mixin borderRadius($radius) {
-//   -webkit-border-radius: $radius;
-//   -moz-border-radius: $radius;
-//   -ms-border-radius: $radius;
-//   -o-border-radius: $radius;
-//   border-radius: $radius;
-// }
 
 //定位全屏
 @mixin allcover {

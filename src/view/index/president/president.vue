@@ -20,7 +20,7 @@
               余额
               <br />
               <!-- <span>{{amount}}</span> -->
-              <span>{{(+infoEarnings.nine).toFixed(2)}}</span>
+              <span>{{(+infoEarnings.eleven).toFixed(2)}}</span>
             </div>
           </div>
         </card>
@@ -38,6 +38,10 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td>2018-10</td>
+              <td>￥{{infoEarnings.ten}}</td>
+            </tr>
             <tr>
               <td>2018-09</td>
               <td>￥{{infoEarnings.nine}}</td>
@@ -107,7 +111,9 @@
           six: 67246,
           seven: 80754,
           eight: 101980,
-          nine: 135441
+          nine: 135441,
+          ten: 142460,
+          eleven: 84312
         }
       }
     },

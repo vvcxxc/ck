@@ -167,10 +167,8 @@
 </script>
 
 <style lang="sass" scoped>
-
 </style>
 <style lang="sass">
-
 $c_black: #000
 
 .profit-title

@@ -7,25 +7,25 @@
             <div class="vux-1px-r">
               昨日收入
               <br />
-              <!-- <span>{{yesterday_fee}}</span> -->
-              <span>3064</span>
+              <span>{{yesterday_fee}}</span>
+              <!-- <span>3064</span> -->
             </div>
             <div class="vux-1px-r">
               今日收入
               <br />
-              <!-- <span>{{today_fee}}</span> -->
-              <span>{{(+today).toFixed(2)}}</span>
+              <span>{{today_fee}}</span>
+              <!-- <span>{{(+today).toFixed(2)}}</span> -->
             </div>
             <div>
               余额
               <br />
-              <!-- <span>{{amount}}</span> -->
-              <span>{{(+infoEarnings.eleven).toFixed(2)}}</span>
+              <span>{{amount}}</span>
+              <!-- <span>{{(+infoEarnings.eleven).toFixed(2)}}</span> -->
             </div>
           </div>
         </card>
       </div>
-      <div class="rank-table">
+      <!-- <div class="rank-table">
         <load-more tip="收益统计"
                    :show-loading="false"
                    background-color="#fbf9fe"></load-more>
@@ -80,7 +80,7 @@
             </tr>
           </tbody>
         </x-table>
-      </div>
+      </div> -->
     </div>
 
   </div>

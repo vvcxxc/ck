@@ -4,42 +4,29 @@
 
       <c-scroll class="index-wrapper ofh">
         <div class="container">
-          <p-entrepreneur v-if="role_type == entrepreneur"></p-entrepreneur>
-          <p-president v-if="role_type == president"></p-president>
+          <p-entrepreneur v-if="getterRoleType == 'entrepreneur'"></p-entrepreneur>
+          <p-president v-if="getterRoleType == 'president'"></p-president>
         </div>
       </c-scroll>
   </div>
 
 </template>
 <script>
+  import { Vue, Component } from 'vue-property-decorator'
+  import { Getter } from 'vuex-class'
   import { XTable, Panel, LoadMore, XHeader } from 'vux'
-  import { mapGetters } from "vuex"
-  import { profits, ranking } from "@api/api"
 
   import PEntrepreneur from "./entrepreneur/entrepreneur"
   import PPresident from "./president/president"
 
   import CScroll from "@components/c-scroll/scroll"
 
+  import checkLogin from '@/decorator/check_login'
+
   const REQUEST_OK = 200
   const ZERO = 0
-  const ROLE_PRESIDENT = 'president'
-  const ROLE_ENTREPRENEUR = 'entrepreneur'
 
-  export default {
-    data() {
-      return {
-        president: ROLE_PRESIDENT,
-        entrepreneur: ROLE_ENTREPRENEUR
-      }
-    },
-    computed: {
-      ...mapGetters(['role_type'])
-    },
-    created () {
-      console.log('----role_type----')
-      console.log(this.role_type)
-    },
+  @Component({
     components: {
       XHeader,
       XTable,
@@ -48,6 +35,11 @@
       PEntrepreneur,
       CScroll
     }
+  })
+  export default class Index extends Vue {
+    @Getter('role_type') getterRoleType
+    @checkLogin
+    created () {}
   }
 </script>
 

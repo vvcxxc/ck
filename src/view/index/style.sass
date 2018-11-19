@@ -1,6 +1,6 @@
-@import '@style/mixin.scss'
 $px_5: 5px
 $px_10: 10px
+$px_12: 12px
 $px_46: 46px
 $px_53: 53px
 $pc_50: 50%
@@ -8,12 +8,17 @@ $pc_100: 100%
 
 @mixin scroll-wrapper($top: 46px, $bottom: 53px)
   position: absolute
-  top: 0
-  padding-top: $top
+  top: $top
   width: $pc_100
   bottom: $bottom
   overflow: hidden
-.entrepreneur
-  @include direct-sub-layout
-  .entrepreneur-wrapper
-    
+.index
+  font-size: $px_12
+  height: $pc_100
+  .index-wrapper
+    @include scroll-wrapper
+    margin-top: $px_5
+    .container
+      // padding-bottom: $px_53
+  
+  

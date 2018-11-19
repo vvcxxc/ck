@@ -3,48 +3,19 @@
 import Vue from "vue"
 import App from "./App"
 import router from "./router"
-import "~utils/rem"
-import "~style/common"
-import "~static/icon-font/iconfont.css"
 import store from "./store"
 import { i18n } from "./i18n"
+
+import "@utils/rem"
+import "@style/common"
+import "@static/icon-font/iconfont.css"
 
 // this is new reconfiguration
 import "@style/base-style"
 
-import { InfiniteScroll } from "mint-ui"
+import { ToastPlugin } from "vux"
 
-import {
-  Cell,
-  Group,
-  XHeader,
-  XInput,
-  Tab,
-  TabItem,
-  LoadMore,
-  Card,
-  XButton,
-  PopupPicker,
-  ToastPlugin,
-  Loading,
-  DatetimePlugin
-} from "vux"
-
-Vue.component("cell", Cell)
-Vue.component("group", Group)
-Vue.component("x-header", XHeader)
-Vue.component("x-input", XInput)
-Vue.component("load-more", LoadMore)
-Vue.component("card", Card)
-Vue.component("x-button", XButton)
-Vue.component("popup-picker", PopupPicker)
-Vue.component("tab", Tab)
-Vue.component("tab-item", TabItem)
-Vue.component("loading", Loading)
-
-Vue.use(InfiniteScroll)
 Vue.use(ToastPlugin)
-Vue.use(DatetimePlugin)
 
 Vue.config.productionTip = false
 

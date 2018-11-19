@@ -1,6 +1,6 @@
 <template>
   <div class="bank">
-    <x-header title="绑定银行卡"></x-header>
+    <x-header title="绑定银行卡" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
 
     <div class="bankList">
       <div class="x-data-preview">
@@ -25,30 +25,58 @@
 
     <div class="bankBind">
       <group>
-        <cell title="更改银行卡" is-link link="/bank/bankBind"></cell>
+        <cell title="更改银行卡" is-link @click.native="handleShowView('bankBind')"></cell>
       </group>
     </div>
-    <router-view></router-view>
+    <div class="sub-view-wrappeer">
+      <v-bank-bind v-if="flagBankBind" @on-hide="handleHideView('bankBind')"></v-bank-bind>
+    </div>
   </div>
 </template>
 
 <script>
-  import XDatapreview from '~components/x-datapreview'
-  // import { bankList } from '~api/self'
+
+  import { XHeader, Group, Cell } from 'vux'
+
+  import XDatapreview from '@components/x-datapreview'
+
   import { bank } from "@api/api"
 
+  import VBankBind from "./bank-bind"
+
   const REQUEST_OK = 200
+  const BANK_BIND = 'bankBind'
 
   export default {
     data() {
       return {
+        flagBankBind: false,
         bank: {}
       }
     },
     components: {
-      XDatapreview
+      XHeader,
+      Cell,
+      Group,
+      XDatapreview,
+      VBankBind
     },
     methods: {
+      handleShowView(view) {
+        switch (view) {
+          case BANK_BIND:
+            return this.flagBankBind = true
+        }
+      },
+      handleHideView(view) {
+        switch (view) {
+          case BANK_BIND:
+            return this.flagBankBind = false
+        }
+      },
+      handleHide() {
+        this.$emit('on-hide')
+      },
       fetchBank() {
         bank().then(({ code, message, data }) => {
           if (code == REQUEST_OK) {
@@ -64,5 +92,4 @@
 </script>
 <style lang="scss" scoped>
   @import "./styles/bank-style.scss";
-
 </style>

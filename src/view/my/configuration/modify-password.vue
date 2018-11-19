@@ -1,7 +1,7 @@
 <template>
   <div class="modifyPasswordbox">
-    <!-- {{msg}} -->
-    <x-header title="重置密码"></x-header>
+
+    <x-header title="重置密码" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
     <form>
       <group title="请输入以下信息">
         <x-input placeholder="旧密码" v-model="modifyInfo.old_account_passwd"></x-input>
@@ -13,12 +13,16 @@
   </div>
 </template>
 <script type="text/javascript">
-  import { modifyPassword } from '~api/self'
-  import { Validator_a } from '~utils/common'
+
+  import { XHeader, Group, XButton, XInput } from 'vux'
+  import { modifyPassword } from '@api/api'
+  import { Validator } from '@utils/common'
+
+  const REQUEST_OK = 200
+
   export default {
     data() {
       return {
-        msg: 'modifyPassword',
         modifyInfo: {
           old_account_passwd: '',
           new_account_passwd: ''
@@ -26,30 +30,33 @@
         confirmPassword: ''
       }
     },
-    components: {},
+    components: {
+      XHeader,
+      Group,
+      XInput,
+      XButton
+    },
     methods: {
+      handleHide(){
+        this.$emit('on-hide')
+      },
       confirm() {
-
         let errmsg = this._valadator()
 
         if (errmsg) return this.$vux.toast.text(errmsg)
 
         modifyPassword(this.modifyInfo).then(({ code, message }) => {
 
-          if (code == 200) {
-
+          if (code == REQUEST_OK) {
             this.$vux.toast.text(message)
-
             this.modifyInfo.old_account_passwd = ''
             this.modifyInfo.new_account_passwd = ''
             this.confirmPassword = ''
           }
-
         })
       },
       _valadator() {
-
-        let validator = new Validator_a
+        let validator = new Validator()
 
         validator.add(this.modifyInfo.old_account_passwd, [{
           validateRule: 'isEmpty',
@@ -73,8 +80,6 @@
         let errmsg = validator.start()
 
         if (errmsg) return errmsg
-
-        return false
       }
     }
   }

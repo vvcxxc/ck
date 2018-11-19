@@ -79,8 +79,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~style/mixin";
-@import "~style/variable";
+
+$px_5: 5px;
+$px_10: 10px;
+$px_12: 12px;
+$px_40: 40px;
+$c_white: #fff;
+$c_border: #E1E1E1;
+$c_font: #757575;
 
 .list-item {
   font-size: $px_12;

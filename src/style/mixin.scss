@@ -1,26 +1,13 @@
-$blue: #3190e8;
-$bc: #e4e4e4;
-$fc:#fff;
-$size: 0.683761rem; // 16px
-$mdsize: 0.598291rem; // 14px
-$minsize: 0.512821rem; // 12px
-$padding: 0.387597rem; // 10px
-$margin: 0.387597rem; // 10px
-$gray: #999999;
-// 背景图片地址和大小
-@mixin bis($url) {
-  background-image: url($url);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+// 子页采用absolute, flex
+@mixin direct-sub-layout ($bottom: 53px, $with: 100%) {
+  position: absolute;
+  top: 0;
+  bottom: $bottom;
+  width: $with;
+  display: flex;
+  flex-direction: column;
 }
 
-@mixin borderRadius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  -o-border-radius: $radius;
-  border-radius: $radius;
-}
 
 //定位全屏
 @mixin allcover {
@@ -52,38 +39,38 @@ $gray: #999999;
 }
 
 //宽高
-@mixin wh($width, $height) {
-  width: $width;
-  height: $height;
-}
+// @mixin wh($width, $height) {
+//   width: $width;
+//   height: $height;
+// }
 
 //字体大小、行高、字体
-@mixin font($size, $line-height, $family: 'Microsoft YaHei') {
-  font: #{$size}/#{$line-height} $family;
-}
+// @mixin font($size, $line-height, $family: 'Microsoft YaHei') {
+//   font: #{$size}/#{$line-height} $family;
+// }
 
 //字体大小，颜色
-@mixin sc($size, $color) {
-  font-size: $size;
-  color: $color;
-}
+// @mixin sc($size, $color) {
+//   font-size: $size;
+//   color: $color;
+// }
 
 //flex 布局和 子元素 对其方式
-@mixin fj($type: space-between) {
-  display: flex;
-  justify-content: $type;
-}
+// @mixin fj($type: space-between) {
+//   display: flex;
+//   justify-content: $type;
+// }
 
-@mixin ovh {
-  overflow: hidden;
-}
+// @mixin ovh {
+//   overflow: hidden;
+// }
 
-@mixin bgc {
-  background-color: rgb(251, 249, 254);
-}
+// @mixin bgc {
+//   background-color: rgb(251, 249, 254);
+// }
 
-@mixin xallcover($zIndex) {
-  @include bgc;
+@mixin xallcover($zIndex: 1, $bgc: rgb(251, 249, 254)) {
+  background-color: $bgc;
   position: absolute;
   z-index: $zIndex;
   top: 0;
@@ -99,15 +86,15 @@ $gray: #999999;
   text-overflow: ellipsis;
 }
 
-@mixin allcover($zIndex) {
-  @include bgc;
-  position: absolute;
-  z-index: $zIndex;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-}
+// @mixin allcover($zIndex) {
+//   @include bgc;
+//   position: absolute;
+//   z-index: $zIndex;
+//   top: 0;
+//   left: 0;
+//   bottom: 0;
+//   right: 0;
+// }
 
 // @mixin xscroll($eleParent, $eleChild) {
 //   $eleParent {

@@ -1,20 +1,6 @@
 <template>
   <div class="advertisement">
-    <x-header title="广告收益"></x-header>
-    <!-- <div class="timeRank">
-      <input type="text"
-             :value="beginTime"
-             @click="handleBeginTime">
-      <input type="text"
-             :value="endTime"
-             @click="handleEndTime">
-      <button @click="search">搜索</button>
-    </div> -->
-    <!-- <load-more tip="请选择日期"
-               :show-loading="false"
-               background-color="#fbf9fe"></load-more> -->
-
-    <!-- <x-scroll :http="http" :lastPage="lastPage" @listenEvent="receive"> -->
+    <x-header title="广告收益" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
     <group :title="'一共有 '+adProfits.length+' 个广告'" slot="inn">
       <x-table full-bordered :cell-bordered="false" style="background-color:#fff;">
         <thead>
@@ -27,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in adProfits" :key="index" @click="getDetails(item.id, item.name)">
+          <tr v-for="(item, index) in adProfits" :key="index" @click="viewDetail(item.id)">
             <td class="advertisement-title">{{item.name}}</td>
             <td>{{dateFormat(item.create_time*1000, 'YYYY-M-D') || '无'}}</td>
             <td>{{item.display || '0'}}次</td>
@@ -38,36 +24,48 @@
       </x-table>
     </group>
     <load-more v-if="!adProfits.toString()" slot="inn" :show-loading="false" :tip="'暂无数据'" background-color="#fff"></load-more>
-    <!-- </x-scroll> -->
-    <router-view></router-view>
+
+    <div class="sub-view-wrapper">
+      <v-ad-profit-defail :id="adId" v-if="flagAdProfitDetail" @on-hide="handleHideView('adProfitDetail')"></v-ad-profit-defail>
+    </div>
   </div>
 </template>
 <script>
-  // import { advertisementEarnings } from '~api/self'
+  import { XHeader, Group, LoadMore } from 'vux'
   import { adProfit } from "@api/api"
   import { XTable, dateFormat } from 'vux'
   import { mapGetters } from 'vuex'
-  // import XScroll from '~components/x-scroll2'
+
+  import VAdProfitDefail from "./adProfitDetail"
 
   const REQUEST_OK = 200
+  const AD_PROFIT_DETAIL = 'adProfitDetail'
 
   export default {
     data() {
       return {
+        adId: '',
         dateFormat,
         adProfits: [],
-        // beginTime: dateFormat(new Date().getTime(), 'YYYY-MM-DD'),
-        // endTime: dateFormat(new Date().getTime(), 'YYYY-MM-DD'),
-        // http: advertisementEarnings,
-        lastPage: '',
-        total: ''
+        flagAdProfitDetail: false
       }
     },
     components: {
       XTable,
-      // XScroll
+      XHeader,
+      Group,
+      LoadMore,
+      VAdProfitDefail
     },
     methods: {
+      handleHideView(view){
+        switch(view){
+          case AD_PROFIT_DETAIL: return this.flagAdProfitDetail = false
+        }
+      },
+      handleHide(){
+        this.$emit('on-hide')
+      },
       fetchAdProfit() {
         adProfit().then(({ code, data: { data }, message }) => {
           if (code == REQUEST_OK) {
@@ -75,90 +73,40 @@
           }
         }).catch(err => console.log(err))
       },
-      // handleBeginTime() {
-      //   document.activeElement.blur()
-      //   this.optionTime('begin')
-      // },
-      // handleEndTime() {
-      //   document.activeElement.blur()
-      //   this.optionTime('end')
-      // },
-      // optionTime(target) {
-      //   let self_ = this
-      //   this.$vux.datetime.show({
-      //     cancelText: '取消',
-      //     confirmText: '确定',
-      //     format: 'YYYY-MM-DD',
-      //     onConfirm(val) {
-      //       switch (target) {
-      //         case 'begin':
-      //           self_.beginTime = val
-      //           break;
-      //         case 'end':
-      //           self_.endTime = val
-      //           break;
-      //       }
-      //     }
-      //   })
-      // },
-      // search() {
-      //   this._advertisementEarnings(this.searchParams)
-      // },
-      // _advertisementEarnings(searchParams = {}) {
+      viewDetail(id) {
 
-      //   advertisementEarnings(searchParams).then(({ code, data, message }) => {
+        this.adId = id
 
-      //     if (code == 200) {
-      //       this.datalist = data.data
-      //       this.lastPage = data.last_page
-      //       this.total = data.total
-      //     }
-
-      //   }).catch(err => {
-      //     console.log(err)
-      //   })
-      // },
-      // receive(data) {
-      //   const loadMoreData = data.data
-
-      //   this.datalist = [...this.datalist, ...loadMoreData]
-      // },
-      getDetails(id, name) {
-        this.$router.push({
-          path: '/adProfit/adProfitDetail',
-          query: {
-            id,
-            name
-          }
-        })
+        this.flagAdProfitDetail = true
       }
     },
     created() {
-      // this._advertisementEarnings()
       this.fetchAdProfit()
     },
     computed: {
-      // ...mapGetters(['authUser', 'roleType']),
-      // searchParams() {
-      //   return {
-      //     begin_time: new Date(this.beginTime).getTime(),
-      //     end_time: new Date(this.endTime).getTime()
-      //   }
-      // },
-      // roleTypeParams() {
-      //   return this.roleType == 'entrepreneur' ? 'entrepreneur_id' : 'president_id'
-      // }
+      
     }
   }
 </script>
 <style lang="scss" scoped>
-  @import "~style/mixin";
-  @import "~style/variable";
+  @import "@style/mixin";
+
+  $px_5: 5px;
+  $px_10: 10px;
+  $px_12: 12px;
+  $px_14: 14px;
+  $px_20: 20px;
+  
+  $px_100: 100px;
+  $pc_100: 100%;
+  $c_333: #333;
+  $c_gray: #ccc;
 
   .advertisement {
+    @include xallcover;
     height: $pc_100;
-    font-size: $s_14;
-    color: $c_font;
+    font-size: $px_14;
+    color: $c_333;
     display: flex;
     flex-direction: column;
 
@@ -167,11 +115,11 @@
     }
 
     .test {
-      @include text-ellipsis(100px);
+      @include text-ellipsis($px_100);
     }
 
     .weui-loadmore {
-      margin-bottom: 0.5rem;
+      margin-bottom: $px_10;
     }
 
     th {
@@ -199,7 +147,7 @@
 
       button {
         flex: 1;
-        border: 1px solid #ccc;
+        border: 1px solid $c_gray;
       }
     }
   }

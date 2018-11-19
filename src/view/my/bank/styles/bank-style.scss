@@ -1,68 +1,77 @@
-@mixin bgc {
-  background-color: rgb(251, 249, 254);
-}
+$px_5: 5px;
+$px_10: 10px;
+$px_12: 12px;
+$px_14: 14px;
+$px_15: 15px;
+$px_40: 40px;
+$c_bgc: rgb(251, 249, 254);
+$c_white: #fff;
+$c_999: #999;
 
-@mixin cover($zIndex) {
-  @include bgc;
+@mixin cover {
   position: absolute;
-  z-index: $zIndex;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
 }
 
+.bank {
+  @include cover;
+  background-color: $c_bgc;
+}
+
 .x-data-preview {
-  margin-top: 0.42735rem; // 10px
+  margin-top: $px_10; // 10px
 
   .x-data-preview-item {
-    margin-top: 0.42735rem;
-    background-color: #fff;
+    margin-top: $px_10;
+    background-color: $c_white;
   }
 
   .x-data-preview-header {
     position: relative;
-    font-size: 0.683761rem; // 16px
-    padding: 0.641026rem; // 15px
-    line-height: 100%;
+    font-size: $px_12;
+    padding: $px_10;
+    // line-height: 100%;
 
     label {
       float: left;
-      color: #999;
+      color: $c_999;
     }
 
     span {
-      font-size: 16px; // 20px
-      display: block; // overflow: hidden;
+      font-size: $px_14;
+      display: block;
       text-align: right;
     }
   }
 
   .x-data-preview-header:after {
     content: ' ';
-    position: absolute; // height: 1px;
+    position: absolute;
     bottom: 0;
     right: 0;
-    left: 0.641026rem; // 15px
+    left: $px_10;
     border-bottom: 1px solid #f5f5f5;
   }
 
   .x-data-preview-body {
     position: relative;
     text-align: right; //
-    padding: 0.641026rem; // 15px
-    font-size: 14px;
+    padding: $px_10; // 15px
+    font-size: $px_14;
 
     .x-data-preview-bd-item {
-      padding: 0.1rem 0;
+      padding: $px_5 0;
 
       label {
         float: left;
-        margin-right: 0.641026rem; // 15px
-        min-width: 1.709402rem; // 40px
+        margin-right: $px_10; // 15px
+        min-width: $px_40; // 40px
         text-align: justify;
         text-align-last: justify;
-        color: #999;
+        color: $c_999;
       }
 
       span {
@@ -70,7 +79,6 @@
         overflow: hidden;
         word-break: normal;
         word-wrap: break-word;
-        // color: #000;
       }
     }
   }

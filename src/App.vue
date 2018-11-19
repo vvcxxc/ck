@@ -15,7 +15,7 @@
 
 <script>
 import { Loading, querystring, TransferDomDirective as TransferDom } from 'vux'
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 import VConsole from "vconsole/dist/vconsole.min.js"
 const PRODUCTION = 'production'
@@ -34,11 +34,11 @@ export default {
     Loading
   },
   computed: {
-    ...mapGetters(['isLoading'])
+    ...mapState(['isLoading'])
   },
   created () {
     if (process.env.NODE_ENV != PRODUCTION) {
-      new VConsole()
+      // new VConsole()
     }
     // this._debug()
   },
@@ -53,30 +53,29 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~style/mixin";
+@import "@style/mixin";
+
+$px_12: 12px;
+$pc_100: 100%;
+
 #app {
-  height: 100%;
+  height: $pc_100;
+  position: relative;
 
   .weui-loading_toast .weui-toast {
     width: 4.5rem;
     height: 4.5rem;
     min-height: 4.5rem;
-    // left: 60%;
-    // transform: translateX(-60%);
     .weui-toast__content {
-      font-size: $minsize;
+      font-size: $px_12;
     }
   }
   .weui-cells {
-    font-size: $mdsize;
+    font-size: $px_12;
   }
 
   .weui-btn {
-    font-size: $mdsize;
+    font-size: $px_12;
   }
-
-  // .vux-label {
-  //   font-size: $size;
-  // }
 }
 </style>

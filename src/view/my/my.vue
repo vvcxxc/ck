@@ -29,6 +29,7 @@
           <cell is-link title="现金券收益" @click.native="handleShowView('couponProfit')"></cell>
 
           <cell is-link title="费率返点" @click.native="handleShowView('rate')"></cell>
+          <cell is-link title="我的二维码" @click.native="myQrcode()"></cell>
         </group>
 
         <group title="提现">
@@ -41,6 +42,10 @@
     </c-scroll>
 
     <div class="sub-view-wrapper">
+      <alert v-model="showQrcode" title="我的二维码">
+        <qrcode
+          :value="qrcodeUrl"></qrcode>
+      </alert>
       <v-configuration v-if="flagConfiguration" @on-hide="handleHideView('configuration')"></v-configuration>
       <v-bank v-if="flagBank" @on-hide="handleHideView('bank')"></v-bank>
       <v-ad-profit v-if="flagAdProfit" @on-hide="handleHideView('adProfit')"></v-ad-profit>
@@ -51,7 +56,7 @@
 </template>
 <script>
   import { mapState } from 'vuex'
-  import { Alert, XHeader, Group, Cell, Card, XInput, XButton } from 'vux'
+  import { Alert, XHeader, Group, Cell, Card, XInput, XButton, Qrcode } from 'vux'
 
   import { authUser, withdrawApply } from "@api/api"
 
@@ -81,7 +86,8 @@
         flagAdProfit: false,
         flagCouponProfit: false,
         flagConfiguration: false,
-        flagRate: false
+        flagRate: false,
+        showQrcode: false
       }
     },
     components: {
@@ -97,10 +103,16 @@
       VConfiguration,
       VAdProfit,
       VCouponProfit,
-      VRate
+      VRate,
+      Qrcode,
     },
     created() {
       this.fetchAuthUser()
+    },
+    computed: {
+      qrcodeUrl() {
+        return `${process.env.SUPPLIER_URL}/#/register?invite_phone=${this.account_phone}`
+      }
     },
     methods: {
       handleShowView(view) {
@@ -161,6 +173,9 @@
         console.log('hide')
         // authUser()
         //   .then(res => this.authUser = res.data)
+      },
+      myQrcode() {
+        this.showQrcode = true
       }
     }
   }

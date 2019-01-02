@@ -29,6 +29,7 @@
   import { LoadMore } from 'vux'
   import CScroll from "@components/c-scroll/scroll"
   import CList from "@components/c-list/list"
+  import {giveIntegral} from "../../api/api";
 
   const REQUEST_OK = 200
   const REQUEST_CODE_ONE = 1
@@ -64,8 +65,12 @@
         this.showModal = true;
         this.currentId = id
       },
-      onConfirm(val) {
-        console.log(val, this.currentId)
+      async onConfirm(val) {
+        const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val });
+        if (code === 200) {
+          this.$vux.toast.text(message);
+          this.fetchSuppliers()
+        }
       },
       fetchSuppliers() {
         const params = {
@@ -102,6 +107,7 @@
                 src: 'static/img/supplier.png',
                 desc: { ...output, [CH_MAP['turnover']]: sum },
                 id: item.id,
+                integral: item.integral.length > 0 ? item.integral[0]['integral'] : 0
               }
             })
           }

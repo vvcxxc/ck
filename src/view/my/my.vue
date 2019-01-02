@@ -34,6 +34,7 @@
 
           <cell is-link title="费率返点" @click.native="handleShowView('rate')"></cell>
           <cell is-link title="我的二维码" @click.native="myQrcode()"></cell>
+          <cell is-link title="积分使用记录" @click.native="integralRecord()"></cell>
         </group>
 
         <group title="提现">
@@ -181,6 +182,9 @@
       },
       myQrcode() {
         this.showQrcode = true
+      },
+      integralRecord() {
+        this.$router.push('/integral_records')
       }
     }
   }

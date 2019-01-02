@@ -10,7 +10,7 @@
           <p class="value">{{value}}</p>
         </div>
       </div>
-      <div class="integral">积分: 999</div>
+      <div class="integral">积分: {{ data.integral }}</div>
       <div class="action">
         <x-button action-type="button" @click.native="distributionIntegral(data.id)">分配积分</x-button>
       </div>

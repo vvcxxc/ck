@@ -20,6 +20,10 @@
               <span>{{account_balance}}</span>
               <br /> 余额
             </div>
+            <div class="">
+              <span>{{ integral }}</span>
+              <br /> 积分
+            </div>
           </div>
         </card>
         <group title="点击查看">
@@ -87,7 +91,8 @@
         flagCouponProfit: false,
         flagConfiguration: false,
         flagRate: false,
-        showQrcode: false
+        showQrcode: false,
+        integral: 0
       }
     },
     components: {

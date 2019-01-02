@@ -2,7 +2,7 @@ import http from "./http"
 
 let NEW_API = 'http://test.api.supplier.tdianyi.com/';
 if (process.env.NODE_ENV === 'development') {
-  NEW_API = `http://test.api.supplier.tdianyi.com/`;
+  NEW_API = `http://api.supplier.tdianyi.test/`;
 }
 if (process.env.NODE_ENV === 'testing') {
   NEW_API = `http://test.api.supplier.tdianyi.com/`
@@ -97,7 +97,7 @@ export const withdrawRecord = params => http({
  */
 
 export const authUser = () => http({
-  url: `${NEW_API}api/entrepreneur/authUser`,
+  url: `api/entrepreneur/authUser`,
   method: "get"
 })
 
@@ -188,3 +188,11 @@ export const rates = params =>
     method: "get",
     params
   })
+
+export const giveIntegral = data => {
+  return http({
+    url: `api/entrepreneur/integral/giveIntegral`,
+    method: 'post',
+    data,
+  })
+}

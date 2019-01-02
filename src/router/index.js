@@ -72,6 +72,10 @@ export default new Router({
     {
       path: "/login",
       component: getComponent("login/login")
+    },
+    {
+      path: '/integral_records',
+      component: getComponent('integral/record')
     }
   ]
 })

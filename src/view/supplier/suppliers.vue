@@ -3,14 +3,27 @@
     <x-header title="店铺" :left-options="{showBack: false}"></x-header>
     <c-scroll class="supplier-wrapper ofh" :pullUpLoad="true">
       <div class="container">
-        <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"></c-list>
+        <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"
+          @on-click-button="onClickButton"
+        ></c-list>
       </div>
       <load-more :tip="tipDesc" :show-loading="flagLoading" v-if="!suppliers.length"></load-more>
     </c-scroll>
+
+    <div v-transfer-dom>
+      <confirm
+         v-model="showModal"
+         show-input
+         :title="`分配积分`"
+         :input-attrs="{type: 'number'}"
+         @on-confirm="onConfirm"
+      />
+    </div>
   </div>
 </template>
+
 <script type="text/javascript">
-  import { XHeader } from "vux"
+  import { XHeader, Confirm, TransferDomDirective as TransferDom } from "vux"
   import { suppliers } from "@api/api"
   import { mapGetters } from 'vuex'
   import { LoadMore } from 'vux'
@@ -25,22 +38,35 @@
       return {
         suppliers: [],
         tipDesc: '正在加载',
-        flagLoading: true
+        flagLoading: true,
+        showModal: false,
+        currentId: 0,
       }
     },
     computed: {
       ...mapGetters(['role_type']),
     },
+    directives: {
+      TransferDom
+    },
     components: {
       XHeader,
       CScroll,
       CList,
-      LoadMore
+      LoadMore,
+      Confirm
     },
     created() {
       this.fetchSuppliers()
     },
     methods: {
+      onClickButton(id) {
+        this.showModal = true;
+        this.currentId = id
+      },
+      onConfirm(val) {
+        console.log(val, this.currentId)
+      },
       fetchSuppliers() {
         const params = {
           type: this.role_type
@@ -74,7 +100,8 @@
               }
               return {
                 src: 'static/img/supplier.png',
-                desc: { ...output, [CH_MAP['turnover']]: sum }
+                desc: { ...output, [CH_MAP['turnover']]: sum },
+                id: item.id,
               }
             })
           }

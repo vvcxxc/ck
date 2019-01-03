@@ -196,3 +196,11 @@ export const giveIntegral = data => {
     data,
   })
 }
+
+export const integralRecords = (params) => {
+  return http({
+    url: `api/entrepreneur/integral/records`,
+    method: 'get',
+    params,
+  })
+}

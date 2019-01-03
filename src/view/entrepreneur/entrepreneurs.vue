@@ -67,7 +67,7 @@
         this.currentId = id
       },
       async onConfirm(val) {
-        const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val, type: 'supplier' });
+        const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val, role_type: 'env' });
         if (code === 200) {
           this.$vux.toast.text(message);
           this.entrepreneurs = []
@@ -105,7 +105,7 @@
                 src: 'static/img/face2.png',
                 desc: output,
                 id: item.party_id,
-                integral: item.integral ? item.integral['integral'] : 0,
+                integral: item.integral ? item.integral['integral'] || 0 : 0,
               }
             })
           ]

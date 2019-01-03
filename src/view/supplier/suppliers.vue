@@ -70,6 +70,8 @@
         if (code === 200) {
           this.$vux.toast.text(message);
           this.fetchSuppliers()
+        } else {
+          this.$vux.toast.text(message);
         }
       },
       fetchSuppliers() {

@@ -67,7 +67,7 @@
         this.currentId = id
       },
       async onConfirm(val) {
-        const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val });
+        const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val, type: 'supplier' });
         if (code === 200) {
           this.$vux.toast.text(message);
           this.fetchEntrepreneurs()

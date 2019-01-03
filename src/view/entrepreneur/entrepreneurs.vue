@@ -70,6 +70,7 @@
         const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val, type: 'supplier' });
         if (code === 200) {
           this.$vux.toast.text(message);
+          this.entrepreneurs = []
           this.fetchEntrepreneurs()
         } else {
           this.$vux.toast.text(message)
@@ -104,7 +105,7 @@
                 src: 'static/img/face2.png',
                 desc: output,
                 id: item.party_id,
-                integral: item.integral.length > 0 ? item.integral[0]['integral'] : 0,
+                integral: item.integral ? item.integral['integral'] : 0,
               }
             })
           ]

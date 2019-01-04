@@ -63,6 +63,7 @@ export default {
       logout().then(({ code, message, data }) => {
         this.$vux.toast.text(message)
         if (code == REQUEST_OK) {
+          window.localStorage.clear();
           this.$store.state.token = ""
 
           timeout(1000).then(() => {

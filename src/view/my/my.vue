@@ -152,11 +152,12 @@
         }
       },
       fetchAuthUser() {
-        authUser().then(({ data: { account_name, account_phone, money, party_id } }) => {
+        authUser().then(({ data: { account_name, account_phone, money, party_id, integral } }) => {
           if (account_name) {
             this.account_name = account_name
             this.account_phone = account_phone
             this.account_balance = money
+            this.integral = integral
           }
         }).catch(err => console.log(err))
       },

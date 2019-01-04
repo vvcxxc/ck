@@ -1,5 +1,5 @@
 <template>
-  <tabbar class="tabbarbox" v-show="showTabbar">
+  <tabbar class="tabbarbox" v-show="showTabbar" style="position: fixed">
     <tabbar-item v-for="(item, index) in tabMenus" :key="index" :selected="currentRouter == index" v-if="Object.keys(item).length" :link="item.link">
       <i slot="icon" :class="['iconfont', item.icon]"></i>
       <span slot="label">{{item.text}}</span>

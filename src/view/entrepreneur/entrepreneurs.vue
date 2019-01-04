@@ -67,13 +67,18 @@
         this.currentId = id
       },
       async onConfirm(val) {
-        const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val, role_type: 'env' });
-        if (code === 200) {
-          this.$vux.toast.text(message);
-          this.entrepreneurs = []
-          this.fetchEntrepreneurs()
+        if (!(Number(val) > 0)) {
+          this.$vux.toast.text('请输入正确的数字');
+          return
         } else {
-          this.$vux.toast.text(message)
+          const {code, message} = await giveIntegral({party_id: this.currentId, integral: val, role_type: 'env'});
+          if (code === 200) {
+            this.$vux.toast.text(message);
+            this.entrepreneurs = []
+            this.fetchEntrepreneurs()
+          } else {
+            this.$vux.toast.text(message)
+          }
         }
       },
       hanleLoadMore () {

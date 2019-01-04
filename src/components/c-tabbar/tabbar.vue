@@ -1,5 +1,5 @@
 <template>
-  <tabbar class="tabbarbox" v-show="isHideTabbar">
+  <tabbar class="tabbarbox" v-show="showTabbar">
     <tabbar-item v-for="(item, index) in tabMenus" :key="index" :selected="currentRouter == index" v-if="Object.keys(item).length" :link="item.link">
       <i slot="icon" :class="['iconfont', item.icon]"></i>
       <span slot="label">{{item.text}}</span>
@@ -60,6 +60,9 @@
     computed: {
       ...mapState(['isHideTabbar']),
       ...mapGetters(['role_type']),
+      showTabbar() {
+        return ['/index', '/finance', '/supplier', '/entrepreneur', '/my'].includes(this.$route.path)
+      },
       tabMenus() {
         return [{
             text: '首页',

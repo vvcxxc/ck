@@ -20,6 +20,10 @@
               <span>{{account_balance}}</span>
               <br /> 余额
             </div>
+            <div class="">
+              <span>{{ integral }}</span>
+              <br /> 积分
+            </div>
           </div>
         </card>
         <group title="点击查看">
@@ -29,6 +33,8 @@
           <cell is-link title="现金券收益" @click.native="handleShowView('couponProfit')"></cell>
 
           <cell is-link title="费率返点" @click.native="handleShowView('rate')"></cell>
+          <cell is-link title="我的二维码" @click.native="myQrcode()"></cell>
+          <cell is-link title="积分使用记录" @click.native="integralRecord()"></cell>
         </group>
 
         <group title="提现">
@@ -41,6 +47,10 @@
     </c-scroll>
 
     <div class="sub-view-wrapper">
+      <alert v-model="showQrcode" title="我的二维码">
+        <qrcode
+          :value="qrcodeUrl"></qrcode>
+      </alert>
       <v-configuration v-if="flagConfiguration" @on-hide="handleHideView('configuration')"></v-configuration>
       <v-bank v-if="flagBank" @on-hide="handleHideView('bank')"></v-bank>
       <v-ad-profit v-if="flagAdProfit" @on-hide="handleHideView('adProfit')"></v-ad-profit>
@@ -51,7 +61,7 @@
 </template>
 <script>
   import { mapState } from 'vuex'
-  import { Alert, XHeader, Group, Cell, Card, XInput, XButton } from 'vux'
+  import { Alert, XHeader, Group, Cell, Card, XInput, XButton, Qrcode } from 'vux'
 
   import { authUser, withdrawApply } from "@api/api"
 
@@ -81,7 +91,9 @@
         flagAdProfit: false,
         flagCouponProfit: false,
         flagConfiguration: false,
-        flagRate: false
+        flagRate: false,
+        showQrcode: false,
+        integral: 0
       }
     },
     components: {
@@ -97,10 +109,16 @@
       VConfiguration,
       VAdProfit,
       VCouponProfit,
-      VRate
+      VRate,
+      Qrcode,
     },
     created() {
       this.fetchAuthUser()
+    },
+    computed: {
+      qrcodeUrl() {
+        return `${process.env.SUPPLIER_URL}/#/register?invite_phone=${this.account_phone}`
+      }
     },
     methods: {
       handleShowView(view) {
@@ -134,11 +152,12 @@
         }
       },
       fetchAuthUser() {
-        authUser().then(({ data: { account_name, account_phone, money, party_id } }) => {
+        authUser().then(({ data: { account_name, account_phone, money, party_id, integral } }) => {
           if (account_name) {
             this.account_name = account_name
             this.account_phone = account_phone
             this.account_balance = money
+            this.integral = integral
           }
         }).catch(err => console.log(err))
       },
@@ -161,6 +180,12 @@
         console.log('hide')
         // authUser()
         //   .then(res => this.authUser = res.data)
+      },
+      myQrcode() {
+        this.showQrcode = true
+      },
+      integralRecord() {
+        this.$router.push('/integral_records')
       }
     }
   }

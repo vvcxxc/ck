@@ -10,11 +10,16 @@
           <p class="value">{{value}}</p>
         </div>
       </div>
+      <div class="integral">积分: {{ data.integral }}</div>
+      <div class="action">
+        <x-button action-type="button" @click.native="distributionIntegral(data.id)">分配积分</x-button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { XButton } from 'vux'
   export default {
     props: {
       data: {
@@ -32,8 +37,12 @@
         }
       }
     },
+    components: {
+      XButton,
+    },
     data() {
-      return {}
+      return {
+      }
     },
     computed: {
       _showOptions() {
@@ -42,10 +51,25 @@
     },
     created() {
       console.log
+    },
+    methods: {
+      distributionIntegral(id) {
+        this.$emit('on-click-button', id)
+      }
     }
   }
 </script>
 
 <style lang="sass" scoped>
   @import "./style"
+  .integral
+    position: absolute
+    right: 6px
+    top: 0
+    font-size: 12px
+  .action
+    position: absolute
+    right: 6px
+    bottom: 6px
+    font-size: 12px
 </style>

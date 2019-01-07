@@ -3,19 +3,33 @@
     <x-header title="店铺" :left-options="{showBack: false}"></x-header>
     <c-scroll class="supplier-wrapper ofh" :pullUpLoad="true">
       <div class="container">
-        <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"></c-list>
+        <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"
+          @on-click-button="onClickButton"
+        ></c-list>
       </div>
       <load-more :tip="tipDesc" :show-loading="flagLoading" v-if="!suppliers.length"></load-more>
     </c-scroll>
+
+    <div v-transfer-dom>
+      <confirm
+         v-model="showModal"
+         show-input
+         :title="`分配积分`"
+         :input-attrs="{type: 'number'}"
+         @on-confirm="onConfirm"
+      />
+    </div>
   </div>
 </template>
+
 <script type="text/javascript">
-  import { XHeader } from "vux"
+  import { XHeader, Confirm, TransferDomDirective as TransferDom } from "vux"
   import { suppliers } from "@api/api"
   import { mapGetters } from 'vuex'
   import { LoadMore } from 'vux'
   import CScroll from "@components/c-scroll/scroll"
   import CList from "@components/c-list/list"
+  import {giveIntegral} from "../../api/api";
 
   const REQUEST_OK = 200
   const REQUEST_CODE_ONE = 1
@@ -25,22 +39,46 @@
       return {
         suppliers: [],
         tipDesc: '正在加载',
-        flagLoading: true
+        flagLoading: true,
+        showModal: false,
+        currentId: 0,
       }
     },
     computed: {
       ...mapGetters(['role_type']),
     },
+    directives: {
+      TransferDom
+    },
     components: {
       XHeader,
       CScroll,
       CList,
-      LoadMore
+      LoadMore,
+      Confirm
     },
     created() {
       this.fetchSuppliers()
     },
     methods: {
+      onClickButton(id) {
+        this.showModal = true;
+        this.currentId = id
+      },
+      async onConfirm(val) {
+        if (!(Number(val) > 0)) {
+          this.$vux.toast.text('请输入正确的数字');
+          return
+        } else {
+          const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val, role_type: 'supplier' });
+          if (code === 200) {
+            this.$vux.toast.text(message);
+            this.fetchSuppliers()
+          } else {
+            this.$vux.toast.text(message);
+          }
+        }
+      },
       fetchSuppliers() {
         const params = {
           type: this.role_type
@@ -74,7 +112,9 @@
               }
               return {
                 src: 'static/img/supplier.png',
-                desc: { ...output, [CH_MAP['turnover']]: sum }
+                desc: { ...output, [CH_MAP['turnover']]: sum },
+                id: item.id,
+                integral: item.integral.length > 0 ? item.integral[0]['integral'] : 0
               }
             })
           }

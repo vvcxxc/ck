@@ -39,7 +39,12 @@
   export default class Index extends Vue {
     @Getter('role_type') getterRoleType
     @checkLogin
-    created () {}
+    created () {
+      const token = window.localStorage.getItem('token')
+      if (!token) {
+        this.$router.push('/login')
+      }
+    }
   }
 </script>
 

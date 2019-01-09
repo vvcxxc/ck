@@ -11,6 +11,7 @@
         </div>
       </div>
       <div class="integral">积分: {{ data.integral }}</div>
+      <div class="integral-2" v-if="data.useIntegral !== undefined">已消耗: {{ typeof data.useIntegral === 'object' ? data.useIntegral.integral : data.useIntegral }}</div>
       <div class="action">
         <x-button action-type="button" @click.native="distributionIntegral(data.id)">分配积分</x-button>
       </div>
@@ -66,6 +67,11 @@
     position: absolute
     right: 6px
     top: 0
+    font-size: 12px
+  .integral-2
+    position: absolute
+    right: 6px
+    top: 16px
     font-size: 12px
   .action
     position: absolute

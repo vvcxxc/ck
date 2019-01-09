@@ -70,13 +70,36 @@
           this.$vux.toast.text('请输入正确的数字');
           return
         } else {
-          const { code, message } = await giveIntegral({ party_id: this.currentId, integral: val, role_type: 'supplier' });
+          const { code, message = '' } = await giveIntegral({ party_id: this.currentId, integral: val, role_type: 'supplier' });
           if (code === 200) {
-            this.$vux.toast.text(message);
+            this.$vux.toast.text(message || '分配成功');
             this.fetchSuppliers()
           } else {
             this.$vux.toast.text(message);
           }
+
+          // const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
+          //   // 当被绑定的元素插入到 DOM 中时……
+          // if(isAndroid){
+          //   return;
+          // }
+          //
+          // let input = document.getElementById('reset-input');
+          // const node = document.getElementsByClassName('supplier-wrapper')
+          // if (!input) {
+          //   input = document.createElement('INPUT');
+          //   input.type = 'text';
+          //   input.style.height = '0px'
+          //   input.style.width = '0px'
+          //   input.style.position = 'absolute'
+          //   input.id = 'reset-input';
+          //   node.prepend(input);
+          // }
+          //
+          // node.style.cssText = "height: 100%; width: 100%;";
+          // input.focus();
+          // input.blur();
+          // console.log('reset---')
         }
       },
       fetchSuppliers() {
@@ -114,7 +137,10 @@
                 src: 'static/img/supplier.png',
                 desc: { ...output, [CH_MAP['turnover']]: sum },
                 id: item.id,
-                integral: item.integral.length > 0 ? item.integral[0]['integral'] : 0
+                integral: item.integral.length > 0 ? item.integral[0]['integral'] : 0,
+                useIntegral: item.integral_log.length > 0 ? item.integral_log.reduce((prev, curr, idx, arr) => {
+                  return (typeof prev === 'object' ? prev.integral : prev) + Number(curr.integral)
+                }) : 0
               }
             })
           }

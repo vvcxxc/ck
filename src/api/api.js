@@ -1,5 +1,16 @@
 import http from "./http"
 
+let NEW_API = 'http://test.api.supplier.tdianyi.com/';
+if (process.env.NODE_ENV === 'development') {
+  NEW_API = `http://api.supplier.tdianyi.test/`;
+}
+if (process.env.NODE_ENV === 'testing') {
+  NEW_API = `http://test.api.supplier.tdianyi.com/`
+}
+if (process.env.NODE_ENV === 'production') {
+  NEW_API = `http://api.supplier.tdianyi.com/`
+}
+
 /**
  * 创客&会长后台登录
  */
@@ -86,7 +97,7 @@ export const withdrawRecord = params => http({
  */
 
 export const authUser = () => http({
-  url: "api/entrepreneur/authUser",
+  url: `api/entrepreneur/authUser`,
   method: "get"
 })
 
@@ -177,3 +188,19 @@ export const rates = params =>
     method: "get",
     params
   })
+
+export const giveIntegral = data => {
+  return http({
+    url: `api/entrepreneur/integral/giveIntegral`,
+    method: 'post',
+    data,
+  })
+}
+
+export const integralRecords = (params) => {
+  return http({
+    url: `api/entrepreneur/integral/records`,
+    method: 'get',
+    params,
+  })
+}

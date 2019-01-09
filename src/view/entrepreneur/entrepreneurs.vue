@@ -69,6 +69,9 @@
       async onConfirm(val) {
         if (!(Number(val) > 0)) {
           this.$vux.toast.text('请输入正确的数字');
+          setTimeout(() => {
+            window.location.reload()
+          }, 200)
           return
         } else {
           const {code, message} = await giveIntegral({party_id: this.currentId, integral: val, role_type: 'env'});
@@ -79,6 +82,9 @@
           } else {
             this.$vux.toast.text(message)
           }
+          setTimeout(() => {
+            window.location.reload()
+          }, 200)
         }
       },
       hanleLoadMore () {

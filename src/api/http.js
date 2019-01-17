@@ -30,10 +30,6 @@ instance.interceptors.request.use(
 
     token && (config.headers["Authorization"] = token)
 
-    // let urlStr = location.href.split('?')[1]
-    // let urlParams = querystring.parse(urlStr)
-    // console.log(location.href)
-
     if (config.method.toLocaleLowerCase() == "post") {
       config.data = qs.stringify(config.data)
     }
@@ -69,12 +65,12 @@ instance.interceptors.response.use(
             text: "未登录"
           })
 
-          return router.replace({
-              path: "/login",
-              query: {
-                redirect: router.currentRoute.fullPath // 跳转登录页面, 并将要浏览的页面fullPath传过去, 登录成功后跳转需要访问的页面
-              }
-            })
+          // return router.replace({
+          //     path: "/login",
+          //     query: {
+          //       redirect: router.currentRoute.fullPath // 跳转登录页面, 并将要浏览的页面fullPath传过去, 登录成功后跳转需要访问的页面
+          //     }
+          //   })
 
         case NOT_FIND:
           return store.commit("TOAST", {

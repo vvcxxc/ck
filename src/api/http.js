@@ -3,6 +3,7 @@ import qs from "qs"
 
 import store from "@/store/index"
 import router from "@/router/index"
+import { querystring } from 'vux'
 
 const config = {
   baseURL: process.env.BASE_DOMAIN,
@@ -28,6 +29,10 @@ instance.interceptors.request.use(
     const token = localStorage.token
 
     token && (config.headers["Authorization"] = token)
+
+    // let urlStr = location.href.split('?')[1]
+    // let urlParams = querystring.parse(urlStr)
+    // console.log(location.href)
 
     if (config.method.toLocaleLowerCase() == "post") {
       config.data = qs.stringify(config.data)

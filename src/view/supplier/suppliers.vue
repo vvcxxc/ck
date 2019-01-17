@@ -68,6 +68,9 @@
       async onConfirm(val) {
         if (!(Number(val) > 0)) {
           this.$vux.toast.text('请输入正确的数字');
+          setTimeout(() => {
+            window.location.reload()
+          }, 200)
           return
         } else {
           const { code, message = '' } = await giveIntegral({ party_id: this.currentId, integral: val, role_type: 'supplier' });
@@ -78,6 +81,9 @@
             this.$vux.toast.text(message);
           }
 
+          setTimeout(() => {
+            window.location.reload()
+          }, 200)
           // const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
           //   // 当被绑定的元素插入到 DOM 中时……
           // if(isAndroid){
@@ -85,7 +91,6 @@
           // }
           //
           // let input = document.getElementById('reset-input');
-          // const node = document.getElementsByClassName('supplier-wrapper')
           // if (!input) {
           //   input = document.createElement('INPUT');
           //   input.type = 'text';
@@ -93,12 +98,15 @@
           //   input.style.width = '0px'
           //   input.style.position = 'absolute'
           //   input.id = 'reset-input';
-          //   node.prepend(input);
+          //   document.body.prepend(input);
           // }
           //
-          // node.style.cssText = "height: 100%; width: 100%;";
+          // // node.style.cssText = "height: 90%;";
           // input.focus();
           // input.blur();
+          // document.getElementsByClassName('supplier').style.height = '90%'
+          // document.getElementsByClassName('supplier-wrapper').style.height = '100%'
+          // // document.getElementsByClassName('container').style.height = '100%'
           // console.log('reset---')
         }
       },

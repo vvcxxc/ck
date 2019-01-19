@@ -6,7 +6,7 @@ const flagDevelopment = process.env.NODE_ENV === 'development'
 // why execute two at here
 export default async function checkLogin (target, name, descriptor) {
   const params = querystring.parse(window.location.search)
-  const token = window.localStorage.token || params['token']
+  const token = params['token'] || window.localStorage.token 
 
   window.localStorage.setItem('token', token)
   if (params['role_type']) {

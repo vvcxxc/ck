@@ -43,7 +43,7 @@
         <x-button type="primary" style="margin-top: 1rem;" @click.native="requestWithdrawApply">提现</x-button>
         <alert v-model="show" title="提示" @on-hide="onHide">您的提现申请已经发出</alert>
 
-        <group>
+        <group style="margin-bottom: 60px">
           <x-button @click.native="goToSupplier()" style="margin-bottom: 80px">店铺管理</x-button>
         </group>
       </div>

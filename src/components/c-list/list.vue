@@ -78,4 +78,5 @@
     right: 6px
     bottom: 6px
     font-size: 12px
+    
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="list-wrapper">
+  <div class="list-wrapper" v-if="data.is_show">
     <div class="list-container">
       <div class="image" v-show="_showOptions.image">
         <img :src="data.src" alt="" width="56" height="56">

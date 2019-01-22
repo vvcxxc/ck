@@ -3,6 +3,7 @@ import qs from "qs"
 
 import store from "@/store/index"
 import router from "@/router/index"
+import { querystring } from 'vux'
 
 const config = {
   baseURL: process.env.BASE_DOMAIN,
@@ -64,12 +65,12 @@ instance.interceptors.response.use(
             text: "未登录"
           })
 
-          return router.replace({
-              path: "/login",
-              query: {
-                redirect: router.currentRoute.fullPath // 跳转登录页面, 并将要浏览的页面fullPath传过去, 登录成功后跳转需要访问的页面
-              }
-            })
+          // return router.replace({
+          //     path: "/login",
+          //     query: {
+          //       redirect: router.currentRoute.fullPath // 跳转登录页面, 并将要浏览的页面fullPath传过去, 登录成功后跳转需要访问的页面
+          //     }
+          //   })
 
         case NOT_FIND:
           return store.commit("TOAST", {

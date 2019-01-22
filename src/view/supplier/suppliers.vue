@@ -141,6 +141,7 @@
                 }
                 CH_MAP[key] && (output[CH_MAP[key]] = value)
               }
+              
               return {
                 src: 'static/img/supplier.png',
                 desc: { ...output, [CH_MAP['turnover']]: sum },
@@ -148,7 +149,8 @@
                 integral: item.integral.length > 0 ? item.integral[0]['integral'] : 0,
                 useIntegral: item.integral_log.length > 0 ? item.integral_log.reduce((prev, curr, idx, arr) => {
                   return (typeof prev === 'object' ? prev.integral : prev) + Number(curr.integral)
-                }) : 0
+                }) : 0,
+                is_show: !!item.name
               }
             })
           }

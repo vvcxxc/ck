@@ -11,6 +11,7 @@ export default async function checkLogin (target, name, descriptor) {
   window.localStorage.setItem('token', token)
   if (params['role_type']) {
     window.localStorage.setItem('role_type', 'entrepreneur')
+    this.$store.commit("ROLE_TYPE", { type: 'entrepreneur' })
   }
 
   if (flagDevelopment) {

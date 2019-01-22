@@ -89,6 +89,10 @@
       LoadMore,
       Card
     },
+    activated() {
+      this.fetchProfits()
+      this.fetchRanking()
+    },
     created() {
       this.fetchProfits()
       this.fetchRanking()

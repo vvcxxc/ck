@@ -26,7 +26,7 @@ const instance = axios.create(config),
 instance.interceptors.request.use(
   config => {
     // 请求前
-    const token = localStorage.token
+    const token = cookie.get('ent_token') ? cookie.get('ent_token') : localStorage.token
 
     token && (config.headers["Authorization"] = token)
 

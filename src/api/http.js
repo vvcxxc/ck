@@ -44,7 +44,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => {
     if (response.data && response.data.data && response.data.data.token) {
-      document.cookie = `token=${response.data.data.token};domain=tdianyi.com;path=/`
+      document.cookie = `ent_token=${response.data.data.token};domain=tdianyi.com;path=/`
     }
     if (response.data && response.data.data && response.data.data.sup_token) {
       document.cookie = `sup_token=${response.data.data.token};domain=tdianyi.com;path=/`

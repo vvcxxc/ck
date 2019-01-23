@@ -61,7 +61,7 @@ instance.interceptors.response.use(
     // 响应错误
     let { request, response } = err,
       errorResponse = {}
-
+    console.log(err)
     if (response) {
       let { status, data } = response
 

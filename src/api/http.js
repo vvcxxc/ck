@@ -43,6 +43,13 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   response => {
+    if (response.data && response.data.data && response.data.data.token) {
+      document.cookie = `token=${response.data.data.token};domain=tdianyi.com;path=/`
+    }
+    if (response.data && response.data.data && response.data.data.sup_token) {
+      document.cookie = `sup_token=${response.data.data.token};domain=tdianyi.com;path=/`
+    }
+    
     // 响应成功
     if (response.status == REQUEST_OK) {
       return response.data

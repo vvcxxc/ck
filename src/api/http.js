@@ -3,7 +3,7 @@ import qs from "qs"
 
 import store from "@/store/index"
 import router from "@/router/index"
-import { querystring } from 'vux'
+import { querystring, cookie } from 'vux'
 
 const config = {
   baseURL: process.env.BASE_DOMAIN,

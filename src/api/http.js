@@ -47,7 +47,7 @@ instance.interceptors.response.use(
       document.cookie = `ent_token=${response.data.data.token};domain=tdianyi.com;path=/`
     }
     if (response.data && response.data.data && response.data.data.sup_token) {
-      document.cookie = `sup_token=${response.data.data.token};domain=tdianyi.com;path=/`
+      document.cookie = `sup_token=${response.data.data.sup_token};domain=tdianyi.com;path=/`
     }
     
     // 响应成功

@@ -156,7 +156,7 @@
         }
       },
       fetchAuthUser() {
-        authUser().then(({ data: { account_name, account_phone, money, party_id, integral, supplier_party_id = 0 } }) => {
+        authUser().then(({ data: { account_name, account_phone, money, party_id, integral, supplier_party_id = 0 }}) => {
           if (account_name) {
             this.account_name = account_name
             this.account_phone = account_phone

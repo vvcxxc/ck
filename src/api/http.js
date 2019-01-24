@@ -3,7 +3,7 @@ import qs from "qs"
 
 import store from "@/store/index"
 import router from "@/router/index"
-import { querystring } from 'vux'
+import { querystring, cookie } from 'vux'
 
 const config = {
   baseURL: process.env.BASE_DOMAIN,
@@ -43,6 +43,13 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   response => {
+    // if (response.data && response.data.data && response.data.data.token) {
+    //   document.cookie = `ent_token=${response.data.data.token};domain=tdianyi.com;path=/`
+    // }
+    // if (response.data && response.data.data && response.data.data.sup_token) {
+    //   document.cookie = `sup_token=${response.data.data.sup_token};domain=tdianyi.com;path=/`
+    // }
+    
     // 响应成功
     if (response.status == REQUEST_OK) {
       return response.data
@@ -54,7 +61,7 @@ instance.interceptors.response.use(
     // 响应错误
     let { request, response } = err,
       errorResponse = {}
-
+    console.log(err)
     if (response) {
       let { status, data } = response
 

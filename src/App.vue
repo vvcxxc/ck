@@ -40,6 +40,17 @@ export default {
     if (process.env.NODE_ENV != PRODUCTION) {
       // new VConsole()
     }
+    const role_type = window.localStorage.getItem('role_type');
+    switch (role_type) {
+      case 'president':
+        document.title = '团卖物联-会长';
+        break;
+      case 'entrepreneur':
+        document.title = '团卖物联-创客';
+        break;
+      default:
+        break;
+    }
     // this._debug()
   },
   methods: {

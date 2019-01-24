@@ -1,8 +1,8 @@
 <template>
-  <div class="self-wrapper">
+  <div class="self-wrapper" style="height: 120vh">
     <x-header title="我的" :left-options="{showBack: false}"></x-header>
 
-    <c-scroll class="scroll-wrapper">
+    <!-- <c-scroll class="scroll-wrapper"> -->
       <div class="container">
         <group>
           <cell is-link @click.native="handleShowView('configuration')">
@@ -43,8 +43,11 @@
         <x-button type="primary" style="margin-top: 1rem;" @click.native="requestWithdrawApply">提现</x-button>
         <alert v-model="show" title="提示" @on-hide="onHide">您的提现申请已经发出</alert>
 
+        <group>
+          <x-button @click.native="goToSupplier()" style="margin-bottom: 80px">商家后台</x-button>
+        </group>
       </div>
-    </c-scroll>
+    <!-- </c-scroll> -->
 
     <div class="sub-view-wrapper">
       <alert v-model="showQrcode" title="我的二维码">
@@ -93,7 +96,8 @@
         flagConfiguration: false,
         flagRate: false,
         showQrcode: false,
-        integral: 0
+        integral: 0,
+        supplier_party_id: 0,
       }
     },
     components: {
@@ -152,12 +156,13 @@
         }
       },
       fetchAuthUser() {
-        authUser().then(({ data: { account_name, account_phone, money, party_id, integral } }) => {
+        authUser().then(({ data: { account_name, account_phone, money, party_id, integral, supplier_party_id = 0 } }) => {
           if (account_name) {
             this.account_name = account_name
             this.account_phone = account_phone
             this.account_balance = money
             this.integral = integral
+            this.supplier_party_id = supplier_party_id
           }
         }).catch(err => console.log(err))
       },
@@ -186,6 +191,11 @@
       },
       integralRecord() {
         this.$router.push('/integral_records')
+      },
+      goToSupplier() {
+        window.localStorage.clear();
+        this.$store.state.token = ""
+        window.location.href = `${process.env.SUPPLIER_URL}/login`
       }
     }
   }

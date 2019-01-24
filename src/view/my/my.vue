@@ -43,7 +43,7 @@
         <x-button type="primary" style="margin-top: 1rem;" @click.native="requestWithdrawApply">提现</x-button>
         <alert v-model="show" title="提示" @on-hide="onHide">您的提现申请已经发出</alert>
 
-        <group>
+        <group v-if="supplier_party_id > 0">
           <x-button @click.native="goToSupplier()" style="margin-bottom: 80px">商家后台</x-button>
         </group>
       </div>
@@ -156,7 +156,7 @@
         }
       },
       fetchAuthUser() {
-        authUser().then(({ data: { account_name, account_phone, money, party_id, integral, supplier_party_id = 0 } }) => {
+        authUser().then(({ data: { account_name, account_phone, money, party_id, integral, supplier_party_id = 0 }}) => {
           if (account_name) {
             this.account_name = account_name
             this.account_phone = account_phone

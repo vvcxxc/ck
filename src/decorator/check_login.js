@@ -6,13 +6,13 @@ import store from "@/store"
 const flagDevelopment = process.env.NODE_ENV === 'development'
 // why execute two at here
 export default async function checkLogin (target, name, descriptor) {
-  const params = querystring.parse(window.location.search)
-  const token = cookie.get('ent_cookie') ? cookie.get('ent_cookie') : window.localStorage.token 
+  // const params = querystring.parse(window.location.search)
+  const token = window.localStorage.token 
 
-  if (params['role_type']) {
-    window.localStorage.setItem('role_type', 'entrepreneur')
-    store.commit("ROLE_TYPE", { type: 'entrepreneur' })
-  }
+  // if (params['role_type']) {
+  //   window.localStorage.setItem('role_type', 'entrepreneur')
+  //   store.commit("ROLE_TYPE", { type: 'entrepreneur' })
+  // }
 
   if (flagDevelopment) {
     console.log('开发环境')

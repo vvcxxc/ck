@@ -193,6 +193,8 @@
         this.$router.push('/integral_records')
       },
       goToSupplier() {
+        window.localStorage.clear();
+        this.$store.state.token = ""
         window.location.href = `${process.env.SUPPLIER_URL}/index`
       }
     }

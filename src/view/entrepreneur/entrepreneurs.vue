@@ -95,7 +95,7 @@
       async fetchEntrepreneurs() {
         const params = {
           type: this.role_type,
-          page: 2
+          page: 1
         }
         let { code, data, message } = await entrepreneurs(params)
         const CH_MAP = {

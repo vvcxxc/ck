@@ -1,5 +1,5 @@
 <template>
-  <div class="list-wrapper" v-if="data.is_show">
+  <div class="list-wrapper" v-if="data.is_show || president">
     <div class="list-container">
       <div class="image" v-show="_showOptions.image">
         <img :src="data.src" alt="" width="56" height="56">
@@ -48,6 +48,9 @@
     computed: {
       _showOptions() {
         return Object.assign({}, this.showOptions)
+      },
+      president() {
+        return localStorage.getItem('role_type') === 'president'
       }
     },
     created() {

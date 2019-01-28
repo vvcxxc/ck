@@ -46,7 +46,7 @@
 
         <group v-if="supplier_party_id > 0">
           <x-button @click.native="goToSupplier()" style="margin-bottom: 80px">商家后台</x-button>
-        </group> -->
+        </group>
       </div>
     <!-- </c-scroll> -->
 

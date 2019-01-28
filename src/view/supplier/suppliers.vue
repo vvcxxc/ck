@@ -15,7 +15,7 @@
          v-model="showModal"
          show-input
          :title="`分配积分`"
-         :input-attrs="{type: 'number'}"
+         :input-attrs="{type: 'number', id: 'reset-input'}"
          @on-confirm="onConfirm"
       />
     </div>
@@ -64,13 +64,14 @@
       onClickButton(id) {
         this.showModal = true;
         this.currentId = id
+        document.getElementById('reset-input').addEventListener('blur', function() {
+          window.scroll(0, 0)
+        })
       },
       async onConfirm(val) {
         if (!(Number(val) > 0)) {
           this.$vux.toast.text('请输入正确的数字');
-          setTimeout(() => {
-            window.location.reload()
-          }, 200)
+          window.scroll(0, 0)
           return
         } else {
           const { code, message = '' } = await giveIntegral({ party_id: this.currentId, integral: val, role_type: 'supplier' });
@@ -80,10 +81,7 @@
           } else {
             this.$vux.toast.text(message);
           }
-
-          setTimeout(() => {
-            window.location.reload()
-          }, 200)
+          window.scroll(0, 0)
           // const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
           //   // 当被绑定的元素插入到 DOM 中时……
           // if(isAndroid){

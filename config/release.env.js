@@ -11,6 +11,6 @@ module.exports = merge(devEnv, {
 
   OSS_UPLOAD_URL: '"http://tmwl.oss-cn-shenzhen.aliyuncs.com"',
 
-  SUPPLIER_URL: '"http://release.supplier.tdianyi.com"'
+  SUPPLIER_URL: '"http://release.supplier.tdianyi.com"',
 
 })

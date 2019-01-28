@@ -15,7 +15,7 @@
         v-model="showModal"
         show-input
         :title="`分配积分`"
-        :input-attrs="{type: 'number'}"
+        :input-attrs="{type: 'number', id: 'reset-input'}"
         @on-confirm="onConfirm"
       />
     </div>
@@ -65,13 +65,14 @@
       onClickButton(id) {
         this.showModal = true;
         this.currentId = id
+        document.getElementById('reset-input').addEventListener('blur', function() {
+          window.scroll(0, 0)
+        })
       },
       async onConfirm(val) {
         if (!(Number(val) > 0)) {
           this.$vux.toast.text('请输入正确的数字');
-          setTimeout(() => {
-            window.location.reload()
-          }, 200)
+          window.scroll(0, 0)
           return
         } else {
           const {code, message} = await giveIntegral({party_id: this.currentId, integral: val, role_type: 'env'});
@@ -82,9 +83,7 @@
           } else {
             this.$vux.toast.text(message)
           }
-          setTimeout(() => {
-            window.location.reload()
-          }, 200)
+          window.scroll(0, 0)
         }
       },
       hanleLoadMore () {
@@ -95,7 +94,7 @@
       async fetchEntrepreneurs() {
         const params = {
           type: this.role_type,
-          page: 2
+          page: 1
         }
         let { code, data, message } = await entrepreneurs(params)
         const CH_MAP = {

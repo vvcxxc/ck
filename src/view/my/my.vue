@@ -122,7 +122,7 @@
     },
     computed: {
       qrcodeUrl() {
-        return `${process.env.SUPPLIER_URL}/#/register?invite_phone=${this.account_phone}`
+        return `${process.env.SUPPLIER_URL}/register?invite_phone=${this.account_phone}`
       }
     },
     methods: {

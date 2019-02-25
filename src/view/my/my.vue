@@ -125,6 +125,7 @@
         return `${process.env.SUPPLIER_URL}/register?invite_phone=${this.account_phone}`
       }
     },
+    
     methods: {
       handleShowView(view) {
         this.$store.commit('HIDE_TABBAR', { path: '' })

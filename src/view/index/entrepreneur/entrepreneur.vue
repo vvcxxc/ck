@@ -24,24 +24,7 @@
           </div>
         </card>
       </div>
-      <div class="ranking">
-        <load-more tip="收益排行榜" :show-loading="false" background-color="#fbf9fe"></load-more>
-        <x-table :cell-bordered="false" style="background-color:#fff;">
-          <thead>
-            <tr style="color: #000">
-              <th>创客</th>
-              <th>本周收益</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="(item, index) in rankings" :key="index">
-              <td>
-                <i class="iconfont icon-wode" style="padding-right: 3px"></i>{{item.account_name}}</td>
-              <td>￥{{item.money}}</td>
-            </tr>
-          </tbody>
-        </x-table>
-      </div>
+
     </div>
   </div>
 </template>

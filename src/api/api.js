@@ -22,6 +22,16 @@ export const login = data => http({
 })
 
 /**
+ * 创客注册
+ */
+
+export const register = data => http({
+  url: "api/entrepreneur/ck_register",
+  method: "post",
+  data
+})
+
+/**
  * 登出
  */
 

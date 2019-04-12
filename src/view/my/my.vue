@@ -133,7 +133,7 @@
         return `${process.env.SUPPLIER_URL}/register?invite_phone=${this.account_phone}`
       },
       inviteEntrepreneurQrcodeUrl() {
-        return `${process.env.SUPPLIER_URL}/ck/register?president_id=${this.party_id}`
+        return `http://${window.location.host}/ck/register?president_id=${this.party_id}`
       }
     },
     

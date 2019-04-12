@@ -7,7 +7,7 @@
       <x-input title="确认密码" type="password" v-model="confirm_password" />
       <x-input title="手机号" type="number" v-model="phone" :show-clear="false">
         <x-button
-          v-bind:disabled="disabled"
+          v-bind:disabled="isSend"
           slot="right"
           type="primary"
           action-type="button"
@@ -24,11 +24,12 @@
 <script>
   import { XInput, XButton, Group, Tab, TabItem, XHeader } from "vux"
   import { Validator, timeout } from '@utils/common'
-  import { register } from "@api/api"
+  import { register,sendVerifyCode } from "@api/api"
 
   import "./style"
 
   export default {
+    
     data() {
       return {
         account_name: '',
@@ -36,6 +37,7 @@
         confirm_password: '',
         phone: '',
         mobile_verification_code: '',
+        isSend : false
       }
     },
     components: {
@@ -68,7 +70,7 @@
         }).catch(err => console.log(err))
       },
       hanleValidator() {
-        let { account_name, account_passwd, confirm_password } = this
+        let { account_name, account_passwd, confirm_password,  phone, mobile_verification_code} = this
 
         let validator = new Validator()
 
@@ -96,16 +98,33 @@
           params: confirm_password
         }])
 
+        validator.add(phone, [{
+          validateRule: 'isEmpty',
+          errmsg: '手机号不能为空'
+        }])
+
+        validator.add(mobile_verification_code, [{
+          validateRule: 'isEmpty',
+          errmsg: '验证码不能为空'
+        }])
+
         let errmsg = validator.start()
 
         if (errmsg) return errmsg
       },
+
       fetchVerify() {
-        this.$vux.toast.text(123)
-        // const { message } = await bankBindVerify()
-        // this.$vux.toast.text(message)
-        // this.disabled = true
-      }
+        if (!this.phone) {
+          this.$vux.toast.text(`手机号不能为空`)
+          return
+        }
+
+        const { code, message } = sendVerifyCode({ phone: this.phone })
+        if (code == 200) {
+          this.isSend = true
+        }
+        this.$vux.toast.text(message)
+    }
       
     }
   }

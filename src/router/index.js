@@ -81,6 +81,11 @@ export default new Router({
     {
       path: '/ck/register',
       component: getComponent('common/ck_register')
-    }
+    },    
+    {
+      path: '/president/inviteEntrepreneur',
+      component: getComponent('president/inviteEntrepreneur')
+    },
+    
   ]
 })

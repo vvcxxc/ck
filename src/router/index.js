@@ -77,6 +77,15 @@ export default new Router({
     {
       path: '/integral_records',
       component: getComponent('integral/record')
-    }
+    },
+    {
+      path: '/ck/register',
+      component: getComponent('common/ck_register')
+    },    
+    {
+      path: '/president/inviteEntrepreneur',
+      component: getComponent('president/inviteEntrepreneur')
+    },
+    
   ]
 })

@@ -22,6 +22,16 @@ export const login = data => http({
 })
 
 /**
+ * 创客注册
+ */
+
+export const register = data => http({
+  url: "api/entrepreneur/ck_register",
+  method: "post",
+  data
+})
+
+/**
  * 登出
  */
 
@@ -149,6 +159,13 @@ export const bankBindVerify = () => http({
     method: "get"
   })
 
+export const sendVerifyCode = data => {
+  return http({
+    url: 'api/entrepreneur/verify_code',
+    method: 'post',
+    data,
+  })
+}
 /**
  * 广告收益
  */
@@ -202,5 +219,19 @@ export const integralRecords = (params) => {
     url: `api/entrepreneur/integral/records`,
     method: 'get',
     params,
+  })
+}
+
+export const jssdkParams = params => {
+  return http({
+    url: `wechat/getShareSign`,
+    method: 'get',
+    params,
+  })
+}
+
+export const invite = () => {
+  return http({
+    url: `api/merchant/invite`
   })
 }

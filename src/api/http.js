@@ -71,29 +71,26 @@ instance.interceptors.response.use(
           store.commit("TOAST", {
             text: "未登录"
           })
-
-          // return router.replace({
-          //     path: "/login",
-          //     query: {
-          //       redirect: router.currentRoute.fullPath // 跳转登录页面, 并将要浏览的页面fullPath传过去, 登录成功后跳转需要访问的页面
-          //     }
-          //   })
+          break;
 
         case NOT_FIND:
           return store.commit("TOAST", {
             text: "不存在的页面",
             status: true
           })
+          break;
         case SERVER_ERROR:
           return store.commit("TOAST", {
             text: "服务器出错",
             status: true
           })
+          break;
         default:
           return store.commit("TOAST", {
             text: data.message || "unknown error",
             status: true
           })
+          break;
       }
     } else if (request) {
       let errmsg = "the server no response"

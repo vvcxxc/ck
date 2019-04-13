@@ -71,6 +71,7 @@ instance.interceptors.response.use(
           store.commit("TOAST", {
             text: "未登录"
           })
+          window.location.href = '/login'
           break;
 
         case NOT_FIND:

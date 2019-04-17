@@ -7,7 +7,7 @@
             <x-input title="会长：" v-model="data.pay_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
-            <x-input @on-change="change_pay_value" title="创客：" v-model="data.pay_entrepreneur_split" type="number">
+            <x-input v-if="is_show_entrepreneur_set" @on-change="change_pay_value" title="创客：" v-model="data.pay_entrepreneur_split" type="number">
                 <i slot="right">%</i>
             </x-input>
             <x-input @on-change="change_pay_value" title="店铺：" v-model="data.pay_store_split" >
@@ -19,7 +19,7 @@
             <x-input title="会长：" v-model="data.coupon_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
-            <x-input @on-change="change_coupon_value" title="创客：" v-model="data.coupon_entrepreneur_split" >
+            <x-input v-if="is_show_entrepreneur_set" @on-change="change_coupon_value" title="创客：" v-model="data.coupon_entrepreneur_split" >
                 <i slot="right">%</i>
             </x-input>
             <x-input @on-change="change_coupon_value" title="店铺：" v-model="data.coupon_store_split" >
@@ -31,7 +31,7 @@
             <x-input title="会长：" v-model="data.ad_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
-            <x-input @on-change="change_ad_value" title="创客：" v-model="data.ad_entrepreneur_split" >
+            <x-input v-if="is_show_entrepreneur_set" @on-change="change_ad_value" title="创客：" v-model="data.ad_entrepreneur_split" >
                 <i slot="right">%</i>
             </x-input>
             <x-input @on-change="change_ad_value" title="店铺：" v-model="data.ad_store_split" >
@@ -47,7 +47,7 @@
 <script>
 
   import { XHeader, Group, XButton, XInput } from 'vux'
-  import { getSplitRule, putSplitRule } from '@api/api'
+  import { getSplitRule, putSplitRule, isExistEntrepreneur } from '@api/api'
   import { Validator } from '@utils/common'
 
   const REQUEST_OK = 200
@@ -66,11 +66,16 @@
           ad_entrepreneur_split: 0,
           ad_store_split: 0,
           supplier_id: 0,
-        }
+        },
+        is_show_entrepreneur_set: false,
       }
     },
     created(){
         this.data.supplier_id = this.$route.query.supplier_id
+        isExistEntrepreneur({supplier_id: this.data.supplier_id}).then(({ code, message, data }) => {
+            this.is_show_entrepreneur_set = data
+        })
+
         getSplitRule({supplier_id: this.data.supplier_id}).then(({ code, message, data }) => {
           this.data = data
 
@@ -79,8 +84,6 @@
           this.data.ad_president_split =  100 - this.data.ad_entrepreneur_split - this.data.ad_store_split
 
         })
-        
-
     },
     components: {
       XHeader,

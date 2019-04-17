@@ -251,4 +251,10 @@ export const getSplitRule = params =>
       data,
     })
   }
-
+  export const isExistEntrepreneur = params =>
+  http({
+    url: "/api/isExistEntrepreneur",
+    method: "get",
+    params
+  })
+  

@@ -7,10 +7,10 @@
             <x-input title="会长：" v-model="data.pay_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
-            <x-input v-if="is_show_entrepreneur_set" @on-change="change_pay_value" title="创客：" v-model="data.pay_entrepreneur_split" type="number">
+            <x-input v-if="is_show_entrepreneur_set" @on-blur="change_pay_value" title="创客：" v-model="data.pay_entrepreneur_split" type="number">
                 <i slot="right">%</i>
             </x-input>
-            <x-input @on-change="change_pay_value" title="店铺：" v-model="data.pay_store_split" >
+            <x-input @on-blur="change_pay_value" title="店铺：" v-model="data.pay_store_split" >
                 <i slot="right">%</i>
             </x-input>
         </group>
@@ -19,10 +19,10 @@
             <x-input title="会长：" v-model="data.coupon_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
-            <x-input v-if="is_show_entrepreneur_set" @on-change="change_coupon_value" title="创客：" v-model="data.coupon_entrepreneur_split" >
+            <x-input v-if="is_show_entrepreneur_set" @on-blur="change_coupon_value" title="创客：" v-model="data.coupon_entrepreneur_split" >
                 <i slot="right">%</i>
             </x-input>
-            <x-input @on-change="change_coupon_value" title="店铺：" v-model="data.coupon_store_split" >
+            <x-input @on-blur="change_coupon_value" title="店铺：" v-model="data.coupon_store_split" >
                 <i slot="right">%</i>
             </x-input>
         </group>
@@ -31,10 +31,10 @@
             <x-input title="会长：" v-model="data.ad_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
-            <x-input v-if="is_show_entrepreneur_set" @on-change="change_ad_value" title="创客：" v-model="data.ad_entrepreneur_split" >
+            <x-input v-if="is_show_entrepreneur_set" @on-blur="change_ad_value" title="创客：" v-model="data.ad_entrepreneur_split" >
                 <i slot="right">%</i>
             </x-input>
-            <x-input @on-change="change_ad_value" title="店铺：" v-model="data.ad_store_split" >
+            <x-input @on-blur="change_ad_value" title="店铺：" v-model="data.ad_store_split" >
                 <i slot="right">%</i>
             </x-input>
         </group>

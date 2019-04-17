@@ -4,7 +4,7 @@
    <x-header title="积分使用记录"></x-header>
     <form>
         <group title="费率返点设置" class="splitFeeSetInfo">
-            <x-input title="会长：" v-model="data.pay_president_split"  >
+            <x-input title="会长：" v-model="data.pay_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
             <x-input @on-change="change_pay_value" title="创客：" v-model="data.pay_entrepreneur_split" type="number">
@@ -16,7 +16,7 @@
         </group>
 
         <group title="券分润设置" class="splitFeeSetInfo">
-            <x-input title="会长：" v-model="data.coupon_president_split"  >
+            <x-input title="会长：" v-model="data.coupon_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
             <x-input @on-change="change_coupon_value" title="创客：" v-model="data.coupon_entrepreneur_split" >
@@ -28,7 +28,7 @@
         </group>
 
         <group title="广告分润设置" class="splitFeeSetInfo">
-            <x-input title="会长：" v-model="data.ad_president_split"  >
+            <x-input title="会长：" v-model="data.ad_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
             <x-input @on-change="change_ad_value" title="创客：" v-model="data.ad_entrepreneur_split" >

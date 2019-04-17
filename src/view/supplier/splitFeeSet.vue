@@ -1,7 +1,7 @@
 <template>
   <div class="splitFeeSet">
 
-   <x-header title="积分使用记录"></x-header>
+   <x-header title="分润比例设置"></x-header>
     <form>
         <group title="费率返点设置" class="splitFeeSetInfo">
             <x-input title="会长：" v-model="data.pay_president_split"  disabled>

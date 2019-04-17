@@ -12,7 +12,12 @@
       </div>
       <div class="integral">积分: {{ data.integral }}</div>
       <div class="integral-2" v-if="data.useIntegral !== undefined">已消耗: {{ typeof data.useIntegral === 'object' ? data.useIntegral.integral : data.useIntegral }}</div>
-      <div class="action">
+      
+      <div class="action1" v-if="data.isShowAction">
+        <x-button action-type="button" @click.native="goSplitFee(data.id)">分润比例设置</x-button>
+      </div>
+
+      <div class="action2">
         <x-button action-type="button" @click.native="distributionIntegral(data.id)">分配积分</x-button>
       </div>
     </div>
@@ -27,7 +32,8 @@
         type: Object,
         default () {
           return {}
-        }
+        },
+        isShowAction: false,
       },
       showOptions: {
         type: Object,
@@ -54,11 +60,17 @@
       }
     },
     created() {
-      console.log
+      console.log(this.$route.path)
+      if (this.$route.path == '/supplier') 
+        this.data.isShowAction = true
+
     },
     methods: {
       distributionIntegral(id) {
         this.$emit('on-click-button', id)
+      },
+      goSplitFee(id) {
+        this.$router.push(`supplier/split_fee_set?supplier_id=${id}`)
       }
     }
   }
@@ -76,7 +88,13 @@
     right: 6px
     top: 16px
     font-size: 12px
-  .action
+  .action1
+    position: absolute
+    right: 90px
+    bottom: 6px
+    font-size: 12px
+
+  .action2
     position: absolute
     right: 6px
     bottom: 6px

@@ -77,6 +77,10 @@ export default new Router({
     {
       path: '/integral_records',
       component: getComponent('integral/record')
+    },
+    {
+      path: '/supplier/split_fee_set',
+      component: getComponent('supplier/splitFeeSet')
     }
   ]
 })

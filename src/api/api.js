@@ -204,3 +204,18 @@ export const integralRecords = (params) => {
     params,
   })
 }
+
+export const getSplitRule = params =>
+  http({
+    url: "/api/splitRule",
+    method: "get",
+    params
+  })
+
+  export const putSplitRule = data => {
+    return http({
+      url: `api/splitRule`,
+      method: 'put',
+      data,
+    })
+  }

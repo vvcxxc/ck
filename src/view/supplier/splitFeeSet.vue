@@ -4,19 +4,19 @@
    <x-header title="分润比例设置"></x-header>
     <form>
         <group title="费率返点设置" class="splitFeeSetInfo">
-            <x-input title="会长：" v-model="data.pay_president_split"  disabled>
-                <i slot="right">%</i>
+            <x-input title="剩余分润总额：" v-model="data.pay_president_split"  disabled>
+                <i slot="right">‰</i>
             </x-input>
             <x-input v-if="is_show_entrepreneur_set" @on-blur="change_pay_value" title="创客：" v-model="data.pay_entrepreneur_split" type="number">
-                <i slot="right">%</i>
+                <i slot="right">‰</i>
             </x-input>
             <x-input @on-blur="change_pay_value" title="店铺：" v-model="data.pay_store_split" >
-                <i slot="right">%</i>
+                <i slot="right">‰</i>
             </x-input>
         </group>
 
         <group title="券分润设置" class="splitFeeSetInfo">
-            <x-input title="会长：" v-model="data.coupon_president_split"  disabled>
+            <x-input title="剩余分润总额：" v-model="data.coupon_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
             <x-input v-if="is_show_entrepreneur_set" @on-blur="change_coupon_value" title="创客：" v-model="data.coupon_entrepreneur_split" >
@@ -28,7 +28,7 @@
         </group>
 
         <group title="广告分润设置" class="splitFeeSetInfo">
-            <x-input title="会长：" v-model="data.ad_president_split"  disabled>
+            <x-input title="剩余分润总额：" v-model="data.ad_president_split"  disabled>
                 <i slot="right">%</i>
             </x-input>
             <x-input v-if="is_show_entrepreneur_set" @on-blur="change_ad_value" title="创客：" v-model="data.ad_entrepreneur_split" >
@@ -59,12 +59,15 @@
           pay_president_split: 0,
           pay_entrepreneur_split: 0,
           pay_store_split: 0,
+          pay_platform_service_charge: 0,
           coupon_president_split: 0,
           coupon_entrepreneur_split: 0,
           coupon_store_split: 0,
+          coupon_allot_split_Profit: 0,
           ad_president_split: 0,
           ad_entrepreneur_split: 0,
           ad_store_split: 0,
+          ad_allot_split_Profit: 0,
           supplier_id: 0,
         },
         is_show_entrepreneur_set: false,
@@ -79,9 +82,9 @@
         getSplitRule({supplier_id: this.data.supplier_id}).then(({ code, message, data }) => {
           this.data = data
 
-          this.data.pay_president_split =  100 - this.data.pay_entrepreneur_split - this.data.pay_store_split
-          this.data.coupon_president_split =  100 - this.data.coupon_entrepreneur_split - this.data.coupon_store_split
-          this.data.ad_president_split =  100 - this.data.ad_entrepreneur_split - this.data.ad_store_split
+          this.data.pay_president_split =  this.data.pay_platform_service_charge - this.data.pay_entrepreneur_split - this.data.pay_store_split
+          this.data.coupon_president_split =  this.data.coupon_allot_split_Profit - this.data.coupon_entrepreneur_split - this.data.coupon_store_split
+          this.data.ad_president_split =  this.data.ad_allot_split_Profit - this.data.ad_entrepreneur_split - this.data.ad_store_split
 
         })
     },
@@ -106,29 +109,29 @@
       },
       change_pay_value(value) {
         let set_value = (parseInt(this.data.pay_entrepreneur_split) + parseInt(this.data.pay_store_split))
-        if (set_value > 100) {
-            return this.$vux.toast.text("不能超过100%")   
+        if (set_value > this.data.pay_platform_service_charge) {
+            return this.$vux.toast.text(`不能超过${this.data.pay_platform_service_charge}`)   
             
         }
-        this.data.pay_president_split = 100 - set_value || 0
+        this.data.pay_president_split = this.data.pay_platform_service_charge - set_value || 0
 
       },
     change_coupon_value(value) {
         let set_value = (parseInt(this.data.coupon_entrepreneur_split) + parseInt(this.data.coupon_store_split))
-        if (set_value > 100) {
-            return this.$vux.toast.text("不能超过100%")   
+        if (set_value > this.data.coupon_allot_split_Profit) {
+            return this.$vux.toast.text(`不能超过${this.data.coupon_allot_split_Profit}`)   
             
         }
-        this.data.coupon_president_split = 100 - set_value || 0
+        this.data.coupon_president_split = this.data.coupon_allot_split_Profit - set_value || 0
 
       },
     change_ad_value(value) {
         let set_value = (parseInt(this.data.ad_entrepreneur_split) + parseInt(this.data.ad_store_split))
-        if (set_value > 100) {
-            return this.$vux.toast.text("不能超过100%")   
+        if (set_value > this.data.ad_allot_split_Profit) {
+            return this.$vux.toast.text(`不能超过${this.data.ad_allot_split_Profit}`)   
             
         }
-        this.data.ad_president_split = 100 - set_value || 0
+        this.data.ad_president_split = this.data.ad_allot_split_Profit - set_value || 0
 
       },
     //   _validator() {

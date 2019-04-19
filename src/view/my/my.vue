@@ -33,7 +33,7 @@
           <cell is-link title="现金券收益" @click.native="handleShowView('couponProfit')"></cell>
 
           <cell is-link title="费率返点" @click.native="handleShowView('rate')"></cell>
-          <cell is-link title="我的二维码" @click.native="myQrcode()"></cell>
+          <cell is-link title="邀请店铺" @click.native="myQrcode()"></cell>
           <cell is-link title="积分使用记录" @click.native="integralRecord()"></cell>
         </group>
 
@@ -51,7 +51,7 @@
     <!-- </c-scroll> -->
 
     <div class="sub-view-wrapper">
-      <alert v-model="showQrcode" title="我的二维码">
+      <alert v-model="showQrcode" title="邀请店铺">
         <qrcode
           :value="qrcodeUrl"></qrcode>
       </alert>

@@ -13,7 +13,7 @@
       <div class="integral">积分: {{ data.integral }}</div>
       <div class="integral-2" v-if="data.useIntegral !== undefined">已消耗: {{ typeof data.useIntegral === 'object' ? data.useIntegral.integral : data.useIntegral }}</div>
       
-      <div class="action1" v-if="data.isShowAction">
+      <div class="action1" v-if="data.isShowAction && president">
         <x-button action-type="button" @click.native="goSplitFee(data.id)">分润比例设置</x-button>
       </div>
 

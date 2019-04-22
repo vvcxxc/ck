@@ -34,6 +34,9 @@
 
           <cell is-link title="费率返点" @click.native="handleShowView('rate')"></cell>
           <cell is-link title="邀请店铺" @click.native="myQrcode()"></cell>
+
+          <cell is-link title="邀请创客" v-if="role_type == 'president'" @click.native="inviteEntrepreneur()"></cell>
+
           <cell is-link title="积分使用记录" @click.native="integralRecord()"></cell>
         </group>
 
@@ -54,6 +57,10 @@
       <alert v-model="showQrcode" title="邀请店铺">
         <qrcode
           :value="qrcodeUrl"></qrcode>
+      </alert>
+      <alert v-model="showEntrepreneurQrcode" title="邀请二维码">
+        <qrcode
+          :value="inviteEntrepreneurQrcodeUrl"></qrcode>
       </alert>
       <v-configuration v-if="flagConfiguration" @on-hide="handleHideView('configuration')"></v-configuration>
       <v-bank v-if="flagBank" @on-hide="handleHideView('bank')"></v-bank>
@@ -97,8 +104,11 @@
         flagConfiguration: false,
         flagRate: false,
         showQrcode: false,
+        showEntrepreneurQrcode: false,
         integral: 0,
         supplier_party_id: 0,
+        role_type : localStorage.getItem('role_type'),
+        party_id: 0
       }
     },
     components: {
@@ -123,6 +133,9 @@
     computed: {
       qrcodeUrl() {
         return `${process.env.SUPPLIER_URL}/register?invite_phone=${this.account_phone}`
+      },
+      inviteEntrepreneurQrcodeUrl() {
+        return `http://${window.location.host}/ck/register?president_id=${this.party_id}`
       }
     },
     
@@ -165,6 +178,7 @@
             this.account_balance = money
             this.integral = integral
             this.supplier_party_id = supplier_party_id
+            this.party_id = party_id
           }
         }).catch(err => console.log(err))
       },
@@ -193,6 +207,9 @@
       },
       integralRecord() {
         this.$router.push('/integral_records')
+      },
+      inviteEntrepreneur() {
+        this.showEntrepreneurQrcode = true
       },
       goToSupplier() {
         window.localStorage.clear();

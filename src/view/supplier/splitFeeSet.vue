@@ -7,7 +7,7 @@
             <x-input title="剩余分润总额：" v-model="data.pay_president_split"  disabled>
                 <i slot="right">‰</i>
             </x-input>
-            <x-input v-if="is_show_entrepreneur_set" @on-blur="change_pay_value" title="创客：" v-model="data.pay_entrepreneur_split" type="number">
+            <x-input v-if="is_show_entrepreneur_set" @on-blur="change_pay_value" title="创客：" v-model="data.pay_entrepreneur_split">
                 <i slot="right">‰</i>
             </x-input>
             <x-input @on-blur="change_pay_value" title="店铺：" v-model="data.pay_store_split" >
@@ -108,7 +108,7 @@
         })
       },
       change_pay_value(value) {
-        let set_value = (parseInt(this.data.pay_entrepreneur_split) + parseInt(this.data.pay_store_split))
+        let set_value = (Number(this.data.pay_entrepreneur_split) + Number(this.data.pay_store_split))
         if (set_value > this.data.pay_platform_service_charge) {
             return this.$vux.toast.text(`不能超过${this.data.pay_platform_service_charge}`)   
             
@@ -117,7 +117,7 @@
 
       },
     change_coupon_value(value) {
-        let set_value = (parseInt(this.data.coupon_entrepreneur_split) + parseInt(this.data.coupon_store_split))
+        let set_value = (Number(this.data.coupon_entrepreneur_split) + Number(this.data.coupon_store_split))
         if (set_value > this.data.coupon_allot_split_Profit) {
             return this.$vux.toast.text(`不能超过${this.data.coupon_allot_split_Profit}`)   
             
@@ -126,7 +126,7 @@
 
       },
     change_ad_value(value) {
-        let set_value = (parseInt(this.data.ad_entrepreneur_split) + parseInt(this.data.ad_store_split))
+        let set_value = (Number(this.data.ad_entrepreneur_split) + Number(this.data.ad_store_split))
         if (set_value > this.data.ad_allot_split_Profit) {
             return this.$vux.toast.text(`不能超过${this.data.ad_allot_split_Profit}`)   
             

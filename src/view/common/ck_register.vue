@@ -55,7 +55,7 @@
         const params = {
           account_name: this.account_name,
           account_passwd: this.account_passwd,
-          president_id : this.$route.query.president_id || 0,
+          invite_id : this.$route.query.invite_id || 0,
           phone : this.phone,
           mobile_verification_code : this.mobile_verification_code
         }

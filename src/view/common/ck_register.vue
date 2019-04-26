@@ -16,7 +16,7 @@
         发送验证码
         </x-button>
       </x-input>
-      <x-input title="手机验证码" type="number" v-model="mobile_verification_code" />
+      <x-input title="手机验证码" v-model="mobile_verification_code" />
     </group>
     <x-button type="primary" style="margin-top: 20px;" @click.native="handleRegister">注册</x-button>
   </div>

@@ -83,6 +83,11 @@ export default new Router({
       path: '/supplier/split_fee_set',
       component: getComponent('supplier/splitFeeSet')
     },
+		{
+		
+		  path: '/entrepreneur/split_fee_set',
+		  component: getComponent('entrepreneur/splitFeeSet')
+		},
     {
 
       path: '/ck/register',

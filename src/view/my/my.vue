@@ -58,7 +58,7 @@
         <qrcode
           :value="qrcodeUrl"></qrcode>
       </alert>
-      <alert v-model="showEntrepreneurQrcode" title="邀请二维码">
+      <alert v-model="showEntrepreneurQrcode" title="邀请创客">
         <qrcode
           :value="inviteEntrepreneurQrcodeUrl"></qrcode>
       </alert>

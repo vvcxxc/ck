@@ -123,7 +123,7 @@
         if (code == 200) {
           this.isSend = true
         }
-        this.$vux.toast.text(message)
+        this.$vux.toast.text('验证码已发送')
     }
       
     }

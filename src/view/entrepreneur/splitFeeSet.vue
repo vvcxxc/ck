@@ -48,7 +48,7 @@
 
   import { XHeader, Group, XButton, XInput } from 'vux'
   import { getSplitRuleCk, putSplitRuleCk, isExistEntrepreneur } from '@api/api'
-  import { Validator } from '@utils/common'
+  import { Validator, timeout} from '@utils/common'
 
   const REQUEST_OK = 200
 
@@ -102,6 +102,10 @@
 
         putSplitRuleCk(this.data).then(({ code, data }) => {
           this.$vux.toast.text(data)
+					timeout(2500).then(() => {
+					    //window.location.href = `/entrepreneur`
+							this.$router.push({path:'/entrepreneur'})
+					})
         })
       },
       change_pay_value(value) {

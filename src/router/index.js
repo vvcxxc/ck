@@ -79,6 +79,17 @@ export default new Router({
       component: getComponent('integral/record')
     },
     {
+
+      path: '/supplier/split_fee_set',
+      component: getComponent('supplier/splitFeeSet')
+    },
+		{
+		
+		  path: '/entrepreneur/split_fee_set',
+		  component: getComponent('entrepreneur/splitFeeSet')
+		},
+    {
+
       path: '/ck/register',
       component: getComponent('common/ck_register')
     },    
@@ -86,9 +97,5 @@ export default new Router({
       path: '/president/inviteEntrepreneur',
       component: getComponent('president/inviteEntrepreneur')
     },
-    {
-      path: '/supplier/split_fee_set',
-      component: getComponent('supplier/splitFeeSet')
-    }
   ]
 })

@@ -13,7 +13,7 @@
       <div class="integral">积分: {{ data.integral }}</div>
       <div class="integral-2" v-if="data.useIntegral !== undefined">已消耗: {{ typeof data.useIntegral === 'object' ? data.useIntegral.integral : data.useIntegral }}</div>
       
-      <div class="action1" v-if="data.isShowAction">
+      <div class="action1" v-if="data.isShowAction && president">
         <x-button action-type="button" @click.native="goSplitFee(data.id)">分润比例设置</x-button>
       </div>
 
@@ -33,7 +33,8 @@
         default () {
           return {}
         },
-        isShowAction: false,
+        isShowAction: true,
+				splitRoleType:'',
       },
       showOptions: {
         type: Object,
@@ -61,8 +62,10 @@
     },
     created() {
       console.log(this.$route.path)
+			this.data.isShowAction = true
+			this.data.splitRoleType = 'entrepreneur'
       if (this.$route.path == '/supplier') 
-        this.data.isShowAction = true
+        this.data.splitRoleType = 'supplier'
 
     },
     methods: {
@@ -70,7 +73,12 @@
         this.$emit('on-click-button', id)
       },
       goSplitFee(id) {
-        this.$router.push(`supplier/split_fee_set?supplier_id=${id}`)
+				if(this.data.splitRoleType == 'supplier'){
+					this.$router.push(`supplier/split_fee_set?supplier_id=${id}`)
+				}
+				if(this.data.splitRoleType == 'entrepreneur'){
+					this.$router.push(`entrepreneur/split_fee_set?entrepreneur_id=${id}`)
+				}
       }
     }
   }

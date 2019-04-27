@@ -119,11 +119,14 @@
           return
         }
 
-        const { code, message } = sendVerifyCode({ phone: this.phone })
+        const { code, message } = sendVerifyCode({ phone: this.phone }).then(({ code, data }) => {
+				//this.isSend = true
         if (code == 200) {
           this.isSend = true
         }
         this.$vux.toast.text('验证码已发送')
+				})
+				
     }
       
     }

@@ -33,7 +33,8 @@
         default () {
           return {}
         },
-        isShowAction: false,
+        isShowAction: true,
+				splitRoleType:'',
       },
       showOptions: {
         type: Object,
@@ -61,8 +62,10 @@
     },
     created() {
       console.log(this.$route.path)
+			this.data.isShowAction = true
+			this.data.splitRoleType = 'entrepreneur'
       if (this.$route.path == '/supplier') 
-        this.data.isShowAction = true
+        this.data.splitRoleType = 'supplier'
 
     },
     methods: {
@@ -70,7 +73,12 @@
         this.$emit('on-click-button', id)
       },
       goSplitFee(id) {
-        this.$router.push(`supplier/split_fee_set?supplier_id=${id}`)
+				if(this.data.splitRoleType == 'supplier'){
+					this.$router.push(`supplier/split_fee_set?supplier_id=${id}`)
+				}
+				if(this.data.splitRoleType == 'entrepreneur'){
+					this.$router.push(`entrepreneur/split_fee_set?entrepreneur_id=${id}`)
+				}
       }
     }
   }

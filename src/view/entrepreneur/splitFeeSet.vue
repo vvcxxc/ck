@@ -47,8 +47,8 @@
 <script>
 
   import { XHeader, Group, XButton, XInput } from 'vux'
-  import { getSplitRule, putSplitRule, isExistEntrepreneur } from '@api/api'
-  import { Validator, timeout } from '@utils/common'
+  import { getSplitRuleCk, putSplitRuleCk, isExistEntrepreneur } from '@api/api'
+  import { Validator, timeout} from '@utils/common'
 
   const REQUEST_OK = 200
 
@@ -68,18 +68,15 @@
           ad_entrepreneur_split: 0,
           ad_store_split: 0,
           ad_allot_split_Profit: 0,
-          supplier_id: 0,
+          entrepreneur_id: 0,
         },
-        is_show_entrepreneur_set: false,
+        is_show_entrepreneur_set: true,
       }
     },
     created(){
-        this.data.supplier_id = this.$route.query.supplier_id
-        isExistEntrepreneur({supplier_id: this.data.supplier_id}).then(({ code, message, data }) => {
-            this.is_show_entrepreneur_set = data
-        })
+        this.data.entrepreneur_id = this.$route.query.entrepreneur_id
 
-        getSplitRule({supplier_id: this.data.supplier_id}).then(({ code, message, data }) => {
+        getSplitRuleCk({entrepreneur_id: this.data.entrepreneur_id}).then(({ code, message, data }) => {
           this.data = data
 
           this.data.pay_president_split =  this.data.pay_platform_service_charge - this.data.pay_entrepreneur_split - this.data.pay_store_split
@@ -103,11 +100,11 @@
 
         // if (errmsg) return this.$vux.toast.text(errmsg)
 
-        putSplitRule(this.data).then(({ code, data }) => {
+        putSplitRuleCk(this.data).then(({ code, data }) => {
           this.$vux.toast.text(data)
 					timeout(2500).then(() => {
 					    //window.location.href = `/entrepreneur`
-							this.$router.push({path:'/supplier'})
+							this.$router.push({path:'/entrepreneur'})
 					})
         })
       },

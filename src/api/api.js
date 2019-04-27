@@ -222,28 +222,6 @@ export const integralRecords = (params) => {
   })
 }
 
-export const getSplitRule = params =>
-  http({
-    url: "/api/splitRule",
-    method: "get",
-    params
-  })
-
-  export const putSplitRule = data => {
-    return http({
-      url: `api/splitRule`,
-      method: 'put',
-      data,
-    })
-  }
-
-  export const isExistEntrepreneur = params =>
-  http({
-    url: "/api/isExistEntrepreneur",
-    method: "get",
-    params
-  })
-  
 
 export const jssdkParams = params => {
   return http({
@@ -259,3 +237,40 @@ export const invite = () => {
   })
 }
 
+export const getSplitRule = params =>
+  http({
+    url: "/api/splitRule",
+    method: "get",
+    params
+  })
+
+export const getSplitRuleCk = params =>
+  http({
+    url: "/api/splitRuleCk",
+    method: "get",
+    params
+  })
+	
+export const putSplitRule = data => {
+	return http({
+		url: `api/splitRule`,
+		method: 'put',
+		data,
+	})
+}
+
+export const putSplitRuleCk = data => {
+	return http({
+		url: `api/splitRuleCk`,
+		method: 'put',
+		data,
+	})
+}
+
+export const isExistEntrepreneur = params =>
+http({
+	url: "/api/isExistEntrepreneur",
+	method: "get",
+	params
+})
+  

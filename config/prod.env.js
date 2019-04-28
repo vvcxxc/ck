@@ -5,4 +5,4 @@ module.exports = {
 
   SUPPLIER_URL: '"http://supplier.tdianyi.com"'
 
-}
+} 

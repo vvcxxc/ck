@@ -2,7 +2,7 @@
 const merge = require("webpack-merge")
 const devEnv = require("./dev.env")
 
-module.exports = merge(devEnv, {
+module.exports = merge(devEnv, { 
   NODE_ENV: '"release"',
   BASE_DOMAIN: '"http://api.supplier.tdianyi.com/"',
   // 上传图片
@@ -12,5 +12,5 @@ module.exports = merge(devEnv, {
   OSS_UPLOAD_URL: '"http://tmwl.oss-cn-shenzhen.aliyuncs.com"',
 
   SUPPLIER_URL: '"http://supplier.tdianyi.com"',
-
+ 
 })

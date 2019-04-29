@@ -230,6 +230,13 @@ export const jssdkParams = params => {
   })
 }
 
+export const invite = () => {
+  return http({
+    url: `api/merchant/invite`
+  })
+}
+
+
 export const getSplitRule = params =>
   http({
     url: "/api/splitRule",
@@ -237,24 +244,32 @@ export const getSplitRule = params =>
     params
   })
 
-  export const putSplitRule = data => {
-    return http({
-      url: `api/splitRule`,
-      method: 'put',
-      data,
-    })
-  }
-  export const isExistEntrepreneur = params =>
+export const getSplitRuleCk = params =>
   http({
-    url: "/api/isExistEntrepreneur",
+    url: "/api/splitRuleCk",
     method: "get",
     params
   })
-
-
-export const invite = () => {
-  return http({
-    url: `api/merchant/invite`
-  })
+	
+export const putSplitRule = data => {
+	return http({
+		url: `api/splitRule`,
+		method: 'put',
+		data,
+	})
 }
 
+export const putSplitRuleCk = data => {
+	return http({
+		url: `api/splitRuleCk`,
+		method: 'put',
+		data,
+	})
+}
+
+export const isExistEntrepreneur = params =>
+http({
+	url: "/api/isExistEntrepreneur",
+	method: "get",
+	params
+})

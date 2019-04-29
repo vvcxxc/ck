@@ -16,7 +16,7 @@
         发送验证码
         </x-button>
       </x-input>
-      <x-input title="手机验证码" type="number" v-model="mobile_verification_code" />
+      <x-input title="手机验证码" v-model="mobile_verification_code" />
     </group>
     <x-button type="primary" style="margin-top: 20px;" @click.native="handleRegister">注册</x-button>
   </div>
@@ -55,7 +55,7 @@
         const params = {
           account_name: this.account_name,
           account_passwd: this.account_passwd,
-          president_id : this.$route.query.president_id || 0,
+          invite_id : this.$route.query.invite_id || 0,
           phone : this.phone,
           mobile_verification_code : this.mobile_verification_code
         }
@@ -119,11 +119,14 @@
           return
         }
 
-        const { code, message } = sendVerifyCode({ phone: this.phone })
+        const { code, message } = sendVerifyCode({ phone: this.phone }).then(({ code, data }) => {
+				//this.isSend = true
         if (code == 200) {
           this.isSend = true
         }
-        this.$vux.toast.text(message)
+        this.$vux.toast.text('验证码已发送')
+				})
+				
     }
       
     }

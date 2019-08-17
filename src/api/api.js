@@ -222,7 +222,6 @@ export const integralRecords = (params) => {
   })
 }
 
-
 export const jssdkParams = params => {
   return http({
     url: `wechat/getShareSign`,
@@ -236,6 +235,7 @@ export const invite = () => {
     url: `api/merchant/invite`
   })
 }
+
 
 export const getSplitRule = params =>
   http({
@@ -273,4 +273,3 @@ http({
 	method: "get",
 	params
 })
-  

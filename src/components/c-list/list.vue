@@ -12,15 +12,16 @@
       </div>
       <div class="integral">礼品额度: {{ data.integral }}</div>
       <div class="integral-2" v-if="data.useIntegral !== undefined">已消耗: {{ typeof data.useIntegral === 'object' ? data.useIntegral.integral : data.useIntegral }}</div>
-      
-      <div class="action1" v-if="data.isShowAction && president">
+    </div>
+    <div class="buttonss">
+        <div class="action1" v-if="data.isShowAction && president">
         <x-button action-type="button" @click.native="goSplitFee(data.id)">分润比例设置</x-button>
       </div>
 
       <div class="action2">
         <x-button action-type="button" @click.native="distributionIntegral(data.id)">分配礼品额度</x-button>
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
@@ -98,7 +99,7 @@
     font-size: 12px
   .action1
     position: absolute
-    right: 90px
+    right: 112px
     bottom: 6px
     font-size: 12px
 
@@ -107,5 +108,12 @@
     right: 6px
     bottom: 6px
     font-size: 12px
-    
+  .buttonss
+    // position: absolute
+    bottom: 6px
+    overflow: hidden
+    height: 32px
+    width: 100%
+  .item_hieght
+    height: 120px
 </style>

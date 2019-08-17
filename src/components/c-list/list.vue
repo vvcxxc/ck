@@ -10,7 +10,7 @@
           <p class="value">{{value}}</p>
         </div>
       </div>
-      <div class="integral">积分: {{ data.integral }}</div>
+      <div class="integral">礼品额度: {{ data.integral }}</div>
       <div class="integral-2" v-if="data.useIntegral !== undefined">已消耗: {{ typeof data.useIntegral === 'object' ? data.useIntegral.integral : data.useIntegral }}</div>
       
       <div class="action1" v-if="data.isShowAction && president">
@@ -18,7 +18,7 @@
       </div>
 
       <div class="action2">
-        <x-button action-type="button" @click.native="distributionIntegral(data.id)">分配积分</x-button>
+        <x-button action-type="button" @click.native="distributionIntegral(data.id)">分配礼品额度</x-button>
       </div>
     </div>
   </div>

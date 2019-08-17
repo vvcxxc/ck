@@ -14,7 +14,7 @@
       <confirm
          v-model="showModal"
          show-input
-         :title="`分配积分`"
+         :title="`分配礼品额度`"
          :input-attrs="{type: 'number', id: 'reset-input'}"
          @on-confirm="onConfirm"
       />

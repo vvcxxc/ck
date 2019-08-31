@@ -44,6 +44,7 @@
       @on-confirm="onConfirm(data.id)"
       :confirm-text='text'
       :show-cancel-button='false'
+      :hide-on-blur='true'
     >
       <p style="text-align:center;">设置费率全返后，线下支付满足全选条件后创客与会长将不分润，同时将不能设置该店费率返点比例，是否确认{{text}}？</p>
     </confirm>

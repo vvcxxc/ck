@@ -10,7 +10,7 @@ export const messages = {
       "card": {
         "item1": "余额",
         "item2": "优惠",
-        "item3": "积分"
+        "item3": "礼品额度"
       }
     },
     "selfDetail": {
@@ -59,7 +59,7 @@ export const messages = {
       "card": {
         "item1": "余额",
         "item2": "优惠券",
-        "item3": "积分"
+        "item3": "礼品额度"
       },
       "item1": "手机号",
       "item2": "地区",

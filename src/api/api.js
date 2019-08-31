@@ -222,7 +222,6 @@ export const integralRecords = (params) => {
   })
 }
 
-
 export const jssdkParams = params => {
   return http({
     url: `wechat/getShareSign`,
@@ -237,6 +236,7 @@ export const invite = () => {
   })
 }
 
+
 export const getSplitRule = params =>
   http({
     url: "/api/splitRule",
@@ -250,7 +250,7 @@ export const getSplitRuleCk = params =>
     method: "get",
     params
   })
-	
+
 export const putSplitRule = data => {
 	return http({
 		url: `api/splitRule`,
@@ -273,4 +273,22 @@ http({
 	method: "get",
 	params
 })
-  
+
+/**
+ * 开启或费率全返
+ */
+export const openReturnMoney = (data, id) =>
+http({
+  url: "api/entrepreneur/ZeroRateOpen/"+id,
+  method: 'put',
+  data
+})
+
+/**
+ * 全返规则
+ */
+export const returnMoneyRule = id =>
+http({
+  url: 'api/entrepreneur/ZeroRate/' + id,
+  method: 'get'
+})

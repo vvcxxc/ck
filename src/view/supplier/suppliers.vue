@@ -1,20 +1,20 @@
 <template>
   <div class="supplier">
     <x-header title="店铺" :left-options="{showBack: false}"></x-header>
-    <c-scroll class="supplier-wrapper ofh" :pullUpLoad="true">
+    <!-- <c-scroll class="supplier-wrapper ofh" :pullUpLoad="true"> -->
       <div class="container">
         <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"
-          @on-click-button="onClickButton"
+          @on-click-button="onClickButton" @changeReturn='changeReturn'
         ></c-list>
       </div>
       <load-more :tip="tipDesc" :show-loading="flagLoading" v-if="!suppliers.length"></load-more>
-    </c-scroll>
+    <!-- </c-scroll> -->
 
     <div v-transfer-dom>
       <confirm
          v-model="showModal"
          show-input
-         :title="`分配积分`"
+         :title="`分配礼品额度`"
          :input-attrs="{type: 'number', id: 'reset-input'}"
          @on-confirm="onConfirm"
       />
@@ -61,6 +61,9 @@
       this.fetchSuppliers()
     },
     methods: {
+      changeReturn(){
+        this.fetchSuppliers()
+      },
       onClickButton(id) {
         this.showModal = true;
         this.currentId = id
@@ -109,6 +112,7 @@
         }
       },
       fetchSuppliers() {
+        console.log(4234)
         const params = {
           type: this.role_type
         }
@@ -119,7 +123,7 @@
             mobile: '手机',
             money: '今日营业额'
           }
-          
+
           this.flagLoading = false
 
           if (!data.length) {
@@ -127,7 +131,6 @@
           }
 
           const turnover_fields = ['sale_money', 'supplierMoney', 'wd_money']
-
           if (code == REQUEST_CODE_ONE) {
             this.suppliers = data.map(item => {
               let output = {},
@@ -139,7 +142,7 @@
                 }
                 CH_MAP[key] && (output[CH_MAP[key]] = value)
               }
-              
+
               return {
                 src: 'static/img/supplier.png',
                 desc: { ...output, [CH_MAP['turnover']]: sum },
@@ -148,7 +151,9 @@
                 useIntegral: item.integral_log.length > 0 ? item.integral_log.reduce((prev, curr, idx, arr) => {
                   return (typeof prev === 'object' ? prev.integral : prev) + Number(curr.integral)
                 }) : 0,
-                is_show: !!item.name
+                is_show: !!item.name,
+                can_zero_rate: item.can_zero_rate,
+                open_zero_rate: item.open_zero_rate
               }
             })
           }

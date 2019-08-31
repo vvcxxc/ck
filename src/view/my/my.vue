@@ -22,7 +22,7 @@
             </div>
             <div class="">
               <span>{{ integral }}</span>
-              <br /> 积分
+              <br /> 礼品额度
             </div>
           </div>
         </card>
@@ -33,11 +33,11 @@
           <cell is-link title="现金券收益" @click.native="handleShowView('couponProfit')"></cell>
 
           <cell is-link title="费率返点" @click.native="handleShowView('rate')"></cell>
+
+ 		  <cell is-link title="邀请创客" @click.native="inviteEntrepreneur()"></cell>
           <cell is-link title="邀请店铺" @click.native="myQrcode()"></cell>
 
-          <cell is-link title="邀请创客" @click.native="inviteEntrepreneur()"></cell>
-
-          <cell is-link title="积分使用记录" @click.native="integralRecord()"></cell>
+          <cell is-link title="礼品额度使用记录" @click.native="integralRecord()"></cell>
         </group>
 
         <group title="提现">

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <x-header title="积分使用记录"></x-header>
+    <x-header title="礼品额度使用记录"></x-header>
 
     <x-table :cell-bordered="false" :content-bordered="false" style="font-size: 12px">
       <tbody>

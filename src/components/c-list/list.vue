@@ -171,6 +171,8 @@ export default {
 
 <style lang="sass" scoped>
   @import "./style"
+  .weui-btn
+    padding: 0 10px
   .integral
     position: absolute
     right: 6px

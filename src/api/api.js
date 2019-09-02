@@ -250,7 +250,7 @@ export const getSplitRuleCk = params =>
     method: "get",
     params
   })
-	
+
 export const putSplitRule = data => {
 	return http({
 		url: `api/splitRule`,
@@ -272,4 +272,23 @@ http({
 	url: "/api/isExistEntrepreneur",
 	method: "get",
 	params
+})
+
+/**
+ * 开启或费率全返
+ */
+export const openReturnMoney = (data, id) =>
+http({
+  url: "api/entrepreneur/ZeroRateOpen/"+id,
+  method: 'put',
+  data
+})
+
+/**
+ * 全返规则
+ */
+export const returnMoneyRule = id =>
+http({
+  url: 'api/entrepreneur/ZeroRate/' + id,
+  method: 'get'
 })

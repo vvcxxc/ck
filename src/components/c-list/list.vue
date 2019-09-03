@@ -48,6 +48,8 @@
     >
       <p style="text-align:center;">设置费率全返后，线下支付满足全选条件后创客与会长将不分润，同时将不能设置该店费率返点比例，是否确认{{text}}？</p>
     </confirm>
+    <toast v-model="showToast" type="text" :time="800" is-show-mask text="开启成功" position="middle" width='100px'></toast>
+    <toast v-model="showToast2" type="text" :time="800" is-show-mask text="关闭成功" position="middle" width='100px'></toast>
     <div class="mask" v-if="show2" @click.stop="showGuize()">
       <div class="guize">
         <div class="text">
@@ -62,7 +64,7 @@
 </template>
 
 <script>
-import { XButton, Confirm } from "vux";
+import { XButton, Confirm, Toast } from "vux";
 import { openReturnMoney, returnMoneyRule } from "@api/api"
 export default {
   props: {
@@ -85,7 +87,8 @@ export default {
   },
   components: {
     XButton,
-    Confirm
+    Confirm,
+    Toast
   },
   data() {
     return {
@@ -94,7 +97,9 @@ export default {
       is_show: false,
       isShowAction: true,
       info: {},
-      text: '开启'
+      text: '开启',
+      showToast: false,
+      showToast2: false
     };
   },
   computed: {
@@ -138,10 +143,16 @@ export default {
       // 打开全返
       if(this.text == '开启'){
         this.returnMoney(1,id)
+        this.showToast = true
       }else{
         this.returnMoney(0,id)
+        this.showToast2 = true
       }
       this.$emit('changeReturn',1)
+    },
+    showPosition (position) {
+      this.position = position
+      this.showPositionValue = true
     },
     quanfan(id,open_zero_rate){
       this.show = true

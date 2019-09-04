@@ -33,6 +33,7 @@
           <cell is-link title="现金券收益" @click.native="handleShowView('couponProfit')"></cell>
 
           <cell is-link title="费率返点" @click.native="handleShowView('rate')"></cell>
+
  		  <cell is-link title="邀请创客" @click.native="inviteEntrepreneur()"></cell>
           <cell is-link title="邀请店铺" @click.native="myQrcode()"></cell>
 

@@ -182,7 +182,7 @@
 <style lang="sass" scoped>
 @import "./style"
 .loadMore
-  margin-bottom: 60px
+  margin-bottom: 80px
   height: 20px
   text-align: center
   line-height: 20px

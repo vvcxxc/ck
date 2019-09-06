@@ -2,7 +2,7 @@
   <div class="supplier">
     <x-header title="店铺" :left-options="{showBack: false}"></x-header>
     <!-- <c-scroll class="supplier-wrapper ofh" :pullUpLoad="true"> -->
-      <div class="container">
+      <div class="container page">
         <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"
           @on-click-button="onClickButton" @changeReturn='changeReturn'
         ></c-list>
@@ -223,8 +223,10 @@
 </script>
 <style lang="sass">
   @import "./style"
+  .page
+    padding-bottom: 60px
   .loadMore
-    margin-bottom: 55px
+    // margin-bottom: 80px
     height: 20px
     text-align: center
     line-height: 20px

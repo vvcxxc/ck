@@ -50,7 +50,7 @@
         },
         showModal: false,
         currentId: 0,
-        load_more: '加载更多',
+        load_more: '点击加载更多',
         is_more: true,
         page: 2,
       }

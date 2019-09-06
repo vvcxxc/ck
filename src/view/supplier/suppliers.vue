@@ -47,7 +47,7 @@
         currentId: 0,
         page: 2,
         is_more: true,
-        load_more: '加载更多'
+        load_more: '点击加载更多'
       }
     },
     computed: {

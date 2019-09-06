@@ -2,7 +2,7 @@
   <div class="list-wrapper" v-if="data.is_show || president">
     <div class="list-container">
       <div class="image" v-show="_showOptions.image">
-        <img :src="data.src" alt width="56" height="56" />
+        <img :src="data.preview" alt width="56" height="56" />
       </div>
       <div class="desc-wrapper">
         <div class="item" v-for="(value, key) in data.desc" :key="key">

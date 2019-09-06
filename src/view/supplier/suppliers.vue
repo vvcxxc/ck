@@ -114,7 +114,8 @@
                 }) : 0,
                 is_show: !!item.name,
                 can_zero_rate: item.can_zero_rate,
-                open_zero_rate: item.open_zero_rate
+                open_zero_rate: item.open_zero_rate,
+                preview: item.preview || 'static/img/supplier.png'
               }
             }))
           }
@@ -210,7 +211,8 @@
                 }) : 0,
                 is_show: !!item.name,
                 can_zero_rate: item.can_zero_rate,
-                open_zero_rate: item.open_zero_rate
+                open_zero_rate: item.open_zero_rate,
+                preview: item.preview || 'static/img/supplier.png'
               }
             })
           }

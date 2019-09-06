@@ -98,11 +98,13 @@
               let output = {},
                 sum = 0
               for (let [key, value] of Object.entries(item)) {
-
                 if (turnover_fields.includes(key)) {
                   sum += +value
                 }
                 CH_MAP[key] && (output[CH_MAP[key]] = value)
+              }
+              if(sum.toString().includes('.')){
+                sum = Math.floor(sum*10000) / 10000
               }
               return {
                 src: 'static/img/supplier.png',
@@ -196,9 +198,12 @@
               for (let [key, value] of Object.entries(item)) {
 
                 if (turnover_fields.includes(key)) {
-                  sum += +value
+                  sum += +value * 1
                 }
                 CH_MAP[key] && (output[CH_MAP[key]] = value)
+              }
+               if(sum.toString().includes('.')){
+                sum = Math.floor(sum*10000) / 10000
               }
 
               return {

@@ -1,10 +1,10 @@
 <template>
   <div class="entrepreneur">
     <x-header title="创客" :left-options="{showBack: false}"></x-header>
-    <c-scroll-new class="entrepreneur-wrapper"
+    <!-- <c-scroll-new class="entrepreneur-wrapper"
       :data="entrepreneurs"
       @pullingUp="hanleLoadMore"
-    >
+    > -->
       <div class="container">
         <c-list v-for="(item, index) in entrepreneurs" :key="index" :showOptions="{image: true}" :data="item" @on-click-button="onClickButton"></c-list>
         <div class="loadMore" @click="loadMore">
@@ -12,7 +12,7 @@
         </div>
       </div>
 
-    </c-scroll-new>
+    <!-- </c-scroll-new> -->
 
     <div v-transfer-dom>
       <confirm

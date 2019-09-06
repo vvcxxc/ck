@@ -1,7 +1,7 @@
 <template>
   <div class="entrepreneur">
     <x-header title="创客" :left-options="{showBack: false}"></x-header>
-    <c-scroll-new class="entrepreneur-wrapper" 
+    <c-scroll-new class="entrepreneur-wrapper"
       :data="entrepreneurs"
       @pullingUp="hanleLoadMore"
     >
@@ -116,6 +116,7 @@
                 desc: output,
                 id: item.party_id,
                 integral: item.integral ? item.integral['integral'] || 0 : 0,
+                preview: item.preview || 'static/img/supplier.png'
               }
             })
           ]

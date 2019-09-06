@@ -4,7 +4,7 @@ const devEnv = require("./dev.env")
 
 module.exports = merge(devEnv, {
   NODE_ENV: '"release"',
-  BASE_DOMAIN: '"http://release.supplier.tdianyi.com/"',
+  BASE_DOMAIN: '"http://release.api.supplier.tdianyi.com/"',
   // 上传图片
   UPLOAD_API: '"http://o2o.tdianyi.com/"',
   DOMAIN: '"http://ck.tdianyi.com"',

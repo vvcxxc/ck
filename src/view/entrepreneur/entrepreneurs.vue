@@ -1,14 +1,18 @@
 <template>
   <div class="entrepreneur">
     <x-header title="创客" :left-options="{showBack: false}"></x-header>
-    <c-scroll-new class="entrepreneur-wrapper" 
+    <!-- <c-scroll-new class="entrepreneur-wrapper"
       :data="entrepreneurs"
       @pullingUp="hanleLoadMore"
-    >
+    > -->
       <div class="container">
         <c-list v-for="(item, index) in entrepreneurs" :key="index" :showOptions="{image: true}" :data="item" @on-click-button="onClickButton"></c-list>
+        <div class="loadMore" @click="loadMore">
+          {{load_more}}
+        </div>
       </div>
-    </c-scroll-new>
+
+    <!-- </c-scroll-new> -->
 
     <div v-transfer-dom>
       <confirm
@@ -46,6 +50,9 @@
         },
         showModal: false,
         currentId: 0,
+        load_more: '点击加载更多',
+        is_more: true,
+        page: 2,
       }
     },
     directives: {
@@ -68,6 +75,47 @@
         document.getElementById('reset-input').addEventListener('blur', function() {
           window.scroll(0, 0)
         })
+      },
+      async loadMore(){
+        if(!this.is_more){
+          return
+        }
+        let params = {
+          type: this.role_type,
+          page: this.page,
+        }
+        let { code, data, message } = await entrepreneurs(params)
+        if(data.length){
+          this.page = this.page + 1
+        }else {
+          this.load_more = '已经到底啦~'
+        }
+        const CH_MAP = {
+          account_name: '用户',
+          account_phone: '手机',
+          account_regist_time: '注册时间'
+        }
+        if(code == REQUEST_ONE){
+          this.entrepreneurs = [
+            ...this.entrepreneurs,
+            ...data.map(item => {
+              let output = {}
+              for(let [key, value] of Object.entries(item)){
+                CH_MAP[key] && (output[CH_MAP[key]] = value)
+              }
+              return {
+                src: 'static/img/face2.png',
+                desc: output,
+                id: item.party_id,
+                integral: item.integral ? item.integral['integral'] || 0 : 0,
+                preview: item.preview || 'static/img/supplier.png'
+              }
+            })
+          ]
+        } else {
+
+        }
+
       },
       async onConfirm(val) {
         if (!(Number(val) > 0)) {
@@ -116,6 +164,7 @@
                 desc: output,
                 id: item.party_id,
                 integral: item.integral ? item.integral['integral'] || 0 : 0,
+                preview: item.preview || 'static/img/supplier.png'
               }
             })
           ]
@@ -132,4 +181,10 @@
 
 <style lang="sass" scoped>
 @import "./style"
+.loadMore
+  margin-bottom: 80px
+  height: 20px
+  text-align: center
+  line-height: 20px
+  font-size: 14px
 </style>

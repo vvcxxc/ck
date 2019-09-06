@@ -2,10 +2,13 @@
   <div class="supplier">
     <x-header title="店铺" :left-options="{showBack: false}"></x-header>
     <!-- <c-scroll class="supplier-wrapper ofh" :pullUpLoad="true"> -->
-      <div class="container">
+      <div class="container page">
         <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"
           @on-click-button="onClickButton" @changeReturn='changeReturn'
         ></c-list>
+        <div class="loadMore" @click="loadMore">
+          {{load_more}}
+        </div>
       </div>
       <load-more :tip="tipDesc" :show-loading="flagLoading" v-if="!suppliers.length"></load-more>
     <!-- </c-scroll> -->
@@ -42,6 +45,9 @@
         flagLoading: true,
         showModal: false,
         currentId: 0,
+        page: 2,
+        is_more: true,
+        load_more: '点击加载更多'
       }
     },
     computed: {
@@ -63,6 +69,59 @@
     methods: {
       changeReturn(){
         this.fetchSuppliers()
+      },
+      loadMore(){
+        if(!this.is_more){
+          return
+        }
+         const CH_MAP = {
+            turnover: '总营业额',
+            name: '店铺',
+            mobile: '手机',
+            money: '今日营业额'
+          }
+
+        let params = {
+          type: this.role_type,
+          page: this.page,
+          limit: 10
+        }
+        suppliers(params).then(res => {
+          if(!res.data.length){
+            this.is_more = false
+            this.load_more = '已经到底啦~'
+          }else{
+            this.page = this.page + 1
+            let data = res.data
+             const turnover_fields = ['sale_money', 'supplierMoney', 'wd_money']
+            this.suppliers = this.suppliers.concat(data.map(item => {
+              let output = {},
+                sum = 0
+              for (let [key, value] of Object.entries(item)) {
+                if (turnover_fields.includes(key)) {
+                  sum += +value
+                }
+                CH_MAP[key] && (output[CH_MAP[key]] = value)
+              }
+              if(sum.toString().includes('.')){
+                sum = Math.floor(sum*10000) / 10000
+              }
+              return {
+                src: 'static/img/supplier.png',
+                desc: { ...output, [CH_MAP['turnover']]: sum },
+                id: item.id,
+                integral: item.integral.length > 0 ? item.integral[0]['integral'] : 0,
+                useIntegral: item.integral_log.length > 0 ? item.integral_log.reduce((prev, curr, idx, arr) => {
+                  return (typeof prev === 'object' ? prev.integral : prev) + Number(curr.integral)
+                }) : 0,
+                is_show: !!item.name,
+                can_zero_rate: item.can_zero_rate,
+                open_zero_rate: item.open_zero_rate,
+                preview: item.preview || 'static/img/supplier.png'
+              }
+            }))
+          }
+        })
       },
       onClickButton(id) {
         this.showModal = true;
@@ -112,9 +171,10 @@
         }
       },
       fetchSuppliers() {
-        console.log(4234)
         const params = {
-          type: this.role_type
+          type: this.role_type,
+          page: 1,
+          limit: 10
         }
         suppliers(params).then(({ code, data, message, total }) => {
           const CH_MAP = {
@@ -138,9 +198,12 @@
               for (let [key, value] of Object.entries(item)) {
 
                 if (turnover_fields.includes(key)) {
-                  sum += +value
+                  sum += +value * 1
                 }
                 CH_MAP[key] && (output[CH_MAP[key]] = value)
+              }
+               if(sum.toString().includes('.')){
+                sum = Math.floor(sum*10000) / 10000
               }
 
               return {
@@ -153,7 +216,8 @@
                 }) : 0,
                 is_show: !!item.name,
                 can_zero_rate: item.can_zero_rate,
-                open_zero_rate: item.open_zero_rate
+                open_zero_rate: item.open_zero_rate,
+                preview: item.preview || 'static/img/supplier.png'
               }
             })
           }
@@ -164,4 +228,12 @@
 </script>
 <style lang="sass">
   @import "./style"
+  .page
+    padding-bottom: 60px
+  .loadMore
+    // margin-bottom: 80px
+    height: 20px
+    text-align: center
+    line-height: 20px
+    font-size: 14px
 </style>

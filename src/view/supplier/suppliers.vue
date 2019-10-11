@@ -2,6 +2,12 @@
   <div class="supplier">
     <x-header title="店铺" :left-options="{showBack: false}"></x-header>
     <!-- <c-scroll class="supplier-wrapper ofh" :pullUpLoad="true"> -->
+      <div class="search">
+        <input placeholder="手机号或店铺名称" v-model="keyword" class="search-input"/>
+        <div class="search-button" @click="search">搜索</div>
+        <i class="search-icon"><icon type="search"></icon></i>
+        <i class="search-clear" @click="onclear"><icon type="clear" v-show="is_clear" ></icon></i>
+      </div>
       <div class="container page">
         <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"
           @on-click-button="onClickButton" @changeReturn='changeReturn'
@@ -26,7 +32,7 @@
 </template>
 
 <script type="text/javascript">
-  import { XHeader, Confirm, TransferDomDirective as TransferDom } from "vux"
+  import { XHeader, Confirm, TransferDomDirective as TransferDom, Icon } from "vux"
   import { suppliers } from "@api/api"
   import { mapGetters } from 'vuex'
   import { LoadMore } from 'vux'
@@ -47,7 +53,18 @@
         currentId: 0,
         page: 2,
         is_more: true,
-        load_more: '点击加载更多'
+        load_more: '点击加载更多',
+        keyword: '',
+        is_clear: false
+      }
+    },
+    watch: {
+      keyword: function(a){
+        if(!a){
+          this.is_clear = false
+        }else{
+          this.is_clear = true
+        }
       }
     },
     computed: {
@@ -61,14 +78,75 @@
       CScroll,
       CList,
       LoadMore,
-      Confirm
+      Confirm,
+      Icon
     },
     created() {
       this.fetchSuppliers()
     },
     methods: {
+      // 搜索
+      onclear (){
+        console.log('das')
+        this.keyword = ''
+      },
       changeReturn(){
         this.fetchSuppliers()
+      },
+      search (){
+        console.log('sss')
+        let params = {
+          type: this.role_type,
+          page: 1,
+          limit: 10,
+          keyword: this.keyword
+        }
+         suppliers(params).then(({ code, data, message, total }) => {
+          const CH_MAP = {
+            turnover: '总营业额',
+            name: '店铺',
+            mobile: '手机',
+            money: '今日营业额'
+          }
+
+          this.flagLoading = false
+
+          if (!data.length) {
+            this.tipDesc = '暂无数据'
+          }
+
+          const turnover_fields = ['sale_money', 'supplierMoney', 'wd_money']
+          if (code == REQUEST_CODE_ONE) {
+            this.suppliers = data.map(item => {
+              let output = {},
+                sum = 0
+              for (let [key, value] of Object.entries(item)) {
+
+                if (turnover_fields.includes(key)) {
+                  sum += +value * 1
+                }
+                CH_MAP[key] && (output[CH_MAP[key]] = value)
+              }
+               if(sum.toString().includes('.')){
+                sum = Math.floor(sum*10000) / 10000
+              }
+
+              return {
+                src: 'static/img/supplier.png',
+                desc: { ...output, [CH_MAP['turnover']]: sum },
+                id: item.id,
+                integral: item.integral.length > 0 ? item.integral[0]['integral'] : 0,
+                useIntegral: item.integral_log.length > 0 ? item.integral_log.reduce((prev, curr, idx, arr) => {
+                  return (typeof prev === 'object' ? prev.integral : prev) + Number(curr.integral)
+                }) : 0,
+                is_show: !!item.name,
+                can_zero_rate: item.can_zero_rate,
+                open_zero_rate: item.open_zero_rate,
+                preview: item.preview || 'static/img/supplier.png'
+              }
+            })
+          }
+        }).catch(err => console.log(err))
       },
       loadMore(){
         if(!this.is_more){
@@ -84,7 +162,8 @@
         let params = {
           type: this.role_type,
           page: this.page,
-          limit: 10
+          limit: 10,
+          keyword: this.keyword
         }
         suppliers(params).then(res => {
           if(!res.data.length){
@@ -174,7 +253,8 @@
         const params = {
           type: this.role_type,
           page: 1,
-          limit: 10
+          limit: 10,
+          keyword: this.keyword
         }
         suppliers(params).then(({ code, data, message, total }) => {
           const CH_MAP = {
@@ -236,4 +316,31 @@
     text-align: center
     line-height: 20px
     font-size: 14px
+  .search
+    height: 40px
+    width: 100%
+    position: relative
+    box-sizing: border-box
+    padding-right: 50px
+    padding-left: 5px
+    .search-input
+      width: 100%
+      height: 30px
+      line-height: 1
+      border-radius: 2px
+      padding-left: 30px
+      border: 1px solid #666
+    .search-button
+      position: absolute
+      top: 25%
+      right: 14px
+      font-size: 14px
+    .search-icon
+      position: absolute
+      top: 0
+      left: 8px
+    .search-clear
+      position: absolute
+      top: 0
+      right: 52px
 </style>

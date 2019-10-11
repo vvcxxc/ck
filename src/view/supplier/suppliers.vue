@@ -12,7 +12,7 @@
         <c-list v-for="(item, index) in suppliers" :key="index" :data="item" :showOptions="{image: true}"
           @on-click-button="onClickButton" @changeReturn='changeReturn'
         ></c-list>
-        <div class="loadMore" @click="loadMore">
+        <div class="loadMore" @click="loadMore" v-show="is_more">
           {{load_more}}
         </div>
       </div>
@@ -55,7 +55,8 @@
         is_more: true,
         load_more: '点击加载更多',
         keyword: '',
-        is_clear: false
+        is_clear: false,
+        is_more: false
       }
     },
     watch: {
@@ -64,6 +65,13 @@
           this.is_clear = false
         }else{
           this.is_clear = true
+        }
+      },
+      suppliers: function(a){
+        if(a.length<10){
+          this.is_more = false
+        }else{
+          this.is_more = true
         }
       }
     },
@@ -112,7 +120,7 @@
           this.flagLoading = false
 
           if (!data.length) {
-            this.tipDesc = '暂无数据'
+            this.tipDesc = '抱歉，未能找到您搜索的商家'
           }
 
           const turnover_fields = ['sale_money', 'supplierMoney', 'wd_money']

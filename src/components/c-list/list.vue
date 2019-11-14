@@ -18,11 +18,11 @@
     </div>
     <div class="buttonss">
       <div class="button-left">
-        <div class="action3" v-if="data.can_zero_rate">
+        <div class="action3" v-if="data.can_zero_rate&&type">
         <x-button action-type="button" @click.native="quanfan(data.id,data.open_zero_rate,data.isShowAction)">费率全返</x-button>
       </div>
 
-      <div class="action4" v-if="data.can_zero_rate">
+      <div class="action4" v-if="data.can_zero_rate&&type">
         <x-button action-type="button" @click.native="showRule(data.id)">全返规则</x-button>
       </div>
       </div>
@@ -99,7 +99,8 @@ export default {
       info: {},
       text: '开启',
       showToast: false,
-      showToast2: false
+      showToast2: false,
+      type: true, //判断创客还是会长，创客为false会长为true
     };
   },
   computed: {
@@ -111,6 +112,12 @@ export default {
     }
   },
   created() {
+    let type = localStorage.getItem('role_type')
+    if(type == 'president'){
+      this.type = true
+    }else{
+      this.type = false
+    }
     if (this.$route.path == "/supplier") {
       this.is_show = true;
     }

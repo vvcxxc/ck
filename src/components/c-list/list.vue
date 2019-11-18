@@ -50,6 +50,7 @@
     </confirm>
     <toast v-model="showToast" type="text" :time="800" is-show-mask text="开启成功" position="middle" width='100px'></toast>
     <toast v-model="showToast2" type="text" :time="800" is-show-mask text="关闭成功" position="middle" width='100px'></toast>
+    <toast v-model="showError" type="text" :time="800" is-show-mask :text="error" position="middle" width='200px'></toast>
     <div class="mask" v-if="show2" @click.stop="showGuize()">
       <div class="guize">
         <div class="text">
@@ -101,6 +102,8 @@ export default {
       showToast: false,
       showToast2: false,
       type: true, //判断创客还是会长，创客为false会长为true
+      showError: false,
+      error: ''
     };
   },
   computed: {
@@ -150,7 +153,7 @@ export default {
       // 打开全返
       if(this.text == '开启'){
         this.returnMoney(1,id)
-        this.showToast = true
+
       }else{
         this.returnMoney(0,id)
         this.showToast2 = true
@@ -177,9 +180,15 @@ export default {
       openReturnMoney(data,id).then(res => {
         let {code, data} = res
         if(code == 200){
-          console.log(data)
+          if(is_open == 1){
+            this.showToast = true
+          }else if(is_open == 2){
+            this.showToast2 = true
+          }
         }else{
           console.log(data)
+          this.showError = true
+          this.error = data
         }
       })
     }

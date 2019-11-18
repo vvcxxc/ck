@@ -90,6 +90,7 @@
       Icon
     },
     created() {
+      console.log('构建成功1')
       this.fetchSuppliers()
     },
     methods: {

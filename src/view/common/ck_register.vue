@@ -12,11 +12,11 @@
           type="primary"
           action-type="button"
           @click.native="fetchVerify"
-        >   
+        >
         发送验证码
         </x-button>
       </x-input>
-      <x-input title="手机验证码" v-model="mobile_verification_code" />
+      <x-input title="手机验证码" v-model="mobile_verification_code" max='6' />
     </group>
     <x-button type="primary" style="margin-top: 20px;" @click.native="handleRegister">注册</x-button>
   </div>
@@ -29,7 +29,7 @@
   import "./style"
 
   export default {
-    
+
     data() {
       return {
         account_name: '',
@@ -126,9 +126,9 @@
         }
         this.$vux.toast.text('验证码已发送')
 				})
-				
+
     }
-      
+
     }
   }
 </script>

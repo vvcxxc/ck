@@ -1,0 +1,71 @@
+<template>
+  <div class="withdraw-page">
+    <div class="header">
+      <div class="header-l">
+        <!-- <img src="/static/img/1_05.png"> -->
+        <div class="bank-info">
+          <p class="bank-name">{{info.blank_name}}</p>
+          <p class="bank-num">尾号{{info.last_number}}储蓄卡</p>
+        </div>
+      </div>
+      <div class="header-r">
+        <img src="/static/img/right.png" />
+      </div>
+    </div>
+    <div class="main">
+      <div class="main-title">提现金额</div>
+      <div class="input-box">
+        <span>￥</span>
+        <input type="number" v-model="money" />
+      </div>
+      <div class="money">可用额度￥{{info.money}}</div>
+    </div>
+    <div class="button-box">
+      <div class="button" @click="withdraw">申请提现</div>
+    </div>
+    <div class="tips">
+      <div class="tips-title">温馨提示：</div>
+      <div class="tips-text">1、银行卡到账时间：T+1日</div>
+    </div>
+  </div>
+</template>
+<script>
+import { withdrawInfo, withdrawApply } from "@api/api";
+export default {
+  data() {
+    return {
+      info: {},
+      money: ""
+    };
+  },
+  created() {
+    withdrawInfo().then(res => {
+      this.info = res;
+    });
+  },
+  methods: {
+    withdraw() {
+      if (this.money) {
+        if (this.money * 1 <= this.info.money * 1) {
+          const params = {
+            money: +this.money
+          };
+          withdrawApply(params)
+            .then(({ message, code }) => {
+              this.$vux.toast.text(message);
+
+            })
+            .catch(err => console.log(err));
+        } else {
+          this.$vux.toast.text("提现金额不能大于可用额度");
+        }
+      } else {
+        this.$vux.toast.text("请输入提现金额");
+      }
+    }
+  }
+};
+</script>
+<style lang="sass" scoped>
+   @import './style'
+</style>

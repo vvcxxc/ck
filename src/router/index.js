@@ -115,5 +115,20 @@ export default new Router({
       component: getComponent('president/inviteEntrepreneur'),
       meta: { keepAlive: false }
     },
+    {
+      path: '/index/withdraw',
+      component: getComponent('index/withdraw'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/index/withdrawList',
+      component: getComponent('index/withdrawList'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/index/withdrawList/details',
+      component: getComponent('index/withdrawList/details'),
+      meta: { keepAlive: false }
+    }
   ]
 })

@@ -31,7 +31,7 @@ export default {
       }
     })
     withdrawRecord().then(res => {
-       if(!res.code){
+        if(!res.code){
           this.withdraws = res.data
         }
     })

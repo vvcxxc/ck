@@ -85,7 +85,7 @@
 
 
     </div>
-    <alert v-model="is_show" title="邀请创客">
+    <alert v-model="is_show" :title="title">
       <qrcode :value="qrCodeUrl"></qrcode>
     </alert>
   </div>

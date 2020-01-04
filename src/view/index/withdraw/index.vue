@@ -18,7 +18,7 @@
         <span>￥</span>
         <input type="number" v-model="money" />
       </div>
-      <div class="money">可用额度￥{{info.money}}</div>
+      <div class="withdraw_money">可用额度￥{{info.money}}</div>
     </div>
     <div class="button-box">
       <div class="button" @click="withdraw">申请提现</div>

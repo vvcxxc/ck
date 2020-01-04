@@ -40,7 +40,10 @@ export default {
   },
   created() {
     withdrawInfo().then(res => {
-      this.info = res;
+      console.log(res)
+      if(res.code == 200){
+        this.info = res.data;
+      }
     });
   },
   methods: {

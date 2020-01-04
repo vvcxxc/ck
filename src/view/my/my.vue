@@ -40,12 +40,12 @@
           <cell is-link title="礼品额度使用记录" @click.native="integralRecord()"></cell>
         </group>
 
-        <group title="提现">
+        <!-- <group title="提现">
           <x-input title="￥" v-model="withdrawMoney" placeholder="请输入提现金额" ref="withdraw"></x-input>
         </group>
         <x-button type="primary" style="margin-top: 1rem;" @click.native="requestWithdrawApply">提现</x-button>
         <alert v-model="show" title="提示" @on-hide="onHide">您的提现申请已经发出</alert>
-
+ -->
 
         <group v-if="supplier_party_id > 0">
           <x-button @click.native="goToSupplier()" style="margin-bottom: 80px">商家后台</x-button>
@@ -138,7 +138,7 @@
         return `http://${window.location.host}/ck/register?invite_id=${this.party_id}`
       }
     },
-    
+
     methods: {
       handleShowView(view) {
         this.$store.commit('HIDE_TABBAR', { path: '' })

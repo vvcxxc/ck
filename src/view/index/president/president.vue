@@ -22,7 +22,7 @@
             <div class="grid-title">今日收益</div>
             <div class="grid-money">{{info.today_fee}}</div>
           </grid-item>
-          <grid-item>
+          <grid-item @click.native="info.is_president && goTo('chuangke')">
             <div class="grid-title">我邀请的创客</div>
             <div class="grid-money">{{info.supplier_number}}</div>
           </grid-item>
@@ -138,8 +138,10 @@
         // 提现跳转
         if(type == 1){
           this.$router.push('/index/withdraw')
-        }else{
+        }else if(type == 0){
           this.$router.push('/index/withdrawList')
+        }else if(type == 'chuangke'){
+          this.$router.push('/entrepreneur')
         }
       }
     },

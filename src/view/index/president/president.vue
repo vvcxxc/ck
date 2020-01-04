@@ -22,7 +22,7 @@
             <div class="grid-title">今日收益</div>
             <div class="grid-money">{{info.today_fee}}</div>
           </grid-item>
-          <grid-item v-if="info.is_president">
+          <grid-item>
             <div class="grid-title">我邀请的创客</div>
             <div class="grid-money">{{info.supplier_number}}</div>
           </grid-item>

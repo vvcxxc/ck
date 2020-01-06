@@ -9,5 +9,5 @@ module.exports = merge(prodEnv, {
   // BASE_DOMAIN: '"http://api.supplier.tdianyi.com/"',
   // BASE_DOMAIN: '"http://release.api.supplier.com/"',
 
-  SUPPLIER_URL: '"http://test.supplier.tdianyi.com"',
+  SUPPLIER_URL: '"http://test.supplierv2.tdianyi.com"',
 })

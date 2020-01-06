@@ -292,3 +292,33 @@ http({
   url: 'api/entrepreneur/ZeroRate/' + id,
   method: 'get'
 })
+
+
+/**
+ * 首页数据（新）
+ */
+
+export const indexInfo = () =>
+http({
+  url: 'api/entrepreneur/index',
+  method: 'get'
+})
+
+/**
+ * 提现页面信息
+ */
+export const withdrawInfo = () =>
+http({
+  url: 'api/entrepreneur/cashWithdrawal',
+  method: 'get'
+})
+
+
+/**
+ * 提现列表页信息
+ */
+export const withdrawListMoney = () =>
+http({
+  url: 'api/entrepreneur/cashInMoney',
+  method: 'get'
+})

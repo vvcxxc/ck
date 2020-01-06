@@ -2,6 +2,7 @@
   <div class="details-page">
     <div class="details-header">
       <div>多美蛋糕店</div>
+      <div></div>
     </div>
   </div>
 </template>

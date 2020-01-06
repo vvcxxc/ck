@@ -129,6 +129,11 @@ export default new Router({
       path: '/index/withdrawList/details',
       component: getComponent('index/withdrawList/details'),
       meta: { keepAlive: false }
+    },
+    {
+      path: '/finance/details',
+      component: getComponent('finance/details'),
+      meta: { keepAlive: false }
     }
   ]
 })

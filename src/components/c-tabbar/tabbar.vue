@@ -9,14 +9,14 @@
     </van-tabbar-item>
     <van-tabbar-item
       name="finance"
-      icon="search"
+      icon="gold-coin-o"
       to="/finance"
     >
     收益
     </van-tabbar-item>
     <van-tabbar-item
       name="supplier"
-      icon="friends-o"
+      icon="shop-o"
       to="/supplier"
     >
     店铺
@@ -24,14 +24,14 @@
     <van-tabbar-item
       v-if="role_type == 'president'"
       name="entrepreneur"
-      icon="setting-o"
+      icon="friends-o"
       to="/entrepreneur"
     >
     创客
     </van-tabbar-item>
     <van-tabbar-item
       name="my"
-      icon="setting-o"
+      icon="user-o"
       to="/my"
     >
     我的

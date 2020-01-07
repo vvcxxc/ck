@@ -2,36 +2,73 @@
   <div class="details-page">
     <div class="details-header">
       <div>多美蛋糕店</div>
-      <div>
-
+      <div @click="showDatePicker" class="date">
+        {{date}}
+        <van-icon name="arrow-down" class="icon"/>
       </div>
     </div>
+
+    <div class="total-money">
+      <div class="money">
+        ￥0.00
+      </div>
+      <div class="name">
+        费率返点收益
+      </div>
+    </div>
+
+    <div class="details-list">
+      <div class="title">费率返点明细</div>
+      <div>
+        <div class="list-item">
+          <div class="item-l">
+            <div class="store-name">多美蛋糕店</div>
+            <div class="date">2019/11/11</div>
+          </div>
+          <div class="item-r">
+            <div class="money">0.56</div>
+            <van-icon name="arrow" class="icon" />
+          </div>
+        </div>
+      </div>
+    </div>
+
     <van-popup  position="bottom" v-model="show">
       <van-datetime-picker
           v-model="currentDate"
           type="date"
-          :min-date="minDate"
-          :max-date="maxDate"
+          @confirm='chooseDate'
+          @cancel='showDatePicker'
         />
     </van-popup>
   </div>
 </template>
 <script type="text/javascript">
-import { DatetimePicker,Popup  } from 'vant';
+import { DatetimePicker, Popup, Icon } from 'vant';
 import Vue from "vue";
+import dayjs from 'dayjs'
 Vue.use(Popup)
-Vue.use(DatetimePicker);
+Vue.use(DatetimePicker)
+Vue.use(Icon);
 export default {
   data(){
     return {
-      minDate: new Date(2020, 0, 1),
-      maxDate: new Date(2025, 10, 1),
       currentDate: new Date(),
-      show: true
+      show: false,
+      date: dayjs(new Date()).format('YYYY-MM-DD')
     }
   },
-  components: {
-    DatetimePicker
+  methods: {
+    // 展示隐藏日期选择器
+    showDatePicker(){
+      this.show = !this.show
+    },
+    // 选择时间
+    chooseDate(date){
+      let time = dayjs(date).format('YYYY-MM-DD')
+      this.show = false
+      this.date = time
+    }
   }
 }
 </script>

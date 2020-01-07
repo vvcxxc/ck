@@ -22,7 +22,7 @@
           <div class="today_earnings_title">今日收益</div>
           <div class="today_earnings_num">{{info.today_fee}}</div>
         </div>
-        <div class="sum_container_bottom_icon">
+        <div class="sum_container_bottom_icon" @click="goTo(3)">
           <van-icon name="down" />
         </div>
       </div>
@@ -96,6 +96,8 @@ export default {
         this.$router.push("/index/withdraw");
       } else if (type == 0) {
         this.$router.push("/index/withdrawList");
+      } else if (type == 3) {
+        this.$router.push("/finance");
       } else if (type == "chuangke") {
         this.$router.push("/entrepreneur");
       }

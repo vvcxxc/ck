@@ -1,7 +1,5 @@
 <template>
   <div class="index">
-    <x-header :left-options="{showBack: false}" title="首页"></x-header>
-
       <c-scroll class="index-wrapper ofh">
         <div class="container">
           <!-- <p-entrepreneur v-if="getterRoleType == 'entrepreneur'"></p-entrepreneur> -->
@@ -48,7 +46,3 @@
     }
   }
 </script>
-
-<style lang="sass" scoped>
-@import "./style"
-</style>

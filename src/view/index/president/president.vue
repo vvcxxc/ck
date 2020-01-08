@@ -58,6 +58,7 @@
 import QRCode from "qrcode";
 import Vue from "vue";
 import { Icon, Popup } from "vant";
+import 'vant/lib/index.css';
 Vue.use(Icon);
 Vue.use(Popup);
 import { indexInfo } from "@api/api";
@@ -103,7 +104,8 @@ export default {
       }
     },
     showQRcode(data) {
-      QRCode.toDataURL(JSON.stringify(data))
+      console.log("showQRcode", data);
+      QRCode.toDataURL(data)
         .then(url => {
           this.codeUrl = url;
           this.is_show = true;

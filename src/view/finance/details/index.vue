@@ -1,40 +1,46 @@
 <template>
-  <div class="details-page">
-    <div class="details-header">
-      <div>多美蛋糕店</div>
-      <div>
+  <div class="page">
+    <div class="money">
+      +10086
+    </div>
+    <div class="title">费率返点</div>
 
+    <div class="layout-box">
+      <div class="layout-item">
+      <div>说明类型</div>
+      <div>费率返点</div>
+      </div>
+      <div class="layout-item">
+        <div>说明类型</div>
+        <div>费率返点</div>
+      </div>
+      <div class="layout-item">
+        <div>说明类型</div>
+        <div>费率返点</div>
       </div>
     </div>
-    <van-popup  position="bottom" v-model="show">
-      <van-datetime-picker
-          v-model="currentDate"
-          type="date"
-          :min-date="minDate"
-          :max-date="maxDate"
-        />
-    </van-popup>
+
+    <div class="layout-item">
+        <div>说明类型</div>
+        <div>费率返点</div>
+      </div>
+      <div class="layout-item">
+        <div>说明类型</div>
+        <div>费率返点</div>
+      </div>
+
   </div>
 </template>
-<script type="text/javascript">
-import { DatetimePicker,Popup  } from 'vant';
-import Vue from "vue";
-Vue.use(Popup)
-Vue.use(DatetimePicker);
+<script>
 export default {
   data(){
     return {
-      minDate: new Date(2020, 0, 1),
-      maxDate: new Date(2025, 10, 1),
-      currentDate: new Date(),
-      show: true
+
     }
   },
-  components: {
-    DatetimePicker
-  }
+
 }
 </script>
 <style lang="sass" scoped>
- @import './index'
+  @import './index'
 </style>

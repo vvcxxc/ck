@@ -131,6 +131,11 @@ export default new Router({
       meta: { keepAlive: false }
     },
     {
+      path: '/finance/detailsList',
+      component: getComponent('finance/detailsList'),
+      meta: { keepAlive: false }
+    },
+    {
       path: '/finance/details',
       component: getComponent('finance/details'),
       meta: { keepAlive: false }

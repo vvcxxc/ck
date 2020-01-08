@@ -5,7 +5,7 @@ import App from "./App"
 import router from "./router"
 import store from "./store"
 import { i18n } from "./i18n"
-
+import { Popup } from "vant";
 import "@utils/rem"
 import "@style/common"
 import "@static/icon-font/iconfont.css"
@@ -14,7 +14,7 @@ import "@static/icon-font/iconfont.css"
 import "@style/base-style"
 
 import { ToastPlugin } from "vux"
-
+Vue.use(Popup)
 Vue.use(ToastPlugin)
 
 Vue.config.productionTip = false

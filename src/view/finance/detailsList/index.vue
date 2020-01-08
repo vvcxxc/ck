@@ -46,9 +46,6 @@
 <script type="text/javascript">
 import { DatetimePicker, Popup, Icon } from 'vant';
 import dayjs from 'dayjs'
-// Vue.use(Popup)
-// Vue.use(DatetimePicker)
-// Vue.use(Icon);
 export default {
   data(){
     return {

@@ -57,9 +57,6 @@
 <script>
 import QRCode from "qrcode";
 import { Icon, Popup, Overlay } from "vant";
-// Vue.use(Icon);
-// Vue.use(Popup);
-// Vue.use(Overlay);
 import { indexInfo } from "@api/api";
 export default {
   data() {

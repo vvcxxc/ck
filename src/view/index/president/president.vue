@@ -78,6 +78,7 @@ export default {
   computed: {},
   methods: {
     invite(name) {
+      console.log(name)
       if (name == "people") {
         let qrCodeUrl = `http://${window.location.host}/ck/register?invite_id=${this.info.party_id}`;
         this.qrCodeUrl = qrCodeUrl;
@@ -111,6 +112,7 @@ export default {
         .then(url => {
           this.codeUrl = url;
           this.is_show = true;
+          console.log(this.is_show)
         })
         .catch(err => {
           console.log(err);

@@ -5,7 +5,7 @@ import App from "./App"
 import router from "./router"
 import store from "./store"
 import { i18n } from "./i18n"
-import { Popup } from "vant";
+import { Icon, Popup, Overlay, DatetimePicker } from "vant";
 import "@utils/rem"
 import "@style/common"
 import "@static/icon-font/iconfont.css"
@@ -16,7 +16,10 @@ import "@style/base-style"
 import { ToastPlugin } from "vux"
 Vue.use(Popup)
 Vue.use(ToastPlugin)
-
+Vue.use(Icon);
+Vue.use(Popup);
+Vue.use(Overlay);
+Vue.use(DatetimePicker)
 Vue.config.productionTip = false
 
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端

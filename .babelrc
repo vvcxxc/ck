@@ -9,15 +9,15 @@
     "stage-2"
   ],
   "plugins": [
-    "transform-vue-jsx",
-    "transform-runtime",
-    "transform-decorators-legacy",
-    "transform-class-properties",
     ["import", {
       "libraryName": "vant",
       "libraryDirectory": "es",
       "style": true
-    }]
+    }],
+    "transform-vue-jsx",
+    "transform-runtime",
+    "transform-decorators-legacy",
+    "transform-class-properties",
   ],
   "env": {
     "test": {

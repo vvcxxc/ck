@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <van-popup  position="bottom" v-model="show">
+    <van-popup  position="bottom" v-model="show" get-container="#app">
       <van-datetime-picker
           v-model="currentDate"
           type="date"
@@ -47,14 +47,14 @@
 import { DatetimePicker, Popup, Icon } from 'vant';
 import Vue from "vue";
 import dayjs from 'dayjs'
-Vue.use(Popup)
-Vue.use(DatetimePicker)
-Vue.use(Icon);
+// Vue.use(Popup)
+// Vue.use(DatetimePicker)
+// Vue.use(Icon);
 export default {
   data(){
     return {
       currentDate: new Date(),
-      show: false,
+      show: true,
       date: dayjs(new Date()).format('YYYY-MM-DD')
     }
   },
@@ -62,6 +62,7 @@ export default {
     // 展示隐藏日期选择器
     showDatePicker(){
       this.show = !this.show
+      console.log(this.show)
     },
     // 选择时间
     chooseDate(date){

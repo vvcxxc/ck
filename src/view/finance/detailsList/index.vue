@@ -62,6 +62,7 @@ export default {
     // 展示隐藏日期选择器
     showDatePicker(){
       this.show = !this.show
+      console.log(this.show)
     },
     // 选择时间
     chooseDate(date){

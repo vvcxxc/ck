@@ -35,13 +35,13 @@
           <div class="invitation_entrepreneur_icon"></div>
           <div class="invitation_entrepreneur_title">邀请的店铺数</div>
           <div class="invitation_entrepreneur_num">{{info.supplier_number}}</div>
-          <div class="invitation_entrepreneur_btn" @click="invite('store')">邀请店铺</div>
+          <div class="invitation_entrepreneur_btn" @click.native="invite('store')">邀请店铺</div>
         </div>
         <div class="entrepreneur_right">
           <div class="invitation_entrepreneur_icon2"></div>
           <div class="invitation_entrepreneur_title">邀请的创客数</div>
           <div class="invitation_entrepreneur_num">{{info.entrepreneur_number}}</div>
-          <div class="invitation_entrepreneur_btn" @click="invite('people')">邀请创客</div>
+          <div class="invitation_entrepreneur_btn" @click.native="invite('people')">邀请创客</div>
         </div>
       </div>
     </div>

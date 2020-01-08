@@ -45,12 +45,12 @@
         </div>
       </div>
     </div>
-    <div v-if="is_show">
+    <van-popup v-model="is_show">
       <div class="qr_code">
         <div class="qr_code_title">{{title}}</div>
         <img class="qr_code_img" :src="codeUrl" />
       </div>
-    </div>
+    </van-popup>
   </div>
 </template>
 

@@ -33,14 +33,14 @@
       </div>
     </div>
 
-    <!-- <van-popup  position="bottom" v-model="show" get-container="#app"> -->
+    <van-popup  position="bottom" v-model="show" get-container="#app">
       <van-datetime-picker
           v-model="currentDate"
           type="date"
           @confirm='chooseDate'
           @cancel='showDatePicker'
         />
-    <!-- </van-popup> -->
+    </van-popup>
   </div>
 </template>
 <script type="text/javascript">

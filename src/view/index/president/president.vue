@@ -58,11 +58,9 @@
 import QRCode from "qrcode";
 import Vue from "vue";
 import { Icon, Popup } from "vant";
-import "vant/lib/index.css";
 Vue.use(Icon);
 Vue.use(Popup);
 import { indexInfo } from "@api/api";
-console.log("555556");
 export default {
   data() {
     return {
@@ -129,7 +127,6 @@ export default {
 
 <style lang="sass" scoped>
   @import './style'
-  @import 'vant/lib/index.css';
 </style>
 <style lang="sass">
 $c_black: #000

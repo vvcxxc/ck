@@ -28,7 +28,6 @@
   </div>
 </template>
 <script type="text/javascript">
-  import Vue from "vue";
   import ReturnsFilte from "./component/returns_filte";
 
   export default {
@@ -64,9 +63,9 @@
   overflow: hidden
   /deep/ .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after
     border: none
-  /deep/ .van-ellipsis 
+  /deep/ .van-ellipsis
     font-size: 14px
-  /deep/ .van-tab--active 
+  /deep/ .van-tab--active
     font-size: 18px
 .van-nav-bar
     background-color: #5091DD
@@ -85,5 +84,5 @@
         font-family: Adobe Heiti Std
         font-weight: normal
         color: rgba(255,255,255,1)
-  
+
 </style>

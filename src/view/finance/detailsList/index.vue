@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <van-popup  position="bottom" v-model="show">
+    <van-popup  position="bottom" v-model="show" get-container="#app">
       <van-datetime-picker
           v-model="currentDate"
           type="date"

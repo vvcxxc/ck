@@ -55,69 +55,64 @@
   </div>
 </template>
 <script type="text/javascript">
-  // {{type_}}"date"
-  import Vue from "vue";
-  import {
-    NavBar,
-    Tab,
-    Tabs,
-    DatetimePicker,
-    Row,
-    Col,
-    Tag,
-    Icon,
-    List
-  } from "vant";
+// {{type_}}"date"
+import Vue from "vue";
+import {
+  NavBar,
+  Tab,
+  Tabs,
+  DatetimePicker,
+  Row,
+  Col,
+  Tag,
+  Icon,
+  List
+} from "vant";
 
-  Vue.use(Tag);
-  Vue.use(Row).use(Col);
-  Vue.use(NavBar);
-  Vue.use(Tab).use(Tabs);
-
-  export default {
-    name: "ReturnsFilte",
-    data() {
-      return {
-        minDate: new Date(2020, 0, 1),
-        maxDate: new Date(2025, 10, 1),
-        currentDate: new Date(),
-        chooseTime: true,
-        list: [1, 3],
-        chooseType: "date",
-        yearTime: ""
-      };
-    },
-    components: {},
-    props: {
-      type_: Number,
-      default: 0
-    },
-    watch: {
-      type_: {
-        handler(newVal, oldVal) {
-          this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
-          this.chooseTime = false
-        },
-        deep: true
-      }
-    },
-    created() {},
-    mounted() {},
-    methods: {
-      chooseTimeData(data) {
-        console.log(this.yearTime, "kkkk");
+export default {
+  name: "ReturnsFilte",
+  data() {
+    return {
+      minDate: new Date(2020, 0, 1),
+      maxDate: new Date(2025, 10, 1),
+      currentDate: new Date(),
+      chooseTime: true,
+      list: [1, 3],
+      chooseType: "date",
+      yearTime: ""
+    };
+  },
+  components: {},
+  props: {
+    type_: Number,
+    default: 0
+  },
+  watch: {
+    type_: {
+      handler(newVal, oldVal) {
+        this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
+        this.chooseTime = false;
       },
-      returnsFilter(data, dd) {},
-      formatter(type, value) {
-        if (type === "year") {
-          return `${value}年`;
-        } else if (type === "month") {
-          return `${value}月`;
-        }
-        return value;
-      }
+      deep: true
     }
-  };
+  },
+  created() {},
+  mounted() {},
+  methods: {
+    chooseTimeData(data) {
+      console.log(this.yearTime, "kkkk");
+    },
+    returnsFilter(data, dd) {},
+    formatter(type, value) {
+      if (type === "year") {
+        return `${value}年`;
+      } else if (type === "month") {
+        return `${value}月`;
+      }
+      return value;
+    }
+  }
+};
 </script>
 <style lang="sass" scoped>
 .daily-earnings

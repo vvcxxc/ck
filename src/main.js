@@ -4,8 +4,22 @@ import Vue from "vue"
 import App from "./App"
 import router from "./router"
 import store from "./store"
-import { i18n } from "./i18n"
-import { Icon, Popup, Overlay, DatetimePicker,List } from "vant";
+import {
+  i18n
+} from "./i18n"
+import {
+  Icon,
+  Popup,
+  Overlay,
+  DatetimePicker,
+  List,
+  Row,
+  Col,
+  Tag,
+  NavBar,
+  Tab,
+  Tabs,
+} from "vant";
 import "@utils/rem"
 import "@style/common"
 import "@static/icon-font/iconfont.css"
@@ -13,7 +27,9 @@ import "@static/icon-font/iconfont.css"
 // this is new reconfiguration
 import "@style/base-style"
 
-import { ToastPlugin } from "vux"
+import {
+  ToastPlugin
+} from "vux"
 Vue.use(Popup)
 Vue.use(ToastPlugin)
 Vue.use(Icon);
@@ -21,13 +37,17 @@ Vue.use(Popup);
 Vue.use(Overlay);
 Vue.use(DatetimePicker)
 Vue.use(List);
+Vue.use(Tag);
+Vue.use(Row).use(Col);
+Vue.use(NavBar);
+Vue.use(Tab).use(Tabs);
 Vue.config.productionTip = false
 
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
 Vue.directive('resetInput', {
   // 当被绑定的元素插入到 DOM 中时……
   inserted: function (el) {
-    if(isAndroid){
+    if (isAndroid) {
       return;
     }
 
@@ -43,7 +63,7 @@ Vue.directive('resetInput', {
       document.body.prepend(input);
     }
 
-    el.addEventListener('blur',function(){
+    el.addEventListener('blur', function () {
       input.focus();
       input.blur();
     });

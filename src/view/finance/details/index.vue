@@ -1,19 +1,46 @@
 <template>
-  <div class="details-page">
-    <div class="details-header">
-      <div>多美蛋糕店</div>
+  <div class="page">
+    <div class="money">
+      +10086
     </div>
+    <div class="title">费率返点</div>
+
+    <div class="layout-box">
+      <div class="layout-item">
+      <div>说明类型</div>
+      <div>费率返点</div>
+      </div>
+      <div class="layout-item">
+        <div>说明类型</div>
+        <div>费率返点</div>
+      </div>
+      <div class="layout-item">
+        <div>说明类型</div>
+        <div>费率返点</div>
+      </div>
+    </div>
+
+    <div class="layout-item">
+        <div>说明类型</div>
+        <div>费率返点</div>
+      </div>
+      <div class="layout-item">
+        <div>说明类型</div>
+        <div>费率返点</div>
+      </div>
+
   </div>
 </template>
-<script type="text/javascript">
+<script>
 export default {
   data(){
     return {
 
     }
-  }
+  },
+
 }
 </script>
 <style lang="sass" scoped>
- @import './index'
+  @import './index'
 </style>

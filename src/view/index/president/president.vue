@@ -109,6 +109,7 @@ export default {
         .then(url => {
           this.codeUrl = url;
           this.is_show = true;
+          console.log(this.is_show)
         })
         .catch(err => {
           console.log(err);

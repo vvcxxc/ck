@@ -50,7 +50,7 @@ export default {
   data(){
     return {
       currentDate: new Date(),
-      show: true,
+      show: false,
       date: dayjs(new Date()).format('YYYY-MM-DD')
     }
   },

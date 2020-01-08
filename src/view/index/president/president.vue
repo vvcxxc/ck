@@ -58,7 +58,6 @@
 import QRCode from "qrcode";
 import Vue from "vue";
 import { Icon, Popup } from "vant";
-import 'vant/lib/index.css';
 Vue.use(Icon);
 Vue.use(Popup);
 import { indexInfo } from "@api/api";

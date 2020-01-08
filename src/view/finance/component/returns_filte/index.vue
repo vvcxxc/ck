@@ -69,9 +69,6 @@
     List
   } from "vant";
 
-  Vue.use(List);
-  Vue.use(DatetimePicker);
-  Vue.use(Icon);
   Vue.use(Tag);
   Vue.use(Row).use(Col);
   Vue.use(NavBar);
@@ -125,9 +122,9 @@
 <style lang="sass" scoped>
 .daily-earnings
   margin-top: 36px
-  width: 232px 
+  width: 232px
   height: 110px
-  img 
+  img
     height: 100%
 .my_row
   display: flex
@@ -140,13 +137,13 @@
     color: #fff
     font-family: Arial
     font-weight: normal
-  .money_des 
+  .money_des
     font-size: 14px
     font-family: Adobe Heiti Std
     font-weight: normal
     color: rgba(233,238,242,1)
-  .my_row_time 
-    display: flex 
+  .my_row_time
+    display: flex
     justify-content: center
     align-items: center
     margin-top: 15px
@@ -158,15 +155,15 @@
     font-family:Adobe Heiti Std
     font-weight:normal
     color:#A4C4E9
-    span 
-      margin-right: 5px 
+    span
+      margin-right: 5px
 .rate-box
   margin: 0 20px
   height: 100vw
   border-radius: 10px 10px 0px 0px
   overflow: hidden
   background-color: #fff
-  div 
+  div
     display: flex
     justify-content: space-between
     padding: 0 24px

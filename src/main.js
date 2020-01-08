@@ -5,7 +5,7 @@ import App from "./App"
 import router from "./router"
 import store from "./store"
 import { i18n } from "./i18n"
-import { Icon, Popup, Overlay, DatetimePicker } from "vant";
+import { Icon, Popup, Overlay, DatetimePicker,List } from "vant";
 import "@utils/rem"
 import "@style/common"
 import "@static/icon-font/iconfont.css"
@@ -20,6 +20,7 @@ Vue.use(Icon);
 Vue.use(Popup);
 Vue.use(Overlay);
 Vue.use(DatetimePicker)
+Vue.use(List);
 Vue.config.productionTip = false
 
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端

@@ -56,7 +56,6 @@
 </template>
 <script type="text/javascript">
 // {{type_}}"date"
-import Vue from "vue";
 import {
   NavBar,
   Tab,

@@ -56,7 +56,6 @@
 
 <script>
 import QRCode from "qrcode";
-import Vue from "vue";
 import { Icon, Popup, Overlay } from "vant";
 // Vue.use(Icon);
 // Vue.use(Popup);

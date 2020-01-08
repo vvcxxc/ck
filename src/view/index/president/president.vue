@@ -103,7 +103,8 @@ export default {
       }
     },
     showQRcode(data) {
-      QRCode.toDataURL(JSON.stringify(data))
+      console.log("showQRcode", data);
+      QRCode.toDataURL(data)
         .then(url => {
           this.codeUrl = url;
           this.is_show = true;

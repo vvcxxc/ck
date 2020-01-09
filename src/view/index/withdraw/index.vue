@@ -49,10 +49,8 @@
   </div>
 </template>
 <script>
-import Vue from "vue";
 import { Field, Button } from "vant";
-Vue.use(Field);
-Vue.use(Button);
+
 import { withdrawInfo, withdrawApply } from "@api/api";
 export default {
   data() {

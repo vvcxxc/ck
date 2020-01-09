@@ -39,10 +39,9 @@
   </van-tabbar>
 </template>
 <script>
-import Vue from "vue";
 import { Tabbar, TabbarItem } from "vant";
  import { mapGetters, mapState } from 'vuex'
-Vue.use(Tabbar).use(TabbarItem);
+
 const ROLE_PRESIDENT = 'president'
 const ROLE_ENTREPRENEUR = 'entrepreneur'
 export default {

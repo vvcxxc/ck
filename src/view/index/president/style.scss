@@ -259,6 +259,12 @@
 
   .qr_code {
     padding: 24px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
 
     .qr_code_title {
       width: 100%;

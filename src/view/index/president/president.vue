@@ -45,21 +45,18 @@
         </div>
       </div>
     </div>
-    <van-popup v-model="is_show">
+    <van-overlay :show="is_show" @click="is_show = false">
       <div class="qr_code">
         <div class="qr_code_title">{{title}}</div>
         <img class="qr_code_img" :src="codeUrl" />
       </div>
-    </van-popup>
+    </van-overlay>
   </div>
 </template>
 
 <script>
 import QRCode from "qrcode";
-import Vue from "vue";
-import { Icon, Popup } from "vant";
-Vue.use(Icon);
-Vue.use(Popup);
+import { Icon, Popup, Overlay } from "vant";
 import { indexInfo } from "@api/api";
 export default {
   data() {
@@ -103,7 +100,7 @@ export default {
       }
     },
     showQRcode(data) {
-      QRCode.toDataURL(JSON.stringify(data))
+      QRCode.toDataURL(data)
         .then(url => {
           this.codeUrl = url;
           this.is_show = true;

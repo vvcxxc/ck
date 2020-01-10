@@ -78,11 +78,11 @@
         this.$emit('on-hide')
       },
       fetchBank() {
-        bank().then(({ code, message, data }) => {
-          if (code == REQUEST_OK) {
-            this.bank = data
-          }
-        })
+        // bank().then(({ code, message, data }) => {
+        //   if (code == REQUEST_OK) {
+        //     this.bank = data
+        //   }
+        // })
       }
     },
     created() {

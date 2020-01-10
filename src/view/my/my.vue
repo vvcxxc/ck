@@ -171,16 +171,16 @@
         }
       },
       fetchAuthUser() {
-        authUser().then(({ data: { account_name, account_phone, money, party_id, integral, supplier_party_id = 0 }}) => {
-          if (account_name) {
-            this.account_name = account_name
-            this.account_phone = account_phone
-            this.account_balance = money
-            this.integral = integral
-            this.supplier_party_id = supplier_party_id
-            this.party_id = party_id
-          }
-        }).catch(err => console.log(err))
+        // authUser().then(({ data: { account_name, account_phone, money, party_id, integral, supplier_party_id = 0 }}) => {
+        //   if (account_name) {
+        //     this.account_name = account_name
+        //     this.account_phone = account_phone
+        //     this.account_balance = money
+        //     this.integral = integral
+        //     this.supplier_party_id = supplier_party_id
+        //     this.party_id = party_id
+        //   }
+        // }).catch(err => console.log(err))
       },
       requestWithdrawApply() {
 

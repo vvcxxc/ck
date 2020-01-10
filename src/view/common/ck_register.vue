@@ -47,7 +47,7 @@ import { Validator, timeout } from "@utils/common";
 import { register, sendVerifyCode } from "@api/api";
 import Vue from "vue";
 import { CountDown } from "vant";
-Vue.use(CountDown);
+// Vue.use(CountDown);
 import "./style";
 
 export default {

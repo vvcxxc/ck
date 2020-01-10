@@ -1,18 +1,29 @@
 <template>
   <div class="login-wrapper">
     <div class="login-wrapper_content">
-      <div class="login_content"></div>
+      <div class="login_content">
+        <div class="select_character_box">
+          <div class="select_item">
+            <div class="select_item_border" v-if="role_type=='president'"></div>
+            <div class="select_item_info" @click="hanleToggleRole('president')">会长</div>
+          </div>
+          <div class="select_item" @click="hanleToggleRole('entrepreneur')">
+            <div class="select_item_border" v-if="role_type=='entrepreneur'"></div>
+            <div class="select_item_info">创客</div>
+          </div>
+        </div>
+        <div class="userName_box">
+          <div class="box_title">账号</div>
+          <input class="box_input" placeholder="请输入账号" v-model="account_name" />
+        </div>
+        <div class="passWord_box">
+          <div class="box_title">密码</div>
+          <input class="box_input" placeholder="请输入密码" type="password" v-model="account_passwd" />
+        </div>
+        <div class="login_box" @click="handleLogin">登录</div>
+        <div class="resign_box" v-if="role_type=='entrepreneur'">注册</div>
+      </div>
     </div>
-    <!-- <x-header :left-options="{showBack: false}" title="登录"></x-header>
-    <tab :line-width="1">
-      <tab-item selected @on-item-click="hanleToggleRole('entrepreneur')">创客</tab-item>
-      <tab-item @on-item-click="hanleToggleRole('president')">会长</tab-item>
-    </tab>
-    <group>
-      <x-input title="账号" v-model="account_name" />
-      <x-input type="password" title="密码" v-model="account_passwd" />
-    </group>
-    <x-button type="primary" style="margin-top: 20px;" @click.native="handleLogin">登录</x-button>-->
   </div>
 </template>
 <script>
@@ -28,18 +39,14 @@ export default {
     return {
       account_name: "",
       account_passwd: "",
-      role_type: ROLE_ENTREPRENEUR
+      role_type: ROLE_PRESIDENT,
+      selectCharacter: 1
     };
   },
-  components: {
-    XInput,
-    XButton,
-    XHeader,
-    Group,
-    Tab,
-    TabItem
-  },
   methods: {
+    changeSelect(idx) {
+      this.selectCharacter = idx;
+    },
     handleLogin() {
       let errmsg = this.hanleValidator();
       if (errmsg) return this.$vux.toast.text(errmsg);

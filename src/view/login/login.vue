@@ -21,13 +21,12 @@
           <input class="box_input" placeholder="请输入密码" type="password" v-model="account_passwd" />
         </div>
         <div class="login_box" @click="handleLogin">登录</div>
-        <div class="resign_box" v-if="role_type=='entrepreneur'">注册</div>
+        <div class="resign_box" v-if="role_type=='entrepreneur'" @click="goToRegister">注册</div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { XInput, XButton, Group, Tab, TabItem, XHeader } from "vux";
 import { Validator, timeout } from "@utils/common";
 import { login } from "@api/api";
 
@@ -39,13 +38,12 @@ export default {
     return {
       account_name: "",
       account_passwd: "",
-      role_type: ROLE_PRESIDENT,
-      selectCharacter: 1
+      role_type: ROLE_PRESIDENT
     };
   },
   methods: {
-    changeSelect(idx) {
-      this.selectCharacter = idx;
+    goToRegister() {
+      this.$router.push("/ck/register");
     },
     handleLogin() {
       let errmsg = this.hanleValidator();

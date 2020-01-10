@@ -18,9 +18,6 @@ import { XTable } from "vux";
 import { integralRecords } from "../../api/api";
 
 export default {
-  components: {
-    XTable
-  },
   created() {
     this.initData();
   },

@@ -1,7 +1,13 @@
 <template>
   <div class="bankBind">
 
-    <x-header title="更改银行卡" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
+     <van-nav-bar
+      title="更改银行卡"
+      left-arrow
+      @click-left="handleHide"
+    />
+
+    <!-- <x-header title="更改银行卡" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
 
     <group title="请输入以下信息" class="bankBindInfo">
       <form>
@@ -20,8 +26,8 @@
         </x-input>
       </form>
     </group>
-    <x-button style="margin-top: 1rem" type="primary" @click.native="applyBankBind">确认更新</x-button>
-    
+    <x-button style="margin-top: 1rem" type="primary" @click.native="applyBankBind">确认更新</x-button> -->
+
   </div>
 </template>
 

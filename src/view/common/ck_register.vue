@@ -154,13 +154,9 @@ export default {
         this.$vux.toast.text(`手机号不能为空`);
         return;
       }
-
+      this.isSend = true;
       const { code, message } = sendVerifyCode({ phone: this.phone }).then(
         ({ code, data }) => {
-          //this.isSend = true
-          if (code == 200) {
-            this.isSend = true;
-          }
           this.$vux.toast.text("验证码已发送");
         }
       );

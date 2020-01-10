@@ -1,52 +1,50 @@
 <template>
-  <div class="">
-    <x-header title="礼品额度使用记录"></x-header>
-
-    <x-table :cell-bordered="false" :content-bordered="false" style="font-size: 12px">
-      <tbody>
-      <tr v-for="(item, index) in data" :key="index">
-        <td>{{ item.created_at | formatDate }}</td>
-        <td>{{ item.receiver ? item.receiver.account_name : item.supplier }}</td>
-        <td>- {{ item.integral }}</td>
-      </tr>
-      </tbody>
-    </x-table>
+  <div class="record">
+    <div class="record_sum">礼品额度使用有{{data.length}}条</div>
+    <div class="record_table">
+      <div class="record_table_item" v-for="(item, index) in data" :key="index">
+        <div class="table_item_left">
+          <div class="left_store">{{ item.receiver ? item.receiver.account_name : item.supplier }}</div>
+          <div class="left_time">{{ item.created_at | formatDate }}</div>
+        </div>
+        <div class="table_item_right">{{item.integral}}</div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import {XHeader, XTable} from 'vux'
-  import {integralRecords} from "../../api/api";
+import { XTable } from "vux";
+import { integralRecords } from "../../api/api";
 
-  export default {
-    components: {
-      XHeader,
-      XTable,
-    },
-    created() {
-      this.initData()
-    },
-    data() {
-      return {
-        data: []
-      }
-    },
-    filters: {
-      formatDate(time) {
-        return time.split(' ')[0]
-      }
-    },
-    methods: {
-      async initData() {
-        const { status, data } = await integralRecords();
-        if (status === 'ok') {
-          this.data = data
-        }
+export default {
+  components: {
+    XTable
+  },
+  created() {
+    this.initData();
+  },
+  data() {
+    return {
+      data: []
+    };
+  },
+  filters: {
+    formatDate(time) {
+      return time.split(" ")[0];
+    }
+  },
+  methods: {
+    async initData() {
+      const { status, data } = await integralRecords();
+      if (status === "ok") {
+        this.data = data;
       }
     }
   }
+};
 </script>
 
-<style scoped>
-
+<style lang="sass" scoped>
+  @import './style'
 </style>

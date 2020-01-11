@@ -1,10 +1,10 @@
 import * as types from "./mutation-type"
 import vue from "vue"
-
+import { Toast } from 'vant';
 export default {
   // this is reconfiguration ..
   [types.TOAST](state, { text }) {
-    vue.$vux.toast.text(text)
+    Toast(text)
   },
   [types.HIDE_TABBAR](state, { path }) {
 

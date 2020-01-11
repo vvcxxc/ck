@@ -1,5 +1,5 @@
 <template>
-  <div class="self-wrapper" style="height: 120vh">
+  <div class="self-wrapper" style="height: 100vh">
     <x-header title="我的" :left-options="{showBack: false}"></x-header>
 
     <!-- <c-scroll class="scroll-wrapper"> -->

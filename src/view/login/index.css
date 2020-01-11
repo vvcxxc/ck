@@ -8,7 +8,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 16px;
 }
 .login-wrapper .login-wrapper_content {
   width: 100%;
@@ -19,7 +18,7 @@
 }
 .login-wrapper .login-wrapper_content .login_content {
   height: 100%;
-  width: calc(100vw - 32px);
+  width: calc(100vw - 8.4vw);
   position: absolute;
   left: 50%;
   top: 0;
@@ -102,6 +101,7 @@
   width: calc(100% - 8vw);
   padding-left: 3vw;
   box-sizing: border-box;
+  font-size: 3.7vw;
 }
 .login-wrapper .login-wrapper_content .login_content .login_box {
   height: 12vw;

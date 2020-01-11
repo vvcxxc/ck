@@ -35,7 +35,6 @@
 
 <script>
   import { NavBar } from 'vant';
-
   import { bank } from "@api/api"
 
   import VBankBind from "./bank-bind"

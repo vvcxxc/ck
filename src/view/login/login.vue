@@ -104,5 +104,5 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
- @import './index'
+ @import './index.scss'
 </style>

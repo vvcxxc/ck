@@ -251,10 +251,10 @@ export default {
 </script>
 
 <style lang="sass">
-.store_wrap 
+.store_wrap
   margin-bottom: 50px
   background: #E9EEF2
-  .supplier 
+  .supplier
     width: 100%
     height: 100%
     padding: 15px
@@ -270,13 +270,14 @@ export default {
         height: 110px
         border-bottom: 1px solid #E9EEF2
         display: flex
+        font-size: 0
         .store_item_ava
           width: 45px
           height: 45px
           border-radius: 50%
           overflow: hidden
         .store_item_data
-          width: calc(100% - 55px) 
+          width: calc(100% - 55px)
           margin-left: 15px
           display: flex
           flex-direction: column

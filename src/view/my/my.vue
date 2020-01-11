@@ -37,8 +37,8 @@
 main
   display: flex
   justify-content: center
-  
-.user-info 
+
+.user-info
   display: flex
   height: 2.81rem
   width: 7rem
@@ -47,7 +47,7 @@ main
   background: url('../../assets/userBackground.png')
   background-size: 100%
   background-repeat: no-repeat
-  img 
+  img
     height: 0.88rem
     width: 0.88rem
     border-radius: 50%
@@ -67,7 +67,7 @@ main
     font-size: 15px
     display: flex
     justify-content: space-between
-    div 
+    div
       color: rgba(224,235,243,1)
       span
         color: rgba(255,255,255,1)

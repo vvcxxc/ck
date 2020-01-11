@@ -75,7 +75,7 @@ export default {
       minDate: new Date(2020, 0, 1),
       maxDate: new Date(2025, 10, 1),
       currentDate: new Date(),
-      chooseTime: true,
+      chooseTime: false,
       list: [1, 3],
       chooseType: "date",
       yearTime: ""

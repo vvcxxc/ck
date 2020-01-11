@@ -19,6 +19,8 @@ import {
   NavBar,
   Tab,
   Tabs,
+  Toast,
+  CountDown,
   Tabbar, TabbarItem,Field, Button
 } from "vant";
 import "@utils/rem"
@@ -32,6 +34,8 @@ import {
   ToastPlugin
 } from "vux"
 Vue.use(Popup)
+Vue.use(Toast)
+Vue.use(CountDown);
 Vue.use(Field);
 Vue.use(Button);
 Vue.use(Tabbar).use(TabbarItem);

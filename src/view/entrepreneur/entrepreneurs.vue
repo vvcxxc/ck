@@ -1,190 +1,198 @@
 <template>
-  <div class="entrepreneur">
-    <x-header title="创客" :left-options="{showBack: false}"></x-header>
-    <!-- <c-scroll-new class="entrepreneur-wrapper"
-      :data="entrepreneurs"
-      @pullingUp="hanleLoadMore"
-    > -->
-      <div class="container">
-        <c-list v-for="(item, index) in entrepreneurs" :key="index" :showOptions="{image: true}" :data="item" @on-click-button="onClickButton"></c-list>
-        <div class="loadMore" @click="loadMore">
-          {{load_more}}
+  <div class="store_wrap">
+    <van-nav-bar title="创客" style="height: 54px;line-height: 54px"></van-nav-bar>
+
+    <div class="entrepreneur">
+      <div class="store_item" v-for="(item) in dataList" :key="item.party_id">
+        <div class="store_item_info">
+          <div class="store_item_ava">
+            <img src="static/img/supplier.png" alt width="45px" height="45px" />
+          </div>
+          <div class="store_item_data">
+            <div class="store_item_desc">
+              <div class="store_item_name">{{item.account_name}}</div>
+              <div class="store_item_tel">{{item.account_phone}}</div>
+              <div class="store_item_time">{{item.account_regist_time}}</div>
+            </div>
+          </div>
+          <div class="store_item_gift">
+            <p>{{item.integral.hasOwnProperty("integral")? item.integral.integral: 0}}</p>
+            <p>礼品额度</p>
+          </div>
+        </div>
+        <div class="store_item_opeartion">
+          <div class="share_benefit_setting" @click="handleShareBenefitSet(item)">分润设置</div>
+          <div class="limit_setting" @click="handleLimitSet(item)">额度设置</div>
         </div>
       </div>
-
-    <!-- </c-scroll-new> -->
-
-    <div v-transfer-dom>
-      <confirm
-        v-model="showModal"
-        show-input
-        :title="`分配礼品额度`"
-        :input-attrs="{type: 'number', id: 'reset-input'}"
-        @on-confirm="onConfirm"
-      />
     </div>
+    <p class="load_more" @click="handleLoadMore" v-if="isMore">点击加载更多</p>
+    <van-divider v-else :style="{borderColor: '#ccc', padding: '10px 16px',margin: 0 }">暂无更多数据</van-divider>
+
+    <van-dialog v-model="showModal" title="分配礼品额度" show-cancel-button @confirm="handleConfirmGift">
+      <van-field v-model="giftValue" placeholder="请输入分配礼品额度" />
+    </van-dialog>
   </div>
 </template>
 
 <script>
-  import { XHeader, Confirm, TransferDomDirective as TransferDom } from "vux"
-  import { mapGetters } from "vuex"
-  import CScroll from "@components/c-scroll/scroll"
-  import CList from "@components/c-list/list"
-  import CScrollNew from "@components/c-n-scroll/scroll"
+import { mapGetters } from "vuex";
+import { entrepreneurs } from "@api/api";
+import { giveIntegral } from "../../api/api";
+import Vue from "vue";
+import { Divider, Dialog, Toast } from "vant";
+Vue.use(Divider);
+Vue.use(Dialog);
+Vue.use(Toast);
 
-  import { entrepreneurs } from "@api/api"
-  import {giveIntegral} from "../../api/api";
-
-  const REQUEST_ONE = 1
-
-  export default {
-    data() {
-      return {
-        entrepreneurs: [],
-        tempEntrepreneur: {
-          account_name: "创客测试号",
-          account_phone: "13800138000",
-          account_regist_time: 1532068447,
-          party_id: 121,
-        },
-        showModal: false,
-        currentId: 0,
-        load_more: '点击加载更多',
-        is_more: true,
-        page: 2,
+export default {
+  data() {
+    return {
+      dataList: [],
+      isMore: true,
+      page: 1,
+      showModal: false,
+      giftValue: "",
+      itemObj: {}
+    };
+  },
+  computed: {
+    ...mapGetters(["role_type"])
+  },
+  methods: {
+    getData() {
+      let params = {
+        type: this.role_type,
+        page: this.page
+      };
+      entrepreneurs(params).then(({ code, data, message, total }) => {
+        // console.log(code, data, message, total);
+        if (data.length != 0) {
+          this.dataList = this.dataList.concat(data);
+        } else {
+          this.isMore = false;
+        }
+      });
+    },
+    handleLoadMore() {
+      this.page += 1;
+      this.getData();
+    },
+    /**
+     * 分润设置
+     */
+    handleShareBenefitSet(item) {
+      this.$router.push(
+        `entrepreneur/split_fee_set?entrepreneur_id=${item.party_id}`
+      );
+    },
+    /**
+     * 额度设置
+     */
+    async handleConfirmGift() {
+      if (!(Number(this.giftValue) > 0)) {
+        Toast("请输入正确的数字");
+        window.scroll(0, 0);
+        return;
+      } else {
+        const { code, message = "" } = await giveIntegral({
+          party_id: this.itemObj.party_id,
+          integral: this.giftValue,
+          role_type: "env"
+        });
+        if (code == 200) {
+          Toast.success(message);
+        } else {
+          Toast.fail(message);
+        }
+        window.scroll(0, 0);
       }
     },
-    directives: {
-      TransferDom
-    },
-    computed: {
-      ...mapGetters(['role_type'])
-    },
-    components: {
-      XHeader,
-      CScroll,
-      CList,
-      CScrollNew,
-      Confirm
-    },
-    methods: {
-      onClickButton(id) {
-        this.showModal = true;
-        this.currentId = id
-        document.getElementById('reset-input').addEventListener('blur', function() {
-          window.scroll(0, 0)
-        })
-      },
-      async loadMore(){
-        if(!this.is_more){
-          return
-        }
-        let params = {
-          type: this.role_type,
-          page: this.page,
-        }
-        let { code, data, message } = await entrepreneurs(params)
-        if(data.length){
-          this.page = this.page + 1
-        }else {
-          this.load_more = '已经到底啦~'
-        }
-        const CH_MAP = {
-          account_name: '用户',
-          account_phone: '手机',
-          account_regist_time: '注册时间'
-        }
-        if(code == REQUEST_ONE){
-          this.entrepreneurs = [
-            ...this.entrepreneurs,
-            ...data.map(item => {
-              let output = {}
-              for(let [key, value] of Object.entries(item)){
-                CH_MAP[key] && (output[CH_MAP[key]] = value)
-              }
-              return {
-                src: 'static/img/face2.png',
-                desc: output,
-                id: item.party_id,
-                integral: item.integral ? item.integral['integral'] || 0 : 0,
-                preview: item.preview || 'static/img/supplier.png'
-              }
-            })
-          ]
-        } else {
-
-        }
-
-      },
-      async onConfirm(val) {
-        if (!(Number(val) > 0)) {
-          this.$vux.toast.text('请输入正确的数字');
-          window.scroll(0, 0)
-          return
-        } else {
-          const {code, message} = await giveIntegral({party_id: this.currentId, integral: val, role_type: 'env'});
-          if (code === 200) {
-            this.$vux.toast.text(message);
-            this.entrepreneurs = []
-            this.fetchEntrepreneurs()
-          } else {
-            this.$vux.toast.text(message)
-          }
-          window.scroll(0, 0)
-        }
-      },
-      hanleLoadMore () {
-        window.setTimeout(() => {
-          this.fetchEntrepreneurs()
-        }, 1000)
-      },
-      async fetchEntrepreneurs() {
-        const params = {
-          type: this.role_type,
-          page: 1
-        }
-        let { code, data, message } = await entrepreneurs(params)
-        const CH_MAP = {
-          account_name: '用户',
-          account_phone: '手机',
-          account_regist_time: '注册时间'
-        }
-
-        if(code == REQUEST_ONE){
-          this.entrepreneurs = [
-            ...this.entrepreneurs,
-            ...data.map(item => {
-              let output = {}
-              for(let [key, value] of Object.entries(item)){
-                CH_MAP[key] && (output[CH_MAP[key]] = value)
-              }
-              return {
-                src: 'static/img/face2.png',
-                desc: output,
-                id: item.party_id,
-                integral: item.integral ? item.integral['integral'] || 0 : 0,
-                preview: item.preview || 'static/img/supplier.png'
-              }
-            })
-          ]
-        } else {
-
-        }
-      }
-    },
-    created() {
-      this.fetchEntrepreneurs()
+    handleLimitSet(item) {
+      this.giftValue = "";
+      this.showModal = true;
+      this.itemObj = item;
     }
+  },
+  created() {
+    this.getData();
   }
+};
 </script>
 
 <style lang="sass" scoped>
-@import "./style"
-.loadMore
-  margin-bottom: 80px
-  height: 20px
-  text-align: center
-  line-height: 20px
-  font-size: 14px
+.store_wrap 
+  margin-bottom: 50px
+  background: #E9EEF2
+  .entrepreneur
+    width: 100%
+    height: 100%
+    padding: 15px
+    oveflow: auto
+    .store_item
+      height: 180px
+      background: #fff
+      border-radius: 10px
+      padding: 15px
+      box-sizing: border-box
+      margin-bottom: 10px
+      .store_item_info
+        height: 110px
+        border-bottom: 1px solid #E9EEF2
+        display: flex
+        .store_item_ava
+          width: 45px
+          height: 45px
+          border-radius: 50%
+          overflow: hidden
+        .store_item_data
+          width: calc(100% - 115px) 
+          margin-left: 15px
+          display: flex
+          flex-direction: column
+          justify-content: space-between
+          margin-bottom: 10px
+          .store_item_desc
+            .store_item_name
+              color: #2C3E50
+              font-size: 17px
+              font-weight: bold
+            .store_item_tel
+              font-size: 14px
+              color: #2C3E50
+              margin-top: 4px
+            .store_item_time
+              font-size: 13px
+              color: #ADB5BD
+              margin-top: 10px
+        .store_item_gift
+          width: 60px
+          p:first-child
+            color: #2C3E50
+            font-size: 15px
+            font-weight: bold
+            text-align: center
+          p:last-child
+            color: #98A6AD
+            font-size: 12px
+            text-align: center
+            margin-top: 4px
+      .store_item_opeartion
+        display: flex
+        margin-top: 12px
+        justify-content: flex-end
+        div
+          width: 70px
+          height: 28px
+          font-size: 13px
+          color: #fff
+          border-radius: 5px
+          text-align: center
+          line-height: 28px
+          margin-left: 10px
+          background: #4486F7
+  .load_more
+    font-size: 14px
+    text-align: center
+    padding-bottom: 10px  
 </style>

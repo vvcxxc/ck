@@ -13,6 +13,12 @@
       </van-cell-group>
     </div>
 
+    <div class="button-box">
+      <div @click="handleLogout">
+        退出登录
+      </div>
+    </div>
+
     <div class="sub-view-wrapper">
       <v-modify-password v-if="flagModifyPassword" @on-hide="handleHideView('modifyPassword')"></v-modify-password>
     </div>
@@ -106,6 +112,21 @@ export default {
   .user-box {
     margin-top: 20px;
     padding: 20px
+  }
+}
+.button-box {
+  height: 44px;
+  padding: 0 44px;
+  margin-top: 23px;
+  div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(152,166,173,1);
+    border-radius:44px;
+    font-size: 14px;
   }
 }
 </style>

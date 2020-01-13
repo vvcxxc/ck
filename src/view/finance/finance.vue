@@ -22,7 +22,7 @@
       <van-tab title="总收益" >
         <!-- <ReturnsFilte :typet="988"/> -->
       </van-tab>
-      <van-tab title=" "></van-tab>
+      <van-tab title=" " disabled></van-tab>
     </van-tabs>
     <ReturnsFilte :type_="meta"  />
   </div>
@@ -36,20 +36,21 @@
       return {
         active: 0,
         meta:0,
-        returns_filter: ["日收益", "月收益", "年收益", "总收益"]
+        returns_filter: ["日收益", "月收益", "年收益", "总收益"],
+
       };
     },
     components: {
       ReturnsFilte
     },
-    created() {},
+    created() {
+
+    },
     methods: {
-      chooseTimeData(data) {
-        console.log(data, "data");
-      },
       returnsFilter(data, dd) {
         this.meta=data
-      }
+      },
+
     }
   };
 </script>

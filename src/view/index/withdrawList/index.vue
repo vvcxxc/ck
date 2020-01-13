@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <div class="header">
-      <div class="header-title">提现中的金额</div>
-      <div class="header-money">{{money}}</div>
+      <div class="header-title">提现中金额</div>
+      <div class="header-money">￥{{money}}</div>
     </div>
     <div class="list">
       <div class="list-item"  v-for="(item, index) in withdraws" :key="index">
@@ -10,13 +10,20 @@
           <p class="item-status">{{item.status}}</p>
           <p class="item-time">{{item.from_date}}</p>
         </div>
-        <div class="item-r">{{item.money}}</div>
+        <div class="item-r">
+          {{item.money}}
+          <!-- <img src="/static/img/right.png" width="16px" height="16px" style="color:#98A6AD"/> -->
+          <van-icon name="arrow" color="#98A6AD"/>
+        </div>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { withdrawListMoney, withdrawRecord } from '@api/api'
+import Vue from 'vue';
+import { Icon } from 'vant';
+Vue.use(Icon);
 export default {
   data(){
     return {

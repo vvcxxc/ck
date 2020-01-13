@@ -322,3 +322,24 @@ http({
   url: 'api/entrepreneur/cashInMoney',
   method: 'get'
 })
+
+/**
+ *  获取收益列表数据
+ *
+ */
+export const getFinanceList = (params) =>
+http({
+  url: 'api/entrepreneur/water/list',
+  method: 'get',
+  params
+})
+
+/**
+ * 获取收益详情
+ */
+export const getFinanceDetails = (id) =>
+http({
+  url: 'api/entrepreneur/water/info',
+  method: 'get',
+  params: {id}
+})

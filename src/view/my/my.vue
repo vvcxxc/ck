@@ -2,30 +2,30 @@
   <main>
     <div class="user-info">
       <img
-        src="https://dsfs.oppo.com/archives/201912/201912270812345e05fb0eb3589.png?x-oss-process=image/format,webp"
+        src="http://oss.tdianyi.com/front/ek7cPQsFbEt7DXT7E7B6Xaf62a46SCXw.png"
         alt
       />
       <ul class="right">
-        <li>李宇轩</li>
-        <li>12345678912</li>
+        <li>{{account_name || '请登录'}}</li>
+        <li>{{account_phone || ''}}</li>
         <li>
           <div>
             余额
-            <span>791.96</span>
+            <span>{{account_balance}}</span>
           </div>
           <div>
             礼品额度
-            <span>791.96</span>
+            <span>{{ integral }}</span>
           </div>
         </li>
       </ul>
     </div>
 
     <div class="invite-box">
-      <div>
+      <div @click="invite('store')">
         <span></span>邀请店铺
       </div>
-      <div>
+      <div @click="invite('people')">
         <span></span>邀请创客
       </div>
     </div>
@@ -52,11 +52,20 @@
     </ul>
     <v-configuration v-if="flagConfiguration" @on-hide="handleHideView('configuration')"></v-configuration>
     <v-bank v-if="flagBank" @on-hide="handleHideView('bank')"></v-bank>
+    <van-overlay :show="is_show" @click="is_show = false">
+      <div class="qr_code">
+        <div class="qr_code_title">{{title}}</div>
+        <img class="qr_code_img" :src="codeUrl" />
+      </div>
+    </van-overlay>
   </main>
 </template>
 <script>
 import VBank from "./bank/bank";
 import VConfiguration from "./configuration/configurations";
+import { authUser } from "@api/api";
+import { Icon, Popup, Overlay } from "vant";
+import QRCode from "qrcode";
 const V_BANK = "bank";
 const V_CONFIGURATION = "configuration";
 export default {
@@ -64,14 +73,50 @@ export default {
     return {
       list: "",
       flagBank: false,
-      flagConfiguration: false
+      flagConfiguration: false,
+      account_name: "",
+      account_balance: "",
+      account_phone: "",
+      integral: 0,
+      supplier_party_id: 0,
+      party_id: 0,
+      qrCodeUrl: "", // 二维码信息
+      codeUrl: "", //二维码图片路径
+      is_show: false, // 展示邀请页面
+      title: "" // 邀请时候的title
     };
   },
   components: {
     VBank,
     VConfiguration
   },
+  created() {
+    this.fetchAuthUser();
+  },
   methods: {
+    invite(name) {
+      if (name == "people") {
+        let qrCodeUrl = `http://${window.location.host}/ck/register?invite_id=${this.party_id}`;
+        this.qrCodeUrl = qrCodeUrl;
+        this.showQRcode(qrCodeUrl);
+        this.title = "邀请创客";
+      } else {
+        let qrCodeUrl = `${process.env.SUPPLIER_URL}/register?invite_phone=${this.account_phone}`;
+        this.qrCodeUrl = qrCodeUrl;
+        this.showQRcode(qrCodeUrl);
+        this.title = "邀请店铺";
+      }
+    },
+    showQRcode(data) {
+      QRCode.toDataURL(data)
+        .then(url => {
+          this.codeUrl = url;
+          this.is_show = true;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
     handleShowView(view) {
       console.log(view);
       this.$store.commit("HIDE_TABBAR", { path: "" });
@@ -90,6 +135,31 @@ export default {
         case V_CONFIGURATION:
           return (this.flagConfiguration = false);
       }
+    },
+    fetchAuthUser() {
+      authUser()
+        .then(
+          ({
+            data: {
+              account_name,
+              account_phone,
+              money,
+              party_id,
+              integral,
+              supplier_party_id = 0
+            }
+          }) => {
+            if (account_name) {
+              this.account_name = account_name;
+              this.account_phone = account_phone;
+              this.account_balance = money;
+              this.integral = integral;
+              this.supplier_party_id = supplier_party_id;
+              this.party_id = party_id;
+            }
+          }
+        )
+        .catch(err => console.log(err));
     },
     integralRecord() {
       this.$router.push("/integral_records");
@@ -195,5 +265,20 @@ main
     background-position: -1.78rem -0.25rem
   li:nth-child(3) span
     background-position: -2.6rem -0.25rem
-
+.qr_code
+  padding: 24px
+  position: fixed
+  left: 50%
+  top: 50%
+  background: #fff
+  transform: translate(-50%, -50%)
+  border-radius: 10px
+  .qr_code_title
+    width: 100%
+    text-align: center
+    margin-bottom: 10px
+    font-size: 16px
+  .qr_code_img
+    width: 180px
+    height: 180px
 </style>

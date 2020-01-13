@@ -121,9 +121,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.store_wrap 
+.store_wrap
   margin-bottom: 50px
   background: #E9EEF2
+  min-height: 100vh
   .entrepreneur
     width: 100%
     height: 100%
@@ -146,7 +147,7 @@ export default {
           border-radius: 50%
           overflow: hidden
         .store_item_data
-          width: calc(100% - 115px) 
+          width: calc(100% - 115px)
           margin-left: 15px
           display: flex
           flex-direction: column
@@ -194,5 +195,5 @@ export default {
   .load_more
     font-size: 14px
     text-align: center
-    padding-bottom: 10px  
+    padding-bottom: 10px
 </style>

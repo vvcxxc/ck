@@ -66,6 +66,41 @@ export default {
   },
   computed: {
     ...mapGetters(['role_type']),
+  },
+  created(){
+    console.log(this.role_type)
+    if(this.role_type == 'entrepreneur'){
+      this.list = [
+        {
+          name: 'index',
+          label: '首页',
+          path: '/index',
+          active: 'static/img/no-index.png',
+          inactive: 'static/img/index.png'
+        },
+        {
+          name: 'finance',
+          label: '收益',
+          path: '/finance',
+          active: 'static/img/no-finance.png',
+          inactive: 'static/img/finance.png'
+        },
+        {
+          name: 'entrepreneur',
+          label: '创客',
+          path: '/entrepreneur',
+          active: 'static/img/no-people.png',
+          inactive: 'static/img/people.png'
+        },
+        {
+          name: 'my',
+          label: '我的',
+          path: '/my',
+          active: 'static/img/no-my.png',
+          inactive: 'static/img/my.png'
+        },
+      ]
+    }
   }
 };
 </script>

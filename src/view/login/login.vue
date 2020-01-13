@@ -29,7 +29,6 @@
 <script>
 import { Validator, timeout } from "@utils/common";
 import { login } from "@api/api";
-
 const ROLE_PRESIDENT = "president";
 const ROLE_ENTREPRENEUR = "entrepreneur";
 

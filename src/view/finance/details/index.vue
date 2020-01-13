@@ -27,7 +27,7 @@
       </div>
       <div class="layout-item">
         <div>用户ID</div>
-        <div>{{info.id}}</div>
+        <div>{{info.user_id}}</div>
       </div>
     </div>
 

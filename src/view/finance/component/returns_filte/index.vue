@@ -7,34 +7,34 @@
     </van-row>
     <van-row type="flex" justify="center">
       <van-col span="6" class="my_row">
-        <span class="my_row_money">88.00</span>
+        <span class="my_row_money">{{info.count_all}}</span>
         <span class="money_des">{{['当日','当月','年份','我的总'][type_]}}收益</span>
         <span class="my_row_time" v-if="type_>2?false:true" @click="chooseTime=true">
-          <span>2019-11-22</span>
+          <span>{{date}}</span>
           <van-icon name="arrow-down" color="#A4C4E9" size="18px" />
         </span>
       </van-col>
     </van-row>
     <van-row type="flex" justify="center">
       <van-col span="24" class="rate-box">
-        <div>
+        <div @click="goTo(1)">
           <span>费率返点</span>
           <span>
-            126.00
+            {{info.rate_all}}
             <van-icon name="arrow" />
           </span>
         </div>
-        <div>
-          <span>费率返点</span>
+        <div @click="goTo(2)">
+          <span>券分润</span>
           <span>
-            126.00
+            {{info.coupon_all}}
             <van-icon name="arrow" />
           </span>
         </div>
-        <div>
-          <span>费率返点</span>
+        <div @click="goTo(3)">
+          <span>广告分润</span>
           <span>
-            126.00
+            {{info.ad_all}}
             <van-icon name="arrow" />
           </span>
         </div>
@@ -67,18 +67,22 @@ import {
   Icon,
   List
 } from "vant";
+import { getFinance } from "@api/api";
+import dayjs from "dayjs";
 
 export default {
   name: "ReturnsFilte",
   data() {
     return {
-      minDate: new Date(2020, 0, 1),
+      minDate: new Date(2015, 0, 1),
       maxDate: new Date(2025, 10, 1),
       currentDate: new Date(),
       chooseTime: false,
       list: [1, 3],
       chooseType: "date",
-      yearTime: ""
+      yearTime: "",
+      date: dayjs(new Date()).format("YYYY-MM-DD"),
+      info: {},
     };
   },
   components: {},
@@ -91,15 +95,65 @@ export default {
       handler(newVal, oldVal) {
         this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
         this.chooseTime = false;
+        let time = "";
+        switch (newVal) {
+          case 0:
+            time = dayjs(new Date()).format("YYYY-MM-DD");
+            break;
+          case 1:
+            time = dayjs(new Date()).format("YYYY-MM");
+            break;
+          case 2:
+            time = dayjs(new Date()).format("YYYY");
+            break;
+          case 3:
+            time = "";
+        }
+        this.date = time;
       },
       deep: true
+    },
+    date: function() {
+      this.getInfo();
     }
   },
-  created() {},
+  created() {
+    this.getInfo();
+  },
   mounted() {},
   methods: {
-    chooseTimeData(data) {
-      console.log(this.yearTime, "kkkk");
+    chooseTimeData(date) {
+      this.chooseTime = false;
+      let time = "";
+      switch (this.type_) {
+        case 0:
+          time = dayjs(date).format("YYYY-MM-DD");
+          this.date = time;
+          break;
+        case 1:
+          time = dayjs(date).format("YYYY-MM");
+          this.date = time;
+          break;
+        case 2:
+          time = dayjs(date).format("YYYY");
+          this.date = time;
+          break;
+        case 3:
+          time = "";
+          this.date = time;
+          break;
+      }
+    },
+    getInfo() {
+      if (this.date) {
+        getFinance(this.date).then(res => {
+          this.info = res.data;
+        });
+      } else {
+        getFinance().then(res => {
+          this.info = res.data;
+        });
+      }
     },
     returnsFilter(data, dd) {},
     formatter(type, value) {
@@ -109,6 +163,24 @@ export default {
         return `${value}月`;
       }
       return value;
+    },
+    goTo (type){
+      if(this.type_ == 0){
+        this.$router.push({
+          path: '/finance/detailsList',
+          query: {
+            type,
+            date: this.date
+          }
+        })
+      }else{
+        this.$router.push({
+          path: '/finance/detailsList',
+          query: {
+            type
+          }
+        })
+      }
     }
   }
 };

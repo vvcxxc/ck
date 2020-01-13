@@ -1,40 +1,17 @@
 <template>
   <van-tabbar v-model="active" route>
     <van-tabbar-item
-      name="index"
-      icon="home-o"
-      to="/index"
+      v-for="(item,index) in list"
+      :key='index'
+      :name="item.name"
+      :to="item.path"
     >
-    首页
-    </van-tabbar-item>
-    <van-tabbar-item
-      name="finance"
-      icon="gold-coin-o"
-      to="/finance"
+    <img
+      slot="icon"
+      slot-scope="props"
+      :src="props.active ? item.inactive : item.active"
     >
-    收益
-    </van-tabbar-item>
-    <van-tabbar-item
-      name="supplier"
-      icon="shop-o"
-      to="/supplier"
-    >
-    店铺
-    </van-tabbar-item>
-    <van-tabbar-item
-      v-if="role_type == 'president'"
-      name="entrepreneur"
-      icon="friends-o"
-      to="/entrepreneur"
-    >
-    创客
-    </van-tabbar-item>
-    <van-tabbar-item
-      name="my"
-      icon="user-o"
-      to="/my"
-    >
-    我的
+    {{item.label}}
     </van-tabbar-item>
   </van-tabbar>
 </template>
@@ -47,7 +24,44 @@ const ROLE_ENTREPRENEUR = 'entrepreneur'
 export default {
   data() {
     return {
-      active: 'index'
+      active: 'index',
+      list: [
+        {
+          name: 'index',
+          label: '首页',
+          path: '/index',
+          active: 'static/img/no-index.png',
+          inactive: 'static/img/index.png'
+        },
+        {
+          name: 'finance',
+          label: '收益',
+          path: '/finance',
+          active: 'static/img/no-finance.png',
+          inactive: 'static/img/finance.png'
+        },
+        {
+          name: 'supplier',
+          label: '店铺',
+          path: '/supplier',
+          active: 'static/img/no-store.png',
+          inactive: 'static/img/store.png'
+        },
+        {
+          name: 'entrepreneur',
+          label: '创客',
+          path: '/entrepreneur',
+          active: 'static/img/no-people.png',
+          inactive: 'static/img/people.png'
+        },
+        {
+          name: 'my',
+          label: '我的',
+          path: '/my',
+          active: 'static/img/no-my.png',
+          inactive: 'static/img/my.png'
+        },
+      ]
     };
   },
   computed: {

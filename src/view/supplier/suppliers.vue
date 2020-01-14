@@ -254,6 +254,7 @@ export default {
 .store_wrap
   margin-bottom: 50px
   background: #E9EEF2
+  min-height: 100vh
   .supplier
     width: 100%
     height: 100%

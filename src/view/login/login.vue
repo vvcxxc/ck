@@ -57,6 +57,16 @@ export default {
           if (token) {
             localStorage.setItem("token", token);
             localStorage.setItem("role_type", role_type);
+            switch (role_type) {
+              case "president":
+                document.title = "团卖物联-会长";
+                break;
+              case "entrepreneur":
+                document.title = "团卖物联-创客";
+                break;
+              default:
+                break;
+            }
             this.$store.commit("TOAST", { text: "登录成功" });
             this.$store.commit("ROLE_TYPE", { type: role_type });
             timeout(500).then(() => {

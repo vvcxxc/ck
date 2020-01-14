@@ -1,5 +1,10 @@
 <template>
   <div class="register-wrapper">
+     <van-nav-bar
+      title="创客注册"
+      left-arrow
+      @click-left="goBack"
+    />
     <div class="register-content">
       <div class="userName_box">
         <div class="box_title">账号</div>
@@ -46,7 +51,7 @@
 import { Validator, timeout } from "@utils/common";
 import { register, sendVerifyCode } from "@api/api";
 import Vue from "vue";
-import { CountDown } from "vant";
+import { CountDown, NavBar } from "vant";
 // Vue.use(CountDown);
 import "./style";
 
@@ -147,6 +152,11 @@ export default {
       let errmsg = validator.start();
 
       if (errmsg) return errmsg;
+    },
+    goBack() {
+      this.$router.push({
+        path: '/login'
+      })
     },
 
     fetchVerify() {

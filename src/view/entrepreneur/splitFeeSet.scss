@@ -1,0 +1,122 @@
+.splitFeeSet {
+    background: #f4f7f9;
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    padding: 4vw;
+    box-sizing: border-box;
+
+    .splitFeeSet_Box {
+        width: 100%;
+        height: auto;
+
+        .splitFeeSet_content {
+            width: 100%;
+            height: auto;
+            border-radius: 2.6vw;
+            background: #fdfdfe;
+            box-shadow: 0.2vw 0.2vw 0.6vw 0.2vw rgba(0, 0, 0, 0.05), 0.1vw 0.1vw 0.4vw 0.1vw rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            margin-bottom: 2.9vw;
+
+            .splitFeeSet_title {
+                height: 12vw;
+                width: 100%;
+                background: #fbfbfc;
+                padding: 0 4.2vw;
+                box-sizing: border-box;
+                border-bottom: 0.1vw solid #f0f2f5;
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+
+                .splitFeeSet_title_img {
+                    width: 5vw;
+                    height: 5vw;
+                    margin-right: 2.6vw;
+                }
+
+                .splitFeeSet_title_word {
+                    line-height: 1;
+                    font-size: 4.4vw;
+                    font-family: Adobe Heiti Std;
+                    font-weight: normal;
+                    color: rgba(52, 58, 64, 1);
+                }
+            }
+
+            .splitFeeSet_item {
+                width: 100%;
+                height: auto;
+                padding: 4.2vw 7.4vw;
+
+                .splitFeeSet_infoBox {
+                    height: 7.4vw;
+                    width: 100%;
+                    margin-bottom: 2.6vw;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: flex-end;
+
+                    .item_title {
+                        height: 4vw;
+                        width: 24vw;
+                        font-size: 3.4vw;
+                        text-align: right;
+                        line-height: 1;
+                        letter-spacing: 0.1vw;
+                    }
+
+                    .splitFeeSet_inputBox {
+                        height: 7.4vw;
+                        width: calc(100% - 24vw);
+                        background: #f3f5f8;
+                        padding: 0 3.6vw 0 0;
+                        box-sizing: border-box;
+                        font-size: 3.6vw;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: flex-end;
+                        margin-left: 3.2vw;
+
+                        .splitFeeSet_input {
+                            height: 7.4vw;
+                            width: 36.8vw;
+                            background: #f3f5f8;
+                            padding-right: 2vw;
+                            box-sizing: border-box;
+                            text-align: right;
+                        }
+                    }
+                }
+
+                .splitFeeSet_infoBox:last-child {
+                    margin-bottom: 0;
+                }
+
+            }
+        }
+
+        .splitFeeSet_content:last-child {
+            margin-bottom: 6.4vw;
+        }
+    }
+
+    .feeSet_save {
+        height: 12vw;
+        border-radius: 6vw;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #4486F7;
+        color: #fff;
+        font-size: 4vw;
+        font-family: Adobe Heiti Std;
+        margin-bottom: 3vw;
+    }
+}

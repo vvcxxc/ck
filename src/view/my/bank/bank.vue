@@ -1,45 +1,40 @@
 <template>
   <div class="bank">
-    <x-header title="绑定银行卡" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
-
-    <div class="bankList">
-      <div class="x-data-preview">
-        <div class="x-data-preview-item">
-          <div class="x-data-preview-header">
-            <label>类型</label>
-            <span>{{bank.bank_name || '未绑定'}}</span>
-          </div>
-          <div class="x-data-preview-body">
-            <div class="x-data-preview-bd-item">
-              <label>账户</label>
-              <span>{{bank.bank_card_number || '未绑定' }}</span>
-            </div>
-            <div class="x-data-preview-bd-item">
-              <label>持卡人</label>
-              <span>{{bank.bank_account_user_name || '未绑定'}}</span>
-            </div>
-          </div>
-        </div>
+    <van-nav-bar
+      title="我的银行卡"
+      left-arrow
+      @click-left="handleHide"
+    />
+    <div class="bank-main">
+      <div class="layout">
+        <div>类型</div>
+        <div>{{bank.bank_name || '未绑定'}}</div>
+      </div>
+      <div class="layout">
+        <div>账户</div>
+        <div>{{bank.bank_card_number || '未绑定'}}</div>
+      </div>
+      <div class="layout">
+        <div>持卡人</div>
+        <div>{{bank.bank_account_user_name || '未绑定'}}</div>
       </div>
     </div>
 
-    <div class="bankBind">
-      <group>
-        <cell title="更改银行卡" is-link @click.native="handleShowView('bankBind')"></cell>
-      </group>
+    <div class="button-box">
+      <div @click="handleShowView('bankBind')">
+        更改银行卡
+      </div>
     </div>
+
     <div class="sub-view-wrappeer">
       <v-bank-bind v-if="flagBankBind" @on-hide="handleHideView('bankBind')"></v-bank-bind>
     </div>
+
   </div>
 </template>
 
 <script>
-
-  import { XHeader, Group, Cell } from 'vux'
-
-  import XDatapreview from '@components/x-datapreview'
-
+  import { NavBar } from 'vant';
   import { bank } from "@api/api"
 
   import VBankBind from "./bank-bind"
@@ -55,10 +50,6 @@
       }
     },
     components: {
-      XHeader,
-      Cell,
-      Group,
-      XDatapreview,
       VBankBind
     },
     methods: {

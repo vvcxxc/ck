@@ -1,6 +1,22 @@
 <template>
   <div class="detailbox">
-    <x-header title="账户信息" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
+
+     <van-nav-bar
+      title="账户信息"
+      left-arrow
+      @click-left="handleHide"
+    />
+
+    <div class="user-box">
+      <van-cell-group>
+        <van-cell @click.native="handleShowView('modifyPassword')" title="登录密码" value="修改" is-link />
+      </van-cell-group>
+    </div>
+
+    <div class="sub-view-wrapper">
+      <v-modify-password v-if="flagModifyPassword" @on-hide="handleHideView('modifyPassword')"></v-modify-password>
+    </div>
+    <!-- <x-header title="账户信息" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
     <group>
       <cell is-link @click.native="handleShowView('modifyPassword')">
         <span slot="after-title">登陆密码</span>
@@ -18,12 +34,12 @@
     </flexbox>
     <div class="sub-view-wrapper">
       <v-modify-password v-if="flagModifyPassword" @on-hide="handleHideView('modifyPassword')"></v-modify-password>
-    </div>
+    </div> -->
   </div>
 </template>
 <script type="text/javascript">
-
-import { Flexbox, XHeader, Group, Cell, XButton } from 'vux'
+import { NavBar, Cell, CellGroup } from 'vant';
+// import { Flexbox, XHeader, Group, Cell, XButton } from 'vux'
 import { logout } from '@api/api'
 import { timeout } from '@utils/common'
 
@@ -38,15 +54,16 @@ export default {
     }
   },
   components: {
-    Flexbox,
-    XHeader,
-    Group,
-    Cell,
-    XButton,
+    // Flexbox,
+    // XHeader,
+    // Group,
+    // Cell,
+    // XButton,
     VModifyPassword
   },
   methods: {
     handleShowView(view){
+      console.log(222)
       switch(view){
         case V_MODIFY_PASSWORD: return this.flagModifyPassword = true
       }
@@ -85,5 +102,10 @@ export default {
 .detailbox {
   @include xallcover(99);
   font-size: $mdsize;
+  background: #fff;
+  .user-box {
+    margin-top: 20px;
+    padding: 20px
+  }
 }
 </style>

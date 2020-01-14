@@ -106,7 +106,7 @@ export default {
     getList() {
       let data = {
         profit_type: this.$route.query.type || 1,
-        date: this.date,
+        created_at: this.date,
         page: this.page
       };
       getFinanceList(data)

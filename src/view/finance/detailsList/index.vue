@@ -99,6 +99,7 @@ export default {
       let time = dayjs(date).format("YYYY-MM-DD");
       this.show = false;
       this.date = time;
+      this.page = 1
       this.getList();
     },
     // 获取列表数据
@@ -112,11 +113,16 @@ export default {
         .then(res => {
           console.log(res);
           this.all_money = res.all_money || 0;
-          this.list = res.data;
+          if(this.page == 1){
+            this.list = res.data
+            this.isMore = true
+          }else{
+            this.list = [...this.list,...res.data];
+          }
           if(!res.pagination.total){
             this.isMore = false
           }
-          if(res.pagination.current_page == res.pagination.total_pages){
+          if(res.pagination.current_page == res.pagination.total_pages || res.pagination.total_pages == null){
             this.isMore = false
           }
         })

@@ -31,6 +31,9 @@
             <van-icon name="arrow" class="icon" />
           </div>
         </div>
+        <p class="load_more" @click="handleLoadMore" v-if="isMore">点击加载更多</p>
+    <van-divider v-else :style="{borderColor: '#ccc', padding: '10px 16px',margin: 0, fontSize: '16px' }">暂无更多数据</van-divider>
+
       </div>
     </div>
 
@@ -46,9 +49,11 @@
   </div>
 </template>
 <script type="text/javascript">
-import { DatetimePicker, Popup, Icon } from "vant";
+import { DatetimePicker, Popup, Icon, Divider  } from "vant";
 import { getFinanceList } from "@api/api";
 import dayjs from "dayjs";
+import Vue from "vue";
+Vue.use(Divider);
 export default {
   data() {
     return {
@@ -58,7 +63,9 @@ export default {
       all_money: "",
       list: [],
       type: 1,
-      title: "费率返点"
+      title: "费率返点",
+      isMore: true,
+      page: 1
     };
   },
   created() {
@@ -98,15 +105,25 @@ export default {
     getList() {
       let data = {
         profit_type: this.$route.query.type || 1,
-        date: this.date
+        date: this.date,
+        page: this.page
       };
       getFinanceList(data)
         .then(res => {
           console.log(res);
           this.all_money = res.all_money || 0;
           this.list = res.data;
+          if(!res.pagination.total){
+            this.isMore = false
+          }
         })
         .catch(err => console.log(err));
+    },
+
+    // 加载更多
+     handleLoadMore() {
+      this.page += 1;
+      this.getList();
     },
 
     // 跳转到详细页

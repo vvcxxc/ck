@@ -2,7 +2,13 @@
   <div class="splitFeeSet">
     <div class="splitFeeSet_Box">
       <div class="splitFeeSet_content">
-        <div class="splitFeeSet_title">费率返点设置</div>
+        <div class="splitFeeSet_title">
+          <img
+            class="splitFeeSet_title_img"
+            src="http://oss.tdianyi.com/front/cP8tczcNJn6pxcE7S7Et3hSCRJfnTjAC.png"
+          />
+          <div class="splitFeeSet_title_word">费率返点设置</div>
+        </div>
         <div class="splitFeeSet_item">
           <div class="splitFeeSet_infoBox">
             <div class="item_title">剩余分润总额</div>
@@ -33,7 +39,13 @@
         </div>
       </div>
       <div class="splitFeeSet_content">
-        <div class="splitFeeSet_title">券分润设置</div>
+        <div class="splitFeeSet_title">
+          <img
+            class="splitFeeSet_title_img"
+            src="http://oss.tdianyi.com/front/cP8tczcNJn6pxcE7S7Et3hSCRJfnTjAC.png"
+          />
+          <div class="splitFeeSet_title_word">券分润设置</div>
+        </div>
         <div class="splitFeeSet_item">
           <div class="splitFeeSet_infoBox">
             <div class="item_title">剩余分润总额</div>
@@ -64,7 +76,13 @@
         </div>
       </div>
       <div class="splitFeeSet_content">
-        <div class="splitFeeSet_title">广告分润设置</div>
+        <div class="splitFeeSet_title">
+          <img
+            class="splitFeeSet_title_img"
+            src="http://oss.tdianyi.com/front/cP8tczcNJn6pxcE7S7Et3hSCRJfnTjAC.png"
+          />
+          <div class="splitFeeSet_title_word">广告分润设置</div>
+        </div>
         <div class="splitFeeSet_item">
           <div class="splitFeeSet_infoBox">
             <div class="item_title">剩余分润总额</div>

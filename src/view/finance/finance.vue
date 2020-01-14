@@ -35,7 +35,7 @@
     data() {
       return {
         active: 3,
-        meta:0,
+        meta:3,
         returns_filter: ["日收益", "月收益", "年收益", "总收益"],
 
       };

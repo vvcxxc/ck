@@ -82,7 +82,7 @@ export default {
       chooseType: "date",
       yearTime: "",
       date: dayjs(new Date()).format("YYYY-MM-DD"),
-      info: {},
+      info: {}
     };
   },
   components: {},
@@ -93,6 +93,7 @@ export default {
   watch: {
     type_: {
       handler(newVal, oldVal) {
+        console.log(newVal);
         this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
         this.chooseTime = false;
         let time = "";
@@ -118,6 +119,26 @@ export default {
     }
   },
   created() {
+    let time = "";
+
+    switch (this.type_) {
+      case 0:
+        time = dayjs(date).format("YYYY-MM-DD");
+        this.date = time;
+        break;
+      case 1:
+        time = dayjs(date).format("YYYY-MM");
+        this.date = time;
+        break;
+      case 2:
+        time = dayjs(date).format("YYYY");
+        this.date = time;
+        break;
+      case 3:
+        time = "";
+        this.date = time;
+        break;
+    }
     this.getInfo();
   },
   mounted() {},
@@ -125,6 +146,7 @@ export default {
     chooseTimeData(date) {
       this.chooseTime = false;
       let time = "";
+
       switch (this.type_) {
         case 0:
           time = dayjs(date).format("YYYY-MM-DD");
@@ -145,6 +167,7 @@ export default {
       }
     },
     getInfo() {
+      console.log(this.type_, "123123");
       if (this.date) {
         getFinance(this.date).then(res => {
           this.info = res.data;
@@ -164,22 +187,22 @@ export default {
       }
       return value;
     },
-    goTo (type){
-      if(this.type_ == 0){
+    goTo(type) {
+      if (this.type_ == 0) {
         this.$router.push({
-          path: '/finance/detailsList',
+          path: "/finance/detailsList",
           query: {
             type,
             date: this.date
           }
-        })
-      }else{
+        });
+      } else {
         this.$router.push({
-          path: '/finance/detailsList',
+          path: "/finance/detailsList",
           query: {
             type
           }
-        })
+        });
       }
     }
   }

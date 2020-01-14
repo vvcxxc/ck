@@ -5,7 +5,7 @@
 
           <!-- <p-entrepreneur v-if="getterRoleType == 'entrepreneur'"></p-entrepreneur> -->
           <!-- 因为创客会长首页区别太小，所以都写在这个组件里了，判断放在组件了 -->
-          <p-president></p-president>
+          <!-- <p-president></p-president> -->
         </div>
       </c-scroll>
   </div>

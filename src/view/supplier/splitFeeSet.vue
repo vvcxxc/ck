@@ -2,7 +2,7 @@
   <div class="splitFeeSet">
     <div class="splitFeeSet_Box">
       <div class="splitFeeSet_content">
-       <div class="splitFeeSet_title">
+        <div class="splitFeeSet_title">
           <img
             class="splitFeeSet_title_img"
             src="http://oss.tdianyi.com/front/cP8tczcNJn6pxcE7S7Et3hSCRJfnTjAC.png"
@@ -39,7 +39,7 @@
         </div>
       </div>
       <div class="splitFeeSet_content">
-         <div class="splitFeeSet_title">
+        <div class="splitFeeSet_title">
           <img
             class="splitFeeSet_title_img"
             src="http://oss.tdianyi.com/front/cP8tczcNJn6pxcE7S7Et3hSCRJfnTjAC.png"
@@ -76,7 +76,7 @@
         </div>
       </div>
       <div class="splitFeeSet_content">
-         <div class="splitFeeSet_title">
+        <div class="splitFeeSet_title">
           <img
             class="splitFeeSet_title_img"
             src="http://oss.tdianyi.com/front/cP8tczcNJn6pxcE7S7Et3hSCRJfnTjAC.png"

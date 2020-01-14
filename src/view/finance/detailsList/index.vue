@@ -116,6 +116,9 @@ export default {
           if(!res.pagination.total){
             this.isMore = false
           }
+          if(res.pagination.current_page == res.pagination.total_pages){
+            this.isMore = false
+          }
         })
         .catch(err => console.log(err));
     },

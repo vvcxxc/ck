@@ -13,7 +13,7 @@
           <div class="splitFeeSet_infoBox">
             <div class="item_title">剩余分润总额</div>
             <div class="splitFeeSet_inputBox">
-              <input class="splitFeeSet_input" v-model="data.pay_president_split" disabled />%
+              <input class="splitFeeSet_input" v-model="data.pay_president_split" disabled />‰
             </div>
           </div>
           <div class="splitFeeSet_infoBox" v-if="is_show_entrepreneur_set">
@@ -23,7 +23,7 @@
                 class="splitFeeSet_input"
                 v-on:blur="change_pay_value"
                 v-model="data.pay_entrepreneur_split"
-              />%
+              />‰
             </div>
           </div>
           <div class="splitFeeSet_infoBox">
@@ -33,7 +33,7 @@
                 class="splitFeeSet_input"
                 v-on:blur="change_pay_value"
                 v-model="data.pay_store_split"
-              />%
+              />‰
             </div>
           </div>
         </div>

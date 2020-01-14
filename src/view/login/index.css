@@ -90,7 +90,7 @@
 }
 .login-wrapper .login-wrapper_content .login_content .userName_box .box_title,
 .login-wrapper .login-wrapper_content .login_content .passWord_box .box_title {
-  width: 8vw;
+  width: 9vw;
   font-size: 4vw;
   font-family: Adobe Heiti Std;
   font-weight: normal;
@@ -98,7 +98,7 @@
 }
 .login-wrapper .login-wrapper_content .login_content .userName_box .box_input,
 .login-wrapper .login-wrapper_content .login_content .passWord_box .box_input {
-  width: calc(100% - 8vw);
+  width: calc(100% - 9vw);
   padding-left: 3vw;
   box-sizing: border-box;
   font-size: 3.7vw;

@@ -32,7 +32,7 @@
           可提现金额
           <span style="color: #000">￥{{info.money}}</span>
         </div>
-        <div class="all_withdraw">全部提现</div>
+        <!-- <div class="all_withdraw">全部提现</div> -->
       </div>
     </div>
     <div class="button-box">

@@ -21,7 +21,7 @@ import {
   Tabs,
   Toast,
   CountDown,
-  Tabbar, TabbarItem,Field, Button, Cell, CellGroup
+  Tabbar, TabbarItem,Field, Button, Cell, CellGroup,
 } from "vant";
 import "@utils/rem"
 import "@style/common"

@@ -57,7 +57,11 @@
 
         <div class="top-list">
           <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-            <div class="item" v-for="item in list" :key="item">{{item}}</div>
+            <div class="list-item">
+              <div class="item-name">杨大富</div>
+              <div class="item-phone">13078881111</div>
+              <div class="item-money">3214</div>
+            </div>
           </van-list>
         </div>
       </div>
@@ -69,6 +73,7 @@
 // import { Getter } from "vuex-class";
 import { NavBar, Icon, List } from "vant";
 import checkLogin from "@/decorator/check_login";
+import { getPeopleTopList, getStoreTopList } from "@api/api";
 import { mapGetters } from "vuex";
 const REQUEST_OK = 200;
 const ZERO = 0;
@@ -107,6 +112,7 @@ export default {
     if (!token) {
       this.$router.push("/login");
     }
+    this.getStoreTop()
   },
   methods: {
     tabClick(index) {
@@ -115,7 +121,26 @@ export default {
     },
     onLoad() {
       // 异步更新数据
-      this.finished = true
+      this.finished = true;
+    },
+    // 获取创客排行榜
+    getPeopleTop (){
+      let page = 1
+      getPeopleTopList(page).then(res => {
+        console.log(res)
+        this.loading = false;
+        this.list = res.data
+        if(res.pagination.current_page == res.pagination.total_pages || res.pagination.total == null){
+          this.finished = true
+        }
+      })
+    },
+    // 获取店铺排行榜
+    getStoreTop (){
+      let page = 1
+      getStoreTopList(page).then(res => {
+        console.log(res)
+      })
     }
   }
 };

@@ -68,7 +68,6 @@ export default {
     ...mapGetters(['role_type']),
   },
   created(){
-    console.log(this.role_type)
     if(this.role_type == 'entrepreneur'){
       this.list = [
         {

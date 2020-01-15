@@ -93,7 +93,6 @@ export default {
   watch: {
     type_: {
       handler(newVal, oldVal) {
-        console.log(newVal);
         this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
         this.chooseTime = false;
         let time = "";
@@ -167,7 +166,6 @@ export default {
       }
     },
     getInfo() {
-      console.log(this.type_, "123123");
       if (this.date) {
         getFinance(this.date).then(res => {
           this.info = res.data;

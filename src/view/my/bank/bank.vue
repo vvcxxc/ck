@@ -60,6 +60,7 @@
         }
       },
       handleHideView(view) {
+        this.fetchBank()
         switch (view) {
           case BANK_BIND:
             return this.flagBankBind = false

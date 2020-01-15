@@ -98,14 +98,17 @@ export default {
       if (errmsg) return this.$vux.toast.text(errmsg);
 
       bankBind(this.bankInfo).then(({ code, message }) => {
-        this.$vux.toast.text(message);
+
 
         if (code == REQUEST_OK) {
+          this.$vux.toast.text('修改成功');
           this.$emit("on-hide");
           this.bankInfo.bank_account_user_name = "";
           this.bankInfo.bank_name = "";
           this.bankInfo.bank_card_number = "";
           this.bankInfo.verify = "";
+        }else{
+          this.$vux.toast.text(message);
         }
       });
     },

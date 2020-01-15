@@ -12,11 +12,11 @@
         <div v-else-if="info.profit_type == 2">券分润</div>
         <div v-else-if="info.profit_type == 3">广告分润</div>
       </div>
-      <div class="layout-item">
+      <div class="layout-item" v-if="info.profit_type != 3">
         <div>订单金额</div>
         <div>{{info.order_money}}</div>
       </div>
-      <div class="layout-item">
+      <div class="layout-item" v-if="info.profit_type != 3">
         <div>订单来源</div>
         <div>{{info.location_name}}</div>
       </div>
@@ -27,7 +27,7 @@
           <div v-if="info.split_type == 2">展示</div>
         </div>
       </div>
-      <div class="layout-item">
+      <div class="layout-item" v-if="info.profit_type != 3">
         <div>用户ID</div>
         <div>{{info.user_id}}</div>
       </div>
@@ -38,7 +38,7 @@
       <div>{{info.created_at}}</div>
     </div>
 
-    <div class="layout-item">
+    <div class="layout-item" v-if="info.profit_type != 3">
       <div>订单号</div>
       <div>{{info.order_number}}</div>
     </div>

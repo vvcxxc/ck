@@ -140,6 +140,11 @@ export default {
       let page = 1
       getStoreTopList(page).then(res => {
         console.log(res)
+         this.loading = false;
+        this.list = res.data
+        if(res.pagination.current_page == res.pagination.total_pages || res.pagination.total == null){
+          this.finished = true
+        }
       })
     }
   }

@@ -166,7 +166,6 @@ export default {
     },
     quanfan(id,open_zero_rate){
       this.show = true
-      console.log(open_zero_rate)
       if(open_zero_rate === 1){
         this.text = '关闭'
       }else if(open_zero_rate === 0){
@@ -186,7 +185,6 @@ export default {
             this.showToast2 = true
           }
         }else{
-          console.log(data)
           this.showError = true
           this.error = data
         }

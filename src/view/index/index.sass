@@ -69,6 +69,9 @@
         flex-wrap: wrap
         width: 1.4rem
         justify-content: space-around
+        p
+          width: 100%
+          text-align: center
         .money
           font-size: .25rem
           color: #000000
@@ -145,5 +148,19 @@
           width: 30%
         .item-money
           text-align: right
-
-
+.qr_code
+  padding: 24px
+  position: fixed
+  left: 50%
+  top: 50%
+  background: #fff
+  transform: translate(-50%, -50%)
+  border-radius: 10px
+  .qr_code_title
+    width: 100%
+    text-align: center
+    margin-bottom: 10px
+    font-size: 16px
+  .qr_code_img
+    width: 180px
+    height: 180px

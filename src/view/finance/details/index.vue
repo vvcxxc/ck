@@ -1,7 +1,9 @@
 <template>
   <div class="page">
     <div class="money">+{{info.money}}</div>
-    <div class="title">费率返点</div>
+    <div class="title"><div v-if="info.profit_type == 1">费率返点</div>
+        <div v-else-if="info.profit_type == 2">券分润</div>
+        <div v-else-if="info.profit_type == 3">广告分润</div></div>
 
     <div class="layout-box">
       <div class="layout-item">

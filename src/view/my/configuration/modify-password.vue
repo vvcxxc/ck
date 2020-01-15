@@ -73,6 +73,7 @@ export default {
 
       modifyPassword(this.modifyInfo).then(({ code, message }) => {
         if (code == REQUEST_OK) {
+          this.$emit("on-hide");
           this.$vux.toast.text(message);
           this.modifyInfo.old_account_passwd = "";
           this.modifyInfo.new_account_passwd = "";

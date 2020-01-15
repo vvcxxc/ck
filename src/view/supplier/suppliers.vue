@@ -28,10 +28,10 @@
                 <p>{{Number(item.supplierMoney) + Number(item.wd_money)}}</p>
                 <p>总营业额</p>
               </div>
-              <div class="today_income">
+              <!-- <div class="today_income">
                 <p>{{item.sale_money}}</p>
                 <p>今日营业额</p>
-              </div>
+              </div> -->
               <div class="gift_limit">
                 <p>{{item.integral.length > 0 ? item.integral[0]['integral'] : 0}}</p>
                 <p>礼品额度</p>

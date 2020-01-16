@@ -10,7 +10,7 @@ import { Vue, Component } from "vue-property-decorator";
 import { Getter } from "vuex-class";
 import { XTable, Panel, LoadMore, XHeader } from "vux";
 
-import PEntrepreneur from "./entrepreneur/entrepreneur";
+// import PEntrepreneur from "./entrepreneur/entrepreneur";
 import PPresident from "./president/president";
 
 import CScroll from "@components/c-scroll/scroll";
@@ -26,7 +26,7 @@ const ZERO = 0;
     XTable,
     Panel,
     PPresident,
-    PEntrepreneur,
+    // PEntrepreneur,
     CScroll
   }
 })

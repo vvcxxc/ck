@@ -1,0 +1,71 @@
+.record {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+}
+.record .record_sum {
+  height: 50px;
+  padding: 0 9px;
+  box-sizing: border-box;
+  background: #e8eff2;
+  font-size: 17px;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #2c3e50;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.record .record_table {
+  width: 100%;
+  height: auto;
+  padding: 0 9px 80px;
+  box-sizing: border-box;
+  background: #fff;
+  font-size: 12px;
+}
+.record .record_table .record_table_item {
+  height: 65px;
+  width: 100%;
+  border-bottom: 1px solid #f9f9fa;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.record .record_table .record_table_item .table_item_left {
+  height: auto;
+  width: 220px;
+}
+.record .record_table .record_table_item .table_item_left .left_store {
+  font-size: 17px;
+  height: 24px;
+  width: 100%;
+  text-align: left;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.record .record_table .record_table_item .table_item_left .left_time {
+  width: 153px;
+  height: 13px;
+  font-size: 13px;
+  font-family: PingFangSCRegular;
+  font-weight: bold;
+  color: #c1c4c6;
+}
+.record .record_table .record_table_item .table_item_right {
+  width: 100px;
+  height: 15px;
+  text-align: right;
+  font-size: 15px;
+  font-family: Arial;
+  font-weight: 400;
+  color: #2c3e50;
+}

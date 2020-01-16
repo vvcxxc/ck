@@ -2,7 +2,7 @@
   <div class="list-wrapper" v-if="data.is_show || president">
     <div class="list-container">
       <div class="image" v-show="_showOptions.image">
-        <img :src="data.preview" alt width="56" height="56" />
+        <img :src="data.preview" alt width="44" height="44" />
       </div>
       <div class="desc-wrapper">
         <div class="item" v-for="(value, key) in data.desc" :key="key">
@@ -166,7 +166,6 @@ export default {
     },
     quanfan(id,open_zero_rate){
       this.show = true
-      console.log(open_zero_rate)
       if(open_zero_rate === 1){
         this.text = '关闭'
       }else if(open_zero_rate === 0){
@@ -186,7 +185,6 @@ export default {
             this.showToast2 = true
           }
         }else{
-          console.log(data)
           this.showError = true
           this.error = data
         }

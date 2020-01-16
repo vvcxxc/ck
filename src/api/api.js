@@ -292,3 +292,64 @@ http({
   url: 'api/entrepreneur/ZeroRate/' + id,
   method: 'get'
 })
+
+
+/**
+ * 首页数据（新）
+ */
+
+export const indexInfo = () =>
+http({
+  url: 'api/entrepreneur/index',
+  method: 'get'
+})
+
+/**
+ * 提现页面信息
+ */
+export const withdrawInfo = () =>
+http({
+  url: 'api/entrepreneur/cashWithdrawal',
+  method: 'get'
+})
+
+
+/**
+ * 提现列表页信息
+ */
+export const withdrawListMoney = () =>
+http({
+  url: 'api/entrepreneur/cashInMoney',
+  method: 'get'
+})
+
+/**
+ *  获取收益列表数据
+ *
+ */
+export const getFinanceList = (params) =>
+http({
+  url: 'api/entrepreneur/water/list',
+  method: 'get',
+  params
+})
+
+/**
+ * 获取收益详情
+ */
+export const getFinanceDetails = (id) =>
+http({
+  url: 'api/entrepreneur/water/info',
+  method: 'get',
+  params: {id}
+})
+
+/**
+ * 获取收益首页
+ */
+export const getFinance = (date) =>
+http({
+  url: 'api/entrepreneur/water',
+  method: 'get',
+  params: {created_at: date}
+})

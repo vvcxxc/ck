@@ -1,93 +1,89 @@
 <template>
   <div class="balance">
-    <x-header title="财务管理"
-              :left-options="{showBack: false}"></x-header>
-    <c-scroll class="scroll-wrapper">
-      <div class="container">
-        <div class="widthdrawHistory">
-          <div class="zw-list-container-img">
-            <div class="zw-list-title">
-              <p>{{'提现记录共有: ' + withdraws.length + ' 条'}}</p>
-            </div>
-            <div class="zw-list-item" v-for="(item, index) in withdraws" :key="index">
-              <div class="zw-list-item-content">
-                <div class="zw-detail" style="padding-left: 0">
-                  <div class="zw-detail-item zw-detail-1">{{'提现金额 '+item.money}}</div>
-                  <div class="zw-detail-item zw-detail-2">{{item.status}}</div>
-                  <div class="zw-detail-item zw-detail-3">
-                    <div>
-                      <span>{{item.from_date}}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <load-more v-if="!withdraws.toString()" :show-loading="false" :tip="'暂无数据'" background-color="#fff"></load-more>
-        </div>
-      </div>
-    </c-scroll>
+    <van-nav-bar :border="false" title="收益信息" />
+    <van-tabs
+      v-model="active"
+      :swipe-threshold="6"
+      @click="returnsFilter"
+      color="#fff"
+      background="#5091DD"
+      title-inactive-color="#fff"
+      title-active-color="#fff"
+    >
+      <van-tab title="日收益" >
+        <!-- <ReturnsFilte :typet="55"/> -->
+      </van-tab>
+      <van-tab title="月收益">
+        <!-- <ReturnsFilte :typet="554"/> -->
+      </van-tab>
+      <van-tab title="年收益">
+        <!-- <ReturnsFilte :typet="77"/> -->
+      </van-tab>
+      <van-tab title="总收益" >
+        <!-- <ReturnsFilte :typet="988"/> -->
+      </van-tab>
+      <van-tab title=" " disabled></van-tab>
+    </van-tabs>
+    <ReturnsFilte :type_="meta"  />
   </div>
 </template>
 <script type="text/javascript">
+  import ReturnsFilte from "./component/returns_filte";
 
-import { XHeader } from "vux"
-import { LoadMore } from "vux"
-import { withdrawRecord } from "@api/api"
-import CScroll from "@components/c-scroll/scroll"
+  export default {
+    name: "balance",
+    data() {
+      return {
+        active: 3,
+        meta:3,
+        returns_filter: ["日收益", "月收益", "年收益", "总收益"],
 
-// import PWithdrawRecord from "./withdrawRecord/withdrawRecord"
-const REQUEST_OK = 200
-export default {
-  name: 'balance',
-  data () {
-    return {
-      withdraws: []
+      };
+    },
+    components: {
+      ReturnsFilte
+    },
+    created() {
+
+    },
+    methods: {
+      returnsFilter(data, dd) {
+        this.meta=data
+      },
+
     }
-  },
-  components: {
-    XHeader,
-    // PWithdrawRecord
-    CScroll,
-    LoadMore
-  },
-  created() {
-    this.fetchWithdrawRecord()
-  },
-  methods: {
-    fetchWithdrawRecord() {
-      withdrawRecord().then(({ data, code, meta }) => {
-        if(!code){
-          this.withdraws = data
-        }
-      }).catch(err => console.log(err))
-    }
-  }
-}
+  };
 </script>
 <style lang="sass" scoped>
-@import "@/style/mixin.scss"
-
-$px_5: 5px
-$px_10: 10px
-$px_12: 12px
-$px_46: 46px
-$px_53: 53px
-$pc_50: 50%
-$pc_100: 100%
-
-@mixin scroll-wrapper($top: 46px, $bottom: 53px)
-  position: absolute
-  top: $top
-  width: $pc_100
-  bottom: $bottom
-  overflow: hidden
 .balance
-  font-size: $px_12
-  height: $pc_100
-  .scroll-wrapper
-    @include scroll-wrapper
-    margin-top: $px_5
-    .container
-      // padding-bottom: $px_53
+  height: 100vh
+  width: 100vw
+  background:url('../../assets/earnings_bg.png')
+  background-repeat: no-repeat
+  background-size: 100%
+  overflow: hidden
+  /deep/ .van-hairline--top-bottom::after, .van-hairline-unset--top-bottom::after
+    border: none
+  /deep/ .van-ellipsis
+    font-size: 14px
+  /deep/ .van-tab--active
+    font-size: 18px
+.van-nav-bar
+    background-color: #5091DD
+    .van-nav-bar__title
+      font-size: 18px
+      font-family: Adobe Heiti Std
+      font-weight: normal
+      color: rgba(233,238,242,1)
+      .van-tab__text
+        font-size: 14px
+        font-family: Adobe Heiti Std
+        font-weight: normal
+        color: rgba(255,255,255,1)
+      .van-tab--active
+        font-size: 14px
+        font-family: Adobe Heiti Std
+        font-weight: normal
+        color: rgba(255,255,255,1)
+
 </style>

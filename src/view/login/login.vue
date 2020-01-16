@@ -70,7 +70,8 @@ export default {
             this.$store.commit("TOAST", { text: "登录成功" });
             this.$store.commit("ROLE_TYPE", { type: role_type });
             timeout(500).then(() => {
-              window.location.href = `http://${window.location.host}`;
+              // window.location.href = `http://${window.location.host}`;
+             this.$router.push("/index");
             });
           }
         })

@@ -68,7 +68,6 @@ export default {
     ...mapGetters(['role_type']),
   },
   created(){
-    console.log(this.role_type)
     if(this.role_type == 'entrepreneur'){
       this.list = [
         {
@@ -85,12 +84,12 @@ export default {
           active: 'static/img/no-finance.png',
           inactive: 'static/img/finance.png'
         },
-        {
-          name: 'entrepreneur',
-          label: '创客',
-          path: '/entrepreneur',
-          active: 'static/img/no-people.png',
-          inactive: 'static/img/people.png'
+       {
+          name: 'supplier',
+          label: '店铺',
+          path: '/supplier',
+          active: 'static/img/no-store.png',
+          inactive: 'static/img/store.png'
         },
         {
           name: 'my',

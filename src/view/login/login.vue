@@ -20,6 +20,7 @@
           <div class="box_title">密码</div>
           <input class="box_input" placeholder="请输入密码" type="password" v-model="account_passwd" />
         </div>
+
         <div class="login_box" @click="handleLogin">登录</div>
         <!-- <div class="resign_box" v-if="role_type=='entrepreneur'" @click="goToRegister">注册</div> -->
       </div>

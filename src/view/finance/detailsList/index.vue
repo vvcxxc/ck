@@ -1,6 +1,8 @@
 <template>
-  <div class="details-page">
-    <div class="details-header">
+  <div >
+    <van-nav-bar  left-arrow :title="title" @click-left="goBack"/>
+    <div class="details-page">
+      <div class="details-header">
       <div></div>
       <div @click="showDatePicker" class="date">
         {{date}}
@@ -36,6 +38,8 @@
 
       </div>
     </div>
+    </div>
+
 
     <van-popup position="bottom" v-model="show" get-container="#app">
       <van-datetime-picker
@@ -90,6 +94,10 @@ export default {
     this.getList();
   },
   methods: {
+    goBack() {
+      this.$router.back()
+    },
+
     // 展示隐藏日期选择器
     showDatePicker() {
       this.show = !this.show;

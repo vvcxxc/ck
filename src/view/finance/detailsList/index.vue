@@ -78,19 +78,27 @@ export default {
     if(date){
       this.date = date
     }
-    switch (type) {
-      case 1:
-        this.title = "费率返点";
-        break;
-      case 2:
-        this.title = "券分润";
-        break;
-      case 3:
-        this.title = "广告分润";
-        break;
-      default:
-        this.title = "费率返点";
+    console.log(4123)
+    if(type == 1){
+      this.title = "费率返点";
+    }else if(type == 2){
+       this.title = "券分润";
+    }else if (type == 3){
+      this.title = "广告分润";
     }
+    // switch (type) {
+    //   case 1:
+    //     this.title = "费率返点";
+    //     break;
+    //   case 2:
+    //     this.title = "券分润";
+    //     break;
+    //   case 3:
+    //     this.title = "广告分润";
+    //     break;
+    //   default:
+    //     this.title = "费率返点";
+    // }
     this.getList();
   },
   methods: {

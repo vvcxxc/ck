@@ -55,25 +55,26 @@ export default {
   data() {
     return {
       info: {},
-      title: '收益详情'
+      title: "收益详情"
     };
   },
   created() {
+    let type = this.$route.query.type;
     let id = this.$route.query.id;
     getFinanceDetails(id).then(res => {
       this.info = res.data;
-      switch(res.data.profit_type) {
-        case 1:
-          this.title = '费率返点详情'
-          break
-        case 2:
-          this.title = '券分润详情'
-          break
-        case 3:
-          this.title = '广告分润详情'
-          break
-      }
     });
+    switch (type) {
+      case '1':
+        this.title = "费率返点详情";
+        break;
+      case '2':
+        this.title = "券分润详情";
+        break;
+      case '3':
+        this.title = "广告分润详情";
+        break;
+    }
   },
   methods: {
     goBack() {

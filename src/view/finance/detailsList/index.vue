@@ -148,7 +148,8 @@ export default {
       this.$router.push({
         path: "/finance/details",
         query: {
-          id
+          id,
+          type: this.$route.query.type
         }
       });
     }

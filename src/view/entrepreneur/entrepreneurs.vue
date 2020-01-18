@@ -125,6 +125,7 @@ export default {
   margin-bottom: 50px
   background: #E9EEF2
   min-height: 100vh
+  padding-bottom: 50px
   .entrepreneur
     width: 100%
     height: 100%

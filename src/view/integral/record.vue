@@ -9,6 +9,10 @@
         </div>
         <div class="table_item_right">{{item.integral}}</div>
       </div>
+      <van-divider
+        v-if="data.length==0"
+        :style="{borderColor: '#ccc', padding: '10px 16px',margin: 0, fontSize: '16px' }"
+      >暂无更多数据</van-divider>
     </div>
   </div>
 </template>

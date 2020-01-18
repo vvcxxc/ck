@@ -27,7 +27,6 @@
         </div>
       </div>
     </div>
-
     <div class="entrepreneur_box">
       <div class="entrepreneur_title">店铺创客</div>
       <div class="entrepreneur_content">

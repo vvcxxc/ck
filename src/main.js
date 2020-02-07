@@ -21,7 +21,7 @@ import {
   Tabs,
   Toast,
   CountDown,
-  Tabbar, TabbarItem,Field, Button, Cell, CellGroup
+  Tabbar, TabbarItem,Field, Button, Cell, CellGroup, Uploader
 } from "vant";
 import "@utils/rem"
 import "@style/common"
@@ -50,6 +50,7 @@ Vue.use(Row).use(Col);
 Vue.use(NavBar);
 Vue.use(Tab).use(Tabs);
 Vue.use(Cell).use(CellGroup);
+Vue.use(Uploader);
 Vue.config.productionTip = false
 
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端

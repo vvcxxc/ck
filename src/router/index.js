@@ -139,6 +139,16 @@ export default new Router({
       path: '/finance/details',
       component: getComponent('finance/details'),
       meta: { keepAlive: false }
+    },
+    {
+      path: '/completeInformation/IdCard',
+      component: getComponent('completeInformation/IdCard'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/completeInformation/bankCard',
+      component: getComponent('completeInformation/bankCard'),
+      meta: { keepAlive: false }
     }
   ]
 })

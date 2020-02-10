@@ -2,13 +2,13 @@
   width: 100vw;
   height: auto;
   min-height: 100vh;
-  padding: 30px 28px;
   box-sizing: border-box;
   background: #fff;
 }
 .register-wrapper .register-content {
   width: 100%;
   height: auto;
+  padding: 30px 28px;
 }
 .register-wrapper .register-content .userName_box {
   height: 45px;
@@ -23,14 +23,14 @@
   position: relative;
 }
 .register-wrapper .register-content .userName_box .box_title {
-  width: 75px;
-  text-align: center;
+  width: 60px;
+  text-align: left;
   font-family: Adobe Heiti Std;
   font-weight: normal;
   color: #2c3e50;
 }
 .register-wrapper .register-content .userName_box .box_input {
-  width: calc(100% - 75px);
+  width: calc(100% - 60px);
 }
 .register-wrapper .register-content .userName_box .get_code {
   height: 27px;
@@ -50,9 +50,26 @@
 .register-wrapper .have_read_rule_box {
   width: 100%;
   height: 68px;
-  background: blue;
+  font-size: 13px;
+  color: #98a6ad;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
-.register-wrapper .resign_box {
+.register-wrapper .have_read_rule_box .have_read_rule_info {
+  margin-left: 13px;
+}
+.register-wrapper .have_read_rule_box .have_read_rule_msg {
+  color: #4781fe;
+}
+.register-wrapper .resign_content {
+  width: 100%;
+  height: auto;
+  padding: 0 46px;
+  box-sizing: border-box;
+}
+.register-wrapper .resign_content .resign_box {
   height: 44px;
   border-radius: 22px;
   font-size: 14px;
@@ -62,4 +79,49 @@
   justify-content: center;
   border: 1px solid #98a6ad;
   color: #2c3e50;
+}
+.register-wrapper .register-success-content {
+  width: 100%;
+  height: auto;
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.4rem;
+}
+.register-wrapper .register-success-content .register-img {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-bottom: 0.34rem;
+}
+.register-wrapper .register-success-content .register-success-words {
+  height: 0.34rem;
+  font-size: 0.34rem;
+  line-height: 1;
+  color: #484d51;
+  margin-bottom: 1rem;
+}
+.register-wrapper .register-success-content .register-success-compete {
+  width: 3.8rem;
+  height: 0.96rem;
+  border-radius: 0.48rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: #4486f7;
+  font-size: 0.35rem;
+  margin-bottom: 0.3rem;
+}
+.register-wrapper .register-success-content .register-success-jump {
+  width: 3.8rem;
+  height: 0.96rem;
+  border-radius: 0.48rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #4486f7;
+  background: #fff;
+  border: 1px solid #4486f7;
+  font-size: 0.35rem;
 }

@@ -17,11 +17,18 @@
     </van-row>
     <van-row type="flex" justify="center">
       <van-col span="24" class="rate-box">
-        <div @click="goTo(1)">
+        <div @click="goTo(1)" v-if="this.type_ <3">
           <span>费率返点</span>
           <span>
             {{info.rate_all}}
             <van-icon name="arrow" />
+          </span>
+        </div>
+        <div  v-else>
+          <span>费率返点</span>
+          <span>
+            {{info.rate_all}}
+            <van-icon name="arrow" v-if="this.type_ <3"/>
           </span>
         </div>
         <div @click="goTo(2)">

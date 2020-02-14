@@ -191,14 +191,16 @@ export default {
           path: "/finance/detailsList",
           query: {
             type,
-            date: this.date
+            date: this.date,
+            time:this.type_//用以区别年 月 日
           }
         });
       } else {
         this.$router.push({
           path: "/finance/detailsList",
           query: {
-            type
+            type,
+            time:this.type_//用以区别年 月 日
           }
         });
       }

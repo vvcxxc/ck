@@ -28,21 +28,34 @@
           <span>费率返点</span>
           <span>
             {{info.rate_all}}
-            <van-icon name="arrow" v-if="this.type_ <3"/>
           </span>
         </div>
-        <div @click="goTo(2)">
+
+        <div @click="goTo(2)" v-if="this.type_ <3">
           <span>券分润</span>
           <span>
             {{info.coupon_all}}
             <van-icon name="arrow" />
           </span>
+          </span>
         </div>
-        <div @click="goTo(3)">
+        <div  v-else>
+          <span>券分润</span>
+          <span>
+            {{info.coupon_all}}
+          </span>
+        </div>
+        <div @click="goTo(3)" v-if="this.type_ <3">
           <span>广告分润</span>
           <span>
             {{info.ad_all}}
             <van-icon name="arrow" />
+          </span>
+        </div>
+        <div v-else>
+          <span>广告分润</span>
+          <span>
+            {{info.ad_all}}
           </span>
         </div>
       </van-col>

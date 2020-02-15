@@ -1,10 +1,6 @@
 <template>
   <div class="register-wrapper">
-     <van-nav-bar
-      title="创客注册"
-      left-arrow
-      @click-left="goBack"
-    />
+    <van-nav-bar title="创客注册" left-arrow @click-left="goBack" />
     <div class="register-content">
       <div class="userName_box">
         <div class="box_title">账号</div>
@@ -42,17 +38,26 @@
         <div class="box_title">确认密码</div>
         <input class="box_input" placeholder="请输入密码" type="password" v-model="confirm_password" />
       </div>
+      <!-- <div class="have_read_rule_box">
+        <van-checkbox v-model="checked" shape="square" icon-size="20px"></van-checkbox>
+        <div class="have_read_rule_info">已阅读并同意</div>
+        <div class="have_read_rule_msg">《用户注册协议》</div>
+      </div>-->
     </div>
-    <!-- <div class="have_read_rule_box">已阅读并注册</div> -->
-    <div class="resign_box" @click="handleRegister">注册</div>
+
+    <div class="resign_content" @click="handleRegister">
+      <div class="resign_box">注册</div>
+    </div>
   </div>
 </template>
 <script>
 import { Validator, timeout } from "@utils/common";
 import { register, sendVerifyCode } from "@api/api";
 import Vue from "vue";
-import { CountDown, NavBar } from "vant";
+import { CountDown, NavBar, Checkbox, CheckboxGroup } from "vant";
 // Vue.use(CountDown);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
 import "./style";
 
 export default {
@@ -63,7 +68,8 @@ export default {
       confirm_password: "",
       phone: "",
       mobile_verification_code: "",
-      isSend: false
+      isSend: false,
+      checked: false
     };
   },
   methods: {
@@ -87,7 +93,7 @@ export default {
           }
           this.$vux.toast.text("注册成功");
           timeout(1500).then(() => {
-            window.location.href = `http://${window.location.host}`;
+            this.$router.push("/ck/resignSccess");
           });
         })
         .catch(err => console.log(err));
@@ -155,8 +161,8 @@ export default {
     },
     goBack() {
       this.$router.push({
-        path: '/login'
-      })
+        path: "/login"
+      });
     },
 
     fetchVerify() {

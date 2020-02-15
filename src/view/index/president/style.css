@@ -1,0 +1,328 @@
+.president {
+  width: 100vw;
+  height: auto;
+  min-height: 100vh;
+  background: url("http://oss.tdianyi.com/front/si3hAtjtrzYKyKEyiae5kBnrz83nf3dh.png");
+  background-position: top;
+  background-size: 100vw 349px;
+  background-repeat: no-repeat;
+  padding: 0 17px 80px;
+  box-sizing: border-box;
+}
+.president .president_header {
+  width: 100%;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+}
+.president .sum_container {
+  width: 100%;
+  height: 192px;
+  background: url("http://oss.tdianyi.com/front/7eE4j4DWZpfxQBnjwxHXHFKBYzpWZmdQ.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.president .sum_container .sum_container_top {
+  width: 100%;
+  height: 136px;
+  padding: 0 22px 0 26px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.president .sum_container .sum_container_top .sum_container_top_left {
+  width: 100%;
+}
+.president
+  .sum_container
+  .sum_container_top
+  .sum_container_top_left
+  .sum_container_balance_title {
+  width: 26px;
+  height: 12px;
+  font-size: 13px;
+  line-height: 1;
+  font-family: PingFang;
+  font-weight: 400;
+  color: #fdfeff;
+  opacity: 0.8;
+  margin-bottom: 16px;
+}
+.president
+  .sum_container
+  .sum_container_top
+  .sum_container_top_left
+  .sum_container_balance_num {
+  width: 100%;
+  height: 27px;
+  font-size: 36px;
+  line-height: 1;
+  font-family: Arial;
+  font-weight: bold;
+  color: #fff;
+}
+.president .sum_container .sum_container_top .sum_container_top_right {
+  width: 70px;
+}
+.president
+  .sum_container
+  .sum_container_top
+  .sum_container_top_right
+  .sum_container_detail_titleBox {
+  width: 100%;
+  height: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.president
+  .sum_container
+  .sum_container_top
+  .sum_container_top_right
+  .sum_container_detail_titleBox
+  .detail_title {
+  width: 52px;
+  height: 12px;
+  font-size: 13px;
+  line-height: 1;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #fff;
+}
+.president
+  .sum_container
+  .sum_container_top
+  .sum_container_top_right
+  .sum_container_detail_titleBox
+  .detail_icon {
+  width: 12px;
+  height: 12px;
+  font-size: 12px;
+  color: #fff;
+}
+.president
+  .sum_container
+  .sum_container_top
+  .sum_container_top_right
+  .sum_container_detail_btn {
+  height: 32px;
+  width: 70px;
+  border-radius: 16px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #3f7de7;
+}
+.president .sum_container .sum_container_bottom {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 23px;
+  box-sizing: border-box;
+}
+.president .sum_container .sum_container_bottom .sum_container_bottom_content {
+  width: 400px;
+  height: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.president
+  .sum_container
+  .sum_container_bottom
+  .sum_container_bottom_content
+  .today_earnings_title {
+  height: 13px;
+  width: 68px;
+  text-align: left;
+  height: 13px;
+  line-height: 1;
+  font-size: 14px;
+  font-family: PingFang;
+  font-weight: 500;
+  color: #2c3e50;
+}
+.president
+  .sum_container
+  .sum_container_bottom
+  .sum_container_bottom_content
+  .today_earnings_num {
+  height: 16px;
+  font-size: 18px;
+  font-family: Arial;
+  font-weight: bold;
+  color: #2c3e50;
+}
+.president .sum_container .sum_container_bottom .sum_container_bottom_icon {
+  transform: rotate(-90deg);
+  color: #5d6b78;
+  font-size: 15px;
+}
+.president .entrepreneur_box {
+  margin-top: 65px;
+}
+.president .entrepreneur_box .entrepreneur_title {
+  height: 45px;
+  width: 100%;
+  text-align: left;
+  font-size: 18px;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #2c3e50;
+}
+.president .entrepreneur_box .entrepreneur_content {
+  width: 100%;
+  height: 230px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.president .entrepreneur_box .entrepreneur_content .entrepreneur_left {
+  background: url("http://oss.tdianyi.com/front/zjRre2XshRdSk57bFizZXte3syHzWCBd.png");
+}
+.president .entrepreneur_box .entrepreneur_content .entrepreneur_right {
+  background: url("http://oss.tdianyi.com/front/drXPWWtk8tXwD6S3m7cXPBQiWBhEHKBG.png");
+}
+.president .entrepreneur_box .entrepreneur_content .entrepreneur_left,
+.president .entrepreneur_box .entrepreneur_content .entrepreneur_right {
+  width: 170px;
+  height: 230px;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_left
+  .invitation_entrepreneur_icon,
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_right
+  .invitation_entrepreneur_icon {
+  width: 25px;
+  height: 25px;
+  background: url("http://oss.tdianyi.com/front/7RZ6AtTdcySZs3JxjsNtDTwD3AF7KR5R.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin-top: 30px;
+}
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_left
+  .invitation_entrepreneur_icon2,
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_right
+  .invitation_entrepreneur_icon2 {
+  width: 25px;
+  height: 25px;
+  background: url("http://oss.tdianyi.com/front/AGpSmbWYjX3AbTJDzc2aMwcQixmjaRkK.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin-top: 30px;
+}
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_left
+  .invitation_entrepreneur_title,
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_right
+  .invitation_entrepreneur_title {
+  width: 100%;
+  height: 14px;
+  text-align: center;
+  font-size: 14px;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #fff;
+  opacity: 0.63;
+  margin-top: 12px;
+}
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_left
+  .invitation_entrepreneur_num,
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_right
+  .invitation_entrepreneur_num {
+  height: 30px;
+  width: 100%;
+  margin-top: 13px;
+  text-align: center;
+  font-size: 36px;
+  font-family: Adobe Heiti Std;
+  font-weight: bold;
+  color: #fff;
+}
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_left
+  .invitation_entrepreneur_btn,
+.president
+  .entrepreneur_box
+  .entrepreneur_content
+  .entrepreneur_right
+  .invitation_entrepreneur_btn {
+  width: 108px;
+  height: 44px;
+  margin-top: 50px;
+  background: #fff;
+  box-shadow: 0px 9px 9px 1px rgba(63, 125, 231, 0.09);
+  opacity: 0.67;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-family: PingFang;
+  font-weight: 500;
+  color: #2c3e50;
+}
+.president .qr_code {
+  padding: 24px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+}
+.president .qr_code .qr_code_title {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+.president .qr_code .qr_code_img {
+  width: 180px;
+  height: 180px;
+}

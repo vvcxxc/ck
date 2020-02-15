@@ -21,6 +21,7 @@
 .record .record_table {
   width: 100%;
   height: auto;
+  min-height: calc(100vh - 50px);
   padding: 0 9px 80px;
   box-sizing: border-box;
   background: #fff;

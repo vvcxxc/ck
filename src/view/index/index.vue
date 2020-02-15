@@ -47,7 +47,7 @@
 
       <div class="top-box">
         <div class="top-tab">
-          <div class="tab" @click="tabClick(0)">
+          <div class="tab" @click="tabClick(0)" v-if="roleType == 'president'">
             <div :class="tab == 0 ? 'actived' : ''">创客排行榜</div>
           </div>
           <div class="tab" @click="tabClick(1)">
@@ -97,6 +97,7 @@ export default {
       codeUrl: "", //二维码图片路径
       is_show: false, // 展示邀请页面
       title: "", // 邀请时候的title
+      roleType: ''
     };
   },
   computed: {
@@ -104,6 +105,11 @@ export default {
   },
   created() {
     const token = window.localStorage.getItem("token");
+    const roleType = localStorage.getItem('role_type')
+    this.roleType = roleType
+    if(roleType != 'president'){
+      this.tab = 1
+    }
     if (!token) {
       this.$router.push("/login");
     }

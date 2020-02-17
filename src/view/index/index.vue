@@ -57,11 +57,21 @@
 
         <div class="top-list">
           <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-            <div class="list-item" v-for="item in list" :key='item'>
+            <div v-if="tab == 1">
+              <div class="list-item" v-for="item in list" :key='item' >
+              <div class="item-name">{{item.location_name}}</div>
+              <div class="item-phone">{{item.tel}}</div>
+              <div class="item-money">{{item.money}}</div>
+              </div>
+            </div>
+            <div v-if="tab == 0">
+              <div class="list-item" v-for="item in list" :key='item' >
               <div class="item-name">{{item.account_name}}</div>
               <div class="item-phone">{{item.account_phone}}</div>
               <div class="item-money">{{item.money}}</div>
+              </div>
             </div>
+
           </van-list>
         </div>
       </div>

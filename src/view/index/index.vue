@@ -9,11 +9,11 @@
           <p class="header-l-money">{{info.amount}}</p>
         </div>
         <div class="header-r">
-          <p class="header-r-title">
+          <p class="header-r-title" @click="goTo(0)">
             提现明细
             <van-icon name="arrow" />
           </p>
-          <div class="header-r-btn">提现</div>
+          <div class="header-r-btn" @click="goTo(1)">提现</div>
         </div>
       </div>
 
@@ -130,6 +130,14 @@ export default {
         this.qrCodeUrl = qrCodeUrl;
         this.showQRcode(qrCodeUrl);
         this.title = "邀请店铺";
+      }
+    },
+    goTo(type) {
+      // 提现跳转
+      if (type == 1) {
+        this.$router.push("/index/withdraw");
+      } else if (type == 0) {
+        this.$router.push("/index/withdrawList");
       }
     },
     showQRcode(data) {

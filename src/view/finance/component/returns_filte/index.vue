@@ -108,7 +108,7 @@ export default {
   },
   components: {},
   props: {
-    type_: Number,
+    type_: Number | String,
     default: 0
   },
   watch: {

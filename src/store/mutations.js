@@ -9,7 +9,6 @@ export default {
   [types.HIDE_TABBAR](state, { path }) {
 
     const targets = ['/my']
-
     const excludes = ['/login']
 
     if(excludes.includes(path)) return false

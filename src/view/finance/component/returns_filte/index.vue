@@ -37,7 +37,6 @@
             {{info.coupon_all}}
             <van-icon name="arrow" />
           </span>
-          </span>
         </div>
         <div  v-else>
           <span>券分润</span>
@@ -89,6 +88,7 @@ import {
 } from "vant";
 import { getFinance } from "@api/api";
 import dayjs from "dayjs";
+import store from "@/store/index"
 
 export default {
   name: "ReturnsFilte",
@@ -102,7 +102,8 @@ export default {
       chooseType: "date",
       yearTime: "",
       date: dayjs(new Date()).format("YYYY-MM-DD"),
-      info: {}
+      info: {},
+      type:3
     };
   },
   components: {},
@@ -114,17 +115,18 @@ export default {
     type_: {
       handler(newVal, oldVal) {
         this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
+        this.type = newVal
         this.chooseTime = false;
         let time = "";
         switch (newVal) {
           case 0:
-            time = dayjs(new Date()).format("YYYY-MM-DD");
+            time= store.state.ql.day?store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
             break;
           case 1:
-            time = dayjs(new Date()).format("YYYY-MM");
+            time= store.state.ql.month?store.state.ql.month:dayjs(new Date()).format("YYYY-MM");
             break;
           case 2:
-            time = dayjs(new Date()).format("YYYY");
+            time= store.state.ql.years?store.state.ql.years:dayjs(new Date()).format("YYYY");
             break;
           case 3:
             time = "";
@@ -139,25 +141,21 @@ export default {
   },
   created() {
     let time = "";
-
     switch (this.type_) {
       case 0:
         time = dayjs(date).format("YYYY-MM-DD");
-        this.date = time;
         break;
       case 1:
         time = dayjs(date).format("YYYY-MM");
-        this.date = time;
         break;
       case 2:
         time = dayjs(date).format("YYYY");
-        this.date = time;
         break;
       case 3:
         time = "";
-        this.date = time;
         break;
     }
+    this.date = time;
     this.getInfo();
   },
   mounted() {},
@@ -165,29 +163,44 @@ export default {
     chooseTimeData(date) {
       this.chooseTime = false;
       let time = "";
-
+      let props_type = ""
       switch (this.type_) {
         case 0:
           time = dayjs(date).format("YYYY-MM-DD");
-          this.date = time;
+          props_type = "day"
           break;
         case 1:
           time = dayjs(date).format("YYYY-MM");
-          this.date = time;
+          props_type="month"
           break;
         case 2:
           time = dayjs(date).format("YYYY");
-          this.date = time;
+          props_type = "year"
           break;
         case 3:
           time = "";
-          this.date = time;
           break;
       }
+      this.date = time;
+      store.dispatch("ql/fetchOrderDetail", { time:this.date, type:props_type })
     },
     getInfo() {
+      let meta = ''
+     switch (this.type) {
+        case 0:
+          meta = store.state.ql.day
+          break;
+        case 1:
+           meta = store.state.ql.month
+          break;
+        case 2:
+          meta = store.state.ql.years
+          break;
+        case 3:
+          break;
+      }
       if (this.date) {
-        getFinance(this.date).then(res => {
+        getFinance(meta?meta:this.date).then(res => {
           this.info = res.data;
         });
       } else {
@@ -212,7 +225,8 @@ export default {
           query: {
             type,
             date: this.date,
-            time:this.type_//用以区别年 月 日
+            time:this.type_,//用以区别年 月 日
+            my_date:this.date
           }
         });
       } else {
@@ -220,7 +234,8 @@ export default {
           path: "/finance/detailsList",
           query: {
             type,
-            time:this.type_//用以区别年 月 日
+            time:this.type_,//用以区别年 月 日
+            my_date:this.date
           }
         });
       }

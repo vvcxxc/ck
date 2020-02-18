@@ -353,3 +353,23 @@ http({
   method: 'get',
   params: {created_at: date}
 })
+
+/**
+ * 获取创客排行榜
+ */
+export const getPeopleTopList = (page) =>
+http({
+  url: 'api/entrepreneur/water/finance/invitationEntrepreneur',
+  method: 'get',
+  params: {page}
+})
+
+/**
+ * 获取店铺排行
+ */
+export const getStoreTopList = (page) =>
+http({
+  url: 'api/entrepreneur/water/finance/invitationLocation',
+  method: 'get',
+  params: {page}
+})

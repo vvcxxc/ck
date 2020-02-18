@@ -111,6 +111,11 @@ export default new Router({
       meta: { keepAlive: false }
     },
     {
+      path: '/ck/resignSccess',
+      component: getComponent('common/resign_sccess'),
+      meta: { keepAlive: false }
+    },
+    {
       path: '/president/inviteEntrepreneur',
       component: getComponent('president/inviteEntrepreneur'),
       meta: { keepAlive: false }

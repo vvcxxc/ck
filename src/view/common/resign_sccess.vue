@@ -8,7 +8,7 @@
       />
 
       <div class="register-success-words">恭喜你，注册成功</div>
-      <div class="register-success-compete" @click="handleCompete">完成资料</div>
+      <div class="register-success-compete" @click="handleCompete">完善资料</div>
       <div class="register-success-jump" @click="handleJump">跳过</div>
     </div>
   </div>
@@ -27,11 +27,16 @@ export default {
   },
   methods: {
     handleJump() {
-      window.location.href = `http://${window.location.host}`;
+      this.$router.push("/index");
     },
     handleCompete(){
-        // this.$router.push("/");
-    }
+        this.$router.push({path: "/completeInformation/IdCard",query:{type: 'add'}});
+    },
+    goBack() {
+      this.$router.push({
+        path: "/login"
+      });
+    },
   }
 };
 </script>

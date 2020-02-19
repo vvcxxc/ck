@@ -87,13 +87,13 @@ export default {
         mobile_verification_code: this.mobile_verification_code
       };
       register(params)
-        .then(({ code, message }) => {
+        .then(({ code, message, data }) => {
           if (code != 200) {
             return this.$vux.toast.text(message);
           }
           this.$vux.toast.text("注册成功");
           timeout(1500).then(() => {
-            this.$router.push("/ck/resignSccess");
+            this.$router.push({path: "/ck/resignSccess", query:{party_id: data.id}});
           });
         })
         .catch(err => console.log(err));

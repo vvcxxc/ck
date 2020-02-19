@@ -1,6 +1,10 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, {
+  AxiosRequestConfig
+} from 'axios';
 import Axios from 'axios'
-import { Toast } from 'vant';
+import {
+  Toast
+} from 'vant';
 const host = 'http://tmwl.oss-cn-shenzhen.aliyuncs.com';
 
 /**base64转blob */
@@ -21,7 +25,9 @@ function b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     byteArrays.push(byteArray);
   }
 
-  const blob = new Blob(byteArrays, { type: contentType });
+  const blob = new Blob(byteArrays, {
+    type: contentType
+  });
   return blob;
 }
 
@@ -37,31 +43,32 @@ function randomString(len) {
   return pwd;
 }
 
-function oss(options, files){
+async function oss(options, files) {
   const imgUrl = files;
   const length = 14680064;
   if (imgUrl.length > length) {
     Toast.fail('上传失败，请上传小于10M的图片');
-    return new Promise(() => { });
+    return new Promise(() => {});
   } else {
     if (!localStorage.getItem('oss_data')) {
-        Toast.clear()
+      Toast.clear()
       Toast.fail('上传失败，请重新上传')
       /**获取oss */
-      Axios.get('http://release.api.supplier.tdianyi.com/api/v2/up').then(res => {
-        let { data } = res.data;
-        let oss_data = {
-          policy: data.policy,
-          OSSAccessKeyId: data.accessid,
-          success_action_status: 200, //让服务端返回200,不然，默认会返回204
-          signature: data.signature,
-          callback: data.callback,
-          host: data.host,
-          key: data.dir
-        };
+      let res = await Axios.get('http://release.api.supplier.tdianyi.com/api/v2/up')
+      let {
+        data
+      } = res.data;
+      let oss_data = {
+        policy: data.policy,
+        OSSAccessKeyId: data.accessid,
+        success_action_status: 200, //让服务端返回200,不然，默认会返回204
+        signature: data.signature,
+        callback: data.callback,
+        host: data.host,
+        key: data.dir
+      };
 
-        window.localStorage.setItem('oss_data', JSON.stringify(oss_data));
-      })
+      window.localStorage.setItem('oss_data', JSON.stringify(oss_data));
     }
     let oss_data = JSON.parse(localStorage.getItem('oss_data') || ' ');
     const block = imgUrl.split(';');
@@ -78,15 +85,20 @@ function oss(options, files){
     formData.append('success_action_status', '200');
     formData.append('key', oss_data.key + randomString(32) + '.png');
     formData.append('file', blob);
-    options.headers = { ...options.headers, 'Content-Type': 'multipart/form-data' };
+    options.headers = {
+      ...options.headers,
+      'Content-Type': 'multipart/form-data'
+    };
     options.url = host;
     options.data = formData;
     return axios(options)
       .then(res => res.data)
-      .catch(err => { });
+      .catch(err => {});
   }
 }
 
-export default function upload(img){
-  return oss({ method: 'post' }, img);
+export default function upload(img) {
+  return oss({
+    method: 'post'
+  }, img);
 }

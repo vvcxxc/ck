@@ -200,7 +200,8 @@ export default {
             this.isMore = false
           }
           if(res.pagination.current_page == res.pagination.total_pages || res.pagination.total_pages == null){
-            this.isMore = falselog
+            this.isMore = false 
+            // log
           }
         })
         .catch(err => console.log(err));

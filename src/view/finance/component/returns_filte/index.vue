@@ -219,23 +219,33 @@ export default {
       return value;
     },
     goTo(type) {
+      console.log(this.date,this.type_,type)
+      store.dispatch("ql/wirteContent", { 
+            time:this.date,
+            type1:type,
+            type2:this.type_
+          //  date:this.date
+           })
+      // return 
       if (this.type_ == 0) {
+        // store.wirteContent()
+        
         this.$router.push({
           path: "/finance/detailsList",
           query: {
             type,
-            date: this.date,
-            time:this.type_,//用以区别年 月 日
-            my_date:this.date
+            // date: this.date,
+            // time:this.type_,//用以区别年 月 日
+            // my_date:this.date
           }
         });
       } else {
         this.$router.push({
           path: "/finance/detailsList",
           query: {
-            type,
-            time:this.type_,//用以区别年 月 日
-            my_date:this.date
+            // type,
+            // time:this.type_,//用以区别年 月 日
+            // my_date:this.date
           }
         });
       }

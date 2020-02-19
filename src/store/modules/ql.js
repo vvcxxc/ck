@@ -4,7 +4,11 @@ const state = {
   day: '',  //精确到天数
   month: '',//精确到月数
   years: '',  //精确到年
-  Index: 0   // 索引
+  Index: 0,  // 索引
+
+  type1: '',  //年月日类型
+  time: '',
+  type2:'' //收益类型 费率返点，卷分润 广告分润
 }
 
 // getters
@@ -31,6 +35,19 @@ const mutations = {
   [types.WIRTEINDEX](state, order) {
     state.Index = order
   },
+  [types.WIRTECONTENT](state, order) {
+    
+    if (order.type1) {
+      state.type1 = order.type1
+    }
+    if (order.time) {
+      state.time = order.time
+    }
+    if (order.type2) {
+      state.type2 = order.type2
+    }
+    
+  },
 }
 
 const actions = {
@@ -39,7 +56,10 @@ const actions = {
   },
   writeIndex({ commit, state }, props) {
     commit(types.WIRTEINDEX, props)
-  }
+  },
+  wirteContent({ commit, state }, props) {
+    commit(types.WIRTECONTENT, props)
+  },
 
 }
 

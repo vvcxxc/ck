@@ -4,9 +4,6 @@
       <div></div>
       <div @click="showDatePicker" class="date">
         {{date}}
-        <!-- {{
-          console.log(props)
-        }} -->
         <van-icon name="arrow-down" class="icon" />
       </div>
     </div>
@@ -39,9 +36,10 @@
 
       </div>
     </div>
-
+  <!-- this.$route.query.time == 2? -->
     <van-popup position="bottom" v-model="show" get-container="#app" 
-    :class="this.$route.query.time == 2?'annual_earnings':''">
+    :class="this.my_time == 2?
+    'annual_earnings':''">
       <!-- <van-datetime-picker
         v-model="currentDate"
         type="date"
@@ -89,13 +87,19 @@ export default {
       yearTime: "",
       chooseType: "date",
       minDate: new Date(2015, 0, 1),
-      maxDate: new Date(2025, 10, 1)
+      maxDate: new Date(2025, 10, 1),
+      my_time:''
     };
   },
   created() {
-    let type = this.$route.query.type;
-    let date = this.$route.query.date;
-    switch (this.$route.query.time) {//ql用于区别年月日显示日期
+    // let type = this.$route.query.type;
+    let type = store.state.ql.type1
+    let date = store.state.ql.time
+    // let date = this.$route.query.date;
+    switch (
+      // this.$route.query.time
+      store.state.ql.type2
+    ) {//ql用于区别年月日显示日期
       case 0:
       this.date = store.state.ql.day?store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
         break;
@@ -126,6 +130,15 @@ export default {
     }
     this.getList();
   },
+  mounted(){
+    this.my_time = store.state.ql.type2 
+  },
+   computed: {
+      getStore(){
+        // let Index =  window.sessionStorage.getItem('Index')
+        // return Number(Index)
+      }
+   },
   methods: {
      formatter(type, value) {
       if (type === "year") {
@@ -140,7 +153,11 @@ export default {
       this.show = false;
       let time = "";
       let props_type = ""
-      switch (this.$route.query.time) {
+      console.log(store.state.ql.type2)
+      switch (
+        // this.$route.query.time
+        store.state.ql.type2
+        ) {
         case 0:
           time = dayjs(date).format("YYYY-MM-DD");
           props_type = "day"
@@ -159,6 +176,9 @@ export default {
       }
       this.date = time;
       this.page = 1
+      store.dispatch("ql/wirteContent", { 
+            time
+           })
       store.dispatch("ql/fetchOrderDetail", { time, type:props_type })
       this.getList();
     },
@@ -166,12 +186,17 @@ export default {
     showDatePicker() {
       // this.$route.query.time 3总收益 2年收益  1月收益 0日收益
       this.show = !this.show;
-      this.chooseType = ["date", "year-month", "year-month", "date"][this.$route.query.time];
+      this.chooseType = ["date", "year-month", "year-month", "date"][
+        // this.$route.query.time
+        store.state.ql.type2
+        ];
     },
     // 获取列表数据
     getList() {
       let data = {
-        profit_type: this.$route.query.type || 1,
+        profit_type: 
+        // this.$route.query.type
+         store.state.ql.type1|| 1,
         created_at: this.date,
         page: this.page
       };

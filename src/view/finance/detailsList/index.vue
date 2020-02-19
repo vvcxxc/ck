@@ -133,12 +133,6 @@ export default {
   mounted(){
     this.my_time = store.state.ql.type2 
   },
-   computed: {
-      getStore(){
-        // let Index =  window.sessionStorage.getItem('Index')
-        // return Number(Index)
-      }
-   },
   methods: {
      formatter(type, value) {
       if (type === "year") {
@@ -153,11 +147,7 @@ export default {
       this.show = false;
       let time = "";
       let props_type = ""
-      console.log(store.state.ql.type2)
-      switch (
-        // this.$route.query.time
-        store.state.ql.type2
-        ) {
+      switch (Number(store.state.ql.type2)) {
         case 0:
           time = dayjs(date).format("YYYY-MM-DD");
           props_type = "day"
@@ -186,10 +176,7 @@ export default {
     showDatePicker() {
       // this.$route.query.time 3总收益 2年收益  1月收益 0日收益
       this.show = !this.show;
-      this.chooseType = ["date", "year-month", "year-month", "date"][
-        // this.$route.query.time
-        store.state.ql.type2
-        ];
+      this.chooseType = ["date", "year-month", "year-month", "date"][Number(store.state.ql.type2)];
     },
     // 获取列表数据
     getList() {

@@ -220,6 +220,7 @@ export default {
     },
     goTo(type) {
       console.log(this.date,this.type_,type)
+      // return
       store.dispatch("ql/wirteContent", { 
             time:this.date,
             type1:type,
@@ -233,7 +234,7 @@ export default {
         this.$router.push({
           path: "/finance/detailsList",
           query: {
-            type,
+            // type,
             // date: this.date,
             // time:this.type_,//用以区别年 月 日
             // my_date:this.date

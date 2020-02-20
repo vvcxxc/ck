@@ -1,3 +1,4 @@
+import {Validator} from '../../utils/common'
 let data = {
   id: 'id',
   party_id: 'party_id',
@@ -21,11 +22,36 @@ export default function Validate(info) {
     if (!info[i] && info[i] != undefined) {
       for (let a in data) {
         if (a == i) {
-          return data[a]
+          return `${data[a]}不能为空`
         }
       }
     }
   }
-
-  return false
+  let validator = new Validator();
+  validator.add(info.name, [{
+    validateRule: 'isChinese',
+    errmsg: '请输入正确的名字'
+  }])
+  validator.add(info.identity_card, [{
+    validateRule: 'isIDNumber',
+    errmsg: '请输入正确的身份证号'
+  }])
+  validator.add(info.bank_account_user_name, [{
+    validateRule: 'isChinese',
+    errmsg: '请输入正确的开户人名字'
+  }])
+  validator.add(info.bank_card_number, [{
+    validateRule: 'isBankNumber',
+    errmsg: '请输入正确16-19位数字银行卡账号'
+  }])
+  validator.add(info.bank_branch, [{
+    validateRule: 'isBankName',
+    errmsg: '请输入正确开户支行名称'
+  }])
+  let errmsg = validator.start();
+  if (errmsg){
+    return errmsg;
+  }else {
+    return false
+  }
 }

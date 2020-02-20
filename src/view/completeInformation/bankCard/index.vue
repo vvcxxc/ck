@@ -190,7 +190,7 @@ export default {
           });
         }
       } else {
-        Toast.fail(validate + "不能为空");
+        Toast.fail(validate);
       }
     },
     // 返回

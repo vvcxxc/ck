@@ -24,10 +24,12 @@
       </van-tab>
       <van-tab title=" " disabled></van-tab>
     </van-tabs>
-    <ReturnsFilte :type_="meta"  />
+    
+    <ReturnsFilte :type_="this.meta"  />
   </div>
 </template>
 <script type="text/javascript">
+  import store from "@/store/index"
   import ReturnsFilte from "./component/returns_filte";
 
   export default {
@@ -35,23 +37,33 @@
     data() {
       return {
         active: 3,
-        meta:3,
+        meta:'',
         returns_filter: ["日收益", "月收益", "年收益", "总收益"],
 
       };
     },
+    mounted () {
+      let Index = this.getStore
+      this.meta = Number(Index)
+      this.active = Number(Index)
+   },
     components: {
-      ReturnsFilte
-    },
-    created() {
-
+      ReturnsFilte,
+      window
     },
     methods: {
       returnsFilter(data, dd) {
+        window.sessionStorage.setItem("Index", data);
         this.meta=data
-      },
-
-    }
+      }
+    },
+    computed: {
+      getStore(){
+        let Index =  window.sessionStorage.getItem('Index')
+        return Number(Index)
+      }
+  }
+  
   };
 </script>
 <style lang="sass" scoped>

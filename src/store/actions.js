@@ -1,4 +1,7 @@
 import { viewInfo } from "@/api/api";
+let modules = [
+  'ql'
+]
 export default {
   getInfo(context){
     viewInfo().then(res => {
@@ -6,5 +9,11 @@ export default {
         ...res.data
       })
     })
-  }
+  },
+
+ reset = ({ dispatch }) => {
+  modules.forEach((module) => {
+    dispatch(`${module}/reset`)
+    // dispatch(`${module}`)
+  })
 }

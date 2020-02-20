@@ -3,7 +3,7 @@
 import Vue from "vue"
 import App from "./App"
 import router from "./router"
-import store from "./store"
+import store from "./store"// 1 引入vuex中的容器对象store
 import {
   i18n
 } from "./i18n"
@@ -90,7 +90,7 @@ Vue.directive('resetInput', {
 new Vue({
   el: "#app",
   router,
-  store,
+  store,// 2 将store注入到vue实例中，让整个应用程序拥有数据容器
   i18n,
   components: {
     App

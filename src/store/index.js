@@ -2,16 +2,19 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import getters from './getters'
-import actions from './actions'
 import mutations from './mutations'
+import ql from './modules/ql'
 
 Vue.use(Vuex)
-
+// 创建vux中的store容器对象
 const store = new Vuex.Store({
   getters,
-  actions,
   mutations,
+  modules: {
+    ql
+  },
   state: {
+    chooseTime:'',
     isLoading: {
       status: false
     },
@@ -37,3 +40,4 @@ const store = new Vuex.Store({
 })
 
 export default store
+

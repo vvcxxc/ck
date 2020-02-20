@@ -176,6 +176,7 @@ export default {
           editInfo(data).then(res => {
             if (res.code == 200) {
               Toast.success(res.message);
+              this.$router.push('/')
             } else {
               Toast.fail(res.message);
             }
@@ -184,6 +185,7 @@ export default {
           addInfo(data).then(res => {
             if (res.code == 200) {
               Toast.success(res.message);
+              this.$router.push('/')
             } else {
               Toast.fail(res.message);
             }

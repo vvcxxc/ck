@@ -38,7 +38,7 @@ export class Validator {
       },
       isRepeat(val, params, errmsg) {
         if (val != params) return errmsg
-      }
+      },
     }
   }
 

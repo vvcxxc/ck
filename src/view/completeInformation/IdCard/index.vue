@@ -2,7 +2,7 @@
   <div class="page">
     <van-nav-bar :border="false" title="提交资质" left-arrow @click-left="goBack"/>
     <div class="main">
-      <div class="title">上传身份证信息</div>
+      <div class="title-syz">上传身份证信息</div>
       <div class="upload-box">
         <van-uploader
           :after-read="afterReadFront"

@@ -30,7 +30,8 @@ export default {
       this.$router.push("/index");
     },
     handleCompete(){
-        this.$router.push({path: "/completeInformation/IdCard",query:{type: 'add'}});
+      let party_id = this.$route.query.party_id;
+        this.$router.push({path: "/completeInformation/IdCard",query:{type: 'add', party_id}});
     },
     goBack() {
       this.$router.push({

@@ -2,7 +2,7 @@
   <div class="page">
     <van-nav-bar :border="false" title="完善资料" left-arrow @click-left="goBack" />
     <div class="main">
-      <div class="title">上传银行卡信息</div>
+      <div class="title-syz">上传银行卡信息</div>
       <div class="upload-box">
         <van-uploader
           :after-read="afterReadFront"

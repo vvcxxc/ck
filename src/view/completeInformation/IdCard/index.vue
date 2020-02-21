@@ -88,16 +88,10 @@
       </div>
       <div class="date-tab">
         <div
-          :class="date_tab == 1 ? 'date-item actived' : 'date-item'"
-          @click="dateTab(1)"
-        >{{date.start_date || '年/月/日'}}</div>至
-        <div
-          :class="date_tab == 2 ? 'date-item actived' : 'date-item'"
-          @click="dateTab(2)"
-        >{{date.end_date || '年/月/日'}}</div>
+          :class="long_date != 1 ? 'date-item actived' : 'date-item'"
+        >{{date || '年/月/日'}}</div>
       </div>
       <div
-        v-if="date_tab == 2"
         :class="long_date == 1 ? 'long-date actived' : 'long-date'"
         @click="longDate"
       >长期有效</div>
@@ -128,11 +122,7 @@ export default {
       minDate: new Date(1990, 0, 1),
       maxDate: new Date(2035, 10, 1),
       currentDate: new Date(),
-      date_tab: 1, // 为1是开始日期，2是结束日期
-      date: {
-        start_date: "",
-        end_date: ""
-      },
+      date: '',
       long_date: 0,
       imgFront: [],
       imgBack: [],
@@ -141,21 +131,9 @@ export default {
   },
   watch: {
     currentDate(val) {
-      if (this.date_tab == 1) {
-        this.date.start_date = dayjs(val).format("YYYY/MM/DD");
-      } else if (this.date_tab == 2) {
-        this.long_date = 0;
-        this.date.end_date = dayjs(val).format("YYYY/MM/DD");
-      }
+      this.date = dayjs(val).format('YYYY-MM-DD')
+      this.long_date = 0
     },
-    date: {
-      handler(newVal) {
-        if (newVal.start_date && newVal.end_date) {
-          this.info.validity_card = newVal.start_date + "-" + newVal.end_date;
-        }
-      },
-      deep: true
-    }
   },
   computed: {
     info: {
@@ -224,7 +202,6 @@ export default {
     // 下一步
     goTo() {
       let type = this.$route.query.type;
-      console.log(this.info)
       this.$router.push({path:"/completeInformation/bankCard", query: {type}});
     },
     afterReadBack(file) {
@@ -247,26 +224,18 @@ export default {
         };
       });
     },
-    // 选择时间类别
-    dateTab(tab) {
-      this.date_tab = tab;
-    },
     // 选择长期有效
     longDate() {
-      this.long_date = !this.long_date;
+      this.long_date = 1;
       if (this.long_date == 1) {
-        this.date.end_date = "长期有效";
-      } else {
-        this.date.end_date = "";
+        this.date = "长期有效";
       }
     },
     // 关闭时间筛选
     closeDate() {
       this.show = false;
-      this.date.start_date = "";
-      this.date.end_date = "";
       this.long_date = 0;
-      this.date_tab = 1;
+      this.date = ''
     },
     //  打开时间筛选
     openDate() {
@@ -275,6 +244,7 @@ export default {
     //  时间筛选确定
     confirmDate() {
       this.show = false;
+      this.info.validity_card = this.date
     },
     // 删除图片
     deleteFront() {

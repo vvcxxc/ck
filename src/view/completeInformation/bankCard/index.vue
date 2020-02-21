@@ -154,6 +154,11 @@ export default {
     submit() {
       let type = this.$route.query.type;
       let info = this.info;
+      let validity_card = info.validity_card
+      if(info.validity_card == '长期有效'){
+        validity_card = 0
+      }
+      console.log(validity_card)
       let data = {
         id: type == "edit" ? info.id : undefined,
         party_id: info.party_id,
@@ -162,7 +167,7 @@ export default {
         hand_identity_card: info.hand_identity_card,
         name: info.name,
         identity_card: info.identity_card,
-        validity_card: info.validity_card,
+        validity_card,
         positive: info.positive,
         opposite: info.opposite,
         bank_account_user_name: info.bank_account_user_name,

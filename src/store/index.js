@@ -21,7 +21,6 @@ const store = new Vuex.Store({
     isHideTabbar: true,
     role_type: "",
     info: {
-      id: '',
       party_id: '', // 用户id
       name: '', // 用户名
       identity_card: '', // 身份证号

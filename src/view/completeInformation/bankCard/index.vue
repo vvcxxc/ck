@@ -160,7 +160,6 @@ export default {
       }
       console.log(validity_card)
       let data = {
-        id: type == "edit" ? info.id : undefined,
         party_id: info.party_id,
         identity_card_positive: info.identity_card_positive,
         identity_card_opposite: info.identity_card_opposite,

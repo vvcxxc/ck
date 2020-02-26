@@ -34,7 +34,7 @@ export default {
     };
   },
   created() {
-    let is_existence = this.$router.query.is_existence
+    let is_existence = this.$route.query.is_existence
     this.is_existence = is_existence
   },
   methods: {

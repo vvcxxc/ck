@@ -31,11 +31,17 @@
     </div>
 
     <ul class="other-info">
-      <li @click="handleShowView('bank')">
+      <!-- @click="handleShowView('bank') -->
+      <!-- mycard() -->
+      <li @click="mycard()">
         <div>
           <span></span>我的银行卡
         </div>
-        <van-icon name="arrow" size="0.3rem" color="#999999" />
+        <div>
+          <!-- <div>未绑定</div> -->
+          <van-icon name="arrow" size="0.3rem" color="#999999" />
+        </div>
+        
       </li>
       <li @click="integralRecord()">
         <div>
@@ -43,7 +49,7 @@
         </div>
         <van-icon name="arrow" size="0.3rem" color="#999999" />
       </li>
-      <li @click="handleShowView('configuration')">
+      <li @click=" handleShowView('configuration')">
         <div>
           <span></span>设置
         </div>
@@ -94,6 +100,10 @@ export default {
     this.fetchAuthUser();
   },
   methods: {
+    //跳转我的银行卡页面
+    mycard(){
+      this.$router.push({ path: "/my/card_new" })
+    },
     invite(name) {
       if (name == "people") {
         let qrCodeUrl = `http://${window.location.host}/ck/register?invite_id=${this.party_id}`;
@@ -118,7 +128,6 @@ export default {
         });
     },
     handleShowView(view) {
-      console.log(view);
       this.$store.commit("HIDE_TABBAR", { path: "" });
       switch (view) {
         case V_BANK:

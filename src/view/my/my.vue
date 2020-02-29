@@ -72,6 +72,7 @@ import VConfiguration from "./configuration/configurations";
 import { authUser } from "@api/api";
 import { Icon, Popup, Overlay } from "vant";
 import QRCode from "qrcode";
+import store from "@/store/index"//vuex
 const V_BANK = "bank";
 const V_CONFIGURATION = "configuration";
 export default {
@@ -158,6 +159,7 @@ export default {
               supplier_party_id = 0
             }
           }) => {
+            
             if (account_name) {
               this.account_name = account_name;
               this.account_phone = account_phone;
@@ -165,6 +167,9 @@ export default {
               this.integral = integral;
               this.supplier_party_id = supplier_party_id;
               this.party_id = party_id;
+              
+              //提供给银行卡验证页面使用
+              store.dispatch("ql_bank/recordInformation", { party_id })
             }
           }
         )

@@ -182,9 +182,7 @@ export default {
      * 全返规则
      */
     handleAllReturnRules(item) {
-      console.log(item);
       returnMoneyRule(item.id).then(res => {
-        // console.log(res);
         const { code, data } = res;
         if (code == 200) {
           this.dataInfo = data;
@@ -209,7 +207,6 @@ export default {
       this.itemObj = item;
     },
     handleOpenOrClose() {
-      // console.log(this.itemObj);
       let is_open;
       if (this.openOrClose == "关闭") {
         is_open = 0;
@@ -232,7 +229,6 @@ export default {
       this.giftValue = "";
       this.showModal = true;
       this.itemObj = item;
-      //console.log(this.itemObj);
     }
   },
   computed: {

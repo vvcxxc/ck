@@ -46,7 +46,10 @@
 </template>
 
 <script>
-  import { bank } from "@api/api"
+
+  import { bank ,bankCardActivation,bankCardBinding } from "@api/api"
+  import { Toast } from "vant";
+  import store from "@/store/index"
   import './index.styl'
   const REQUEST_OK = 200
 
@@ -74,6 +77,7 @@
       })
     },
     methods: {
+      
       lookTime(){//定时器倒计时
        const timeStart =  setTimeout(()=>{
           this.time -= 1
@@ -86,17 +90,41 @@
             this.lookTime()
         },1000);
       },
+
       getVerify(){//获取验证码
-        this.show_time = true
-        this.lookTime();
-        // bankBindVerify().then(({ code, message, data }) => {
-        //     if (code == REQUEST_OK) {
-        //       console.log(data,'333')
-        //     }
-        //   })
+        bankCardActivation({
+          	party_id:store.state.ql_bank.party_id,
+            phone:this.phone
+          }).then(({ code, message, data }) => {
+            if (code == REQUEST_OK) {
+              this.show_time = true
+              this.lookTime();
+              Toast.success(message);
+            }else {
+              Toast.fail(message);
+            }
+          })
       },
-      bindingData(){//绑定数据
-      
+
+      bindingData(){//绑定银行卡
+
+        bankCardBinding({
+          party_id:store.state.ql_bank.party_id,
+          code:this.validation,phone:this.phone
+          }).then(({ code, message, data }) => {
+            if (code == REQUEST_OK) {
+              this.show_success = true
+              const timeStart =  setTimeout(()=>{
+                  this.show_success = false
+                  clearTimeout(timeStart)
+                  this.$router.push("/my/card_new");//绑定成功跳回上一级
+                  return
+              },1000);
+            }else {
+              this.show_fail = true
+            }
+
+          })
       }
 
     }

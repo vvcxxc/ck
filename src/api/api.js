@@ -373,3 +373,25 @@ http({
   method: 'get',
   params: {page}
 })
+
+/**
+ * 银行卡激活短信发送
+ */
+export const bankCardActivation = (data) =>
+http({
+  url: 'api/entrepreneur/sq/sendSmsCode',
+  method: 'post',
+  data
+})
+
+/**
+ * 银行卡绑卡
+ */
+export const bankCardBinding = (data) =>
+  http({
+    url: 'api/entrepreneur/sq/bindCard',
+    method: 'post',
+    data
+  })
+
+

@@ -6,3 +6,6 @@ export const HIDE_TABBAR = "HIDE_TABBAR"
 export const GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
 export const WIRTEINDEX = "WIRTEINDEX"
 export const WIRTECONTENT = 'WIRTECONTENT'
+
+//激活银行卡
+export const ActivateBankCard = "ActivateBankCard"

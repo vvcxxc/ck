@@ -92,14 +92,9 @@ export default {
     };
   },
   created() {
-    // let type = this.$route.query.type;
     let type = store.state.ql.type1
     let date = store.state.ql.time
-    // let date = this.$route.query.date;
-    switch (
-      // this.$route.query.time
-      store.state.ql.type2
-    ) {//ql用于区别年月日显示日期
+    switch (store.state.ql.type2) {//ql用于区别年月日显示日期
       case 0:
       this.date = store.state.ql.day?store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
         break;
@@ -181,9 +176,7 @@ export default {
     // 获取列表数据
     getList() {
       let data = {
-        profit_type: 
-        // this.$route.query.type
-         store.state.ql.type1|| 1,
+        profit_type: store.state.ql.type1|| 1,
         created_at: this.date,
         page: this.page
       };
@@ -201,7 +194,6 @@ export default {
           }
           if(res.pagination.current_page == res.pagination.total_pages || res.pagination.total_pages == null){
             this.isMore = false 
-            // log
           }
         })
         .catch(err => console.log(err));

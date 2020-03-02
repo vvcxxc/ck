@@ -103,7 +103,8 @@ export default {
       yearTime: "",
       date: dayjs(new Date()).format("YYYY-MM-DD"),
       info: {},
-      type:3
+      type:3,
+      date:''
     };
   },
   components: {},
@@ -114,24 +115,33 @@ export default {
   watch: {
     type_: {
       handler(newVal, oldVal) {
-        this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
+        this.chooseType = ["date", "year-month", "year-month", "date"][Number(store.state.ql.Index)];
+        // newVal
         this.type = newVal
         this.chooseTime = false;
         let time = "";
-        switch (newVal) {
+        let props_type = ""
+        switch (
+          // newVal
+          store.state.ql.Index
+          ) {
           case 0:
+            props_type = "day"
             time= store.state.ql.day?store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
             break;
           case 1:
+            props_type="month"
             time= store.state.ql.month?store.state.ql.month:dayjs(new Date()).format("YYYY-MM");
             break;
           case 2:
+            props_type = "year"
             time= store.state.ql.years?store.state.ql.years:dayjs(new Date()).format("YYYY");
             break;
           case 3:
             time = "";
         }
         this.date = time;
+        store.dispatch("ql/fetchOrderDetail", { time, type:props_type })
       },
       deep: true
     },
@@ -140,7 +150,26 @@ export default {
     }
   },
   created() {
-    let time = "";
+    // let time = "";
+    // switch (this.type_) {
+    //   case 0:
+    //     time = dayjs(date).format("YYYY-MM-DD");
+    //     break;
+    //   case 1:
+    //     time = dayjs(date).format("YYYY-MM");
+    //     break;
+    //   case 2:
+    //     time = dayjs(date).format("YYYY");
+    //     break;
+    //   case 3:
+    //     time = "";
+    //     break;
+    // }
+    // this.date = time;
+    
+  },
+  mounted() {
+     let time = "";
     switch (this.type_) {
       case 0:
         time = dayjs(date).format("YYYY-MM-DD");
@@ -158,12 +187,13 @@ export default {
     this.date = time;
     this.getInfo();
   },
-  mounted() {},
   methods: {
     chooseTimeData(date) {
+
       this.chooseTime = false;
       let time = "";
       let props_type = ""
+
       switch (this.type_) {
         case 0:
           time = dayjs(date).format("YYYY-MM-DD");
@@ -186,7 +216,7 @@ export default {
     },
     getInfo() {
       let meta = ''
-     switch (this.type) {
+     switch (Number(store.state.ql.Index)) {
         case 0:
           meta = store.state.ql.day
           break;
@@ -199,15 +229,9 @@ export default {
         case 3:
           break;
       }
-      if (this.date) {
-        getFinance(meta?meta:this.date).then(res => {
+       getFinance(meta  ? {created_at:meta}:'').then(res => {
           this.info = res.data;
         });
-      } else {
-        getFinance().then(res => {
-          this.info = res.data;
-        });
-      }
     },
     returnsFilter(data, dd) {},
     formatter(type, value) {
@@ -219,35 +243,18 @@ export default {
       return value;
     },
     goTo(type) {
-      console.log(this.date,this.type_,type)
-      // return
       store.dispatch("ql/wirteContent", { 
             time:this.date,
             type1:type,
             type2:this.type_
-          //  date:this.date
            })
-      // return 
       if (this.type_ == 0) {
-        // store.wirteContent()
-        
         this.$router.push({
-          path: "/finance/detailsList",
-          query: {
-            // type,
-            // date: this.date,
-            // time:this.type_,//用以区别年 月 日
-            // my_date:this.date
-          }
+          path: "/finance/detailsList"
         });
       } else {
         this.$router.push({
-          path: "/finance/detailsList",
-          query: {
-            // type,
-            // time:this.type_,//用以区别年 月 日
-            // my_date:this.date
-          }
+          path: "/finance/detailsList"
         });
       }
     }

@@ -347,11 +347,11 @@ http({
 /**
  * 获取收益首页
  */
-export const getFinance = (date) =>
+export const getFinance = (params) =>
 http({
   url: 'api/entrepreneur/water',
   method: 'get',
-  params: {created_at: date}
+  params
 })
 
 /**

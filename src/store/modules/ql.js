@@ -4,7 +4,7 @@ const state = {
   day: '',  //精确到天数
   month: '',//精确到月数
   years: '',  //精确到年
-  Index: 0,  // 索引
+  Index: 3,  // 索引 默认是总收益
 
   type1: '',  //年月日类型
   time: '',

@@ -103,8 +103,7 @@ export default {
       yearTime: "",
       date: dayjs(new Date()).format("YYYY-MM-DD"),
       info: {},
-      type:3,
-      date:''
+      type:3
     };
   },
   components: {},

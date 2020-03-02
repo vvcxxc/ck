@@ -37,7 +37,7 @@
       </div>
     </div>
   <!-- this.$route.query.time == 2? -->
-    <van-popup position="bottom" v-model="show" get-container="#app" 
+    <van-popup position="bottom" v-model="show" get-container="#app"
     :class="this.my_time == 2?
     'annual_earnings':''">
       <!-- <van-datetime-picker
@@ -74,7 +74,7 @@ export default {
   data() {
     return {
       currentDate: new Date(),
-      
+
       date: '',
       all_money: "",
       list: [],
@@ -126,7 +126,7 @@ export default {
     this.getList();
   },
   mounted(){
-    this.my_time = store.state.ql.type2 
+    this.my_time = store.state.ql.type2
   },
   methods: {
      formatter(type, value) {
@@ -161,7 +161,7 @@ export default {
       }
       this.date = time;
       this.page = 1
-      store.dispatch("ql/wirteContent", { 
+      store.dispatch("ql/wirteContent", {
             time
            })
       store.dispatch("ql/fetchOrderDetail", { time, type:props_type })

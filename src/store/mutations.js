@@ -21,5 +21,10 @@ export default {
   },
   [types.ROLE_TYPE] (state, { type }) {
     state.role_type = type
+  },
+  [types.INFO] (state, payload) {
+    for (let key in payload){
+      state.info[key] = payload[key]
+    }
   }
 }

@@ -380,6 +380,14 @@ http({
 export const bankCardActivation = (data) =>
 http({
   url: 'api/entrepreneur/sq/sendSmsCode',
+  data
+})
+  
+  // 添加创客会长资质认证
+ 
+export const addInfo = (data) =>
+http({
+  url: 'api/entrepreneur/ck_createInfo',
   method: 'post',
   data
 })
@@ -395,3 +403,20 @@ export const bankCardBinding = (data) =>
   })
 
 
+//  * 查看创客会长资质认证
+
+export const viewInfo = () =>
+http({
+  url: 'api/entrepreneur/ck/info',
+  method: 'get',
+})
+
+/**
+ * 编辑创客会长资质认证
+ * */
+export const editInfo = data =>
+http({
+  url: 'api/entrepreneur/ck/updateInfo',
+  method: 'post',
+  data
+})

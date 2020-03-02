@@ -54,7 +54,7 @@
             v-if="item.can_zero_rate&&type"
             @click="handleAllReturnRules(item)"
           >全返规则</div>
-          <div class="share_benefit_setting" @click="handleShareBenefitSet(item)">分润设置</div>
+          <div class="share_benefit_setting" v-if='type' @click="handleShareBenefitSet(item)">分润设置</div>
           <div class="limit_setting" @click="handleLimitSet(item)">额度设置</div>
         </div>
       </div>

@@ -157,6 +157,13 @@ export default new Router({
     {
       path: '/my/bank_card_bind',
       component: getComponent('my/bank_card_bind'),
+      path: '/completeInformation/IdCard',
+      component: getComponent('completeInformation/IdCard'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/completeInformation/bankCard',
+      component: getComponent('completeInformation/bankCard'),
       meta: { keepAlive: false }
     }
   ]

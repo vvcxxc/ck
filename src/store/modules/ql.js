@@ -4,11 +4,9 @@ const state = {
   day: '',  //精确到天数
   month: '',//精确到月数
   years: '',  //精确到年
-  Index: 3,  // 索引 默认是总收益
-
-  type1: '',  //年月日类型
+  Index: 3,  // 收益类型 年 月 日 总收益
   time: '',
-  type2:'' //收益类型 费率返点，卷分润 广告分润
+  profit_type: ''//收益类型 费率返点，卷分润 广告分润
 }
 
 // getters
@@ -18,14 +16,14 @@ const getters = {
 // mutations
 const mutations = {
   [types.GET_ORDER_DETAIL](state, order) {
-    switch (order.type) {
-      case 'day':
+    switch (order.type) {//仅作为判断条件
+      case 0:
         state.day = order.time
         break;
-      case 'month':
+      case 1:
         state.month = order.time
         break;
-      case 'year':
+      case 2:
         state.years = order.time
         break;
       default:
@@ -36,18 +34,13 @@ const mutations = {
     state.Index = order
   },
   [types.WIRTECONTENT](state, order) {
-    
-    if (order.type1) {
-      state.type1 = order.type1
+    if (order.profit_type) {
+      state.profit_type = order.profit_type
     }
     if (order.time) {
       state.time = order.time
     }
-    if (order.type2) {
-      state.type2 = order.type2
-    }
-    
-  },
+  }
 }
 
 const actions = {

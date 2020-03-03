@@ -122,26 +122,25 @@ export default {
     type_: {
       handler(newVal, oldVal) {
         this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
-        const { day,month,years}=store.state.ql
         this.type = newVal
         this.chooseTime = false;
         let time = "";
         switch (newVal) {
           case 0:
-            time= day? day:dayjs(new Date()).format("YYYY-MM-DD");
+            time= store.state.ql.day? store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
             break;
           case 1:
-            time= month? month:dayjs(new Date()).format("YYYY-MM");
+            time= store.state.ql.month? store.state.ql.month:dayjs(new Date()).format("YYYY-MM");
             break;
           case 2:
-            time=years? years:dayjs(new Date()).format("YYYY");
+            time=store.state.ql.years? store.state.ql.years:dayjs(new Date()).format("YYYY");
             break;
           case 3:
             time = "";
         }
         this.date = time;
         this.showTime = dayjs(time).$d
-        store.dispatch("ql/fetchOrderDetail", { time, type:Index })
+        store.dispatch("ql/fetchOrderDetail", { time, type:store.state.ql.Index })
       },
       deep: true
     },
@@ -177,10 +176,9 @@ export default {
         this.chooseTime=true
     },
     chooseTimeData(date) {
-      const {Index } = store.state.ql
       this.chooseTime = false;
       let time = "";
-      switch ( Index ) {
+      switch ( store.state.ql.Index ) {
         case 0:
           time = dayjs(date).format("YYYY-MM-DD");
           break;
@@ -197,20 +195,19 @@ export default {
       this.date = time;
       this.showTime = dayjs(time).$d
       //type 作为判断条件
-      store.dispatch("ql/fetchOrderDetail", { time:this.date, type: Index })
+      store.dispatch("ql/fetchOrderDetail", { time:this.date, type: store.state.ql.Index })
     },
     getInfo() {
       let meta = ''
-      const { day,month,years,Index}=store.state.ql
-     switch (Number(Index)) {
+     switch (store.state.ql.Index) {
         case 0:
-          meta = day
+          meta = store.state.ql.day
           break;
         case 1:
-           meta = month
+           meta = store.state.ql.month
           break;
         case 2:
-          meta = years
+          meta = store.state.ql.years
           break;
         case 3:
           break;

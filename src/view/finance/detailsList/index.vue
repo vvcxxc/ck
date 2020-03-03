@@ -90,24 +90,23 @@ export default {
     };
   },
   created() {
-    const { day,month,years, profit_type , Index} = store.state.ql
     let time = "";
-    switch ( Index) {//ql 用于区别年月日显示日期
+    switch ( store.state.ql.Index) {//ql 用于区别年月日显示日期
       case 0:
-      time = day? day:dayjs(new Date()).format("YYYY-MM-DD");
+      time = store.state.ql.day? store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
         break;
         case 1:
-       time = month? month:dayjs(new Date()).format("YYYY-MM");
+       time = store.state.ql.month? store.state.ql.month:dayjs(new Date()).format("YYYY-MM");
         break;
       case 2:
-       time = years? years:dayjs(new Date()).format("YYYY");
+       time = store.state.ql.years? store.state.ql.years:dayjs(new Date()).format("YYYY");
         break;
       default:
     }
     this.date = time
     this.showTime = dayjs(time).$d
     
-    switch ( profit_type ) {//ql 用于区别title
+    switch ( store.state.ql.profit_type ) {//ql 用于区别title
       case 1:
         this.title = "费率返点";
         break;
@@ -123,9 +122,8 @@ export default {
     this.getList();
   },
   mounted(){
-    const {Index } = store.state.ql
-    this.my_time =Index
-    this.chooseType = ["date", "year-month", "year-month", "date"][Index];
+    this.my_time =store.state.ql.Index
+    this.chooseType = ["date", "year-month", "year-month", "date"][store.state.ql.Index];
   },
   methods: {
      formatter(type, value) {

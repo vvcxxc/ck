@@ -56,7 +56,7 @@
       <div class="input-box">
         <div class="label">姓名</div>
         <div class="input-area">
-          <input type="text" v-model="info.name" placeholder="请输入用户名" class="input" />
+          <input type="text" v-model="info.identity_name" placeholder="请输入用户名" class="input" />
         </div>
       </div>
       <div class="input-box">
@@ -69,8 +69,8 @@
         <div class="label">有效期</div>
         <div class="date-area" @click="openDate">
           <div
-            :class="info.validity_card ? 'date actived' : 'date'"
-          >{{ info.validity_card ? info.validity_card : '请选择身份证有效期'}}</div>
+            :class="info.identity_validity_card ? 'date actived' : 'date'"
+          >{{ info.identity_validity_card ? info.identity_validity_card : '请选择身份证有效期'}}</div>
           <van-icon name="arrow" class="icon" />
         </div>
       </div>
@@ -178,12 +178,12 @@ export default {
         }
       ];
     }
-    if (this.info.hand_identity_card) {
+    if (this.info.identity_hand_card) {
       this.imgHand = [
         {
           url:
             "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
-            this.info.hand_identity_card
+            this.info.identity_hand_card
         }
       ];
     }
@@ -217,7 +217,7 @@ export default {
     afterReadHand(file) {
       // 此时可以自行将文件上传至服务器，手持照
       upload(file.content).then(res => {
-        this.info.hand_identity_card = res.data.path;
+        this.info.identity_hand_card = res.data.path;
         this.imgHand[0] = {
           url: file.content,
           isImage: true
@@ -244,7 +244,7 @@ export default {
     //  时间筛选确定
     confirmDate() {
       this.show = false;
-      this.info.validity_card = this.date
+      this.info.identity_validity_card = this.date
     },
     // 删除图片
     deleteFront() {
@@ -256,7 +256,7 @@ export default {
       return true;
     },
     deleteHand() {
-      this.info.hand_identity_card = "";
+      this.info.identity_hand_card = "";
       return true;
     },
      // 返回

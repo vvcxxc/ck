@@ -42,7 +42,7 @@
         <div class="input-area">
           <input
             type="text"
-            v-model="info.bank_account_user_name"
+            v-model="info.bank_account_name"
             placeholder="请输入开户人姓名"
             class="input"
           />
@@ -93,17 +93,17 @@ export default {
     };
   },
   mounted() {
-    if (this.info.positive) {
+    if (this.info.bank_positive) {
       this.imgFront = [
         {
-          url: "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" + this.info.positive
+          url: "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" + this.info.bank_positive
         }
       ];
     }
-    if (this.info.opposite) {
+    if (this.info.bank_opposite) {
       this.imgBack = [
         {
-          url: "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" + this.info.opposite
+          url: "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" + this.info.bank_opposite
         }
       ];
     }
@@ -125,7 +125,7 @@ export default {
       // 此时可以自行将文件上传至服务器,正面
       console.log(file);
       upload(file.content).then(res => {
-        this.info.positive = res.data.path;
+        this.info.bank_positive = res.data.path;
         this.imgFront[0] = {
           url: file.content,
           isImage: true
@@ -135,7 +135,7 @@ export default {
     afterReadBack(file) {
       // 此时可以自行将文件上传至服务器，反面
       upload(file.content).then(res => {
-        this.info.opposite = res.data.path;
+        this.info.bank_opposite = res.data.path;
         this.imgBack[0] = {
           url: file.content,
           isImage: true
@@ -143,11 +143,11 @@ export default {
       });
     },
     deleteFront() {
-      this.info.positive = "";
+      this.info.bank_positive = "";
       return true;
     },
     deleteBack() {
-      this.info.opposite = "";
+      this.info.bank_opposite = "";
       return true;
     },
     // 提交
@@ -167,9 +167,9 @@ export default {
         name: info.name,
         identity_card: info.identity_card,
         validity_card,
-        positive: info.positive,
-        opposite: info.opposite,
-        bank_account_user_name: info.bank_account_user_name,
+        bank_positive: info.bank_positive,
+        bank_opposite: info.bank_opposite,
+        bank_account_name: info.bank_account_name,
         bank_card_number: info.bank_card_number,
         bank_name: info.bank_name,
         bank_branch: info.bank_branch

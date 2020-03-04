@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
+import ql from './modules/ql'
 
 Vue.use(Vuex)
 
@@ -11,6 +12,9 @@ const store = new Vuex.Store({
   getters,
   actions,
   mutations,
+  modules: {
+    ql
+  },
   state: {
     isLoading: {
       status: false

@@ -24,11 +24,10 @@
       </van-tab>
       <van-tab title=" " disabled></van-tab>
     </van-tabs>
-    <ReturnsFilte :type_="this.meta"  />
+    <ReturnsFilte :type_="meta"  />
   </div>
 </template>
 <script type="text/javascript">
-  import store from "@/store/index"
   import ReturnsFilte from "./component/returns_filte";
 
   export default {
@@ -41,22 +40,18 @@
 
       };
     },
-    mounted () {
-      let Index = Number(store.state.ql.Index)
-      this.meta = Index
-      this.active = Index
-   },
     components: {
-      ReturnsFilte,
-      window
+      ReturnsFilte
+    },
+    created() {
+
     },
     methods: {
       returnsFilter(data, dd) {
-        store.dispatch("ql/writeIndex",  data)
         this.meta=data
-      }
+      },
+
     }
-  
   };
 </script>
 <style lang="sass" scoped>

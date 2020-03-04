@@ -9,7 +9,7 @@
       <van-col span="6" class="my_row">
         <span class="my_row_money">{{info.count_all}}</span>
         <span class="money_des">{{['当日','当月','年份','我的总'][type_]}}收益</span>
-        <span class="my_row_time" v-if="type_>2?false:true" @click="showVanDatetimePicker">
+        <span class="my_row_time" v-if="type_>2?false:true" @click="chooseTime=true">
           <span>{{date}}</span>
           <van-icon name="arrow-down" color="#A4C4E9" size="18px" />
         </span>
@@ -17,58 +17,36 @@
     </van-row>
     <van-row type="flex" justify="center">
       <van-col span="24" class="rate-box">
-        <div @click="goTo(1)" v-if="this.type_ <3">
+        <div @click="goTo(1)">
           <span>费率返点</span>
           <span>
             {{info.rate_all}}
             <van-icon name="arrow" />
           </span>
         </div>
-        <div  v-else>
-          <span>费率返点</span>
-          <span>
-            {{info.rate_all}}
-          </span>
-        </div>
-
-        <div @click="goTo(2)" v-if="this.type_ <3">
+        <div @click="goTo(2)">
           <span>券分润</span>
           <span>
             {{info.coupon_all}}
             <van-icon name="arrow" />
           </span>
         </div>
-        <div  v-else>
-          <span>券分润</span>
-          <span>
-            {{info.coupon_all}}
-          </span>
-        </div>
-        <div @click="goTo(3)" v-if="this.type_ <3">
+        <div @click="goTo(3)">
           <span>广告分润</span>
           <span>
             {{info.ad_all}}
             <van-icon name="arrow" />
-          </span>
-        </div>
-        <div v-else>
-          <span>广告分润</span>
-          <span>
-            {{info.ad_all}}
           </span>
         </div>
       </van-col>
     </van-row>
-    <!-- -->
     <van-datetime-picker
       class="shoose-time-box"
       v-if="chooseTime"
-      
-       v-model="showTime"
+      v-model="yearTime"
       :type="chooseType"
       :min-date="minDate"
       :max-date="maxDate"
-
       @confirm="chooseTimeData"
       @cancel="chooseTime=false"
       :visible-item-count="6"
@@ -91,7 +69,6 @@ import {
 } from "vant";
 import { getFinance } from "@api/api";
 import dayjs from "dayjs";
-import store from "@/store/index"
 
 export default {
   name: "ReturnsFilte",
@@ -99,48 +76,40 @@ export default {
     return {
       minDate: new Date(2015, 0, 1),
       maxDate: new Date(2025, 10, 1),
-
       currentDate: new Date(),
       chooseTime: false,
       list: [1, 3],
       chooseType: "date",
-
-      showTime:'',//用来展示的时间戳
-      date: '',
-      info: {},
-      type:3,
-      
+      yearTime: "",
+      date: dayjs(new Date()).format("YYYY-MM-DD"),
+      info: {}
     };
-    // dayjs(new Date()).format("YYYY-MM-DD")
   },
   components: {},
   props: {
-    type_: Number | String,
+    type_: Number,
     default: 0
   },
   watch: {
     type_: {
       handler(newVal, oldVal) {
         this.chooseType = ["date", "year-month", "year-month", "date"][newVal];
-        this.type = newVal
         this.chooseTime = false;
         let time = "";
         switch (newVal) {
           case 0:
-            time= store.state.ql.day? store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
+            time = dayjs(new Date()).format("YYYY-MM-DD");
             break;
           case 1:
-            time= store.state.ql.month? store.state.ql.month:dayjs(new Date()).format("YYYY-MM");
+            time = dayjs(new Date()).format("YYYY-MM");
             break;
           case 2:
-            time=store.state.ql.years? store.state.ql.years:dayjs(new Date()).format("YYYY");
+            time = dayjs(new Date()).format("YYYY");
             break;
           case 3:
             time = "";
         }
         this.date = time;
-        this.showTime = dayjs(time).$d
-        store.dispatch("ql/fetchOrderDetail", { time, type:store.state.ql.Index })
       },
       deep: true
     },
@@ -149,72 +118,63 @@ export default {
     }
   },
   created() {
-  },
-  mounted() {
-     let time = "";
-    switch (store.state.ql.Index) {
+    let time = "";
+
+    switch (this.type_) {
       case 0:
         time = dayjs(date).format("YYYY-MM-DD");
+        this.date = time;
         break;
       case 1:
         time = dayjs(date).format("YYYY-MM");
+        this.date = time;
         break;
       case 2:
         time = dayjs(date).format("YYYY");
+        this.date = time;
         break;
       case 3:
         time = "";
+        this.date = time;
         break;
     }
-    this.date = time;
-    this.showTime = dayjs(time).$d
     this.getInfo();
   },
+  mounted() {},
   methods: {
-    //展示筛选组件
-    showVanDatetimePicker(){
-        this.chooseTime=true
-    },
     chooseTimeData(date) {
       this.chooseTime = false;
       let time = "";
-      switch ( store.state.ql.Index ) {
+
+      switch (this.type_) {
         case 0:
           time = dayjs(date).format("YYYY-MM-DD");
+          this.date = time;
           break;
         case 1:
           time = dayjs(date).format("YYYY-MM");
+          this.date = time;
           break;
         case 2:
           time = dayjs(date).format("YYYY");
+          this.date = time;
           break;
         case 3:
           time = "";
+          this.date = time;
           break;
       }
-      this.date = time;
-      this.showTime = dayjs(time).$d
-      //type 作为判断条件
-      store.dispatch("ql/fetchOrderDetail", { time:this.date, type: store.state.ql.Index })
     },
     getInfo() {
-      let meta = ''
-     switch (store.state.ql.Index) {
-        case 0:
-          meta = store.state.ql.day
-          break;
-        case 1:
-           meta = store.state.ql.month
-          break;
-        case 2:
-          meta = store.state.ql.years
-          break;
-        case 3:
-          break;
-      }
-       getFinance(meta  ? {created_at:meta}:'').then(res => {
+      if (this.date) {
+        getFinance(this.date).then(res => {
           this.info = res.data;
         });
+      } else {
+        getFinance().then(res => {
+          this.info = res.data;
+        });
+      }
     },
     returnsFilter(data, dd) {},
     formatter(type, value) {
@@ -225,9 +185,23 @@ export default {
       }
       return value;
     },
-    goTo(profit_type) {
-      store.dispatch("ql/wirteContent", {profit_type})
-      this.$router.push({ path: "/finance/detailsList" });
+    goTo(type) {
+      if (this.type_ == 0) {
+        this.$router.push({
+          path: "/finance/detailsList",
+          query: {
+            type,
+            date: this.date
+          }
+        });
+      } else {
+        this.$router.push({
+          path: "/finance/detailsList",
+          query: {
+            type
+          }
+        });
+      }
     }
   }
 };

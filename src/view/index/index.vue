@@ -193,7 +193,6 @@ export default {
     // 获取店铺排行榜
     getStoreTop (){
       getStoreTopList(this.page).then(res => {
-        console.log(res)
         this.loading = false;
         this.list =[ ...this.list ,...res.data]
         this.page = this.page + 1

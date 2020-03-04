@@ -24,7 +24,6 @@
       </van-tab>
       <van-tab title=" " disabled></van-tab>
     </van-tabs>
-    
     <ReturnsFilte :type_="this.meta"  />
   </div>
 </template>
@@ -37,15 +36,15 @@
     data() {
       return {
         active: 3,
-        meta:'',
+        meta:3,
         returns_filter: ["日收益", "月收益", "年收益", "总收益"],
 
       };
     },
     mounted () {
-      let Index = this.getStore
-      this.meta = Number(Index)
-      this.active = Number(Index)
+      let Index = Number(store.state.ql.Index)
+      this.meta = Index
+      this.active = Index
    },
     components: {
       ReturnsFilte,
@@ -53,16 +52,10 @@
     },
     methods: {
       returnsFilter(data, dd) {
-        window.sessionStorage.setItem("Index", data);
+        store.dispatch("ql/writeIndex",  data)
         this.meta=data
       }
-    },
-    computed: {
-      getStore(){
-        let Index =  window.sessionStorage.getItem('Index')
-        return Number(Index)
-      }
-  }
+    }
   
   };
 </script>

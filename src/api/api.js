@@ -347,11 +347,11 @@ http({
 /**
  * 获取收益首页
  */
-export const getFinance = (date) =>
+export const getFinance = (params) =>
 http({
   url: 'api/entrepreneur/water',
   method: 'get',
-  params: {created_at: date}
+  params
 })
 
 /**
@@ -375,8 +375,16 @@ http({
 })
 
 /**
- * 添加创客会长资质认证
- * */
+ * 银行卡激活短信发送
+ */
+export const bankCardActivation = (data) =>
+http({
+  url: 'api/entrepreneur/sq/sendSmsCode',
+  data
+})
+  
+  // 添加创客会长资质认证
+ 
 export const addInfo = (data) =>
 http({
   url: 'api/entrepreneur/ck_createInfo',
@@ -385,8 +393,18 @@ http({
 })
 
 /**
- * 查看创客会长资质认证
- * */
+ * 银行卡绑卡
+ */
+export const bankCardBinding = (data) =>
+  http({
+    url: 'api/entrepreneur/sq/bindCard',
+    method: 'post',
+    data
+  })
+
+
+//  * 查看创客会长资质认证
+
 export const viewInfo = () =>
 http({
   url: 'api/entrepreneur/ck/info',

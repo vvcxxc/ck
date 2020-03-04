@@ -9,7 +9,7 @@
       <van-col span="6" class="my_row">
         <span class="my_row_money">{{info.count_all}}</span>
         <span class="money_des">{{['当日','当月','年份','我的总'][type_]}}收益</span>
-        <span class="my_row_time" v-if="type_>2?false:true" @click="chooseTime=true">
+        <span class="my_row_time" v-if="type_>2?false:true" @click="showVanDatetimePicker">
           <span>{{date}}</span>
           <van-icon name="arrow-down" color="#A4C4E9" size="18px" />
         </span>
@@ -59,13 +59,16 @@
         </div>
       </van-col>
     </van-row>
+    <!-- -->
     <van-datetime-picker
       class="shoose-time-box"
       v-if="chooseTime"
-      v-model="yearTime"
+      
+       v-model="showTime"
       :type="chooseType"
       :min-date="minDate"
       :max-date="maxDate"
+
       @confirm="chooseTimeData"
       @cancel="chooseTime=false"
       :visible-item-count="6"
@@ -96,15 +99,19 @@ export default {
     return {
       minDate: new Date(2015, 0, 1),
       maxDate: new Date(2025, 10, 1),
+
       currentDate: new Date(),
       chooseTime: false,
       list: [1, 3],
       chooseType: "date",
-      yearTime: "",
-      date: dayjs(new Date()).format("YYYY-MM-DD"),
+
+      showTime:'',//用来展示的时间戳
+      date: '',
       info: {},
-      type:3
+      type:3,
+      
     };
+    // dayjs(new Date()).format("YYYY-MM-DD")
   },
   components: {},
   props: {
@@ -120,18 +127,20 @@ export default {
         let time = "";
         switch (newVal) {
           case 0:
-            time= store.state.ql.day?store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
+            time= store.state.ql.day? store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
             break;
           case 1:
-            time= store.state.ql.month?store.state.ql.month:dayjs(new Date()).format("YYYY-MM");
+            time= store.state.ql.month? store.state.ql.month:dayjs(new Date()).format("YYYY-MM");
             break;
           case 2:
-            time= store.state.ql.years?store.state.ql.years:dayjs(new Date()).format("YYYY");
+            time=store.state.ql.years? store.state.ql.years:dayjs(new Date()).format("YYYY");
             break;
           case 3:
             time = "";
         }
         this.date = time;
+        this.showTime = dayjs(time).$d
+        store.dispatch("ql/fetchOrderDetail", { time, type:store.state.ql.Index })
       },
       deep: true
     },
@@ -140,8 +149,10 @@ export default {
     }
   },
   created() {
-    let time = "";
-    switch (this.type_) {
+  },
+  mounted() {
+     let time = "";
+    switch (store.state.ql.Index) {
       case 0:
         time = dayjs(date).format("YYYY-MM-DD");
         break;
@@ -156,37 +167,39 @@ export default {
         break;
     }
     this.date = time;
+    this.showTime = dayjs(time).$d
     this.getInfo();
   },
-  mounted() {},
   methods: {
+    //展示筛选组件
+    showVanDatetimePicker(){
+        this.chooseTime=true
+    },
     chooseTimeData(date) {
       this.chooseTime = false;
       let time = "";
-      let props_type = ""
-      switch (this.type_) {
+      switch ( store.state.ql.Index ) {
         case 0:
           time = dayjs(date).format("YYYY-MM-DD");
-          props_type = "day"
           break;
         case 1:
           time = dayjs(date).format("YYYY-MM");
-          props_type="month"
           break;
         case 2:
           time = dayjs(date).format("YYYY");
-          props_type = "year"
           break;
         case 3:
           time = "";
           break;
       }
       this.date = time;
-      store.dispatch("ql/fetchOrderDetail", { time:this.date, type:props_type })
+      this.showTime = dayjs(time).$d
+      //type 作为判断条件
+      store.dispatch("ql/fetchOrderDetail", { time:this.date, type: store.state.ql.Index })
     },
     getInfo() {
       let meta = ''
-     switch (this.type) {
+     switch (store.state.ql.Index) {
         case 0:
           meta = store.state.ql.day
           break;
@@ -199,15 +212,9 @@ export default {
         case 3:
           break;
       }
-      if (this.date) {
-        getFinance(meta?meta:this.date).then(res => {
+       getFinance(meta  ? {created_at:meta}:'').then(res => {
           this.info = res.data;
         });
-      } else {
-        getFinance().then(res => {
-          this.info = res.data;
-        });
-      }
     },
     returnsFilter(data, dd) {},
     formatter(type, value) {
@@ -218,38 +225,9 @@ export default {
       }
       return value;
     },
-    goTo(type) {
-      console.log(this.date,this.type_,type)
-      // return
-      store.dispatch("ql/wirteContent", { 
-            time:this.date,
-            type1:type,
-            type2:this.type_
-          //  date:this.date
-           })
-      // return 
-      if (this.type_ == 0) {
-        // store.wirteContent()
-        
-        this.$router.push({
-          path: "/finance/detailsList",
-          query: {
-            // type,
-            // date: this.date,
-            // time:this.type_,//用以区别年 月 日
-            // my_date:this.date
-          }
-        });
-      } else {
-        this.$router.push({
-          path: "/finance/detailsList",
-          query: {
-            // type,
-            // time:this.type_,//用以区别年 月 日
-            // my_date:this.date
-          }
-        });
-      }
+    goTo(profit_type) {
+      store.dispatch("ql/wirteContent", {profit_type})
+      this.$router.push({ path: "/finance/detailsList" });
     }
   }
 };

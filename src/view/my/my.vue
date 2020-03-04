@@ -31,11 +31,17 @@
     </div>
 
     <ul class="other-info">
-      <li @click="handleShowView('bank')">
+      <!-- @click="handleShowView('bank') -->
+      <!-- mycard() -->
+      <li @click="mycard()">
         <div>
           <span></span>我的银行卡
         </div>
-        <van-icon name="arrow" size="0.3rem" color="#999999" />
+        <div>
+          <!-- <div>未绑定</div> -->
+          <van-icon name="arrow" size="0.3rem" color="#999999" />
+        </div>
+        
       </li>
       <li @click="integralRecord()">
         <div>
@@ -43,7 +49,7 @@
         </div>
         <van-icon name="arrow" size="0.3rem" color="#999999" />
       </li>
-      <li @click="handleShowView('configuration')">
+      <li @click=" handleShowView('configuration')">
         <div>
           <span></span>设置
         </div>
@@ -66,6 +72,7 @@ import VConfiguration from "./configuration/configurations";
 import { authUser } from "@api/api";
 import { Icon, Popup, Overlay } from "vant";
 import QRCode from "qrcode";
+import store from "@/store/index"//vuex
 const V_BANK = "bank";
 const V_CONFIGURATION = "configuration";
 export default {
@@ -94,6 +101,10 @@ export default {
     this.fetchAuthUser();
   },
   methods: {
+    //跳转我的银行卡页面
+    mycard(){
+      this.$router.push({ path: "/my/card_new" })
+    },
     invite(name) {
       if (name == "people") {
         let qrCodeUrl = `http://${window.location.host}/ck/register?invite_id=${this.party_id}`;
@@ -118,7 +129,6 @@ export default {
         });
     },
     handleShowView(view) {
-      console.log(view);
       this.$store.commit("HIDE_TABBAR", { path: "" });
       switch (view) {
         case V_BANK:
@@ -149,6 +159,7 @@ export default {
               supplier_party_id = 0
             }
           }) => {
+            
             if (account_name) {
               this.account_name = account_name;
               this.account_phone = account_phone;
@@ -156,6 +167,9 @@ export default {
               this.integral = integral;
               this.supplier_party_id = supplier_party_id;
               this.party_id = party_id;
+              
+              //提供给银行卡验证页面使用
+              store.dispatch("ql_bank/recordInformation", { party_id })
             }
           }
         )

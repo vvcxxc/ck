@@ -96,14 +96,12 @@
     methods: {
       // 搜索
       onclear (){
-        console.log('das')
         this.keyword = ''
       },
       changeReturn(){
         this.fetchSuppliers()
       },
       search (){
-        console.log('sss')
         let params = {
           type: this.role_type,
           page: 1,

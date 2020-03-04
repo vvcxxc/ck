@@ -1,8 +1,6 @@
 <template>
-  <div >
-    <van-nav-bar  left-arrow :title="title" @click-left="goBack"/>
-    <div class="details-page">
-      <div class="details-header">
+  <div  class="details-page">
+    <div class="details-header">
       <div></div>
       <div @click="showDatePicker" class="date">
         {{date}}
@@ -34,101 +32,150 @@
           </div>
         </div>
         <p class="load_more" @click="handleLoadMore" v-if="isMore">点击加载更多</p>
-    <van-divider v-else :style="{borderColor: '#ccc', padding: '10px 16px',margin: 0, fontSize: '16px' }">暂无更多数据</van-divider>
+      <van-divider 
+      v-else 
+      :style="{borderColor: '#ccc', padding: '10px 16px',margin: 0, fontSize: '16px' }"
+      >
+      暂无更多数据
+      </van-divider>
 
       </div>
     </div>
-    </div>
-
-
-    <van-popup position="bottom" v-model="show" get-container="#app">
+    <van-popup position="bottom" v-model="show" get-container="#app"
+    :class="this.my_time == 2?
+    'annual_earnings':''">
       <van-datetime-picker
-        v-model="currentDate"
-        type="date"
-        value='date'
-        @confirm="chooseDate"
-        @cancel="showDatePicker"
-      />
+      class="shoose-time-box"
+      v-if="show"
+      v-model="showTime"
+      :type="chooseType"
+      :min-date="minDate"
+      :max-date="maxDate"
+      @confirm="chooseTimeData"
+      @cancel="show=false"
+      :visible-item-count="6"
+      :formatter="formatter"
+    />
     </van-popup>
   </div>
 </template>
 <script type="text/javascript">
+import Vue from "vue";
+import dayjs from "dayjs";
 import { DatetimePicker, Popup, Icon, Divider  } from "vant";
 import { getFinanceList } from "@api/api";
-import dayjs from "dayjs";
-import Vue from "vue";
+import store from "@/store/index"
+
 Vue.use(Divider);
 export default {
   data() {
     return {
       currentDate: new Date(),
-      show: false,
-      date: dayjs(new Date()).format("YYYY-MM-DD"),
+
+      date: '',
       all_money: "",
       list: [],
       type: 1,
       title: "费率返点",
       isMore: true,
-      page: 1
+      page: 1,
+
+      show: false,
+      showTime:'',//用来展示的时间戳
+
+      chooseType: "date",
+      minDate: new Date(2015, 0, 1),
+      maxDate: new Date(2025, 10, 1),
+      my_time:''
     };
   },
   created() {
-    let type = this.$route.query.type;
-    let date = this.$route.query.date;
-    if(date){
-      this.date = date
+    let time = "";
+    switch ( store.state.ql.Index) {//ql 用于区别年月日显示日期
+      case 0:
+      time = store.state.ql.day? store.state.ql.day:dayjs(new Date()).format("YYYY-MM-DD");
+        break;
+        case 1:
+       time = store.state.ql.month? store.state.ql.month:dayjs(new Date()).format("YYYY-MM");
+        break;
+      case 2:
+       time = store.state.ql.years? store.state.ql.years:dayjs(new Date()).format("YYYY");
+        break;
+      default:
     }
-    console.log(4123)
-    if(type == 1){
-      this.title = "费率返点";
-    }else if(type == 2){
-       this.title = "券分润";
-    }else if (type == 3){
-      this.title = "广告分润";
+    this.date = time
+    this.showTime = dayjs(time).$d
+    
+    switch ( store.state.ql.profit_type ) {//ql 用于区别title
+      case 1:
+        this.title = "费率返点";
+        break;
+      case 2:
+        this.title = "券分润";
+        break;
+      case 3:
+        this.title = "广告分润";
+        break;
+      default:
+        this.title = "费率返点";
     }
-    // switch (type) {
-    //   case 1:
-    //     this.title = "费率返点";
-    //     break;
-    //   case 2:
-    //     this.title = "券分润";
-    //     break;
-    //   case 3:
-    //     this.title = "广告分润";
-    //     break;
-    //   default:
-    //     this.title = "费率返点";
-    // }
     this.getList();
   },
+  mounted(){
+    this.my_time =store.state.ql.Index
+    this.chooseType = ["date", "year-month", "year-month", "date"][store.state.ql.Index];
+  },
   methods: {
-    goBack() {
-      this.$router.back()
+     formatter(type, value) {
+      if (type === "year") {
+        return `${value}年`;
+      } else if (type === "month") {
+        return `${value}月`;
+      }
+      return value;
     },
-
+    //选择时间
+    chooseTimeData(date) {
+      this.show = false;
+      let time = "";
+      switch (Number(store.state.ql.Index)) {
+        case 0:
+          time = dayjs(date).format("YYYY-MM-DD");
+          break;
+        case 1:
+          time = dayjs(date).format("YYYY-MM");
+          break;
+        case 2:
+          time = dayjs(date).format("YYYY");
+          break;
+        case 3:
+          time = "";
+          break;
+      }
+      this.date = time;
+      this.showTime = dayjs(time).$d
+      this.page = 1
+      store.dispatch("ql/wirteContent", { time })
+      //type 仅作为判断条件
+      store.dispatch("ql/fetchOrderDetail", { time, type: Number(store.state.ql.Index)})
+      this.getList();
+    },
     // 展示隐藏日期选择器
     showDatePicker() {
       this.show = !this.show;
     },
-    // 选择时间
-    chooseDate(date) {
-      let time = dayjs(date).format("YYYY-MM-DD");
-      this.show = false;
-      this.date = time;
-      this.page = 1
-      this.getList();
-    },
     // 获取列表数据
     getList() {
+      const { day,month,years,profit_type}=store.state.ql
       let data = {
-        profit_type: this.$route.query.type || 1,
+        profit_type,
         created_at: this.date,
         page: this.page
       };
       getFinanceList(data)
         .then(res => {
-          console.log(res);
-          this.all_money = res.all_money || 0;
+          this.all_money = res.all_money || 0;//这个是?
+
           if(this.page == 1){
             this.list = res.data
             this.isMore = true
@@ -139,7 +186,7 @@ export default {
             this.isMore = false
           }
           if(res.pagination.current_page == res.pagination.total_pages || res.pagination.total_pages == null){
-            this.isMore = false
+            this.isMore = false 
           }
         })
         .catch(err => console.log(err));
@@ -156,8 +203,7 @@ export default {
       this.$router.push({
         path: "/finance/details",
         query: {
-          id,
-          type: this.$route.query.type
+          id
         }
       });
     }
@@ -166,4 +212,7 @@ export default {
 </script>
 <style lang="sass" scoped>
  @import './index'
+ .annual_earnings
+  /deep/  .van-picker-column:nth-child(2)
+      display: none
 </style>

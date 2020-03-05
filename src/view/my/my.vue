@@ -96,7 +96,8 @@ export default {
       qrCodeUrl: "", // 二维码信息
       codeUrl: "", //二维码图片路径
       is_show: false, // 展示邀请页面
-      title: "" // 邀请时候的title
+      title: "", // 邀请时候的title
+      is_existence: '',
     };
   },
   components: {
@@ -125,7 +126,11 @@ export default {
       }
     },
     goto() {
-      this.$router.push({path:'/completeInformation/IDCard',query: {type: 'edit'}})
+      if(this.is_existence){
+        this.$router.push({path:'/completeInformation/IDCard',query: {type: 'edit'}})
+      }else {
+        this.$router.push({path:'/completeInformation/IDCard',query: {type: 'add',party_id: this.party_id}})
+      }
     },
     showQRcode(data) {
       QRCode.toDataURL(data)
@@ -165,7 +170,8 @@ export default {
               money,
               party_id,
               integral,
-              supplier_party_id = 0
+              supplier_party_id = 0,
+              is_existence
             }
           }) => {
 

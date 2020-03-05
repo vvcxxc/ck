@@ -125,7 +125,7 @@ export default {
       }
     },
     goto() {
-      this.$router.push('/completeInformation/IDCard')
+      this.$router.push({path:'/completeInformation/IDCard',query: {type: 'edit'}})
     },
     showQRcode(data) {
       QRCode.toDataURL(data)

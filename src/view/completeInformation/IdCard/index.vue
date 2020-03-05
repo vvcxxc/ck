@@ -149,15 +149,16 @@ export default {
   },
   created() {
     let type = this.$route.query.type;
-    // let party_id = this.$route.query.party_id;
+    let party_id = this.$route.query.party_id;
     if (type != "add") {
       store.dispatch("getInfo");
     }else{
       store.commit("INFO", {
           ...this.info,
-          // party_id
+          party_id
         });
     }
+    console.log(this.info)
   },
   mounted() {
     if (this.info.identity_card_positive) {

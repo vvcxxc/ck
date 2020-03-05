@@ -41,11 +41,17 @@
           <!-- <div>未绑定</div> -->
           <van-icon name="arrow" size="0.3rem" color="#999999" />
         </div>
-        
+
       </li>
       <li @click="integralRecord()">
         <div>
           <span></span>礼品额度使用记录
+        </div>
+        <van-icon name="arrow" size="0.3rem" color="#999999" />
+      </li>
+      <li @click="goto()">
+        <div>
+          <span></span>身份认证
         </div>
         <van-icon name="arrow" size="0.3rem" color="#999999" />
       </li>
@@ -118,6 +124,9 @@ export default {
         this.title = "邀请店铺";
       }
     },
+    goto() {
+      this.$router.push('/completeInformation/IDCard')
+    },
     showQRcode(data) {
       QRCode.toDataURL(data)
         .then(url => {
@@ -159,7 +168,7 @@ export default {
               supplier_party_id = 0
             }
           }) => {
-            
+
             if (account_name) {
               this.account_name = account_name;
               this.account_phone = account_phone;
@@ -167,7 +176,7 @@ export default {
               this.integral = integral;
               this.supplier_party_id = supplier_party_id;
               this.party_id = party_id;
-              
+
               //提供给银行卡验证页面使用
               store.dispatch("ql_bank/recordInformation", { party_id })
             }

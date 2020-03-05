@@ -154,11 +154,11 @@ export default {
     submit() {
       let type = this.$route.query.type;
       let info = this.info;
-      let validity_card = info.validity_card
-      if(info.validity_card == '长期有效'){
-        validity_card = 0
+      let identity_validity_card = info.identity_validity_card
+      if(info.identity_validity_card == '长期有效'){
+        identity_validity_card = 0
       }
-      console.log(validity_card)
+      console.log(identity_validity_card)
       let data = {
         party_id: info.party_id,
         identity_card_positive: info.identity_card_positive,
@@ -166,7 +166,7 @@ export default {
         hand_identity_card: info.hand_identity_card,
         name: info.name,
         identity_card: info.identity_card,
-        validity_card,
+        identity_validity_card,
         bank_positive: info.bank_positive,
         bank_opposite: info.bank_opposite,
         bank_account_name: info.bank_account_name,

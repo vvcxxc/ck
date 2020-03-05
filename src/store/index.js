@@ -26,7 +26,7 @@ const store = new Vuex.Store({
       party_id: '', // 用户id
       identity_name: '', // 用户名
       identity_card: '', // 身份证号
-      validity_card: '', // 身份证有效期
+      identity_validity_card: '', // 身份证有效期
       identity_card_positive: '', // 身份证正面
       identity_card_opposite: '', // 身份证反面
       identity_hand_card: '', //手持身份证

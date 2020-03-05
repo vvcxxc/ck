@@ -5,12 +5,13 @@ import getters from './getters'
 import mutations from './mutations'
 import ql from './modules/ql'
 import ql_bank from './modules/ql_bank'//我的银行卡
-
+import actions from './actions'
 Vue.use(Vuex)
 // 创建vux中的store容器对象
 const store = new Vuex.Store({
   getters,
   mutations,
+  actions,
   modules: {
     ql,
     ql_bank

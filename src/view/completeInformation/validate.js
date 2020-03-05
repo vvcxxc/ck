@@ -18,6 +18,7 @@ let data = {
 export default function Validate(info) {
   // 验证完善资料
   // 验证是否为空
+  console.log(info)
   for (let i in info) {
     if (!info[i] && info[i] != undefined) {
       for (let a in data) {
@@ -36,7 +37,7 @@ export default function Validate(info) {
     validateRule: 'isIDNumber',
     errmsg: '请输入正确的身份证号'
   }])
-  validator.add(info.bank_account_user_name, [{
+  validator.add(info.bank_account_name, [{
     validateRule: 'isChinese',
     errmsg: '请输入正确的开户人名字'
   }])

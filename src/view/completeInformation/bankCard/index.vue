@@ -158,8 +158,8 @@ export default {
       if(info.identity_validity_card == '长期有效'){
         identity_validity_card = 0
       }
-      console.log(identity_validity_card)
       let data = {
+        id: type == "edit" ? info.id : undefined,
         party_id: info.party_id,
         identity_card_positive: info.identity_card_positive,
         identity_card_opposite: info.identity_card_opposite,

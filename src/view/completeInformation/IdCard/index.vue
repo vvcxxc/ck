@@ -111,6 +111,8 @@ import upload from "../../../api/oss";
 import store from "@/store/index";
 import { viewInfo } from "@/api/api";
 import Axios from 'axios'
+import { Toast } from "vant";
+import ValidateIDCard from "./validate";
 export default {
   data() {
     return {
@@ -226,7 +228,23 @@ export default {
     // 下一步
     goTo() {
       let type = this.$route.query.type;
-      this.$router.push({path:"/completeInformation/bankCard", query: {type}});
+      let info = this.info
+       let data = {
+        id: type == "edit" ? info.id : undefined,
+        party_id: info.party_id,
+        identity_card_positive: info.identity_card_positive,
+        identity_card_opposite: info.identity_card_opposite,
+        identity_hand_card: info.identity_hand_card,
+        identity_name: info.identity_name,
+        identity_card: info.identity_card,
+        identity_validity_card: info.identity_validity_card,
+      };
+      let validate = ValidateIDCard(data);
+      if(!validate){
+        this.$router.push({path:"/completeInformation/bankCard", query: {type}});
+      }else {
+        Toast.fail(validate);
+      }
     },
     afterReadBack(file) {
       // 此时可以自行将文件上传至服务器，反面照

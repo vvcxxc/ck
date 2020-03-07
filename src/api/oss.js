@@ -1,6 +1,4 @@
-import axios, {
-  AxiosRequestConfig
-} from 'axios';
+
 import Axios from 'axios'
 import {
   Toast

@@ -45,25 +45,26 @@
             v-model="info.bank_account_name"
             placeholder="请输入开户人姓名"
             class="input"
+             @focus="scroll"
           />
         </div>
       </div>
       <div class="input-box">
         <div class="label">银行卡号</div>
         <div class="input-area">
-          <input type="text" v-model="info.bank_card_number" placeholder="请输入银行卡号" class="input" />
+          <input type="text" v-model="info.bank_card_number" placeholder="请输入银行卡号" class="input" @focus="scroll"/>
         </div>
       </div>
       <div class="input-box">
         <div class="label">开户行</div>
         <div class="input-area">
-          <input type="text" v-model="info.bank_name" placeholder="请输入开户行" class="input" />
+          <input type="text" v-model="info.bank_name" placeholder="请输入开户行" class="input" @focus="scroll"/>
         </div>
       </div>
       <div class="input-box">
         <div class="label">支行</div>
         <div class="input-area">
-          <input type="text" v-model="info.bank_branch" placeholder="请输入支行" class="input" />
+          <input type="text" v-model="info.bank_branch" placeholder="请输入支行" class="input" @focus="scroll" />
         </div>
       </div>
     </div>
@@ -121,6 +122,11 @@ export default {
     }
   },
   methods: {
+     // 键盘事件兼容
+    scroll (){
+      window.scrollTo(100,500)
+      console.log(3234)
+    },
     afterReadFront(file) {
       // 此时可以自行将文件上传至服务器,正面
       console.log(file);

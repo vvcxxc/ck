@@ -56,13 +56,13 @@
       <div class="input-box">
         <div class="label">姓名</div>
         <div class="input-area">
-          <input type="text" v-model="info.identity_name" placeholder="请输入用户名" class="input" />
+          <input type="text" v-model="info.identity_name" placeholder="请输入用户名" class="input"  @focus="scroll"/>
         </div>
       </div>
       <div class="input-box">
         <div class="label">身份证号</div>
         <div class="input-area">
-          <input type="text" v-model="info.identity_card" placeholder="请输入身份证号" class="input" />
+          <input type="text" v-model="info.identity_card" placeholder="请输入身份证号" class="input" @focus="scroll"/>
         </div>
       </div>
       <div class="input-box">
@@ -124,7 +124,7 @@ export default {
       long_date: 0,
       imgFront: [],
       imgBack: [],
-      imgHand: []
+      imgHand: [],
     };
   },
   watch: {
@@ -191,6 +191,11 @@ export default {
     }
   },
   methods: {
+    // 键盘事件兼容
+    scroll (){
+      window.scrollTo(100,500)
+      console.log(3234)
+    },
     afterReadFront(file) {
       // 此时可以自行将文件上传至服务器,正面照
       upload(file.content).then(res => {

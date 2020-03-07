@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <van-nav-bar :border="false" title="提交资质" left-arrow @click-left="goBack"/>
+    <van-nav-bar :border="false" title="提交资质" left-arrow @click-left="goBack" />
     <div class="main">
       <div class="title-syz">上传身份证信息</div>
       <div class="upload-box">
@@ -87,14 +87,9 @@
         <van-icon name="cross" class="cancel" size=".3rem" @click="closeDate" />
       </div>
       <div class="date-tab">
-        <div
-          :class="long_date != 1 ? 'date-item actived' : 'date-item'"
-        >{{date || '年/月/日'}}</div>
+        <div :class="long_date != 1 ? 'date-item actived' : 'date-item'">{{date || '年/月/日'}}</div>
       </div>
-      <div
-        :class="long_date == 1 ? 'long-date actived' : 'long-date'"
-        @click="longDate"
-      >长期有效</div>
+      <div :class="long_date == 1 ? 'long-date actived' : 'long-date'" @click="longDate">长期有效</div>
       <van-datetime-picker
         v-model="currentDate"
         :show-toolbar="false"
@@ -115,6 +110,7 @@ import dayjs from "dayjs";
 import upload from "../../../api/oss";
 import store from "@/store/index";
 import { viewInfo } from "@/api/api";
+import Axios from 'axios'
 export default {
   data() {
     return {
@@ -148,6 +144,9 @@ export default {
     }
   },
   created() {
+
+    this.ossData()
+
     let type = this.$route.query.type;
     let party_id = this.$route.query.party_id;
     if (type != "add") {
@@ -199,6 +198,30 @@ export default {
           isImage: true
         };
       });
+    },
+
+    // oss参数
+    async ossData (){
+      console.log('2211')
+      if (!localStorage.getItem('oss_data')) {
+       /**获取oss */
+       console.log(4444)
+        let res = await Axios.get('http://release.api.supplier.tdianyi.com/api/v2/up')
+        let {
+          data
+        } = res.data;
+        let oss_data = {
+          policy: data.policy,
+          OSSAccessKeyId: data.accessid,
+          success_action_status: 200, //让服务端返回200,不然，默认会返回204
+          signature: data.signature,
+          callback: data.callback,
+          host: data.host,
+          key: data.dir
+        };
+
+        window.localStorage.setItem('oss_data', JSON.stringify(oss_data));
+      }
     },
     // 下一步
     goTo() {

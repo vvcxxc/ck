@@ -49,13 +49,12 @@
     <PersonalCenterGird 
       leftName="身份认证"
       type="2"
+      :rightName="sq_array[sq_status]"
       @onClick="goto()"
     />
     <PersonalCenterGird 
       leftName="设置"
-      rightName="未提交资料"
       type="3"
-      :rightName="sq_array[sq_status]"
       @onClick="handleShowView('configuration')"
     />
     <v-configuration v-if="flagConfiguration" @on-hide="handleHideView('configuration')"></v-configuration>
@@ -96,7 +95,7 @@ export default {
       title: "", // 邀请时候的title
       is_existence: '',
       sq_status:'',
-      sq_array:['未提交资料','审核中','拒绝','通过'],
+      sq_array:['未认证','资料审核中','资料审核失败','审核通过'],
 
     };
   },

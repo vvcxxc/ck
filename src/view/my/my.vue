@@ -6,7 +6,7 @@
         alt
       />
       <ul class="right">
-        <li>{{account_name || '请登录'}} 
+        <li>{{account_name || '请登录'}}
           <!-- <span class="user_my_icon"/> -->
           </li>
         <li>{{account_phone || ''}}</li>
@@ -33,26 +33,26 @@
         <span>邀请创客</span>
       </div>
     </div>
-    
+
   <!-- @click="handleShowView('bank') -->
     <!-- rightName="未提交资料" 此属性用来加提示 -->
-    <PersonalCenterGird 
+    <PersonalCenterGird
       leftName="我的银行卡"
       type="0"
       @onClick="mycard()"
     />
-    <PersonalCenterGird 
+    <PersonalCenterGird
       leftName="礼品额度使用记录"
       type="1"
       @onClick="integralRecord()"
     />
-    <PersonalCenterGird 
+    <PersonalCenterGird
       leftName="身份认证"
       type="2"
       :rightName="sq_array[sq_status]"
       @onClick="goto()"
     />
-    <PersonalCenterGird 
+    <PersonalCenterGird
       leftName="设置"
       type="3"
       @onClick="handleShowView('configuration')"
@@ -126,6 +126,7 @@ export default {
       }
     },
     goto() {
+      console.log(this.is_existence)
       if(this.is_existence){
         this.$router.push({path:'/completeInformation/IDCard',query: {type: 'edit'}})
       }else {
@@ -184,6 +185,7 @@ export default {
               this.supplier_party_id = supplier_party_id;
               this.party_id = party_id;
               this.sq_status = sq_status
+              this.is_existence = is_existence
               // console.log(sq_status,'sq_status')
 
               //提供给银行卡验证页面使用

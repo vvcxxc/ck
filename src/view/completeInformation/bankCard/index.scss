@@ -4,7 +4,12 @@
   height: 100%;
   position: relative;
 }
-
+.van-nav-bar {
+  background: #fff;
+  .van-icon {
+    color: #1989fa;
+  }
+}
 .main {
   padding: 0 .26rem;
   margin-top: .6rem;

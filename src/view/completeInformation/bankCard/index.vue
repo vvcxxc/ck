@@ -70,7 +70,7 @@
     </div>
     <div class="botton-box">
       <div class="botton-go-back" @click="goBack">返回上一步</div>
-      <div class="botton" @click="submit">提交</div>
+      <div class="botton" @click="submit" v-if="sq_status != 1 && sq_status != 3">提交</div>
     </div>
   </div>
 </template>
@@ -80,6 +80,7 @@ import { editInfo, addInfo } from "@/api/api";
 import store from "@/store/index";
 import { Toast } from "vant";
 import Validate from "../validate";
+import { authUser } from "@api/api";
 export default {
   data() {
     return {
@@ -90,10 +91,17 @@ export default {
       imgBack: [],
       imgFront: [],
       bank_front: "",
-      bank_back: ""
+      bank_back: "",
+      sq_status: 1
     };
   },
   mounted() {
+    let type = this.$route.query.type;
+    if(type == 'edit'){
+      authUser().then(res => {
+        this.sq_status = res.data.sq_status
+      })
+    }
     if (this.info.bank_positive) {
       this.imgFront = [
         {

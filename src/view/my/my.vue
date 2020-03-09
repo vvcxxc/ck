@@ -187,7 +187,6 @@ export default {
               this.sq_status = sq_status
               this.is_existence = is_existence
               // console.log(sq_status,'sq_status')
-
               //提供给银行卡验证页面使用
               store.dispatch("ql_bank/recordInformation", { party_id })
             }

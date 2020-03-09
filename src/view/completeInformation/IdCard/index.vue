@@ -1,6 +1,10 @@
 <template>
   <div class="page">
     <van-nav-bar :border="false" title="提交资质" left-arrow @click-left="goBack" />
+    <div class="refuse-reason" v-show="this.tip">
+      <img src="/static/img/tips.png" class="refuse-reason-icon" />
+      {{this.tip}}
+    </div>
     <div class="main">
       <div class="title-syz">上传身份证信息</div>
       <div class="upload-box">
@@ -56,13 +60,25 @@
       <div class="input-box">
         <div class="label">姓名</div>
         <div class="input-area">
-          <input type="text" v-model="info.identity_name" placeholder="请输入用户名" class="input"  @focus="scroll"/>
+          <input
+            type="text"
+            v-model="info.identity_name"
+            placeholder="请输入用户名"
+            class="input"
+            @focus="scroll"
+          />
         </div>
       </div>
       <div class="input-box">
         <div class="label">身份证号</div>
         <div class="input-area">
-          <input type="text" v-model="info.identity_card" placeholder="请输入身份证号" class="input" @focus="scroll"/>
+          <input
+            type="text"
+            v-model="info.identity_card"
+            placeholder="请输入身份证号"
+            class="input"
+            @focus="scroll"
+          />
         </div>
       </div>
       <div class="input-box">
@@ -110,32 +126,63 @@ import dayjs from "dayjs";
 import upload from "../../../api/oss";
 import store from "@/store/index";
 import { viewInfo } from "@/api/api";
-import Axios from 'axios'
+import Axios from "axios";
 import { Toast } from "vant";
 import ValidateIDCard from "./validate";
 export default {
   data() {
     return {
+      tip: "",
       show: false,
       minDate: new Date(1990, 0, 1),
       maxDate: new Date(2035, 10, 1),
       currentDate: new Date(),
-      date: '',
+      date: "",
       long_date: 0,
       imgFront: [],
       imgBack: [],
-      imgHand: [],
+      imgHand: []
     };
   },
   watch: {
     currentDate(val) {
-      this.date = dayjs(val).format('YYYY-MM-DD')
-      this.long_date = 0
-    },
+      this.date = dayjs(val).format("YYYY-MM-DD");
+      this.long_date = 0;
+    }
   },
   computed: {
     info: {
       get() {
+        if (store.state.info.tip) {
+          this.tip = store.state.info.tip;
+        }
+        if (store.state.info.identity_card_positive) {
+          this.imgFront = [
+            {
+              url:
+                "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
+                store.state.info.identity_card_positive
+            }
+          ];
+        }
+        if (store.state.info.identity_card_opposite) {
+          this.imgBack = [
+            {
+              url:
+                "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
+                store.state.info.identity_card_opposite
+            }
+          ];
+        }
+        if (store.state.info.identity_hand_card) {
+          this.imgHand = [
+            {
+              url:
+                "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
+                store.state.info.identity_hand_card
+            }
+          ];
+        }
         return store.state.info;
       },
       set(value) {
@@ -145,56 +192,27 @@ export default {
       }
     }
   },
-  created() {
-
-    this.ossData()
+  async created() {
+    this.ossData();
 
     let type = this.$route.query.type;
     let party_id = this.$route.query.party_id;
     if (type != "add") {
-      store.dispatch("getInfo");
-    }else{
+      await store.dispatch("getInfo");
+    } else {
       store.commit("INFO", {
-          ...this.info,
-          party_id
-        });
+        ...this.info,
+        party_id
+      });
     }
-    console.log(this.info)
+    console.log(this.info);
   },
-  mounted() {
-    if (this.info.identity_card_positive) {
-      this.imgFront = [
-        {
-          url:
-            "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
-            this.info.identity_card_positive
-        }
-      ];
-    }
-    if (this.info.identity_card_opposite) {
-      this.imgBack = [
-        {
-          url:
-            "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
-            this.info.identity_card_opposite
-        }
-      ];
-    }
-    if (this.info.identity_hand_card) {
-      this.imgHand = [
-        {
-          url:
-            "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
-            this.info.identity_hand_card
-        }
-      ];
-    }
-  },
+  mounted() {},
   methods: {
     // 键盘事件兼容
-    scroll (){
-      window.scrollTo(100,500)
-      console.log(3234)
+    scroll() {
+      window.scrollTo(100, 500);
+      console.log(3234);
     },
     afterReadFront(file) {
       // 此时可以自行将文件上传至服务器,正面照
@@ -208,15 +226,15 @@ export default {
     },
 
     // oss参数
-    async ossData (){
-      console.log('2211')
-      if (!localStorage.getItem('oss_data')) {
-       /**获取oss */
-       console.log(4444)
-        let res = await Axios.get('http://release.api.supplier.tdianyi.com/api/v2/up')
-        let {
-          data
-        } = res.data;
+    async ossData() {
+      console.log("2211");
+      if (!localStorage.getItem("oss_data")) {
+        /**获取oss */
+        console.log(4444);
+        let res = await Axios.get(
+          "http://release.api.supplier.tdianyi.com/api/v2/up"
+        );
+        let { data } = res.data;
         let oss_data = {
           policy: data.policy,
           OSSAccessKeyId: data.accessid,
@@ -227,14 +245,14 @@ export default {
           key: data.dir
         };
 
-        window.localStorage.setItem('oss_data', JSON.stringify(oss_data));
+        window.localStorage.setItem("oss_data", JSON.stringify(oss_data));
       }
     },
     // 下一步
     goTo() {
       let type = this.$route.query.type;
-      let info = this.info
-       let data = {
+      let info = this.info;
+      let data = {
         id: type == "edit" ? info.id : undefined,
         party_id: info.party_id,
         identity_card_positive: info.identity_card_positive,
@@ -242,12 +260,15 @@ export default {
         identity_hand_card: info.identity_hand_card,
         identity_name: info.identity_name,
         identity_card: info.identity_card,
-        identity_validity_card: info.identity_validity_card,
+        identity_validity_card: info.identity_validity_card
       };
       let validate = ValidateIDCard(data);
-      if(!validate){
-        this.$router.push({path:"/completeInformation/bankCard", query: {type}});
-      }else {
+      if (!validate) {
+        this.$router.push({
+          path: "/completeInformation/bankCard",
+          query: { type }
+        });
+      } else {
         Toast.fail(validate);
       }
     },
@@ -282,7 +303,7 @@ export default {
     closeDate() {
       this.show = false;
       this.long_date = 0;
-      this.date = ''
+      this.date = "";
     },
     //  打开时间筛选
     openDate() {
@@ -291,7 +312,7 @@ export default {
     //  时间筛选确定
     confirmDate() {
       this.show = false;
-      this.info.identity_validity_card = this.date
+      this.info.identity_validity_card = this.date;
     },
     // 删除图片
     deleteFront() {
@@ -306,8 +327,8 @@ export default {
       this.info.identity_hand_card = "";
       return true;
     },
-     // 返回
-    goBack (){
+    // 返回
+    goBack() {
       this.$router.go(-1);
     }
   }

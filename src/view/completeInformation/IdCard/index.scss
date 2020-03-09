@@ -4,12 +4,38 @@
   height: 100%;
   position: relative;
 }
+
 .van-nav-bar {
   background: #fff;
+
   .van-icon {
     color: #1989fa;
   }
 }
+
+.refuse-reason {
+  width: 100vw;
+  height: 0.64rem;
+  background: rgba(253, 99, 99, 1);
+  font-size: 0.34rem;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: rgba(255, 255, 255, 1);
+  line-height: 90px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+
+.refuse-reason-icon {
+  width: 0.32rem;
+  height: 0.32rem;
+  margin: 0 0.2rem;
+
+}
+
 .main {
   padding: 0 .26rem;
   margin-top: .6rem;
@@ -28,14 +54,17 @@
   display: flex;
   margin-top: .4rem;
   justify-content: space-between;
+
   .upload-main {
     width: 2.16rem;
     height: 2.02rem;
   }
+
   /deep/ .van-uploader__preview-image {
     width: 2.16rem;
     height: 2.02rem;
   }
+
   .upload {
     width: 2.16rem;
     height: 2.02rem;
@@ -144,10 +173,11 @@
   border-top: 1px solid #DDE2E5;
   padding: .15rem .32rem;
   box-sizing: border-box;
+
   .botton {
     width: 100%;
     height: 100%;
-    background:rgba(68,134,247,1);
+    background: rgba(68, 134, 247, 1);
     border-radius: .49rem;
     color: #fff;
     display: flex;
@@ -156,6 +186,7 @@
     font-size: .34rem;
   }
 }
+
 .date-picker {
   .title {
     width: 100%;
@@ -164,11 +195,13 @@
     padding: .6rem .5rem;
     color: #333;
     position: relative;
+
     .cancel {
       position: absolute;
       right: .5rem;
     }
   }
+
   .date-tab {
     width: 100%;
     padding: 0 .48rem;
@@ -177,6 +210,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: .8rem;
+
     .date-item {
       width: 2.83rem;
       border-bottom: 1px solid #DDE2E5;
@@ -186,6 +220,7 @@
       font-weight: bold;
     }
   }
+
   .long-date {
     width: 100%;
     text-align: center;
@@ -202,9 +237,10 @@
     font-size: .34rem;
     color: #3F7DE7;
     font-weight: bold;
-    border-top:1px solid rgba(221,226,229,1);
+    border-top: 1px solid rgba(221, 226, 229, 1);
   }
 }
+
 .actived {
   color: #333 !important;
 }

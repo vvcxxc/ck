@@ -1,6 +1,10 @@
 <template>
   <div class="page">
     <van-nav-bar :border="false" title="完善资料" left-arrow @click-left="goBack" />
+    <div class="refuse-reason" v-show="this.tip">
+      <img src="/static/img/tips.png" class="refuse-reason-icon" />
+      {{this.tip}}
+    </div>
     <div class="main">
       <div class="title-syz">上传银行卡信息</div>
       <div class="upload-box">
@@ -102,6 +106,7 @@ import { authUser } from "@api/api";
 export default {
   data() {
     return {
+      tip: "",
       name: "",
       number: "",
       bank_name: "",
@@ -142,6 +147,9 @@ export default {
   computed: {
     info: {
       get() {
+        if (store.state.info.tip) {
+          this.tip = store.state.info.tip;
+        }
         return store.state.info;
       },
       set(value) {

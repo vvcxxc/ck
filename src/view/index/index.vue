@@ -58,14 +58,14 @@
         <div class="top-list">
           <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
             <div v-if="tab == 1">
-              <div class="list-item" v-for="item in list" :key='item' >
+              <div class="list-item" v-for="(item,key) in list" :key='key' >
               <div class="item-name">{{item.location_name}}</div>
               <div class="item-phone">{{item.tel}}</div>
               <div class="item-money">{{item.money}}</div>
               </div>
             </div>
             <div v-if="tab == 0">
-              <div class="list-item" v-for="item in list" :key='item' >
+              <div class="list-item" v-for="(item,key) in list" :key='key' >
               <div class="item-name">{{item.account_name}}</div>
               <div class="item-phone">{{item.account_phone}}</div>
               <div class="item-money">{{item.money}}</div>
@@ -124,7 +124,6 @@ export default {
       this.$router.push("/login");
     }
     indexInfo().then(res => {
-      console.log(res)
       this.info = res.data
     })
   },
@@ -183,7 +182,6 @@ export default {
     // 获取创客排行榜
     getPeopleTop (){
       getPeopleTopList(this.page).then(res => {
-        console.log(res)
         this.loading = false;
         this.list =[ ...this.list ,...res.data]
         this.page = this.page + 1
@@ -195,7 +193,6 @@ export default {
     // 获取店铺排行榜
     getStoreTop (){
       getStoreTopList(this.page).then(res => {
-        console.log(res)
         this.loading = false;
         this.list =[ ...this.list ,...res.data]
         this.page = this.page + 1

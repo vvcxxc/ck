@@ -47,7 +47,6 @@ export default new Router({
       components: {
         default: getComponent('my/my'),
         tabbar,
-
       },
       meta: { keepAlive: false }
     },
@@ -121,6 +120,11 @@ export default new Router({
       meta: { keepAlive: false }
     },
     {
+      path: '/index/open_withdrawal',//开通电子账户
+      component: getComponent('index/open_withdrawal'),
+      meta: { keepAlive: false }
+    },
+    {
       path: '/index/withdraw',
       component: getComponent('index/withdraw'),
       meta: { keepAlive: false }
@@ -143,6 +147,23 @@ export default new Router({
     {
       path: '/finance/details',
       component: getComponent('finance/details'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/my/card_new',
+      component: getComponent('my/card_new'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/my/bank_card_bind',
+      component: getComponent('my/bank_card_bind'),
+      path: '/completeInformation/IdCard',
+      component: getComponent('completeInformation/IdCard'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/completeInformation/bankCard',
+      component: getComponent('completeInformation/bankCard'),
       meta: { keepAlive: false }
     }
   ]

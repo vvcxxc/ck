@@ -22,7 +22,7 @@ export class Validator {
         if (+val < +target) return errmsg
       },
       isMobileError(val, errmsg) {
-        if (!/^1[34678]\d{9}$/.test(val)) return errmsg
+        if (!/^1[346789]\d{9}$/.test(val)) return errmsg
       },
       isLengthError(val, len, errmsg) {
         if (val.length < len) return errmsg
@@ -38,6 +38,22 @@ export class Validator {
       },
       isRepeat(val, params, errmsg) {
         if (val != params) return errmsg
+      },
+    //  身份证号验证
+      isIDNumber(val, errmsg) {
+        if(!(/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/).test(val)) return errmsg
+      },
+    //  银行卡号校验
+      isBankNumber(val, errmsg) {
+        if(!(/^\d{16,19}$/).test(val)) return errmsg
+      },
+    //  汉字校验（例如姓名）
+      isChinese (val, errmsg) {
+        if(!(/^[\u4E00-\u9FA5]{1,}$/.test(val))) return errmsg
+      },
+    //  支行校验
+      isBankName (val, errmsg) {
+        if(!(/^[\u4e00-\u9fa5a-zA-Z0-9]{1,}$/.test(val))) return errmsg
       }
     }
   }

@@ -1,0 +1,185 @@
+.bank_card_bind {
+    font-size:0.3rem;
+    background-color #fff
+    /deep/ .van-nav-bar {
+      border-bottom: 0.01rem solid #DDE2E5;
+    }
+    /deep/ .van-cell {
+      padding-left 0;
+      padding-top 0.47rem;
+      padding-bottom 0.3rem
+      border-bottom:0.01rem solid rgba(221,226,229,1);
+    }
+
+    .bank_title {
+      margin 0.54rem 0;
+      font-size:0.3rem;
+      font-family:Adobe Heiti Std;
+      font-weight:normal;
+      text-align: center;
+      color:rgba(255,54,34,1);
+    }
+
+    .bank_card_  {
+      li:nth-child(1){
+        margin-left 0.58rem ;
+        margin-bottom 0.44rem
+        span {
+          margin-right 0.30rem
+          font-size:0.37rem;
+          font-family:PingFang;
+          font-weight:bold;
+          color:#4B88F9;
+        }
+        span:nth-child(1){
+          font-size:0.3rem;
+          font-family:Adobe Heiti Std;
+          font-weight:normal;
+          color:rgba(51,51,51,1);
+        }
+      }
+      li:nth-child(2){
+        margin 0 0.57rem
+      }
+      li:nth-child(3){
+        position relative;
+        margin 0 0.57rem;
+        display: flex;
+
+       /deep/ .van-field__control {
+          width 50%
+        }
+        
+        span {
+          position absolute;
+          height 0.8rem;
+          width: 2rem;
+          line-height 0.98rem;
+          border-left: 1px solid #B7C0C5;
+          padding-left 0.44rem
+          right 0.68rem;
+          top: 0.2rem;
+
+          text-align: center;
+          font-size:0.3rem;
+          font-family:PingFang;
+          font-weight:500;
+          color:rgba(68,134,247,1);
+        }
+      }
+    }
+
+  }
+
+  
+
+  .my_button {
+    margin-top 0.72rem
+    margin-left 0.33rem
+    width:6.85rem;
+    height:0.98rem;
+    font-size:0.34rem;
+    font-family:Adobe Heiti Std;
+    font-weight:normal;
+    color:rgba(71,129,254,1);
+    border:0.01rem solid rgba(71,129,254,1);
+    border-radius:0.49rem;
+    background-color #fff
+  }
+
+  .show_success {
+    position fixed;
+    top:0;
+    left: 0;
+    right 0;
+    bottom: 0;
+    z-index: 100
+    background-color rgba(0,0,0,0)
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .success_box {
+    width:3.66rem;
+    height:2.16rem;
+    background:rgba(0,0,0,0.7);
+    border-radius:0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center
+    img {
+      margin-bottom 0.32rem
+      height 0.56rem
+      width 0.56rem
+    }
+    span {
+      display: block;
+      font-size:0.34rem;
+      line-height 0.34rem
+      font-family:PingFang;
+      font-weight:bold;
+      color:rgba(255,255,255,1);
+    }
+  }
+
+
+  .fail {
+    position fixed;
+    top:0;
+    left: 0;
+    right 0;
+    bottom: 0;
+    z-index: 100
+    background-color rgba(0,0,0,0.6)
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #fail_box {
+    width:6.03rem;
+    height:5.06rem;
+    background:rgba(255,255,255,1);
+    border-radius:0.3rem;
+    li {
+      text-align: center
+    }
+    li:nth-child(1){
+      margin-top 0.66rem;
+      margin-bottom 0.22rem
+      text-align: center
+      img {
+        height 0.95rem;
+        width 1.2rem
+      }
+    }
+
+    li:nth-child(2) {
+      margin-bottom 0.44rem
+      font-size:0.36rem
+      font-family:Adobe Heiti Std;
+      font-weight:normal;
+      color:rgba(52,58,64,1);
+    }
+    li:nth-child(3) , li:nth-child(4) {
+      margin-bottom 0.1rem
+      font-size:0.3rem
+      font-family:Adobe Heiti Std;
+      font-weight:normal;
+      color:rgba(95,102,108,1);
+    }
+
+    li:nth-child(5) {
+      margin-top 0.56rem
+      height 0.88rem
+      line-height 0.70rem
+      font-size:0.36rem;
+      font-family:Adobe Heiti Std;
+      font-weight:normal;
+      color:rgba(68,134,247,1);
+      border-top: 0.015rem solid rgba(240,242,245,1);
+    }
+
+  }

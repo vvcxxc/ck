@@ -1,0 +1,205 @@
+.page {
+  background: #fff;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.main {
+  padding: 0 .26rem;
+  margin-top: .6rem;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background: #fff;
+}
+
+.title-syz {
+  font-size: .3rem;
+}
+
+.upload-box {
+  width: 100%;
+  display: flex;
+  margin-top: .4rem;
+  justify-content: space-between;
+  .upload-main {
+    width: 2.16rem;
+    height: 2.02rem;
+  }
+  /deep/ .van-uploader__preview-image {
+    width: 2.16rem;
+    height: 2.02rem;
+  }
+  .upload {
+    width: 2.16rem;
+    height: 2.02rem;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 0px 10px 5px rgba(236, 236, 238, 0.9);
+
+    .upload-top {
+      width: 100%;
+      height: 1.38rem;
+      position: relative;
+
+      .upload-bj {
+        width: 1.66rem;
+        height: .94rem;
+        margin: .23rem;
+      }
+
+      .upload-photo {
+        width: .72rem;
+        height: .72rem;
+        position: absolute;
+        top: .38rem;
+        left: .66rem;
+      }
+    }
+
+    .upload-bottom {
+      border-top: 1px solid #DDE2E5;
+      font-size: .24rem;
+      color: #98A6AD;
+      height: .64rem;
+      text-align: center;
+      line-height: .64rem;
+    }
+  }
+
+}
+
+.input-box {
+  border-bottom: 1px solid rgba(221, 226, 229, 1);
+  height: 1.08rem;
+  width: 100%;
+  display: flex;
+
+  .label {
+    width: 1.78rem;
+    font-size: .3rem;
+    color: #343A40;
+    height: 100%;
+    // line-height: 1.08rem;
+    padding-top: .5rem;
+    font-weight: 500;
+  }
+
+  .input-area {
+    height: 100%;
+    font-size: 0;
+
+    .input {
+      font-size: .3rem;
+      height: 100%;
+      width: 4.5rem;
+      padding-top: .4rem;
+    }
+
+    /*placeholder样式-开始*/
+    input::-webkit-input-placeholder {
+      color: #98A6AD;
+    }
+
+    input::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: #98A6AD;
+    }
+
+    input:-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: #98A6AD;
+    }
+
+    input:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: #98A6AD;
+    }
+
+    /*placeholder样式-结束*/
+  }
+
+  .date-area {
+    display: flex;
+    // width: 100%;
+    flex: 1;
+    font-size: .3rem;
+    color: #98A6AD;
+    justify-content: space-between;
+    padding-top: .5rem;
+  }
+}
+
+.botton-box {
+  width: 100%;
+  height: 1.28rem;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #DDE2E5;
+  padding: .15rem .32rem;
+  box-sizing: border-box;
+  .botton {
+    width: 100%;
+    height: 100%;
+    background:rgba(68,134,247,1);
+    border-radius: .49rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .34rem;
+  }
+}
+.date-picker {
+  .title {
+    width: 100%;
+    font-size: .34rem;
+    text-align: center;
+    padding: .6rem .5rem;
+    color: #333;
+    position: relative;
+    .cancel {
+      position: absolute;
+      right: .5rem;
+    }
+  }
+  .date-tab {
+    width: 100%;
+    padding: 0 .48rem;
+    font-size: .3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: .8rem;
+    .date-item {
+      width: 2.83rem;
+      border-bottom: 1px solid #DDE2E5;
+      text-align: center;
+      padding: .24rem 0;
+      color: #98A6AD;
+      font-weight: bold;
+    }
+  }
+  .long-date {
+    width: 100%;
+    text-align: center;
+    font-size: .34rem;
+    font-weight: bold;
+    color: #98A6AD;
+  }
+
+  .date-confirm {
+    width: 100%;
+    height: 1.28rem;
+    line-height: 1.28rem;
+    text-align: center;
+    font-size: .34rem;
+    color: #3F7DE7;
+    font-weight: bold;
+    border-top:1px solid rgba(221,226,229,1);
+  }
+}
+.actived {
+  color: #333 !important;
+}

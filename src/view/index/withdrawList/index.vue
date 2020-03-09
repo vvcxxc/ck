@@ -13,7 +13,7 @@
         <div class="item-r">
           {{item.money}}
           <!-- <img src="/static/img/right.png" width="16px" height="16px" style="color:#98A6AD"/> -->
-          <van-icon name="arrow" color="#98A6AD"/>
+          <!-- <van-icon name="arrow" color="#98A6AD"/> -->
         </div>
       </div>
     </div>

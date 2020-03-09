@@ -8,8 +8,14 @@
       />
 
       <div class="register-success-words">恭喜你，注册成功</div>
-      <div class="register-success-compete" @click="handleCompete">完成资料</div>
-      <div class="register-success-jump" @click="handleJump">跳过</div>
+      <div v-if="!is_existence">
+        <div class="register-success-compete" @click="handleCompete">完善资料</div>
+        <div class="register-success-jump" @click="handleJump">跳过</div>
+      </div>
+      <div v-if="is_existence">
+        <div class="register-success-jump" @click="handleJump">完成</div>
+      </div>
+
     </div>
   </div>
 </template>
@@ -23,15 +29,27 @@ import "./style";
 
 export default {
   data() {
-    return {};
+    return {
+      is_existence: 0,
+    };
+  },
+  created() {
+    let is_existence = this.$route.query.is_existence
+    this.is_existence = is_existence
   },
   methods: {
     handleJump() {
-      window.location.href = `http://${window.location.host}`;
+      this.$router.push("/index");
     },
     handleCompete(){
-        // this.$router.push("/");
-    }
+      let party_id = this.$route.query.party_id;
+        this.$router.push({path: "/completeInformation/IdCard",query:{type: 'add', party_id}});
+    },
+    goBack() {
+      this.$router.push({
+        path: "/login"
+      });
+    },
   }
 };
 </script>

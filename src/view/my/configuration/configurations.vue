@@ -25,7 +25,7 @@
     <!-- <x-header title="账户信息" :left-options="{preventGoBack: true}" @on-click-back="handleHide"></x-header>
     <group>
       <cell is-link @click.native="handleShowView('modifyPassword')">
-        <span slot="after-title">登陆密码</span>
+        <span slot="after-title">登录密码</span>
         <x-icon slot="icon"
                 style="box-sizing: border-box; padding: 0.2rem 0.2rem 0 0;"
                 type="ios-ionic-outline"

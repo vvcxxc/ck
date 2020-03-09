@@ -1,6 +1,6 @@
 <template>
   <div class="login-wrapper">
-    <x-header :left-options="{showBack: false}" title="登陆"></x-header>
+    <x-header :left-options="{showBack: false}" title="登录"></x-header>
     <tab :line-width="1">
       <tab-item selected @on-item-click="hanleToggleRole('entrepreneur')">创客</tab-item>
       <tab-item @on-item-click="hanleToggleRole('president')">会长</tab-item>
@@ -52,7 +52,7 @@
             console.log(role_type)
             localStorage.setItem('token', token)
             localStorage.setItem('role_type', role_type)
-            this.$store.commit('TOAST', { text: '登陆成功' })
+            this.$store.commit('TOAST', { text: '登录成功' })
             timeout(500).then(() => {
               this.$router.push('/')
             })

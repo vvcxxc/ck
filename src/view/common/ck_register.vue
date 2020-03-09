@@ -22,8 +22,8 @@
           class="box_input"
           placeholder="请输入验证码"
           v-model="mobile_verification_code"
-          maxlength="6"
         />
+          <!-- maxlength="6" -->
 
         <button class="get_code" @click="fetchVerify" v-bind:disabled="isSend" v-if="!isSend">获取验证码</button>
         <div class="get_code" v-if="isSend">

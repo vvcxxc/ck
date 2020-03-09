@@ -45,26 +45,44 @@
             v-model="info.bank_account_name"
             placeholder="请输入开户人姓名"
             class="input"
-             @focus="scroll"
+            @focus="scroll"
           />
         </div>
       </div>
       <div class="input-box">
         <div class="label">银行卡号</div>
         <div class="input-area">
-          <input type="text" v-model="info.bank_card_number" placeholder="请输入银行卡号" class="input" @focus="scroll"/>
+          <input
+            type="text"
+            v-model="info.bank_card_number"
+            placeholder="请输入银行卡号"
+            class="input"
+            @focus="scroll"
+          />
         </div>
       </div>
       <div class="input-box">
         <div class="label">开户行</div>
         <div class="input-area">
-          <input type="text" v-model="info.bank_name" placeholder="请输入开户行" class="input" @focus="scroll"/>
+          <input
+            type="text"
+            v-model="info.bank_name"
+            placeholder="请输入开户行"
+            class="input"
+            @focus="scroll"
+          />
         </div>
       </div>
       <div class="input-box">
         <div class="label">支行</div>
         <div class="input-area">
-          <input type="text" v-model="info.bank_branch" placeholder="请输入支行" class="input" @focus="scroll" />
+          <input
+            type="text"
+            v-model="info.bank_branch"
+            placeholder="请输入支行"
+            class="input"
+            @focus="scroll"
+          />
         </div>
       </div>
     </div>
@@ -97,22 +115,26 @@ export default {
   },
   mounted() {
     let type = this.$route.query.type;
-    if(type == 'edit'){
+    if (type == "edit") {
       authUser().then(res => {
-        this.sq_status = res.data.sq_status
-      })
+        this.sq_status = res.data.sq_status;
+      });
     }
     if (this.info.bank_positive) {
       this.imgFront = [
         {
-          url: "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" + this.info.bank_positive
+          url:
+            "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
+            this.info.bank_positive
         }
       ];
     }
     if (this.info.bank_opposite) {
       this.imgBack = [
         {
-          url: "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" + this.info.bank_opposite
+          url:
+            "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" +
+            this.info.bank_opposite
         }
       ];
     }
@@ -130,10 +152,10 @@ export default {
     }
   },
   methods: {
-     // 键盘事件兼容
-    scroll (){
-      window.scrollTo(100,500)
-      console.log(3234)
+    // 键盘事件兼容
+    scroll() {
+      window.scrollTo(100, 500);
+      console.log(3234);
     },
     afterReadFront(file) {
       // 此时可以自行将文件上传至服务器,正面
@@ -168,13 +190,13 @@ export default {
     submit() {
       let type = this.$route.query.type;
       let info = this.info;
-      let identity_validity_card = info.identity_validity_card
-      if(info.identity_validity_card == '长期有效'){
-        identity_validity_card = 0
+      let identity_validity_card = info.identity_validity_card;
+      if (info.identity_validity_card == "长期有效") {
+        identity_validity_card = 0;
       }
       let data = {
         id: type == "edit" ? info.id : undefined,
-        party_id: info.party_id,
+        party_id: type == "add" ? info.party_id : undefined,
         identity_card_positive: info.identity_card_positive,
         identity_card_opposite: info.identity_card_opposite,
         identity_hand_card: info.identity_hand_card,
@@ -194,16 +216,19 @@ export default {
           editInfo(data).then(res => {
             if (res.code == 200) {
               Toast.success(res.message);
-              this.$router.push('/index')
+              this.$router.push("/index");
             } else {
               Toast.fail(res.message);
             }
           });
         } else if (type == "add") {
           addInfo(data).then(res => {
+            console.log(res);
             if (res.code == 200) {
               Toast.success(res.message);
-              this.$router.push('/index')
+              setTimeout(() => {
+                this.$router.push("/index");
+              }, 1500);
             } else {
               Toast.fail(res.message);
             }
@@ -221,5 +246,5 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
-    @import './index'
+@import './index'
 </style>

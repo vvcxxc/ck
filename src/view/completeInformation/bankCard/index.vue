@@ -92,7 +92,7 @@ export default {
       imgFront: [],
       bank_front: "",
       bank_back: "",
-      sq_status: 1
+      sq_status: 0
     };
   },
   mounted() {

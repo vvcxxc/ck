@@ -7,7 +7,7 @@
 
 .van-nav-bar {
   background: #fff;
-
+  border-bottom: 1px solid #eee;
   .van-icon {
     color: #5F666C;
   }
@@ -204,4 +204,13 @@
     justify-content: center;
     font-size: .34rem;
   }
+}
+.no-submit {
+  width: 100%;
+  height: 1.28rem;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #DDE2E5;
+  padding: .15rem .32rem;
+  box-sizing: border-box;
 }

@@ -128,6 +128,7 @@ import store from "@/store/index";
 import { viewInfo } from "@/api/api";
 import Axios from "axios";
 import { Toast } from "vant";
+import { authUser } from "@api/api";
 import ValidateIDCard from "./validate";
 export default {
   data() {
@@ -194,8 +195,12 @@ export default {
   },
   async created() {
     this.ossData();
-
     let type = this.$route.query.type;
+      if (type == "edit") {
+        authUser().then(res => {
+          this.sq_status = res.data.sq_status;
+        });
+      }
     let party_id = this.$route.query.party_id;
     if (type != "add") {
       await store.dispatch("getInfo");
@@ -227,7 +232,6 @@ export default {
 
     // oss参数
     async ossData() {
-      console.log("2211");
       if (!localStorage.getItem("oss_data")) {
         /**获取oss */
         console.log(4444);
@@ -266,7 +270,8 @@ export default {
       if (!validate) {
         this.$router.push({
           path: "/completeInformation/bankCard",
-          query: { type }
+          query: { type, sq_status: type == 'edit' ? this.sq_status : undefined },
+
         });
       } else {
         Toast.fail(validate);

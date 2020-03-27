@@ -76,3 +76,9 @@ export const editBank = (id,data) => http({
   method: 'put',
   data
 })
+
+//  获取银行卡列表
+export const getBankList = () => http({
+  url: 'v3/bank_name',
+  method: 'post'
+})

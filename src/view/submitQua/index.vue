@@ -168,14 +168,17 @@
         </div>
         <div class="input-box">
           <div class="label">开户行</div>
-          <div class="input-area">
-            <input
+          <div class="input-area" @click="show_list = true">
+            <div class="input" v-if='info.bank_name'>{{info.bank_name}}</div>
+            <div class="input no-choose" v-if='!info.bank_name'>请输入开户行</div>
+            <!-- <input
               type="text"
+              disabled
               v-model="info.bank_name"
               placeholder="请输入开户行"
               class="input"
               @focus="scroll"
-            />
+            /> -->
           </div>
         </div>
         <div class="input-box">
@@ -218,6 +221,16 @@
       <div class="date-confirm" @click="confirmDate">确定</div>
     </van-popup>
 
+    <van-popup v-model="show_list" position="bottom" :style="{ height: '30%' }">
+      <van-picker
+        show-toolbar
+        title="选择银行"
+        :columns="bank_list"
+        @cancel="onCancel"
+        @confirm="onConfirm"
+      />
+    </van-popup>
+
     <div class="botton-box">
       <div class="botton" @click="submit">注册</div>
     </div>
@@ -231,7 +244,7 @@ import { viewInfo } from "@/api/api";
 import Axios from "axios";
 import { Toast } from "vant";
 import { authUser } from "@api/api";
-import { createInfo, editInfo } from "./service";
+import { createInfo, editInfo, getBankList } from "./service";
 import Validate from "./validate";
 export default {
   data() {
@@ -252,7 +265,9 @@ export default {
       imgBankBack: [],
       imgBankFront: [],
       bank_front: "",
-      bank_back: ""
+      bank_back: "",
+      bank_list: [],
+      show_list: false
     };
   },
   watch: {
@@ -323,14 +338,27 @@ export default {
   },
   async created() {
     this.ossData();
-    console.log(this.$route.query.type, "aaa");
     if (this.$route.query.type) {
       await store.dispatch("getInfo");
     }
-    console.log(this.info);
+    getBankList().then(res => {
+      let bank_list = [];
+      let list = res.data
+      for (let i = 0; i < list.length; i ++){
+        bank_list.push(list[i].bank_name)
+      }
+      this.bank_list = bank_list;
+    });
   },
 
   methods: {
+     onConfirm(value, index) {
+      this.info.bank_name = value
+      this.show_list = false
+    },
+    onCancel() {
+      this.show_list = false
+    },
     // 键盘事件兼容
     scroll() {},
     // 下一步
@@ -487,7 +515,7 @@ export default {
         editInfo(data).then(res => {
           if (res.code == 200) {
             Toast.success(res.message);
-            this.$router.push({path: '/submitQua/result'})
+            this.$router.push({ path: "/submitQua/result" });
           } else {
             Toast.fail(res.message);
           }
@@ -496,7 +524,7 @@ export default {
         createInfo(data).then(res => {
           if (res.code == 200) {
             Toast.success(res.message);
-            this.$router.push({path: '/submitQua/result'})
+            this.$router.push({ path: "/submitQua/result" });
           } else {
             Toast.fail(res.message);
           }

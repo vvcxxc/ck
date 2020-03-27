@@ -130,7 +130,6 @@ export default {
   methods: {
     afterReadFront(file) {
       // 此时可以自行将文件上传至服务器,正面
-      console.log(file);
       upload(file.content).then(res => {
         this.bank_positive = res.data.path;
         this.imgFront[0] = {
@@ -150,11 +149,11 @@ export default {
       });
     },
     deleteFront() {
-      this.info.bank_positive = "";
+      this.bank_positive = "";
       return true;
     },
     deleteBack() {
-      this.info.bank_opposite = "";
+      this.bank_opposite = "";
       return true;
     },
     // 返回

@@ -21,6 +21,7 @@ import {
   Tabs,
   Toast,
   CountDown,
+  Picker,
   Tabbar, TabbarItem,Field, Button, Cell, CellGroup, Uploader, Checkbox, CheckboxGroup
 } from "vant";
 import "@utils/rem"
@@ -36,6 +37,7 @@ import {
 Vue.use(Popup)
 Vue.use(Toast)
 Vue.use(CountDown);
+Vue.use(Picker);
 Vue.use(Field);
 Vue.use(Button);
 Vue.use(Tabbar).use(TabbarItem);

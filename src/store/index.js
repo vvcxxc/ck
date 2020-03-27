@@ -24,8 +24,8 @@ const store = new Vuex.Store({
     isHideTabbar: true,
     role_type: "",
     info: {
-      tip:'',//拒绝原因
-      party_id: '', // 用户id
+      // tip:'',//拒绝原因
+      // party_id: '', // 用户id
       identity_name: '', // 用户名
       identity_card: '', // 身份证号
       identity_validity_card: '', // 身份证有效期

@@ -144,7 +144,38 @@ export default {
     goTo(type) {
       // 提现跳转
       if (type == 1) {
-        this.$router.push("/index/withdraw");
+        let {is_existence ,is_sq, is_card_activation, is_opening} = this.info
+        if(is_existence){
+          switch(is_sq){
+            case 0: // 认证失败
+              this.$router.push({path: '/submitQua/result'})
+              break
+            case 1: // 认证成功
+              if(is_card_activation){
+                if(is_opening){
+                  this.$router.push("/index/withdraw");
+                }else {
+                  this.$router.push({path: '/submitQua/confirmWidraw'})
+                }
+              }else {
+                this.$router.push({path: '/submitQua/bankBind'})
+              }
+              break
+            case 2:
+              this.$router.push({path: '/submitQua/result'})
+              break
+            case 3:
+              this.$router.push({path: '/submitQua/result'})
+              break
+            case 4:
+              this.$router.push({path: '/submitQua/result'})
+              break
+            default:
+              this.$router.push("/index/withdraw");
+          }
+        }else {
+          this.$router.push({path: '/submitQua'})
+        }
       } else if (type == 0) {
         this.$router.push("/index/withdrawList");
       }

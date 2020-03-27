@@ -1,0 +1,194 @@
+<template>
+  <div class="page">
+    <van-nav-bar :border="false" title="修改银行卡" left-arrow @click-left="goBack" />
+    <div class="main">
+      <div class="title-syz">上传银行卡信息</div>
+      <div class="upload-box">
+        <van-uploader
+          :after-read="afterReadFront"
+          v-model="imgFront"
+          :max-count="1"
+          class="upload-main"
+          :before-delete="deleteFront"
+        >
+          <div class="upload">
+            <div class="upload-top">
+              <img src="/static/img/bank-front.png" class="upload-bj" />
+              <img src="/static/img/photo.png" class="upload-photo" />
+            </div>
+            <div class="upload-bottom">银行卡正面</div>
+          </div>
+        </van-uploader>
+
+        <van-uploader
+          :after-read="afterReadBack"
+          v-model="imgBack"
+          :max-count="1"
+          class="upload-main"
+          :before-delete="deleteBack"
+        >
+          <div class="upload">
+            <div class="upload-top">
+              <img src="/static/img/bank-back.png" class="upload-bj" />
+              <img src="/static/img/photo.png" class="upload-photo" />
+            </div>
+            <div class="upload-bottom">银行卡反面</div>
+          </div>
+        </van-uploader>
+      </div>
+
+      <div class="input-box">
+        <div class="label">开户人</div>
+        <div class="input-area">
+          <input
+            type="text"
+            v-model="bank_account_name"
+            placeholder="请输入开户人姓名"
+            class="input"
+            @focus="scroll"
+          />
+        </div>
+      </div>
+      <div class="input-box">
+        <div class="label">银行卡号</div>
+        <div class="input-area">
+          <input
+            type="text"
+            v-model="bank_card_number"
+            placeholder="请输入银行卡号"
+            class="input"
+            @focus="scroll"
+          />
+        </div>
+      </div>
+      <div class="input-box">
+        <div class="label">开户行</div>
+        <div class="input-area">
+          <input type="text" v-model="bank_name" placeholder="请输入开户行" class="input" @focus="scroll" />
+        </div>
+      </div>
+      <div class="input-box">
+        <div class="label">支行</div>
+        <div class="input-area">
+          <input
+            type="text"
+            v-model="bank_branch"
+            placeholder="请输入支行"
+            class="input"
+            @focus="scroll"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="botton-box">
+      <div class="botton" @click="submit">提交</div>
+    </div>
+  </div>
+</template>
+<script>
+import { Toast } from "vant";
+import upload from "../../../api/oss";
+import { getEditBankInfo, editBank } from "../service";
+export default {
+  data() {
+    return {
+      bank_name: "",
+      bank_account_name: "",
+      bank_card_number: "",
+      bank_positive: "",
+      bank_opposite: "",
+      bank_branch: "",
+      imgBack: [],
+      imgFront: [],
+      id: null
+    };
+  },
+
+  created() {
+    getEditBankInfo().then(res => {
+      console.log(res);
+      this.bank_account_name = res.data.bank_account_name;
+      this.bank_branch = res.data.bank_branch;
+      this.bank_card_number = res.data.bank_card_number;
+      this.bank_name = res.data.bank_name;
+      this.bank_opposite = res.data.bank_opposite;
+      this.bank_positive = res.data.bank_positive;
+      this.id = res.data.id
+      this.imgBack = [
+        {
+          url: "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" + this.bank_opposite
+        }
+      ];
+      this.imgFront = [
+        {
+          url: "http://tmwl.oss-cn-shenzhen.aliyuncs.com/" + this.bank_positive
+        }
+      ];
+    });
+  },
+
+  methods: {
+    afterReadFront(file) {
+      // 此时可以自行将文件上传至服务器,正面
+      console.log(file);
+      upload(file.content).then(res => {
+        this.bank_positive = res.data.path;
+        this.imgFront[0] = {
+          url: file.content,
+          isImage: true
+        };
+      });
+    },
+    afterReadBack(file) {
+      // 此时可以自行将文件上传至服务器，反面
+      upload(file.content).then(res => {
+        this.bank_opposite = res.data.path;
+        this.imgBack[0] = {
+          url: file.content,
+          isImage: true
+        };
+      });
+    },
+    deleteFront() {
+      this.info.bank_positive = "";
+      return true;
+    },
+    deleteBack() {
+      this.info.bank_opposite = "";
+      return true;
+    },
+    // 返回
+    goBack() {
+      this.$router.go(-1);
+    },
+    submit() {
+      let data = {
+        id: this.id,
+        bank_name: this.bank_name,
+        bank_account_name: this.bank_account_name,
+        bank_card_number: this.bank_card_number,
+        bank_positive: this.bank_positive,
+        bank_opposite: this.bank_opposite,
+        bank_branch: this.bank_branch,
+      }
+      editBank(this.id, data).then (res => {
+        console.log(res)
+        if(res.status_code == 200){
+          Toast.success('修改成功')
+          this.$router.go(-1);
+        }else {
+          Toast.fail(res.message)
+        }
+      })
+    },
+    // 键盘事件兼容
+    scroll() {
+      window.scrollTo(100, 500);
+      console.log(3234);
+    }
+  }
+};
+</script>
+<style lang="sass" scoped>
+@import './index'
+</style>

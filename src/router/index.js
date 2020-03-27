@@ -65,6 +65,31 @@ export default new Router({
       meta: { keepAlive: false }
     },
     {
+      path: "/submitQua",
+      component: getComponent("submitQua"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua/bankBind",
+      component: getComponent("submitQua/bankBind"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua/confirmWithdraw",
+      component: getComponent("submitQua/confirmWithdraw"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua/editBank",
+      component: getComponent("submitQua/editBank"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua/result",
+      component: getComponent("submitQua/result"),
+      meta: { keepAlive: false }
+    },
+    {
       path: "/configuration",
       component: getComponent("my/configuration/configurations"),
       meta: { keepAlive: false }

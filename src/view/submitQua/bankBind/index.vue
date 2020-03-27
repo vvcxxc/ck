@@ -27,11 +27,11 @@
       <div class="input-main">
         <div class="input-box">
           <div class="input-label">手机号码</div>
-          <input type="phone" placeholder="请输入银行预留手机号" v-model="phone" />
+          <input type="phone" style="flex: 1" placeholder="请输入银行预留手机号" v-model="phone" />
         </div>
         <div class="input-box" style="border: none">
           <div class="input-label">验证码</div>
-          <input type="number" placeholder="请输入验证码" v-model="code" />
+          <input type="number" style="flex: 1" placeholder="请输入验证码" v-model="code" />
           <div class="get-code" v-if="!isSend" @click="showTips">获取验证码</div>
           <div class="get-code" v-if="isSend">
             <van-count-down :time="60000" format="ss" @finish="finish" />

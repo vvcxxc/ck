@@ -9,7 +9,7 @@
           <span>{{this.bank_name}}</span>
           <span>储蓄卡</span>
         </div>
-        <div @click="verifyRouting()">去验证</div>
+        <!-- <div @click="verifyRouting()">去验证</div> -->
       </li>
       <li>卡号</li>
       <li>

@@ -238,7 +238,7 @@ export default {
     return {
       show: false,
       minDate: new Date(1990, 0, 1),
-      maxDate: new Date(2035, 10, 1),
+      maxDate: new Date(2099, 10, 1),
       currentDate: new Date(),
       date: "",
       long_date: 0,

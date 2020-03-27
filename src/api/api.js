@@ -427,6 +427,6 @@ http({
 */
 export const Notice = () =>
 http({
-  url: 'sq_notice',
+  url: 'api/entrepreneur/sq_notice',
   method: 'post'
 })

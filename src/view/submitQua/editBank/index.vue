@@ -63,8 +63,9 @@
       </div>
       <div class="input-box">
         <div class="label">开户行</div>
-        <div class="input-area">
-          <input type="text" v-model="bank_name" placeholder="请输入开户行" class="input" @focus="scroll" />
+        <div class="input-area" @click="show_list = true">
+          <div class="input" v-if='bank_name'>{{bank_name}}</div>
+            <div class="input no-choose" v-if='!bank_name'>请输入开户行</div>
         </div>
       </div>
       <div class="input-box">
@@ -80,6 +81,15 @@
         </div>
       </div>
     </div>
+     <van-popup v-model="show_list" position="bottom" :style="{ height: '30%' }">
+      <van-picker
+        show-toolbar
+        title="选择银行"
+        :columns="bank_list"
+        @cancel="onCancel"
+        @confirm="onConfirm"
+      />
+    </van-popup>
     <div class="botton-box">
       <div class="botton" @click="submit">提交</div>
     </div>
@@ -88,7 +98,7 @@
 <script>
 import { Toast } from "vant";
 import upload from "../../../api/oss";
-import { getEditBankInfo, editBank } from "../service";
+import { getEditBankInfo, editBank, getBankList } from "../service";
 export default {
   data() {
     return {
@@ -100,11 +110,21 @@ export default {
       bank_branch: "",
       imgBack: [],
       imgFront: [],
-      id: null
+      id: null,
+          bank_list: [],
+      show_list: false
     };
   },
 
   created() {
+    getBankList().then(res => {
+      let bank_list = [];
+      let list = res.data
+      for (let i = 0; i < list.length; i ++){
+        bank_list.push(list[i].bank_name)
+      }
+      this.bank_list = bank_list;
+    });
     getEditBankInfo().then(res => {
       console.log(res);
       this.bank_account_name = res.data.bank_account_name;
@@ -128,6 +148,13 @@ export default {
   },
 
   methods: {
+     onConfirm(value, index) {
+      this.bank_name = value
+      this.show_list = false
+    },
+    onCancel() {
+      this.show_list = false
+    },
     afterReadFront(file) {
       // 此时可以自行将文件上传至服务器,正面
       upload(file.content).then(res => {

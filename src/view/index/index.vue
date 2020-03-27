@@ -82,12 +82,26 @@
         <img class="qr_code_img" :src="codeUrl" />
       </div>
     </van-overlay>
+    <van-overlay :show="show" @click="show = false">
+      <div class="wrapper" @click.stop>
+        <div class="alert-box">
+          <div class="alert-title">平台提现升级公告</div>
+          <div class="alert-text">目前小熊敬礼平台与双乾支付联合开展电子账户体系，方便平台商家角色提现快速审核以及资金账户安全。</div>
+          <div class="alert-check-box">
+            <van-checkbox v-model="checked" shape="square">我已知晓，下次不再提示</van-checkbox>
+          </div>
+          <div class="alert-button-box">
+            <div class="alert-button" @click="confirmNotice">确定</div>
+          </div>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 <script>
 import { NavBar, Icon, List, Overlay } from "vant";
 import checkLogin from "@/decorator/check_login";
-import { getPeopleTopList, getStoreTopList, indexInfo } from "@api/api";
+import { getPeopleTopList, getStoreTopList, indexInfo, Notice } from "@api/api";
 import { mapGetters } from "vuex";
 import QRCode from "qrcode";
 const REQUEST_OK = 200;
@@ -107,7 +121,9 @@ export default {
       codeUrl: "", //二维码图片路径
       is_show: false, // 展示邀请页面
       title: "", // 邀请时候的title
-      roleType: ''
+      roleType: '',
+      show: false,
+      checked: false
     };
   },
   computed: {
@@ -125,6 +141,11 @@ export default {
     }
     indexInfo().then(res => {
       this.info = res.data
+      if(!sessionStorage.getItem('notice_show')){
+        if(!res.data.notice){
+        this.show = true
+      }
+      }
     })
   },
   methods: {
@@ -139,6 +160,13 @@ export default {
         this.qrCodeUrl = qrCodeUrl;
         this.showQRcode(qrCodeUrl);
         this.title = "邀请店铺";
+      }
+    },
+    confirmNotice() {
+      sessionStorage.setItem('notice_show',1)
+      this.show = false
+      if(this.checked == true){
+        Notice()
       }
     },
     goTo(type) {

@@ -93,7 +93,10 @@ export default {
           }
           this.$vux.toast.text("注册成功");
           timeout(1500).then(() => {
-            this.$router.push({path: "/ck/resignSccess", query:{party_id: data.id, is_existence: data.is_existence}});
+            this.$router.push({
+        path: "/login"
+      });
+            // this.$router.push({path: "/ck/resignSccess", query:{party_id: data.id, is_existence: data.is_existence}});
           });
         })
         .catch(err => console.log(err));

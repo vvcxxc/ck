@@ -45,7 +45,7 @@ export const getAutoCode = data => http({
 
 //  开启自动提现
 export const openAuto = data => http({
-  url: 'api/entrepreneur/v4/sq/send_sms_auto',
+  url: 'api/entrepreneur/v4/sq/confirm_auto',
   method: 'post',
   data
 })

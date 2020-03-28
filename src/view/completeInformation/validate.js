@@ -1,7 +1,6 @@
 import {Validator} from '../../utils/common'
 let data = {
   id: 'id',
-  party_id: 'party_id',
   identity_card_positive: '身份证正面照',
   identity_card_opposite: '身份证反面照',
   identity_hand_card: '手持身份证照',

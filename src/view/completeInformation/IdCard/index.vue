@@ -258,7 +258,7 @@ export default {
       let info = this.info;
       let data = {
         id: type == "edit" ? info.id : undefined,
-        party_id: info.party_id,
+        // party_id: info.party_id,
         identity_card_positive: info.identity_card_positive,
         identity_card_opposite: info.identity_card_opposite,
         identity_hand_card: info.identity_hand_card,

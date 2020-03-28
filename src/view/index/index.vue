@@ -183,7 +183,7 @@ export default {
                 if(is_opening){
                   this.$router.push("/index/withdraw");
                 }else {
-                  this.$router.push({path: '/submitQua/confirmWidraw'})
+                  this.$router.push({path: '/submitQua/confirmWithdraw'})
                 }
               }else {
                 this.$router.push({path: '/submitQua/bankBind'})

@@ -221,7 +221,7 @@
       <div class="date-confirm" @click="confirmDate">确定</div>
     </van-popup>
 
-    <van-popup v-model="show_list" position="bottom" :style="{ height: '30%' }">
+    <van-popup v-model="show_list" position="bottom" :style="{ height: '36%' }">
       <van-picker
         show-toolbar
         title="选择银行"

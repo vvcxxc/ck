@@ -231,7 +231,7 @@
       />
     </van-popup>
 
-    <div class="botton-box">
+    <div class="sub-botton-box">
       <div class="botton" @click="submit">注册</div>
     </div>
   </div>

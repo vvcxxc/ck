@@ -32,7 +32,8 @@ export const getBankCode = phone => http({
 //  绑定银行卡
 export const bindBankCard = data => http({
   url: 'api/entrepreneur/v4/sq/bind_card',
-  method: 'post'
+  method: 'post',
+  data
 })
 
 //  获取自动提现验证码

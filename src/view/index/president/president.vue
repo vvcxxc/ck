@@ -135,7 +135,7 @@ export default {
               this.$router.push({path: '/submitQua/result'})
               break
             case 4:
-              this.$router.push({path: '/submitQua/result'})
+              this.$router.push({path: '/submitQua'})
               break
             default:
               this.$router.push("/index/withdraw");

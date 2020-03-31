@@ -50,13 +50,27 @@
         <img class="qr_code_img" :src="codeUrl" />
       </div>
     </van-overlay>
+    <van-overlay :show="show" @click="show = false">
+      <div class="wrapper" @click.stop>
+        <div class="alert-box">
+          <div class="alert-title">平台提现升级公告</div>
+          <div class="alert-text">目前小熊敬礼平台与双乾支付联合开展电子账户体系，方便平台{{people}}角色提现快速审核以及资金账户安全。</div>
+          <div class="alert-check-box">
+            <van-checkbox v-model="checked" shape="square">我已知晓，下次不再提示</van-checkbox>
+          </div>
+          <div class="alert-button-box">
+            <div class="alert-button" @click="confirmNotice">确定</div>
+          </div>
+        </div>
+      </div>
+    </van-overlay>
   </div>
 </template>
 
 <script>
 import QRCode from "qrcode";
 import { Icon, Popup, Overlay } from "vant";
-import { indexInfo } from "@api/api";
+import { indexInfo, Notice } from "@api/api";
 export default {
   data() {
     return {
@@ -65,10 +79,18 @@ export default {
       codeUrl: "", //二维码图片路径
       is_show: false, // 展示邀请页面
       title: "", // 邀请时候的title
-      info: {} // 首页数据
+      info: {}, // 首页数据
+      show: false,
+      checked: false,
+      people: '创客'
     };
   },
   computed: {},
+  mounted() {
+    const roleType = localStorage.getItem('role_type')
+    this.people = roleType == 'entrepreneur' ? '创客' : '会长'
+    console.log(roleType)
+  },
   methods: {
     invite(name) {
       if (name == "people") {
@@ -89,7 +111,38 @@ export default {
     goTo(type) {
       // 提现跳转
       if (type == 1) {
-        this.$router.push("/index/withdraw");
+         let {is_existence ,is_sq, is_card_activation, is_opening} = this.info
+        if(is_existence){
+          switch(is_sq){
+            case 0: // 认证失败
+              this.$router.push({path: '/submitQua/result'})
+              break
+            case 1: // 认证成功
+              if(is_card_activation){
+                if(is_opening){
+                  this.$router.push("/index/withdraw");
+                }else {
+                  this.$router.push({path: '/submitQua/confirmWithdraw'})
+                }
+              }else {
+                this.$router.push({path: '/submitQua/bankBind'})
+              }
+              break
+            case 2:
+              this.$router.push({path: '/submitQua/result'})
+              break
+            case 3:
+              this.$router.push({path: '/submitQua/result'})
+              break
+            case 4:
+              this.$router.push({path: '/submitQua/result'})
+              break
+            default:
+              this.$router.push("/index/withdraw");
+          }
+        }else {
+          this.$router.push({path: '/submitQua'})
+        }
       } else if (type == 0) {
         this.$router.push("/index/withdrawList");
       } else if (type == 3) {
@@ -107,13 +160,26 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    confirmNotice() {
+      sessionStorage.setItem("notice_show", 1);
+      this.show = false;
+      if (this.checked == true) {
+        Notice();
+      }
     }
   },
+
   created() {
     // 获取数据
     indexInfo().then(res => {
       if (res.code == 200) {
         this.info = res.data;
+        if (!sessionStorage.getItem("notice_show")) {
+          if (!res.data.notice) {
+            this.show = true;
+          }
+        }
       }
     });
   }
@@ -121,7 +187,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  @import './style'
+@import './style'
 </style>
 <style lang="sass">
 $c_black: #000

@@ -47,7 +47,6 @@ export default new Router({
       components: {
         default: getComponent('my/my'),
         tabbar,
-
       },
       meta: { keepAlive: false }
     },
@@ -63,6 +62,31 @@ export default new Router({
     {
       path: "/bank",
       component: getComponent("my/bank/bank"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua",
+      component: getComponent("submitQua"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua/bankBind",
+      component: getComponent("submitQua/bankBind"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua/confirmWithdraw",
+      component: getComponent("submitQua/confirmWithdraw"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua/editBank",
+      component: getComponent("submitQua/editBank"),
+      meta: { keepAlive: false }
+    },
+    {
+      path: "/submitQua/result",
+      component: getComponent("submitQua/result"),
       meta: { keepAlive: false }
     },
     {
@@ -111,8 +135,18 @@ export default new Router({
       meta: { keepAlive: false }
     },
     {
+      path: '/ck/resignSccess',
+      component: getComponent('common/resign_sccess'),
+      meta: { keepAlive: false }
+    },
+    {
       path: '/president/inviteEntrepreneur',
       component: getComponent('president/inviteEntrepreneur'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/index/open_withdrawal',//开通电子账户
+      component: getComponent('index/open_withdrawal'),
       meta: { keepAlive: false }
     },
     {
@@ -138,6 +172,23 @@ export default new Router({
     {
       path: '/finance/details',
       component: getComponent('finance/details'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/my/card_new',
+      component: getComponent('my/card_new'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/my/bank_card_bind',
+      component: getComponent('my/bank_card_bind'),
+      path: '/completeInformation/IdCard',
+      component: getComponent('completeInformation/IdCard'),
+      meta: { keepAlive: false }
+    },
+    {
+      path: '/completeInformation/bankCard',
+      component: getComponent('completeInformation/bankCard'),
       meta: { keepAlive: false }
     }
   ]

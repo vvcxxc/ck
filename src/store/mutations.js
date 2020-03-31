@@ -9,7 +9,6 @@ export default {
   [types.HIDE_TABBAR](state, { path }) {
 
     const targets = ['/my']
-
     const excludes = ['/login']
 
     if(excludes.includes(path)) return false
@@ -22,5 +21,10 @@ export default {
   },
   [types.ROLE_TYPE] (state, { type }) {
     state.role_type = type
+  },
+  [types.INFO] (state, payload) {
+    for (let key in payload){
+      state.info[key] = payload[key]
+    }
   }
 }

@@ -3,7 +3,7 @@
 import Vue from "vue"
 import App from "./App"
 import router from "./router"
-import store from "./store"
+import store from "./store"// 1 引入vuex中的容器对象store
 import {
   i18n
 } from "./i18n"
@@ -21,7 +21,8 @@ import {
   Tabs,
   Toast,
   CountDown,
-  Tabbar, TabbarItem,Field, Button, Cell, CellGroup
+  Picker,
+  Tabbar, TabbarItem,Field, Button, Cell, CellGroup, Uploader, Checkbox, CheckboxGroup
 } from "vant";
 import "@utils/rem"
 import "@style/common"
@@ -36,6 +37,7 @@ import {
 Vue.use(Popup)
 Vue.use(Toast)
 Vue.use(CountDown);
+Vue.use(Picker);
 Vue.use(Field);
 Vue.use(Button);
 Vue.use(Tabbar).use(TabbarItem);
@@ -50,6 +52,9 @@ Vue.use(Row).use(Col);
 Vue.use(NavBar);
 Vue.use(Tab).use(Tabs);
 Vue.use(Cell).use(CellGroup);
+Vue.use(Uploader);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
 Vue.config.productionTip = false
 
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端
@@ -89,7 +94,7 @@ Vue.directive('resetInput', {
 new Vue({
   el: "#app",
   router,
-  store,
+  store,// 2 将store注入到vue实例中，让整个应用程序拥有数据容器
   i18n,
   components: {
     App

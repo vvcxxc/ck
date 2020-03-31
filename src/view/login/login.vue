@@ -22,9 +22,10 @@
         </div>
 
         <div class="login_box" @click="handleLogin">登录</div>
-        <!-- <div class="resign_box" v-if="role_type=='entrepreneur'" @click="goToRegister">注册</div> -->
+        <div class="resign_box" v-if="role_type=='entrepreneur'" @click="goToRegister">注册</div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
@@ -38,7 +39,8 @@ export default {
     return {
       account_name: "",
       account_passwd: "",
-      role_type: ROLE_PRESIDENT
+      role_type: ROLE_PRESIDENT,
+
     };
   },
   methods: {
@@ -72,7 +74,7 @@ export default {
             this.$store.commit("ROLE_TYPE", { type: role_type });
             timeout(500).then(() => {
               // window.location.href = `http://${window.location.host}`;
-             this.$router.push("/index");
+              this.$router.push("/index");
             });
           }
         })
@@ -114,5 +116,5 @@ export default {
 };
 </script>
 <style lang="sass" scoped>
- @import './index'
+@import './index'
 </style>

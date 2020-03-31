@@ -1,0 +1,35 @@
+.result-page {
+  width: 100%;
+  height: 100%;
+  padding: 0 .24rem;
+  overflow: hidden;
+  .result-icon {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: .9rem;
+    margin-top: 1.9rem;
+    margin-bottom: .6rem;
+    img {
+      width: .9rem;
+      height: .9rem;
+    }
+  }
+  .result-text {
+    width: 100%;
+    font-size: .3rem;
+    color: #999999;
+    text-align: center;
+  }
+  .button {
+    width: 100%;
+    margin-top: .6rem;
+    height: .95rem;
+    border-radius: .1rem;
+    background: #547BE7;
+    font-size: .3rem;
+    line-height: .95rem;
+    text-align: center;
+    color: #fff;
+  }
+}

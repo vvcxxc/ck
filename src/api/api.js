@@ -353,3 +353,80 @@ http({
   method: 'get',
   params
 })
+
+/**
+ * 获取创客排行榜
+ */
+export const getPeopleTopList = (page) =>
+http({
+  url: 'api/entrepreneur/water/finance/invitationEntrepreneur',
+  method: 'get',
+  params: {page}
+})
+
+/**
+ * 获取店铺排行
+ */
+export const getStoreTopList = (page) =>
+http({
+  url: 'api/entrepreneur/water/finance/invitationLocation',
+  method: 'get',
+  params: {page}
+})
+
+/**
+ * 银行卡激活短信发送
+ */
+export const bankCardActivation = (data) =>
+http({
+  url: 'api/entrepreneur/sq/sendSmsCode',
+  data
+})
+
+  // 添加创客会长资质认证
+
+export const addInfo = (data) =>
+http({
+  url: 'api/entrepreneur/ck_createInfo',
+  method: 'post',
+  data
+})
+
+/**
+ * 银行卡绑卡
+ */
+export const bankCardBinding = (data) =>
+  http({
+    url: 'api/entrepreneur/sq/bindCard',
+    method: 'post',
+    data
+  })
+
+
+//  * 查看创客会长资质认证
+
+export const viewInfo = () =>
+http({
+  url: 'api/entrepreneur/ck/info',
+  method: 'get',
+})
+
+/**
+ * 编辑创客会长资质认证
+ * */
+export const editInfo = data =>
+http({
+  url: 'api/entrepreneur/ck/updateInfo',
+  method: 'post',
+  data
+})
+
+
+/**
+ * 通告
+*/
+export const Notice = () =>
+http({
+  url: 'api/entrepreneur/sq_notice',
+  method: 'post'
+})

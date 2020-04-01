@@ -34,7 +34,7 @@ export default {
       let is_sq = this.is_sq;
       if (is_sq == 0) {
         // 审核失败
-        this.$router.push({path: '/submitQua'})
+        this.$router.push({path: '/submitQua?type=eidt'})
       } else if (is_sq == 2 || 4 || 3) {
         // 审核中
         this.$router.push({path: '/index'})

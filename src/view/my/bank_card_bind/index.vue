@@ -41,7 +41,7 @@
         <li @click="show_fail = false">重新绑定</li>
       </ul>
     </div>
-    
+
   </main>
 </template>
 
@@ -77,7 +77,7 @@
       })
     },
     methods: {
-      
+
       lookTime(){//定时器倒计时
        const timeStart =  setTimeout(()=>{
           this.time -= 1
@@ -92,12 +92,13 @@
       },
 
       getVerify(){//获取验证码
+      this.show_time = true
         bankCardActivation({
           	party_id:store.state.ql_bank.party_id,
             phone:this.phone
           }).then(({ code, message, data }) => {
             if (code == REQUEST_OK) {
-              this.show_time = true
+
               this.lookTime();
               Toast.success(message);
             }else {

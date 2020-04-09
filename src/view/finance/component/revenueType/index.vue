@@ -28,6 +28,7 @@
       }
     },
     mounted(){
+      this.index = store.state.ql.profit_type-1
       switch ( store.state.ql.profit_type ) {//ql 用于区别title
         case 1:
           this.title = "费率返点";

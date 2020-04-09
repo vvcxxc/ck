@@ -215,6 +215,7 @@ export default {
     },
     updateTypeData(data){//修改数据类型
       this.updateType = data
+      this.list= []
       switch(data){
         case 1:
         this.title = "费率返点";

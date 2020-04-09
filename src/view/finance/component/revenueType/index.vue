@@ -46,7 +46,7 @@
       recordIndex(index,item){
         this.index = index
         this.show= false
-        this.desc = item
+        this.title = item
         this.$emit('onChange',index+1)
       },
       updateShow(){

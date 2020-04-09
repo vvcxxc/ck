@@ -215,6 +215,19 @@ export default {
     },
     updateTypeData(data){//修改数据类型
       this.updateType = data
+      switch(data){
+        case 1:
+        this.title = "费率返点";
+        break;
+      case 2:
+        this.title = "券分润";
+        break;
+      case 3:
+        this.title = "广告分润";
+        break;
+      default:
+        this.title = "费率返点";
+      }
       this.getList()
     }
 

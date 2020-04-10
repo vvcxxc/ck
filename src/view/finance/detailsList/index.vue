@@ -1,7 +1,9 @@
 <template>
   <div  class="details-page">
     <div class="details-header">
-      <div></div>
+      <RevenueType 
+      @onChange="updateTypeData"
+      />
       <div @click="showDatePicker" class="date">
         {{date}}
         <van-icon name="arrow-down" class="icon" />
@@ -64,6 +66,7 @@ import Vue from "vue";
 import dayjs from "dayjs";
 import { DatetimePicker, Popup, Icon, Divider  } from "vant";
 import { getFinanceList } from "@api/api";
+import RevenueType from '../component/revenueType'
 import store from "@/store/index"
 
 Vue.use(Divider);
@@ -86,8 +89,11 @@ export default {
       chooseType: "date",
       minDate: new Date(2015, 0, 1),
       maxDate: new Date(2025, 10, 1),
-      my_time:''
+      my_time:'',
     };
+  },
+  components:{
+    RevenueType
   },
   created() {
     let time = "";
@@ -105,23 +111,10 @@ export default {
     }
     this.date = time
     this.showTime = dayjs(time).$d
-    
-    switch ( store.state.ql.profit_type ) {//ql 用于区别title
-      case 1:
-        this.title = "费率返点";
-        break;
-      case 2:
-        this.title = "券分润";
-        break;
-      case 3:
-        this.title = "广告分润";
-        break;
-      default:
-        this.title = "费率返点";
-    }
     this.getList();
   },
   mounted(){
+    this.title =["费率返点","券分润","广告分润","费率返点"][store.state.ql.profit_type-1] ;
     this.my_time =store.state.ql.Index
     this.chooseType = ["date", "year-month", "year-month", "date"][store.state.ql.Index];
   },
@@ -168,14 +161,13 @@ export default {
     getList() {
       const { day,month,years,profit_type}=store.state.ql
       let data = {
-        profit_type,
+        profit_type: profit_type,
         created_at: this.date,
         page: this.page
       };
       getFinanceList(data)
         .then(res => {
           this.all_money = res.all_money || 0;//这个是?
-
           if(this.page == 1){
             this.list = res.data
             this.isMore = true
@@ -206,7 +198,15 @@ export default {
           id
         }
       });
+    },
+    updateTypeData(data){//修改数据类型
+      store.dispatch("ql/wirteContent", {profit_type:data})
+      this.list= []
+      this.page = 1
+      this.title =["费率返点","券分润","广告分润","费率返点"][data-1] ;
+      this.getList()
     }
+
   }
 };
 </script>

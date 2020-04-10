@@ -99,19 +99,15 @@ export default {
     return {
       minDate: new Date(2015, 0, 1),
       maxDate: new Date(2025, 10, 1),
-
       currentDate: new Date(),
       chooseTime: false,
       list: [1, 3],
       chooseType: "date",
-
       showTime:'',//用来展示的时间戳
       date: '',
       info: {},
       type:3,
-      
     };
-    // dayjs(new Date()).format("YYYY-MM-DD")
   },
   components: {},
   props: {

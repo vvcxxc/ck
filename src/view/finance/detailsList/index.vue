@@ -90,7 +90,6 @@ export default {
       minDate: new Date(2015, 0, 1),
       maxDate: new Date(2025, 10, 1),
       my_time:'',
-      updateType:''
     };
   },
   components:{
@@ -112,23 +111,10 @@ export default {
     }
     this.date = time
     this.showTime = dayjs(time).$d
-    
-    switch ( store.state.ql.profit_type ) {//ql 用于区别title
-      case 1:
-        this.title = "费率返点";
-        break;
-      case 2:
-        this.title = "券分润";
-        break;
-      case 3:
-        this.title = "广告分润";
-        break;
-      default:
-        this.title = "费率返点";
-    }
     this.getList();
   },
   mounted(){
+    this.title =["费率返点","券分润","广告分润","费率返点"][store.state.ql.profit_type-1] ;
     this.my_time =store.state.ql.Index
     this.chooseType = ["date", "year-month", "year-month", "date"][store.state.ql.Index];
   },
@@ -175,7 +161,7 @@ export default {
     getList() {
       const { day,month,years,profit_type}=store.state.ql
       let data = {
-        profit_type: this.updateType? this.updateType: profit_type,
+        profit_type: profit_type,
         created_at: this.date,
         page: this.page
       };
@@ -214,22 +200,10 @@ export default {
       });
     },
     updateTypeData(data){//修改数据类型
-      this.updateType = data
+      store.dispatch("ql/wirteContent", {profit_type:data})
       this.list= []
       this.page = 1
-      switch(data){
-        case 1:
-        this.title = "费率返点";
-        break;
-      case 2:
-        this.title = "券分润";
-        break;
-      case 3:
-        this.title = "广告分润";
-        break;
-      default:
-        this.title = "费率返点";
-      }
+      this.title =["费率返点","券分润","广告分润","费率返点"][data-1] ;
       this.getList()
     }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="revenue_type_box">
     <div class="revenue_type_title" @click="updateShow()">
-      <span class="confirm_type">{{title}}</span>
+      <span class="confirm_type">{{showType}}</span>
       <van-icon name="arrow-down" class="icon" />
    </div>
     <div class="revenue_type" v-show="show">
@@ -27,21 +27,13 @@
         title:''
       }
     },
+    computed:{
+      showType(){
+        return ["费率返点","券分润","广告分润","费率返点"][store.state.ql.profit_type-1]
+      }
+    },
     mounted(){
       this.index = store.state.ql.profit_type-1
-      switch ( store.state.ql.profit_type ) {//ql 用于区别title
-        case 1:
-          this.title = "费率返点";
-          break;
-        case 2:
-          this.title = "券分润";
-          break;
-        case 3:
-          this.title = "广告分润";
-          break;
-        default:
-          this.title = "费率返点";
-      }
     },
     methods:{
       recordIndex(index,item){

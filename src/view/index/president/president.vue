@@ -88,14 +88,14 @@ export default {
   computed: {
     remain_money(){
       if (!isNaN(this.info.amount) && this.info.amount!== '') {
-          return parseFloat(this.info.amount).toFixed(2)
+        return  Math.floor(this.info.amount * 100) / 100
       } else {
         return this.info.amount
       }
     },
     today_money(){
       if (!isNaN(this.info.today_fee) && this.info.today_fee!== '') {
-          return parseFloat(this.info.today_fee).toFixed(2)
+          return  Math.floor(this.info.today_fee * 100) / 100
       } else {
         return this.info.today_fee
       }

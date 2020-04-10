@@ -5,7 +5,7 @@
       <div class="sum_container_top">
         <div class="sum_container_top_left">
           <div class="sum_container_balance_title">余额</div>
-          <div class="sum_container_balance_num">{{info.amount}}</div>
+          <div class="sum_container_balance_num">{{remain_money}}</div>
         </div>
         <div class="sum_container_top_right">
           <div class="sum_container_detail_titleBox" @click="goTo(0)">
@@ -20,7 +20,7 @@
       <div class="sum_container_bottom">
         <div class="sum_container_bottom_content">
           <div class="today_earnings_title">今日收益</div>
-          <div class="today_earnings_num">{{info.today_fee}}</div>
+          <div class="today_earnings_num">{{today_money}}</div>
         </div>
         <div class="sum_container_bottom_icon" @click="goTo(3)">
           <van-icon name="down" />
@@ -30,17 +30,17 @@
     <div class="entrepreneur_box">
       <div class="entrepreneur_title">店铺创客</div>
       <div class="entrepreneur_content">
-        <div class="entrepreneur_left">
+        <div class="entrepreneur_left" @click="jumpSurePage('supplier')">
           <div class="invitation_entrepreneur_icon"></div>
-          <div class="invitation_entrepreneur_title">邀请的店铺数</div>
+          <div class="invitation_entrepreneur_title" >邀请的店铺数</div>
           <div class="invitation_entrepreneur_num">{{info.supplier_number}}</div>
-          <div class="invitation_entrepreneur_btn" @click="invite('store')">邀请店铺</div>
+          <div class="invitation_entrepreneur_btn" @click="invite('store',$event)">邀请店铺</div>
         </div>
-        <div class="entrepreneur_right">
+        <div class="entrepreneur_right" @click="jumpSurePage('entrepreneur')">
           <div class="invitation_entrepreneur_icon2"></div>
           <div class="invitation_entrepreneur_title">邀请的创客数</div>
           <div class="invitation_entrepreneur_num">{{info.entrepreneur_number}}</div>
-          <div class="invitation_entrepreneur_btn" @click="invite('people')">邀请创客</div>
+          <div class="invitation_entrepreneur_btn" @click="invite('people',$event)">邀请创客</div>
         </div>
       </div>
     </div>
@@ -85,14 +85,28 @@ export default {
       people: '创客'
     };
   },
-  computed: {},
+  computed: {
+    remain_money(){
+      if (!isNaN(this.info.amount) && this.info.amount!== '') {
+          return parseFloat(this.info.amount).toFixed(2)
+      } else {
+        return this.info.amount
+      }
+    },
+    today_money(){
+      if (!isNaN(this.info.today_fee) && this.info.today_fee!== '') {
+          return parseFloat(this.info.today_fee).toFixed(2)
+      } else {
+        return this.info.today_fee
+      }
+    }
+  },
   mounted() {
     const roleType = localStorage.getItem('role_type')
     this.people = roleType == 'entrepreneur' ? '创客' : '会长'
-    console.log(roleType)
   },
   methods: {
-    invite(name) {
+    invite(name,e) {
       if (name == "people") {
         let qrCodeUrl = `http://${window.location.host}/ck/register?invite_id=${this.info.party_id}`;
         this.qrCodeUrl = qrCodeUrl;
@@ -104,6 +118,7 @@ export default {
         this.showQRcode(qrCodeUrl);
         this.title = "邀请店铺";
       }
+      e.stopPropagation()
     },
     itemClick(index) {
       console.log(index);
@@ -167,7 +182,12 @@ export default {
       if (this.checked == true) {
         Notice();
       }
+    },
+    // 店铺创客跳转
+    jumpSurePage(supplier){
+      this.$router.push("./"+supplier)
     }
+
   },
 
   created() {

@@ -1,49 +1,70 @@
 <template>
   <div class="president">
-    <div class="president_header">首页</div>
-    <div class="sum_container">
-      <div class="sum_container_top">
-        <div class="sum_container_top_left">
-          <div class="sum_container_balance_title">余额</div>
-          <div class="sum_container_balance_num">{{info.amount}}</div>
-        </div>
-        <div class="sum_container_top_right">
-          <div class="sum_container_detail_titleBox" @click="goTo(0)">
-            <div class="detail_title">提现明细</div>
-            <div class="detail_icon">
-              <van-icon name="arrow" />
-            </div>
+    <div class="main-box">
+      <div class="president_header">首页</div>
+      <div class="sum_container">
+        <div class="sum_container_top">
+          <div class="sum_container_top_left">
+            <div class="sum_container_balance_title">余额</div>
+            <div class="sum_container_balance_num">{{info.amount}}</div>
           </div>
-          <div class="sum_container_detail_btn" @click="goTo(1)">提现</div>
+          <div class="sum_container_top_right">
+            <div class="sum_container_detail_titleBox" @click="goTo(0)">
+              <div class="detail_title">提现明细</div>
+              <div class="detail_icon">
+                <van-icon name="arrow" />
+              </div>
+            </div>
+            <div class="sum_container_detail_btn" @click="goTo(1)">提现</div>
+          </div>
+        </div>
+        <div class="sum_container_bottom">
+          <div class="sum_container_bottom_content">
+            <div class="today_earnings_title">今日收益</div>
+            <div class="today_earnings_num">{{info.today_fee}}</div>
+          </div>
+          <div class="sum_container_bottom_icon" @click="goTo(3)">
+            <van-icon name="down" />
+          </div>
         </div>
       </div>
-      <div class="sum_container_bottom">
-        <div class="sum_container_bottom_content">
-          <div class="today_earnings_title">今日收益</div>
-          <div class="today_earnings_num">{{info.today_fee}}</div>
-        </div>
-        <div class="sum_container_bottom_icon" @click="goTo(3)">
-          <van-icon name="down" />
+      <div class="entrepreneur_box">
+        <div class="entrepreneur_title">店铺创客</div>
+        <div class="entrepreneur_content">
+          <div class="entrepreneur_left">
+            <div class="invitation_entrepreneur_icon"></div>
+            <div class="invitation_entrepreneur_title">邀请的店铺数</div>
+            <div class="invitation_entrepreneur_num">{{info.supplier_number}}</div>
+            <div class="invitation_entrepreneur_btn" @click="invite('store')">邀请店铺</div>
+          </div>
+          <div class="entrepreneur_right">
+            <div class="invitation_entrepreneur_icon2"></div>
+            <div class="invitation_entrepreneur_title">邀请的创客数</div>
+            <div class="invitation_entrepreneur_num">{{info.entrepreneur_number}}</div>
+            <div class="invitation_entrepreneur_btn" @click="invite('people')">邀请创客</div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="entrepreneur_box">
-      <div class="entrepreneur_title">店铺创客</div>
-      <div class="entrepreneur_content">
-        <div class="entrepreneur_left">
-          <div class="invitation_entrepreneur_icon"></div>
-          <div class="invitation_entrepreneur_title">邀请的店铺数</div>
-          <div class="invitation_entrepreneur_num">{{info.supplier_number}}</div>
-          <div class="invitation_entrepreneur_btn" @click="invite('store')">邀请店铺</div>
-        </div>
-        <div class="entrepreneur_right">
-          <div class="invitation_entrepreneur_icon2"></div>
-          <div class="invitation_entrepreneur_title">邀请的创客数</div>
-          <div class="invitation_entrepreneur_num">{{info.entrepreneur_number}}</div>
-          <div class="invitation_entrepreneur_btn" @click="invite('people')">邀请创客</div>
-        </div>
+
+    <div class="information-box" v-if="article_item">
+      <div class="information-title-box">
+        <div class="information-title">实战攻略</div>
+        <div class="information-more">更多</div>
+      </div>
+
+      <div class="img-box">
+        <div class="img-title">{{article_item.article_title}}</div>
+        <img :src="article_item.author_cover" class="information-img" />
+        <div class="img-date">{{article_item.publish_time}}</div>
+      </div>
+
+      <div class="article-box" v-for="(item,key) in article_list" :key="key">
+        <div class="article-name">{{item.article_title}}</div>
+        <div class="article-date">{{item.publish_time}}</div>
       </div>
     </div>
+
     <van-overlay :show="is_show" @click="is_show = false">
       <div class="qr_code">
         <div class="qr_code_title">{{title}}</div>
@@ -71,6 +92,7 @@
 import QRCode from "qrcode";
 import { Icon, Popup, Overlay } from "vant";
 import { indexInfo, Notice } from "@api/api";
+import { getQualityArticle } from "@api/article_api";
 export default {
   data() {
     return {
@@ -82,14 +104,34 @@ export default {
       info: {}, // 首页数据
       show: false,
       checked: false,
-      people: '创客'
+      people: "创客",
+      article_item: {},
+      article_list: []
     };
   },
   computed: {},
   mounted() {
-    const roleType = localStorage.getItem('role_type')
-    this.people = roleType == 'entrepreneur' ? '创客' : '会长'
-    console.log(roleType)
+    const roleType = localStorage.getItem("role_type");
+    this.people = roleType == "entrepreneur" ? "创客" : "会长";
+    const params = {
+      role_uusn: roleType || "entrepreneur",
+      // exclude_article_id: ""
+    };
+    getQualityArticle(params).then(res => {
+      if (res.data.length) {
+        if (res.data.length > 0) {
+          res.data.map((item, index) => {
+            if (index == 0) {
+              this.article_item = item;
+            } else {
+              this.article_list.push(item);
+            }
+          });
+        } else {
+          this.article_item = res.data[0];
+        }
+      }
+    });
   },
   methods: {
     invite(name) {
@@ -111,37 +153,37 @@ export default {
     goTo(type) {
       // 提现跳转
       if (type == 1) {
-         let {is_existence ,is_sq, is_card_activation, is_opening} = this.info
-        if(is_existence){
-          switch(is_sq){
+        let { is_existence, is_sq, is_card_activation, is_opening } = this.info;
+        if (is_existence) {
+          switch (is_sq) {
             case 0: // 认证失败
-              this.$router.push({path: '/submitQua/result'})
-              break
+              this.$router.push({ path: "/submitQua/result" });
+              break;
             case 1: // 认证成功
-              if(is_card_activation){
-                if(is_opening){
+              if (is_card_activation) {
+                if (is_opening) {
                   this.$router.push("/index/withdraw");
-                }else {
-                  this.$router.push({path: '/submitQua/confirmWithdraw'})
+                } else {
+                  this.$router.push({ path: "/submitQua/confirmWithdraw" });
                 }
-              }else {
-                this.$router.push({path: '/submitQua/bankBind'})
+              } else {
+                this.$router.push({ path: "/submitQua/bankBind" });
               }
-              break
+              break;
             case 2:
-              this.$router.push({path: '/submitQua/result'})
-              break
+              this.$router.push({ path: "/submitQua/result" });
+              break;
             case 3:
-              this.$router.push({path: '/submitQua/result'})
-              break
+              this.$router.push({ path: "/submitQua/result" });
+              break;
             case 4:
-              this.$router.push({path: '/submitQua'})
-              break
+              this.$router.push({ path: "/submitQua" });
+              break;
             default:
               this.$router.push("/index/withdraw");
           }
-        }else {
-          this.$router.push({path: '/submitQua'})
+        } else {
+          this.$router.push({ path: "/submitQua" });
         }
       } else if (type == 0) {
         this.$router.push("/index/withdrawList");

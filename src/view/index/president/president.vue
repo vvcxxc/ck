@@ -129,10 +129,10 @@ export default {
          let {is_existence ,is_sq, is_card_activation, is_opening} = this.info
         if(is_existence){
           switch(is_sq){
-            case 0: // 认证失败
+            case 2: // 认证失败
               this.$router.push({path: '/submitQua/result'})
               break
-            case 1: // 认证成功
+            case 3: // 认证成功
               if(is_card_activation){
                 if(is_opening){
                   this.$router.push("/index/withdraw");
@@ -143,13 +143,10 @@ export default {
                 this.$router.push({path: '/submitQua/bankBind'})
               }
               break
-            case 2:
+            case 1:
               this.$router.push({path: '/submitQua/result'})
               break
-            case 3:
-              this.$router.push({path: '/submitQua/result'})
-              break
-            case 4:
+            case 0:
               this.$router.push({path: '/submitQua'})
               break
             default:

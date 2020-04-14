@@ -2,14 +2,14 @@ import http from '../../api/http';
 
 //  添加身份证银行卡信息
 export const createInfo = data => http({
-  url: 'api/entrepreneur/ck_createInfo',
+  url: 'api/entrepreneur/ck_create_info',
   method: 'post',
   data
 })
 
 //  编辑身份证银行卡信息
 export const editInfo = data => http({
-  url: 'api/entrepreneur/ck/updateInfo',
+  url: 'api/entrepreneur/ck/update_info',
   method: 'post',
   data
 })
@@ -21,11 +21,12 @@ export const getStatus = () => http({
 })
 
 //  获取银行卡手机号验证码
-export const getBankCode = phone => http({
+export const getBankCode = (phone, bank_card_number) => http({
   url: 'api/entrepreneur/v4/sq/send_sms_code',
   method: 'post',
   data: {
-    phone
+    phone,
+    bank_card_number
   }
 })
 

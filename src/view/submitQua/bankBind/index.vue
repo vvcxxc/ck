@@ -90,7 +90,7 @@ export default {
       this.showModule = false;
       if (type) {
         this.isSend = true;
-        getBankCode(this.phone).then(res => {
+        getBankCode(this.phone, this.bank_card_number).then(res => {
           console.log(res);
           if (res.status_code == 200) {
             Toast.success(res.message);
@@ -119,7 +119,8 @@ export default {
       let data = {
         code: this.code,
         phone: this.phone,
-        seqNo: this.seqNo
+        seqNo: this.seqNo,
+        bank_card_number: this.bank_card_number
       };
       bindBankCard(data).then(res => {
         if (res.status_code == 200) {

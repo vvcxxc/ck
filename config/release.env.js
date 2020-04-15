@@ -10,7 +10,7 @@ module.exports = merge(devEnv, {
   DOMAIN: '"http://ck.tdianyi.com"',
 
   OSS_UPLOAD_URL: '"http://tmwl.oss-cn-shenzhen.aliyuncs.com"',
-
+  INFORMATION_URL: '"http://test.information_center.tdianyi.com"',
   SUPPLIER_URL: '"http://supplier.tdianyi.com"',
 
 })

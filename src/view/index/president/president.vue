@@ -50,16 +50,16 @@
     <div class="information-box" v-if="article_item">
       <div class="information-title-box">
         <div class="information-title">实战攻略</div>
-        <div class="information-more">更多</div>
+        <div class="information-more" @click="goToInformation()">更多</div>
       </div>
 
-      <div class="img-box">
+      <div class="img-box" @click="goToInformation(article_item.id)">
         <div class="img-title">{{article_item.article_title}}</div>
         <img :src="article_item.author_cover" class="information-img" />
         <div class="img-date">{{article_item.publish_time}}</div>
       </div>
 
-      <div class="article-box" v-for="(item,key) in article_list" :key="key">
+      <div class="article-box" v-for="(item,key) in article_list" :key="key" @click="goToInformation(item.id)">
         <div class="article-name">{{item.article_title}}</div>
         <div class="article-date">{{item.publish_time}}</div>
       </div>
@@ -150,18 +150,28 @@ export default {
     itemClick(index) {
       console.log(index);
     },
+    goToInformation(id) {
+      const roleType = localStorage.getItem("role_type");
+      if(id){
+        console.log(id)
+        location.href = process.env.INFORMATION_URL + 'article?id=' + id + '&role_uusn=' + roleType
+      }else {
+        console.log(333)
+         location.href = process.env.INFORMATION_URL + '?role_uusn=' + roleType
+      }
+    },
     goTo(type) {
       // 提现跳转
       if (type == 1) {
-        let { is_existence, is_sq, is_card_activation, is_opening } = this.info;
-        if (is_existence) {
-          switch (is_sq) {
-            case 0: // 认证失败
-              this.$router.push({ path: "/submitQua/result" });
-              break;
-            case 1: // 认证成功
-              if (is_card_activation) {
-                if (is_opening) {
+         let {is_existence ,is_sq, is_card_activation, is_opening} = this.info
+        if(is_existence){
+          switch(is_sq){
+            case 2: // 认证失败
+              this.$router.push({path: '/submitQua/result'})
+              break
+            case 3: // 认证成功
+              if(is_card_activation){
+                if(is_opening){
                   this.$router.push("/index/withdraw");
                 } else {
                   this.$router.push({ path: "/submitQua/confirmWithdraw" });
@@ -169,16 +179,13 @@ export default {
               } else {
                 this.$router.push({ path: "/submitQua/bankBind" });
               }
-              break;
-            case 2:
-              this.$router.push({ path: "/submitQua/result" });
-              break;
-            case 3:
-              this.$router.push({ path: "/submitQua/result" });
-              break;
-            case 4:
-              this.$router.push({ path: "/submitQua" });
-              break;
+              break
+            case 1:
+              this.$router.push({path: '/submitQua/result'})
+              break
+            case 0:
+              this.$router.push({path: '/submitQua'})
+              break
             default:
               this.$router.push("/index/withdraw");
           }

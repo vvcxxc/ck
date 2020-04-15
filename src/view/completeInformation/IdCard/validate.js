@@ -11,7 +11,6 @@ let data1 = {
 export default function ValidateIDCard (info) {
   // 验证完善资料
   // 验证是否为空
-  console.log(info)
   for (let i in info) {
     if (!info[i] && info[i] != undefined) {
       for (let a in data1) {

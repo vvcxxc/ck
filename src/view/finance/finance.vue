@@ -56,7 +56,6 @@
         this.meta=data
       }
     }
-  
   };
 </script>
 <style lang="sass" scoped>
@@ -75,6 +74,7 @@
     font-size: 18px
 .van-nav-bar
     background-color: #5091DD
+    border-bottom: none
     .van-nav-bar__title
       font-size: 18px
       font-family: Adobe Heiti Std

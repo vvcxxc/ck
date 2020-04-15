@@ -67,14 +67,9 @@
       </div>
       <div class="input-box">
         <div class="label">开户行</div>
-        <div class="input-area">
-          <input
-            type="text"
-            v-model="info.bank_name"
-            placeholder="请输入开户行"
-            class="input"
-            @focus="scroll"
-          />
+        <div class="input-area" @click="show_list = true">
+          <div class="input" v-if='info.bank_name'>{{info.bank_name}}</div>
+          <div class="input no-choose" v-if='!info.bank_name'>请输入开户行</div>
         </div>
       </div>
       <div class="input-box">
@@ -90,10 +85,23 @@
         </div>
       </div>
     </div>
-    <div class="botton-box">
+    <div class="botton-box" v-if="sq_status != 1 && sq_status != 3">
       <div class="botton-go-back" @click="goBack">返回上一步</div>
-      <div class="botton" @click="submit" v-if="sq_status != 1 && sq_status != 3">提交</div>
+      <div class="botton" @click="submit">提交</div>
     </div>
+    <div class="botton-box no-submit" v-if="sq_status == 1 || sq_status == 3">
+      <div class="botton-go-back" @click="goBack">返回上一步</div>
+    </div>
+
+    <van-popup v-model="show_list" position="bottom" :style="{ height: '30%' }">
+      <van-picker
+        show-toolbar
+        title="选择银行"
+        :columns="bank_list"
+        @cancel="onCancel"
+        @confirm="onConfirm"
+      />
+    </van-popup>
   </div>
 </template>
 <script>
@@ -102,7 +110,7 @@ import { editInfo, addInfo } from "@/api/api";
 import store from "@/store/index";
 import { Toast } from "vant";
 import Validate from "../validate";
-import { authUser } from "@api/api";
+import {getBankList} from '../../submitQua/service'
 export default {
   data() {
     return {
@@ -115,16 +123,24 @@ export default {
       imgFront: [],
       bank_front: "",
       bank_back: "",
-      sq_status: 0
+      sq_status: 0,
+      bank_list: [],
+      show_list: false
     };
   },
   mounted() {
     let type = this.$route.query.type;
     if (type == "edit") {
-      authUser().then(res => {
-        this.sq_status = res.data.sq_status;
-      });
+      this.sq_status = this.$route.query.sq_status;
     }
+    getBankList().then(res => {
+      let bank_list = [];
+      let list = res.data
+      for (let i = 0; i < list.length; i ++){
+        bank_list.push(list[i].bank_name)
+      }
+      this.bank_list = bank_list;
+    });
     if (this.info.bank_positive) {
       this.imgFront = [
         {
@@ -160,6 +176,13 @@ export default {
     }
   },
   methods: {
+    onConfirm(value, index) {
+      this.info.bank_name = value;
+      this.show_list = false;
+    },
+    onCancel() {
+      this.show_list = false;
+    },
     // 键盘事件兼容
     scroll() {
       window.scrollTo(100, 500);

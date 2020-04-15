@@ -18,14 +18,7 @@ export default {
   name: "PersonalCenterGird",
   data() {
     return {
-      list: "",
-      // type: [
-      //   "small_bank_card",
-      //   "small_gift",
-      //   "small_id_card",
-      //   "small_set_up",
-      //   "actual_combat"
-      // ]
+      list: ""
     };
   },
   props: {

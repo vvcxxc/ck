@@ -1,0 +1,232 @@
+.no-animation-box {
+  z-index: -1;
+}
+
+.have-animation-box {
+  z-index: 100;
+}
+
+#tied-card-tips-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: .3rem;
+  .no-animation {
+    //消失弹框类名
+    transition: all 0.3s ease;
+    transform: translateY(140%);
+  }
+
+  .have-animation {
+    transition: all 0.3s ease;
+    transform: translateY(10%);
+  }
+
+  #tied-card-tips {
+    width: 6.79rem;
+    height: 9.54rem;
+    padding-top: 0.7rem;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 0.5rem;
+  }
+
+}
+
+.no-animation-box {
+  position: fixed;
+  z-index: -11;
+  transition: all 0.3s ease;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: red;
+}
+
+#tied-card-tips {
+
+  .title {
+    margin-bottom: 0.57rem;
+
+    .title-value {
+      margin-left: 2.70rem;
+      margin-right: 1.94rem;
+      font-size: 0.36rem;
+      font-family: Adobe Heiti Std;
+      font-weight: bold;
+      color: rgba(51, 51, 51, 1);
+    }
+
+    .title-img {
+      width: 0.29rem;
+      height: 0.29rem;
+      border-radius: 0.02rem;
+    }
+  }
+
+
+  .title-image {
+    margin-bottom: 0.57rem;
+    padding-left: 0;
+    text-align: center;
+
+    img {
+      height: 1.28rem;
+      width: 1.28rem;
+    }
+  }
+
+
+  .marked-words {
+    margin: 0rem 0.68rem 1.86rem 0.61rem;
+    font-size: 0.28rem;
+    font-family: Adobe Heiti Std;
+    font-weight: normal;
+    color: rgba(51, 51, 51, 1);
+
+    .first-line {
+      margin-bottom: 0.05rem;
+      text-align: right;
+    }
+
+    .second-line {
+      text-align: left;
+    }
+  }
+
+  .check-user {
+    margin-left: 0.61rem;
+    margin-right: 0.43rem;
+    margin-bottom: 0.32rem;
+
+    .check-user-first-line {
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+
+      img {
+        margin-right: 0.16rem;
+        height: 0.32rem;
+        width: 0.32rem;
+      }
+
+      .check-icon {
+        margin-right: 0.16rem;
+        display: inline-block;
+        width: 0.32rem;
+        height: 0.32rem;
+        font-size: 0.28rem;
+        font-family: Adobe Heiti Std;
+        font-weight: normal;
+        color: rgba(51, 51, 51, 1);
+        border: 0.02rem solid rgba(173, 181, 189, 1);
+        border-radius: 0.02rem;
+      }
+    }
+
+    .protocol {
+      margin-left: 0.5rem;
+      font-size: 0.2rem;
+      font-family: Adobe Heiti Std;
+      font-weight: normal;
+      color: rgba(51, 51, 51, 1);
+
+      span {
+        margin-left: -0.09rem;
+        color: #4486F7;
+      }
+    }
+
+  }
+
+
+
+  .submit-button {
+    display: flex;
+    justify-content: center;
+
+    button {
+      width: 5.02rem;
+      height: 0.88rem;
+      border-radius: 0.44rem;
+      color: rgba(255, 255, 255, 1);
+      font-size: 0.34rem;
+      font-family: Adobe Heiti Std;
+      font-weight: normal;
+    }
+
+    .blue-button {
+      background: rgba(68, 134, 247, 1);
+    }
+
+    .gray-button {
+      background: rgba(173, 181, 189, 1);
+    }
+  }
+
+}
+
+// 开通账户说明
+.open-that {
+  transition: all 0.3s ease;
+  transform: translateY(10%);
+
+  .my-margin-left {
+    // padding-left: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
+  .open-that-title {
+    margin-bottom: 0.51rem;
+    margin-left: 0.41rem;
+    display: flex;
+    align-items: center;
+
+    span {
+      font-size: 0.36rem;
+      font-family: Adobe Heiti Std;
+      font-weight: bold;
+      color: rgba(51, 51, 51, 1);
+    }
+
+    img {
+      margin-right: 0.87rem;
+      width: 0.19rem;
+      height: 0.34rem;
+    }
+  }
+
+  .open-that-ul {
+    height: 7.47rem;
+    overflow-y: scroll;
+
+    li {
+      // padding: 0 0.31rem;
+      padding-left: 0.31rem;
+      padding-right: 0.41rem;
+      // margin-right: 0.61rem;
+      font-size: 0.28rem;
+      font-family: Adobe Heiti Std;
+      font-weight: normal;
+      color: rgba(51, 51, 51, 1);
+    }
+
+    li:nth-last-child(1) {
+      margin-bottom: 1rem;
+    }
+
+    .open-that-second-line {
+      line-height: 0.45rem;
+    }
+  }
+
+}
+
+

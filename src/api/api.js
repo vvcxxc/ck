@@ -382,12 +382,12 @@ http({
   url: 'api/entrepreneur/sq/sendSmsCode',
   data
 })
-  
+
   // 添加创客会长资质认证
- 
+
 export const addInfo = (data) =>
 http({
-  url: 'api/entrepreneur/ck_createInfo',
+  url: 'api/entrepreneur/ck_create_info',
   method: 'post',
   data
 })
@@ -419,4 +419,14 @@ http({
   url: 'api/entrepreneur/ck/updateInfo',
   method: 'post',
   data
+})
+
+
+/**
+ * 通告
+*/
+export const Notice = () =>
+http({
+  url: 'api/entrepreneur/sq_notice',
+  method: 'post'
 })

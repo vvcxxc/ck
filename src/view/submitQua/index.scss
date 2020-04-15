@@ -1,51 +1,80 @@
 .page {
-  background: #fff;
+  background: #F2F5FC;
   width: 100%;
   height: 100%;
   position: relative;
+  // padding: .2rem;
+}
+
+.main-box {
+  width: 100%;
+  height: auto;
+  // padding: .2rem;
+  padding-bottom: .5rem;
+  .step-box {
+    width: 100%;
+    height: 1.1rem;
+    background: #fff;
+    border-radius: .1rem;
+    margin-bottom: .2rem;
+    padding: 0 .35rem;
+    display: flex;
+    align-items: center;
+    .step-item {
+      display: flex;
+      align-items: center;
+      .step-num {
+        width: .42rem;
+        height: .42rem;
+        border-radius: 50%;
+        color: #fff;
+        font-size: .3rem;
+        background: #999999;
+        text-align: center;
+        line-height: .42rem;
+        margin-right: .06rem;
+      }
+      .step-text {
+        font-size: .3rem;
+        line-height: 1;
+        color: #999999;
+      }
+      .step-icon {
+        width: .17rem;
+        height: .3rem;
+        margin: 0 .2rem;
+      }
+      .active {
+        color: #547BE7;
+      }
+      .active-background {
+        background: #547BE7;
+      }
+
+    }
+  }
 }
 
 .van-nav-bar {
   background: #fff;
   border-bottom: 1px solid #eee;
+
   .van-icon {
     color: #5F666C;
   }
+
   .van-nav-bar__title {
     color: #333;
   }
 }
 
-.refuse-reason {
-  width: 100vw;
-  height: 0.64rem;
-  background: rgba(253, 99, 99, 1);
-  font-size: 0.34rem;
-  font-family: Adobe Heiti Std;
-  font-weight: normal;
-  color: rgba(255, 255, 255, 1);
-  line-height: 90px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  box-sizing: border-box;
-}
-
-.refuse-reason-icon {
-  width: 0.32rem;
-  height: 0.32rem;
-  margin: 0 0.2rem;
-
-}
-
-.main {
-  padding: 0 .26rem;
-  margin-top: .6rem;
-  height: 100%;
+.id-main {
+  padding: .4rem .26rem;
+  height: auto;
   width: 100%;
   position: relative;
   background: #fff;
+  border-radius: .1rem;
 }
 
 .title-syz {
@@ -133,6 +162,9 @@
       width: 4.5rem;
       padding-top: .4rem;
     }
+    .no-choose {
+      color: #98A6AD;
+    }
 
     /*placeholder样式-开始*/
     input::-webkit-input-placeholder {
@@ -168,11 +200,11 @@
   }
 }
 
-.botton-box {
+.sub-botton-box {
   width: 100%;
   height: 1.28rem;
-  position: fixed;
-  bottom: 0;
+  // position: fixed;
+  // bottom: 0;
   border-top: 1px solid #DDE2E5;
   padding: .15rem .32rem;
   box-sizing: border-box;
@@ -246,4 +278,70 @@
 
 .actived {
   color: #333 !important;
+}
+
+
+// 银行卡
+.bank-main {
+  padding: .4rem .26rem;
+  height: auto;
+  width: 100%;
+  position: relative;
+  background: #fff;
+  border-radius: .1rem;
+  margin-top: .2rem;
+  .upload-box {
+    width: 100%;
+    display: flex;
+    margin-top: .4rem;
+    justify-content: space-between;
+
+    .upload-main {
+      width: 3.16rem;
+      height: 2.64rem;
+    }
+
+    /deep/ .van-uploader__preview-image {
+      width: 3.16rem;
+      height: 2.64rem;
+    }
+
+    .upload {
+      width: 3.16rem;
+      height: 2.64rem;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0px 0px 10px 5px rgba(236, 236, 238, 0.9);
+
+      .upload-top {
+        width: 100%;
+        height: 1.99rem;
+        position: relative;
+
+        .upload-bj {
+          width: 2.58rem;
+          height: 1.57rem;
+          margin: .23rem;
+        }
+
+        .upload-photo {
+          width: .72rem;
+          height: .72rem;
+          position: absolute;
+          top: .55rem;
+          left: 1.24rem;
+        }
+      }
+
+      .upload-bottom {
+        border-top: 1px solid #DDE2E5;
+        font-size: .24rem;
+        color: #98A6AD;
+        height: .64rem;
+        text-align: center;
+        line-height: .64rem;
+      }
+    }
+
+  }
 }

@@ -21,7 +21,8 @@ import {
   Tabs,
   Toast,
   CountDown,
-  Tabbar, TabbarItem,Field, Button, Cell, CellGroup, Uploader
+  Picker,
+  Tabbar, TabbarItem,Field, Button, Cell, CellGroup, Uploader, Checkbox, CheckboxGroup
 } from "vant";
 import "@utils/rem"
 import "@style/common"
@@ -36,6 +37,7 @@ import {
 Vue.use(Popup)
 Vue.use(Toast)
 Vue.use(CountDown);
+Vue.use(Picker);
 Vue.use(Field);
 Vue.use(Button);
 Vue.use(Tabbar).use(TabbarItem);
@@ -51,6 +53,8 @@ Vue.use(NavBar);
 Vue.use(Tab).use(Tabs);
 Vue.use(Cell).use(CellGroup);
 Vue.use(Uploader);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
 Vue.config.productionTip = false
 
 const isAndroid = navigator.userAgent.indexOf('Android') > -1 || navigator.userAgent.indexOf('Adr') > -1; //android终端

@@ -77,6 +77,7 @@ export default {
           withdrawApply(params)
             .then(({ message, code }) => {
               this.$vux.toast.text(message);
+              this.$router.push("/index/withdrawList");
             })
             .catch(err => console.log(err));
         } else {

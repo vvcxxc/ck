@@ -5,6 +5,6 @@ const devEnv = require("./dev.env")
 module.exports = merge(devEnv, {
   NODE_ENV: '"testing"',
   BASE_DOMAIN: '"http://test.api.supplier.tdianyi.com/"',
-
-  SUPPLIER_URL: '"http://test.supplierv2.tdianyi.com"'
+  INFORMATION_URL: '"http://test.information_center.tdianyi.com"',
+  SUPPLIER_URL: '"http://test.supplierv2.tdianyi.com/"'
 })

@@ -387,7 +387,7 @@ http({
 
 export const addInfo = (data) =>
 http({
-  url: 'api/entrepreneur/ck_createInfo',
+  url: 'api/entrepreneur/ck_create_info',
   method: 'post',
   data
 })

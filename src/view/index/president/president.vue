@@ -58,6 +58,23 @@
         </div>
       </div>
     </div>
+     <div class="information-box" v-if="article_item">
+      <div class="information-title-box">
+        <div class="information-title">实战攻略</div>
+        <div class="information-more" @click="goToInformation()">更多</div>
+      </div>
+
+      <div class="img-box" @click="goToInformation(article_item.id)">
+        <div class="img-title">{{article_item.article_title}}</div>
+        <img :src="article_item.author_cover" class="information-img" />
+        <div class="img-date">{{article_item.publish_time}}</div>
+      </div>
+
+      <div class="article-box" v-for="(item,key) in article_list" :key="key" @click="goToInformation(item.id)">
+        <div class="article-name">{{item.article_title}}</div>
+        <div class="article-date">{{item.publish_time}}</div>
+      </div>
+    </div>
 
     <van-overlay :show="is_show" @click="is_show = false">
       <div class="qr_code">

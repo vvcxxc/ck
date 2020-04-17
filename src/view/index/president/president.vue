@@ -1,8 +1,8 @@
 <template>
-  <div class="president">
+ <div class="president">
     <div class="main-box">
-    <div class="president_header">首页</div>
-    <div class="sum_container">
+      <div class="president_header">首页</div>
+      <div class="sum_container">
       <div class="sum_container_top">
         <div class="sum_container_top_left">
           <div class="sum_container_balance_title">余额</div>
@@ -14,8 +14,8 @@
             <div class="detail_icon">
               <van-icon name="arrow" />
             </div>
-            <div class="sum_container_detail_btn" @click="goTo(1)">提现</div>
           </div>
+          <div class="sum_container_detail_btn" @click="goTo(1)">提现</div>
         </div>
       </div>
       <div class="sum_container_bottom">
@@ -23,24 +23,28 @@
           <div class="today_earnings_title">今日收益</div>
           <div class="today_earnings_num">{{today_money}}</div>
         </div>
-      </div>
-      <div class="entrepreneur_box">
-        <div class="entrepreneur_title">店铺创客</div>
-        <div class="entrepreneur_content">
-          <div class="entrepreneur_left">
-            <div class="invitation_entrepreneur_icon"></div>
-            <div class="invitation_entrepreneur_title">邀请的店铺数</div>
-            <div class="invitation_entrepreneur_num">{{info.supplier_number}}</div>
-            <div class="invitation_entrepreneur_btn" @click="invite('store')">邀请店铺</div>
-          </div>
-          <div class="entrepreneur_right">
-            <div class="invitation_entrepreneur_icon2"></div>
-            <div class="invitation_entrepreneur_title">邀请的创客数</div>
-            <div class="invitation_entrepreneur_num">{{info.entrepreneur_number}}</div>
-            <div class="invitation_entrepreneur_btn" @click="invite('people')">邀请创客</div>
-          </div>
+        <div class="sum_container_bottom_icon" @click="goTo(3)">
+          <van-icon name="down" />
         </div>
       </div>
+    </div>
+    <div class="entrepreneur_box">
+      <div class="entrepreneur_title">店铺创客</div>
+      <div class="entrepreneur_content">
+        <div class="entrepreneur_left" @click="jumpSurePage('supplier')">
+          <div class="invitation_entrepreneur_icon"></div>
+          <div class="invitation_entrepreneur_title" >邀请的店铺数</div>
+          <div class="invitation_entrepreneur_num">{{info.supplier_number}}</div>
+          <div class="invitation_entrepreneur_btn" @click="invite('store',$event)">邀请店铺</div>
+        </div>
+        <div class="entrepreneur_right" @click="jumpSurePage('entrepreneur')">
+          <div class="invitation_entrepreneur_icon2"></div>
+          <div class="invitation_entrepreneur_title">邀请的创客数</div>
+          <div class="invitation_entrepreneur_num">{{info.entrepreneur_number}}</div>
+          <div class="invitation_entrepreneur_btn" @click="invite('people',$event)">邀请创客</div>
+        </div>
+      </div>
+    </div>
     </div>
 
     <div class="information-box" v-if="article_item">
@@ -59,7 +63,6 @@
         <div class="article-name">{{item.article_title}}</div>
         <div class="article-date">{{item.publish_time}}</div>
       </div>
-    </div>
     </div>
 
     <van-overlay :show="is_show" @click="is_show = false">

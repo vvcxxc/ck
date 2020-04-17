@@ -100,7 +100,7 @@
           <div class="date-area" @click="openDate">
             <div
               :class="info.identity_validity_card ? 'date actived' : 'date'"
-            >{{ info.identity_validity_card ? info.identity_validity_card : '请选择身份证有效期'}}</div>
+            >{{ info.identity_validity_card ? info.identity_validity_card == 1 ? '长期有效' : info.identity_validity_card : '请选择身份证有效期'}}</div>
             <van-icon name="arrow" class="icon" />
           </div>
         </div>
@@ -491,7 +491,7 @@ export default {
       let info = this.info;
       let identity_validity_card = info.identity_validity_card;
       if (info.identity_validity_card == "长期有效") {
-        identity_validity_card = 0;
+        identity_validity_card = 1;
       }
 
       let data = {
@@ -507,7 +507,8 @@ export default {
         bank_account_name: info.bank_account_name,
         bank_card_number: info.bank_card_number,
         bank_name: info.bank_name,
-        bank_branch: info.bank_branch
+        bank_branch: info.bank_branch,
+        bank_card_id: this.$route.query.type ? info.bank_card_id :undefined
       };
       let validate = Validate(data);
 

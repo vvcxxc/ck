@@ -22,7 +22,8 @@
       <div class="input-main">
         <div class="input-box">
           <div class="input-label">手机号码</div>
-          <input type="phone" placeholder="请输入手机号" v-model="phone" />
+          <!-- <input type="phone" placeholder="请输入手机号" v-model="phone" disabled /> -->
+          <div>{{phone}}</div>
         </div>
         <div class="input-box" style="border: none">
           <div class="input-label">验证码</div>
@@ -55,6 +56,8 @@ export default {
   async created (){
     let res = await getIndexInfo();
     let phone = res.data.account_phone;
+    console.log(phone)
+    this.phone = phone
     let bank_info = await getBankInfo(phone);
     if(bank_info){
       this.bank_card_number = bank_info.data.bank_card_number

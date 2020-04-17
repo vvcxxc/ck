@@ -8,7 +8,8 @@ module.exports = merge(devEnv, {
   // 上传图片
   UPLOAD_API: '"http://o2o.tdianyi.com/"',
   DOMAIN: '"http://ck.tdianyi.com"',
-
+  ARTICLE_DOMAIN: '"http://release.api.counsel_terrace.tdianyi.com/"',
+  INFORMATION_URL: '"http://release.information_center.tdianyi.com/"',
   OSS_UPLOAD_URL: '"http://tmwl.oss-cn-shenzhen.aliyuncs.com"',
 
   SUPPLIER_URL: '"http://supplier.tdianyi.com"',

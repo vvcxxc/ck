@@ -1,0 +1,56 @@
+.list_gird {
+  padding: 0.31rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  border-bottom: 1px solid #eee;
+}
+.list_gird div {
+  font-size: 0.28rem;
+  font-family: PingFang;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+.list_gird .icon_box span {
+  display: inline-block;
+  width: 0.34rem;
+  height: 0.25rem;
+  margin-right: 0.24rem;
+  background-image: url("../../../../assets/userInfoIcon.png");
+  background-size: 4.4rem;
+  background-repeat: no-repeat;
+}
+.list_gird .small_bank_card {
+  background-position: -2.02rem -0.09rem;
+}
+.list_gird .small_gift {
+  height: 0.34rem !important;
+  background-position: -2.7rem -0.04rem;
+}
+.list_gird .small_id_card {
+  background-position: -3.38rem -0.13rem;
+}
+.list_gird .small_set_up {
+  height: 0.34rem !important;
+  background-position: -4.08rem -0.05rem;
+}
+.list_gird .actual_combat {
+  display: inline-block !important;
+  width: 0.34rem !important;
+  height: 0.25rem !important;
+  margin-right: 0.24rem !important;
+  background-image: url("../../../../assets/userInfoIcon2.png") !important;
+  background-size: 4.4rem !important;
+  background-repeat: no-repeat !important;
+  height: 0.34rem !important;
+  background-position: -4.08rem -0.05rem !important;
+}
+.list_gird .my_margin_right {
+  margin-right: 0.2rem;
+  font-size: 0.28rem;
+  font-family: Adobe Heiti Std;
+  font-weight: normal;
+  color: #ff394c;
+}

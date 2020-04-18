@@ -1,14 +1,12 @@
 <template>
   <main class="personal_center">
     <div class="user-info">
-      <img
-        src="http://oss.tdianyi.com/front/ek7cPQsFbEt7DXT7E7B6Xaf62a46SCXw.png"
-        alt
-      />
+      <img src="http://oss.tdianyi.com/front/ek7cPQsFbEt7DXT7E7B6Xaf62a46SCXw.png" alt />
       <ul class="right">
-        <li>{{account_name || '请登录'}}
+        <li>
+          {{account_name || '请登录'}}
           <!-- <span class="user_my_icon"/> -->
-          </li>
+        </li>
         <li>{{account_phone || ''}}</li>
         <li>
           <div>
@@ -25,38 +23,27 @@
 
     <div class="invite-box">
       <div @click="invite('store')">
-        <span class="my_icon"/>
+        <span class="my_icon" />
         <span>邀请店铺</span>
       </div>
       <div @click="invite('people')">
-        <span class="my_icon"/>
+        <span class="my_icon" />
         <span>邀请创客</span>
       </div>
     </div>
 
-  <!-- @click="handleShowView('bank') -->
+    <!-- @click="handleShowView('bank') -->
     <!-- rightName="未提交资料" 此属性用来加提示 -->
-    <PersonalCenterGird
-      leftName="我的银行卡"
-      type="0"
-      @onClick="mycard()"
-    />
-    <PersonalCenterGird
-      leftName="礼品额度使用记录"
-      type="1"
-      @onClick="integralRecord()"
-    />
+    <PersonalCenterGird leftName="我的银行卡" type="0" @onClick="mycard()" />
+    <PersonalCenterGird leftName="礼品额度使用记录" type="1" @onClick="integralRecord()" />
     <PersonalCenterGird
       leftName="身份认证"
       type="2"
       :rightName="sq_array[sq_status]"
       @onClick="goto()"
     />
-    <PersonalCenterGird
-      leftName="设置"
-      type="3"
-      @onClick="handleShowView('configuration')"
-    />
+    <PersonalCenterGird leftName="实战攻略" type="4" @onClick="jumpArticle()" />
+    <PersonalCenterGird leftName="设置" type="3" @onClick="handleShowView('configuration')" />
     <v-configuration v-if="flagConfiguration" @on-hide="handleHideView('configuration')"></v-configuration>
     <v-bank v-if="flagBank" @on-hide="handleHideView('bank')"></v-bank>
     <van-overlay :show="is_show" @click="is_show = false">
@@ -73,8 +60,8 @@ import VConfiguration from "./configuration/configurations";
 import { authUser } from "@api/api";
 import { Icon, Overlay } from "vant";
 import QRCode from "qrcode";
-import store from "@/store/index"//vuex
-import  PersonalCenterGird  from './component/personalCenterGird'
+import store from "@/store/index"; //vuex
+import PersonalCenterGird from "./component/personalCenterGird";
 const V_BANK = "bank";
 const V_CONFIGURATION = "configuration";
 export default {
@@ -93,10 +80,9 @@ export default {
       codeUrl: "", //二维码图片路径
       is_show: false, // 展示邀请页面
       title: "", // 邀请时候的title
-      is_existence: '',
-      sq_status:'',
-      sq_array:['未认证','资料审核中','资料审核失败','审核通过'],
-
+      is_existence: "",
+      sq_status: "",
+      sq_array: ["未认证", "资料审核中", "资料审核失败", "审核通过"]
     };
   },
   components: {
@@ -109,8 +95,8 @@ export default {
   },
   methods: {
     //跳转我的银行卡页面
-    mycard(){
-      this.$router.push({ path: "/my/card_new" })
+    mycard() {
+      this.$router.push({ path: "/my/card_new" });
     },
     invite(name) {
       if (name == "people") {
@@ -126,12 +112,23 @@ export default {
       }
     },
     goto() {
-      console.log(this.is_existence)
-      if(this.is_existence){
-        this.$router.push({path:'/completeInformation/IDCard',query: {type: 'edit'}})
-      }else {
-        this.$router.push({path:'/completeInformation/IDCard',query: {type: 'add',party_id: this.party_id}})
+      console.log(this.is_existence);
+      if (this.is_existence) {
+        this.$router.push({
+          path: "/completeInformation/IDCard",
+          query: { type: "edit" }
+        });
+      } else {
+        this.$router.push({
+          path: "/completeInformation/IDCard",
+          query: { type: "add", party_id: this.party_id }
+        });
       }
+    },
+    jumpArticle() {
+      console.log("jhgfuyij");
+      const roleType = localStorage.getItem("role_type");
+      location.href = process.env.INFORMATION_URL + "?role_uusn=" + roleType;
     },
     showQRcode(data) {
       QRCode.toDataURL(data)
@@ -176,7 +173,6 @@ export default {
               sq_status
             }
           }) => {
-
             if (account_name) {
               this.account_name = account_name;
               this.account_phone = account_phone;
@@ -184,11 +180,11 @@ export default {
               this.integral = integral;
               this.supplier_party_id = supplier_party_id;
               this.party_id = party_id;
-              this.sq_status = sq_status
-              this.is_existence = is_existence
+              this.sq_status = sq_status;
+              this.is_existence = is_existence;
               // console.log(sq_status,'sq_status')
               //提供给银行卡验证页面使用
-              store.dispatch("ql_bank/recordInformation", { party_id })
+              store.dispatch("ql_bank/recordInformation", { party_id });
             }
           }
         )
@@ -201,5 +197,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  @import "./my-style.scss";
+@import "./my-style.scss";
 </style>

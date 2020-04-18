@@ -185,6 +185,8 @@ export default {
     },
     // 店铺创客跳转
     jumpSurePage(supplier){
+      const roleType = localStorage.getItem('role_type')
+      if(roleType == 'entrepreneur' && supplier == 'entrepreneur') return
       this.$router.push("./"+supplier)
     }
 

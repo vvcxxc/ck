@@ -156,7 +156,7 @@ export default {
         this.showQRcode(qrCodeUrl);
         this.title = "邀请创客";
       } else {
-        let qrCodeUrl = `${process.env.SUPPLIER_URL}/register?invite_phone=${this.info.account_phone}`;
+        let qrCodeUrl = `${process.env.SUPPLIER_URL}/register?phone=${this.info.account_phone}`;
         this.qrCodeUrl = qrCodeUrl;
         this.showQRcode(qrCodeUrl);
         this.title = "邀请店铺";
